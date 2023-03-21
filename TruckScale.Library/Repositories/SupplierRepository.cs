@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TruckScale.Library.Data.DBContext;
+using TruckScale.Library.Data.Models;
+using TruckScale.Library.Interfaces;
+
+namespace TruckScale.Library.Repositories
+{
+    public class SupplierRepository : ISupplierRepository, IDisposable
+    {
+        private ScaleDbContext? dbContext;
+
+        public SupplierRepository(ScaleDbContext? dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
+        public void Delete(int id)
+        {
+            Supplier supplier = dbContext.Suppliers.Find(id);
+
+            if (supplier is null)
+            {
+                return;
+            }
+            dbContext.Suppliers.Remove(supplier);
+        }
+
+        public List<Supplier> GetAll()
+        {
+            var suppliers = dbContext?.Suppliers.ToList();
+            return suppliers;
+        }
+
+        public Supplier? GetById(int id)
+        {
+           var supplier = dbContext?.Suppliers.Find(id);
+            if (supplier is null)
+            {
+                return null;
+            }
+            return supplier;
+        }
+
+        public void Insert(Supplier supplier)
+        {
+            var rec = dbContext.Suppliers.Find(supplier);
+            if (rec is null)
+            {
+                dbContext.Suppliers.Add(supplier);
+                dbContext.SaveChanges(); 
+            }
+
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    dbContext.Dispose();
+                }
+            }
+            disposed = true;
+        }
+        public void Dispose()
+        {
+            disposed = true;
+            GC.SuppressFinalize(this);
+        }
+    }
+}

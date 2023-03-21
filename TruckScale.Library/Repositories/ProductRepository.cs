@@ -1,0 +1,72 @@
+﻿using TruckScale.Library.Data.DBContext;
+using TruckScale.Library.Data.Models;
+using TruckScale.Library.Interfaces;
+
+namespace TruckScale.Library.Repositories
+{
+    public class ProductRepository : IProductRepository, IDisposable
+    {
+        private ScaleDbContext dbContext;
+
+        public ProductRepository(ScaleDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
+        public void Delete(int id)
+        {
+            Product product = dbContext.Products.Find(id);
+
+            if (product is null)
+            {
+                return;
+            }
+            dbContext.Products.Remove(product);
+        }
+
+        public List<Product> GetAll()
+        {
+            var products = dbContext?.Products.ToList();
+            return products;
+        }
+
+        public Product? GetById(int id)
+        {
+            var product = dbContext?.Products.Find(id);
+            if (product is null)
+            {
+                return null;
+            }
+            return product;
+        }
+
+        public void Insert(Product product)
+        {
+            var rec = dbContext.Products.Find(product);
+            if (rec is null)
+            {
+                dbContext.Products.Add(product);
+                dbContext.SaveChanges();
+            }
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    dbContext.Dispose();
+                }
+            }
+            disposed = true;
+        }
+        public void Dispose()
+        {
+            disposed = true;
+            GC.SuppressFinalize(this);
+        }
+    }
+}
