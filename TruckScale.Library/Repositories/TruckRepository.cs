@@ -43,7 +43,7 @@ namespace TruckScale.Library.Repositories
 
         public void Insert(Truck truck)
         {
-            var rec = dbContext.Trucks.Find(truck.id);
+            var rec = dbContext.Trucks.Find(truck.Id);
             if (rec is null)
             {
                 dbContext.Trucks.Add(truck);
