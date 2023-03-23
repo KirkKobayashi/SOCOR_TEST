@@ -57,27 +57,82 @@ namespace TruckScale.UI.UserControls
 
         private void InsertTransaction()
         {
-            Supplier supplier = new Supplier { Name = cboSupplier.Text, Active = true };
-            Customer customer = new Customer { Name = cboCustomer.Text, Active = true };    
-            Product product = new Product { Name=cboProduct.Text, Active=true };
-            Truck truck = new Truck { PlateNumber = txtPlateNumber.Text.Trim(), TareWeight = Convert.ToInt32(txtFirstWeight.Text) };
-            Weigher weigher = new Weigher { Id = 1, FirstName = "Test" };
-
-            WeighingTransaction transaction = new WeighingTransaction
+            using (TransactionScope scope = new TransactionScope())
             {
-                Supplier = supplier,
-                Customer = customer,
-                Product = product,
-                Truck = truck,
-                Weigher = weigher,
-                FirstWeightDate = DateTime.Now,
-                FirstWeight = Convert.ToInt32(txtFirstWeight.Text),
-                Driver = txtDriver.Text.Trim(),
-                Remarks = txtRemarks.Text,
-                Quantity = txtQuantity.Text
-            };
+                try
+                {
+                    int productId;
+                    int supplierId;
+                    int customerId;
+                    int truckId;
 
-            _service.InsertTransaction(transaction);
+                    var supplier = _service.GetSupplierByName(cboSupplier.Text);
+                    var customer = _service.GetCustomerByName(cboCustomer.Text);
+                    var product = _service.GetProductByName(cboProduct.Text);
+                    var truck = _service.GetTruckByPlate(txtPlateNumber.Text);
+
+                    if (supplier is null)
+                    {
+                        supplierId = _service.AddSupplier(cboSupplier.Text);
+                    }
+                    else
+                    {
+                        supplierId = supplier.Id;
+                    }
+
+                    if (customer is null)
+                    {
+                        customerId = _service.AddCustomer(cboCustomer.Text);
+                    }
+                    else
+                    {
+                        customerId = customer.Id;
+                    }
+
+                    if (product is null)
+                    {
+                        productId = _service.AddProduct(cboProduct.Text);
+                    }
+                    else
+                    {
+                        productId = product.Id;
+                    }
+
+                    if (truck is null)
+                    {
+                        truckId = _service.AddTruck(txtPlateNumber.Text.ToUpper());
+                    }
+                    else
+                    {
+                        truckId = truck.Id;
+                    }
+
+                    WeighingTransaction transaction = new WeighingTransaction
+                    {
+                        FirstWeightDate = DateTime.Now,
+                        FirstWeight = Convert.ToInt32(txtFirstWeight.Text),
+                        Driver = txtDriver.Text.Trim(),
+                        Remarks = txtRemarks.Text,
+                        Quantity = txtQuantity.Text,
+                        WeigherId = _mainForm.weigherId,
+                        CustomerId = customerId,
+                        SupplierId = supplierId,
+                        ProductId = productId,
+                        TruckId = truckId
+                    };
+
+                    _service.InsertTransaction(transaction);
+
+                    scope.Complete();
+
+                    _mainForm.ClearPanelFromWeighing();
+                }
+                catch (Exception)
+                {
+                    scope.Dispose();
+                    throw;
+                }
+            }
         }
 
         private void GetCustomers()
@@ -101,7 +156,7 @@ namespace TruckScale.UI.UserControls
         }
 
         private void GetProducts()
-        { 
+        {
             var products = _service.GetProducts();
 
             cboProduct.Items.Clear();
@@ -138,10 +193,9 @@ namespace TruckScale.UI.UserControls
                     }
 
                     InsertTransaction();
-                } 
+                }
             }
         }
-
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {

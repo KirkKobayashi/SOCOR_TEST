@@ -1,6 +1,7 @@
 ﻿using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -37,48 +38,52 @@ namespace TruckScale.Library.BLL
             return dbContext.Products.ToList();
         }
 
-        public void InsertSupplier(string name)
+        public Supplier GetSupplierByName(string name)
         {
-            var supplier = dbContext.Suppliers.FirstOrDefault(x => x.Name == name);
-
-            if (supplier is null)
-            {
-                dbContext.Suppliers.Add(new Supplier { Name = name, Active = true });
-                dbContext.SaveChanges();
-            }
+            var service = new SupplierRepository(dbContext);
+            return service.GetSupplierByName(name);
         }
 
-        public void InsertCustomer(string name)
+        public Customer GetCustomerByName(string name)
         {
-            var customer = dbContext.Customers.FirstOrDefault(x => x.Name == name);
-
-            if (customer is null)
-            {
-                dbContext.Customers.Add(new Customer { Name = name, Active = true });
-                dbContext.SaveChanges();
-            }
+            var service = new CustomerRepository(dbContext);
+            return service.GetCustomerByName(name);
         }
 
-        public void InsertProduct(string name)
+        public Truck GetTruckByPlate(string platenumber)
         {
-            var product = dbContext.Products.FirstOrDefault(x => x.Name == name);
-
-            if (product is null)
-            {
-                dbContext.Products.Add(new Product { Name = name, Active = true });
-                dbContext.SaveChanges();
-            }
+            var service = new TruckRepository(dbContext);
+            return service.GetTruckByPlateNumber(platenumber);
         }
 
-        public void InsertTruck(string platenumber, int tareweight)
+        public Product GetProductByName(string name)
         {
-            var truck = dbContext.Trucks.FirstOrDefault(x => x.PlateNumber == platenumber);
+            var service = new ProductRepository(dbContext);
+            return service.GetProductByName(name);
+        }
 
-            if (truck is null)
-            {
-                dbContext.Trucks.Add(new Truck { PlateNumber = platenumber, TareWeight = tareweight });
-                dbContext.SaveChanges();
-            }
+        public int AddSupplier(string name)
+        {
+            var service = new SupplierRepository(dbContext);
+            return service.Insert(new Supplier { Name = name, Active = true });
+        }
+
+        public int AddCustomer(string name)
+        {
+            var service = new CustomerRepository(dbContext);
+            return service.Insert(new Customer { Name = name, Active = true });
+        }
+
+        public int AddProduct(string name)
+        {
+            var service = new ProductRepository(dbContext);
+            return service.Insert(new Product { Name = name, Active = true });
+        }
+
+        public int AddTruck(string platenumber)
+        {
+            var service = new TruckRepository(dbContext);
+            return service.Insert(new Truck { PlateNumber = platenumber });
         }
 
         public void InsertTransaction(WeighingTransaction transaction)
