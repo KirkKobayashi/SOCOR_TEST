@@ -22,6 +22,7 @@ namespace TruckScale.Library.Repositories
                 return;
             }
             dbContext.Products.Remove(product);
+            dbContext.SaveChanges();
         }
 
         public List<Product> GetAll()
@@ -40,15 +41,19 @@ namespace TruckScale.Library.Repositories
             return product;
         }
 
-        public void Insert(Product product)
+        public int Insert(Product product)
         {
-            var rec = dbContext.Products.Find(product);
-            if (rec is null)
-            {
-                dbContext.Products.Add(product);
-                dbContext.SaveChanges();
-            }
+            dbContext.Products.Add(product);
+            dbContext.SaveChanges();
+
+            return product.Id;
         }
+
+        public Product GetProductByName(string name)
+        {
+            return dbContext.Products.FirstOrDefault(p => p.Name == name);
+        }
+
 
         private bool disposed = false;
 
@@ -68,5 +73,7 @@ namespace TruckScale.Library.Repositories
             disposed = true;
             GC.SuppressFinalize(this);
         }
+
+
     }
 }

@@ -31,6 +31,17 @@ namespace TruckScale.UI.Forms
             _service = new ApplicationService(new ScaleDbContext(ConStringHelper.Get()));
         }
 
+        public void ClearPanelFromWeighing()
+        {
+            btnNew.Enabled = true;
+            btnTransactions.Enabled = true;
+            btnReport.Enabled = true;
+            btnDelete.Enabled = true;
+            btnPrint.Enabled = true;
+            PanelMain.Controls.Clear();
+
+            ShowTransactions();
+        }
         public void LogIn()
         {
             PanelMain.Controls.Clear();
@@ -72,11 +83,15 @@ namespace TruckScale.UI.Forms
             btnPrint.Enabled= false;
             btnNew.Enabled = false;
 
-            WeighingUC uc = new WeighingUC(_service);
+
+            WeighingUC uc = new WeighingUC(_service, this);
+            uc.NewTransaction = true;
             PanelMain.Controls.Clear();
             PanelMain.Controls.Add(uc); 
             uc.Dock = DockStyle.Fill;
             uc.Show();
+
+            stringWeight = txtIndicator.Text;
         }
 
         private void btnTransactions_Click(object sender, EventArgs e)

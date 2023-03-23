@@ -41,7 +41,7 @@
             this.tPanelTop = new System.Windows.Forms.TableLayoutPanel();
             this.IndicatorPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtIndicator = new System.Windows.Forms.TextBox();
             this.tbPanelButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -166,7 +166,7 @@
             // 
             this.IndicatorPanel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.IndicatorPanel.Controls.Add(this.label1);
-            this.IndicatorPanel.Controls.Add(this.textBox1);
+            this.IndicatorPanel.Controls.Add(this.txtIndicator);
             this.IndicatorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.IndicatorPanel.Location = new System.Drawing.Point(893, 3);
             this.IndicatorPanel.Name = "IndicatorPanel";
@@ -182,21 +182,21 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "WEIGHT INDICATOR";
             // 
-            // textBox1
+            // txtIndicator
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.txtIndicator.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(2, 45);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(260, 96);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TabStop = false;
-            this.textBox1.Text = "123456";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtIndicator.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtIndicator.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtIndicator.Location = new System.Drawing.Point(2, 45);
+            this.txtIndicator.Name = "txtIndicator";
+            this.txtIndicator.ReadOnly = true;
+            this.txtIndicator.Size = new System.Drawing.Size(260, 96);
+            this.txtIndicator.TabIndex = 0;
+            this.txtIndicator.TabStop = false;
+            this.txtIndicator.Text = "123456";
+            this.txtIndicator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tbPanelButtons
             // 
@@ -327,7 +327,7 @@
         private TableLayoutPanel tPanelTop;
         private Panel IndicatorPanel;
         private TableLayoutPanel tbPanelButtons;
-        private TextBox textBox1;
+        private TextBox txtIndicator;
         private Label label1;
         private Button btnDelete;
         private Button btnReport;

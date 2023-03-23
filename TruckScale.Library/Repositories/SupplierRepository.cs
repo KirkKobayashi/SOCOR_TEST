@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,15 +46,17 @@ namespace TruckScale.Library.Repositories
             return supplier;
         }
 
-        public void Insert(Supplier supplier)
+        public int Insert(Supplier supplier)
         {
-            var rec = dbContext.Suppliers.Find(supplier);
-            if (rec is null)
-            {
-                dbContext.Suppliers.Add(supplier);
-                dbContext.SaveChanges(); 
-            }
+            dbContext.Suppliers.Add(supplier);
+            dbContext.SaveChanges();
 
+            return supplier.Id;
+        }
+
+        public Supplier GetSupplierByName(string name)
+        {
+            return dbContext.Suppliers.FirstOrDefault(s => s.Name == name);
         }
 
         private bool disposed = false;
@@ -74,5 +77,7 @@ namespace TruckScale.Library.Repositories
             disposed = true;
             GC.SuppressFinalize(this);
         }
+
+   
     }
 }

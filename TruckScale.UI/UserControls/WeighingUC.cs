@@ -6,11 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 using TruckScale.Library.Data.DBContext;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
 using TruckScale.Library.Repositories;
+using TruckScale.UI.Forms;
 using TruckScale.UI.HelperClass;
 
 namespace TruckScale.UI.UserControls
@@ -19,12 +21,15 @@ namespace TruckScale.UI.UserControls
     {
         public bool NewTransaction { get; set; } = false;
         private ErrorProvider errorProvider;
+
         private readonly IApplicationService _service;
-        public WeighingUC(IApplicationService service)
+        private readonly MainForm _mainForm;
+
+        public WeighingUC(IApplicationService service, MainForm mainForm)
         {
             InitializeComponent();
             _service = service;
-           
+            _mainForm = mainForm;
         }
 
         private void WeighingUC_Load(object sender, EventArgs e)
@@ -71,6 +76,8 @@ namespace TruckScale.UI.UserControls
                 Remarks = txtRemarks.Text,
                 Quantity = txtQuantity.Text
             };
+
+            _service.InsertTransaction(transaction);
         }
 
         private void GetCustomers()
@@ -101,6 +108,47 @@ namespace TruckScale.UI.UserControls
             cboProduct.DataSource = products;
             cboProduct.DisplayMember = "Name";
             cboProduct.ValueMember = "Id";
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            _mainForm.ClearPanelFromWeighing();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            var goodTicket = FormValidation(txtTicket);
+            var goodPlate = FormValidation(txtPlateNumber);
+            var goodCustomer = FormValidation(cboCustomer);
+            var goodSupplier = FormValidation(cboSupplier);
+            var goodProduct = FormValidation(cboProduct);
+
+            if (NewTransaction)
+            {
+                if (goodTicket && goodPlate && goodCustomer && goodSupplier && goodProduct)
+                {
+                    if (string.IsNullOrWhiteSpace(txtFirstWeight.Text))
+                    {
+                        errorProvider.SetError(btnUpdate, "Click update weight");
+                        return;
+                    }
+                    else
+                    {
+                        errorProvider.SetError(btnUpdate, "");
+                    }
+
+                    InsertTransaction();
+                } 
+            }
+        }
+
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (NewTransaction)
+            {
+                txtFirstWeight.Text = _mainForm.stringWeight;
+            }
         }
     }
 }

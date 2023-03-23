@@ -8,6 +8,7 @@ namespace TruckScale.Library.Interfaces
         void Dispose();
         Customer? GetById(int id);
         List<Customer> GetAll();
-        void Insert(Customer customer);
+        int Insert(Customer customer);
+        Customer GetCustomerByName(string name);
     }
 }

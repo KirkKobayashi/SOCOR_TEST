@@ -8,6 +8,7 @@ namespace TruckScale.Library.Interfaces
         void Dispose();
         Truck? GetById(int id);
         List<Truck> GetAll();
-        void Insert(Truck truck);
+        int Insert(Truck truck);
+        Truck GetTruckByPlateNumber(string plateNumber);
     }
 }

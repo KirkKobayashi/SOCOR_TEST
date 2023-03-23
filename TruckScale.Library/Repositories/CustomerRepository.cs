@@ -23,9 +23,16 @@ namespace TruckScale.Library.Repositories
             return dbContext.Customers.ToList();
         }
 
-        public void Insert(Customer customer)
+        public int Insert(Customer customer)
         {
             dbContext.Customers.Add(customer);
+            dbContext.SaveChanges();
+            return customer.Id;
+        }
+
+        public Customer GetCustomerByName(string name)
+        {
+            return dbContext.Customers.FirstOrDefault(c => c.Name == name);
         }
 
         public Customer? GetById(int id)
@@ -37,6 +44,7 @@ namespace TruckScale.Library.Repositories
         {
             Customer customer = dbContext.Customers.Find(id);
             dbContext.Customers.Remove(customer);
+            dbContext.SaveChanges();
         }
 
 

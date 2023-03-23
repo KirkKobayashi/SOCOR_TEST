@@ -1,4 +1,5 @@
-﻿using TruckScale.Library.Data.DBContext;
+﻿using System.Data;
+using TruckScale.Library.Data.DBContext;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
 
@@ -41,14 +42,16 @@ namespace TruckScale.Library.Repositories
             return truck;
         }
 
-        public void Insert(Truck truck)
+        public int Insert(Truck truck)
         {
-            var rec = dbContext.Trucks.Find(truck.Id);
-            if (rec is null)
-            {
-                dbContext.Trucks.Add(truck);
-                dbContext.SaveChanges();
-            }
+            dbContext.Trucks.Add(truck);
+            dbContext.SaveChanges() ; 
+            return truck.Id;  
+        }
+
+        public Truck GetTruckByPlateNumber(string plateNumber)
+        {
+            return dbContext.Trucks.FirstOrDefault(p => p.PlateNumber == plateNumber);
         }
 
         private bool disposed = false;
@@ -69,5 +72,7 @@ namespace TruckScale.Library.Repositories
             disposed = true;
             GC.SuppressFinalize(this);
         }
+
+
     }
 }
