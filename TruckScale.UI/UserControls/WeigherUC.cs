@@ -96,6 +96,7 @@ namespace TruckScale.UI.UserControls
                 return;
             }
 
+            ClearForm();
             txtFirstName.Text = weigher.FirstName;
             txtLastName.Text = weigher.LastName;
             txtFirstName.Focus();
@@ -104,6 +105,19 @@ namespace TruckScale.UI.UserControls
         private void btnSearch_Click(object sender, EventArgs e)
         {
             SearchUser();
+        }
+
+        private void ClearForm()
+        {
+            txtFirstName.Text = string.Empty;
+            txtLastName.Text = string.Empty;
+            txtPassword.Text = string.Empty;
+            txtConfirmPassword.Text = string.Empty;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearForm();
         }
     }
 }

@@ -451,6 +451,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "WeighingUC";
             this.Size = new System.Drawing.Size(1648, 996);
+            this.Load += new System.EventHandler(this.WeighingUC_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);

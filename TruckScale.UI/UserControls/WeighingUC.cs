@@ -17,15 +17,37 @@ namespace TruckScale.UI.UserControls
 {
     public partial class WeighingUC : UserControl
     {
+        public bool NewTransaction { get; set; } = false;
+        private ErrorProvider errorProvider;
         private readonly IApplicationService _service;
         public WeighingUC(IApplicationService service)
         {
             InitializeComponent();
-            
             _service = service;
+           
+        }
+
+        private void WeighingUC_Load(object sender, EventArgs e)
+        {
             GetCustomers();
             GetSuppliers();
             GetProducts();
+
+            errorProvider = new ErrorProvider();
+        }
+
+        private bool FormValidation(Control control)
+        {
+            if (string.IsNullOrWhiteSpace(control.Text))
+            {
+                errorProvider.SetError(control, "Field can not be empty");
+                return false;
+            }
+            else
+            {
+                errorProvider.SetError(control, "");
+                return true;
+            }
         }
 
         private void InsertTransaction()
@@ -79,11 +101,6 @@ namespace TruckScale.UI.UserControls
             cboProduct.DataSource = products;
             cboProduct.DisplayMember = "Name";
             cboProduct.ValueMember = "Id";
-        }
-
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

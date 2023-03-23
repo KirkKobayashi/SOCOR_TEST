@@ -30,11 +30,13 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stripMenuLogIn = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.managementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolMenuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.tPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.tPanelTop = new System.Windows.Forms.TableLayoutPanel();
             this.IndicatorPanel = new System.Windows.Forms.Panel();
@@ -47,8 +49,6 @@
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
             this.PanelMain = new System.Windows.Forms.Panel();
-            this.managementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolMenuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tPanelMain.SuspendLayout();
             this.tPanelTop.SuspendLayout();
@@ -71,7 +71,7 @@
             // systemToolStripMenuItem
             // 
             this.systemToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.logInToolStripMenuItem,
+            this.stripMenuLogIn,
             this.logOutToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
@@ -79,27 +79,28 @@
             this.systemToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
             this.systemToolStripMenuItem.Text = "System";
             // 
-            // logInToolStripMenuItem
+            // stripMenuLogIn
             // 
-            this.logInToolStripMenuItem.Name = "logInToolStripMenuItem";
-            this.logInToolStripMenuItem.Size = new System.Drawing.Size(179, 34);
-            this.logInToolStripMenuItem.Text = "Log In";
+            this.stripMenuLogIn.Name = "stripMenuLogIn";
+            this.stripMenuLogIn.Size = new System.Drawing.Size(270, 34);
+            this.stripMenuLogIn.Text = "Log In";
+            this.stripMenuLogIn.Click += new System.EventHandler(this.stripMenuLogIn_Click);
             // 
             // logOutToolStripMenuItem
             // 
             this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(179, 34);
+            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.logOutToolStripMenuItem.Text = "Log Out";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(176, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(267, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(179, 34);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // viewToolStripMenuItem
@@ -109,6 +110,21 @@
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
             this.viewToolStripMenuItem.Text = "View";
+            // 
+            // managementToolStripMenuItem
+            // 
+            this.managementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolMenuUser});
+            this.managementToolStripMenuItem.Name = "managementToolStripMenuItem";
+            this.managementToolStripMenuItem.Size = new System.Drawing.Size(219, 34);
+            this.managementToolStripMenuItem.Text = "Management";
+            // 
+            // toolMenuUser
+            // 
+            this.toolMenuUser.Name = "toolMenuUser";
+            this.toolMenuUser.Size = new System.Drawing.Size(149, 34);
+            this.toolMenuUser.Text = "User";
+            this.toolMenuUser.Click += new System.EventHandler(this.toolMenuUser_Click);
             // 
             // tPanelMain
             // 
@@ -273,21 +289,6 @@
             this.PanelMain.Size = new System.Drawing.Size(1152, 280);
             this.PanelMain.TabIndex = 1;
             // 
-            // managementToolStripMenuItem
-            // 
-            this.managementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolMenuUser});
-            this.managementToolStripMenuItem.Name = "managementToolStripMenuItem";
-            this.managementToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.managementToolStripMenuItem.Text = "Management";
-            // 
-            // toolMenuUser
-            // 
-            this.toolMenuUser.Name = "toolMenuUser";
-            this.toolMenuUser.Size = new System.Drawing.Size(270, 34);
-            this.toolMenuUser.Text = "User";
-            this.toolMenuUser.Click += new System.EventHandler(this.toolMenuUser_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -318,7 +319,7 @@
         private TableLayoutPanel tPanelMain;
         private Panel PanelMain;
         private ToolStripMenuItem systemToolStripMenuItem;
-        private ToolStripMenuItem logInToolStripMenuItem;
+        private ToolStripMenuItem stripMenuLogIn;
         private ToolStripMenuItem logOutToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem exitToolStripMenuItem;
