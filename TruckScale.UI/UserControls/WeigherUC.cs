@@ -46,7 +46,6 @@ namespace TruckScale.UI.UserControls
         {
             ValidateForm();
 
-
             if (readyToSave == true)
             {
                 if (txtPassword.Text.Trim() == txtConfirmPassword.Text.Trim())
@@ -81,5 +80,30 @@ namespace TruckScale.UI.UserControls
             }
         }
 
+        private void SearchUser()
+        {
+            if (string.IsNullOrWhiteSpace(txtUserName.Text))
+            {
+                MessageBox.Show("User name is empty", "Truck Scale Application", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var weigher = _service.GetWeigherByName(txtUserName.Text);
+
+            if (weigher is null)
+            {
+                MessageBox.Show("Username does not exists.");
+                return;
+            }
+
+            txtFirstName.Text = weigher.FirstName;
+            txtLastName.Text = weigher.LastName;
+            txtFirstName.Focus();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            SearchUser();
+        }
     }
 }

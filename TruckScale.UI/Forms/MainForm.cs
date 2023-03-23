@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,26 +18,25 @@ namespace TruckScale.UI.Forms
 {
     public partial class MainForm : Form
     {
+        public int weigherId { get; set; }
+        public string? stringWeight { get; set; }
+
+
+        private ApplicationService _service;
         private WeighingUC? weighingUC;
+
         public MainForm()
         {
             InitializeComponent();
-            //ShowWeighing();
-            //ShowUserManagement();
             ShowUserLogIn();
+
+            _service = new ApplicationService(new ScaleDbContext(ConStringHelper.Get()));
         }
 
-        public void ClearPanel()
+        public void LogIn()
         {
             PanelMain.Controls.Clear();
-        }
-
-        private void ShowWeighing()
-        {
-            //weighingUC= new WeighingUC();
-            //PanelMain.Controls.Add( weighingUC );
-            //weighingUC.Dock = DockStyle.Fill;
-            //weighingUC.Show();
+            tbPanelButtons.Visible = true;
         }
 
         private void ShowUserLogIn()
@@ -47,7 +47,6 @@ namespace TruckScale.UI.Forms
             logInUC.Show();
         }
 
-
         private void ShowUserManagement()
         {
             WeigherUC weigherUC = new WeigherUC(new ApplicationService(new ScaleDbContext(ConStringHelper.Get())));
@@ -56,5 +55,40 @@ namespace TruckScale.UI.Forms
             weigherUC.Show();
         }
 
+        private void ShowTransactions()
+        {
+            TransactionsUC uc = new TransactionsUC();
+            PanelMain.Controls.Add(uc);
+            uc.Dock = DockStyle.Fill;
+            uc.Show();
+        }
+
+        
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            btnTransactions.Enabled = false;
+            btnReport.Enabled = false;
+            btnDelete.Enabled = false;
+            btnPrint.Enabled= false;
+            btnNew.Enabled = false;
+
+            WeighingUC uc = new WeighingUC(_service);
+            PanelMain.Controls.Clear();
+            PanelMain.Controls.Add(uc); 
+            uc.Dock = DockStyle.Fill;
+            uc.Show();
+        }
+
+        private void btnTransactions_Click(object sender, EventArgs e)
+        {
+            ShowTransactions();
+        }
+
+        private void toolMenuUser_Click(object sender, EventArgs e)
+        {
+            PanelMain.Controls.Clear();
+            ShowUserManagement();
+        }
     }
 }

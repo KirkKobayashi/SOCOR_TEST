@@ -8,7 +8,7 @@ namespace TruckScale.Library.Interfaces
         List<Product> GetProducts();
         List<Supplier> GetSuppliers();
         IEnumerable<WeighingTransaction> GetTransactionsByDate(DateTime startDate, DateTime endDate);
-        Weigher GetWeigher(string name);
+        Weigher GetWeigherByName(string name);
         void InsertCustomer(string name);
         void InsertProduct(string name);
         void InsertSupplier(string name);

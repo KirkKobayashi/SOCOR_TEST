@@ -40,18 +40,20 @@
             this.IndicatorPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tbPanelButtons = new System.Windows.Forms.TableLayoutPanel();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnReport = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnTransactions = new System.Windows.Forms.Button();
             this.PanelMain = new System.Windows.Forms.Panel();
+            this.managementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolMenuUser = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tPanelMain.SuspendLayout();
             this.tPanelTop.SuspendLayout();
             this.IndicatorPanel.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tbPanelButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -62,7 +64,7 @@
             this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1595, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1168, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -102,6 +104,8 @@
             // 
             // viewToolStripMenuItem
             // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.managementToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
             this.viewToolStripMenuItem.Text = "View";
@@ -122,7 +126,7 @@
             this.tPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
-            this.tPanelMain.Size = new System.Drawing.Size(1595, 978);
+            this.tPanelMain.Size = new System.Drawing.Size(1168, 511);
             this.tPanelMain.TabIndex = 1;
             // 
             // tPanelTop
@@ -132,14 +136,14 @@
             this.tPanelTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.92308F));
             this.tPanelTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.07692F));
             this.tPanelTop.Controls.Add(this.IndicatorPanel, 1, 0);
-            this.tPanelTop.Controls.Add(this.tableLayoutPanel1, 0, 0);
+            this.tPanelTop.Controls.Add(this.tbPanelButtons, 0, 0);
             this.tPanelTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tPanelTop.Location = new System.Drawing.Point(5, 0);
             this.tPanelTop.Margin = new System.Windows.Forms.Padding(0);
             this.tPanelTop.Name = "tPanelTop";
             this.tPanelTop.RowCount = 1;
             this.tPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tPanelTop.Size = new System.Drawing.Size(1585, 200);
+            this.tPanelTop.Size = new System.Drawing.Size(1158, 200);
             this.tPanelTop.TabIndex = 0;
             // 
             // IndicatorPanel
@@ -148,9 +152,9 @@
             this.IndicatorPanel.Controls.Add(this.label1);
             this.IndicatorPanel.Controls.Add(this.textBox1);
             this.IndicatorPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.IndicatorPanel.Location = new System.Drawing.Point(1222, 3);
+            this.IndicatorPanel.Location = new System.Drawing.Point(893, 3);
             this.IndicatorPanel.Name = "IndicatorPanel";
-            this.IndicatorPanel.Size = new System.Drawing.Size(360, 194);
+            this.IndicatorPanel.Size = new System.Drawing.Size(262, 194);
             this.IndicatorPanel.TabIndex = 3;
             // 
             // label1
@@ -172,98 +176,92 @@
             this.textBox1.Location = new System.Drawing.Point(2, 45);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(358, 96);
+            this.textBox1.Size = new System.Drawing.Size(260, 96);
             this.textBox1.TabIndex = 0;
             this.textBox1.TabStop = false;
             this.textBox1.Text = "123456";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // tableLayoutPanel1
+            // tbPanelButtons
             // 
-            this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel1.Controls.Add(this.button5, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button4, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button3, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1213, 194);
-            this.tableLayoutPanel1.TabIndex = 4;
+            this.tbPanelButtons.ColumnCount = 6;
+            this.tbPanelButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
+            this.tbPanelButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
+            this.tbPanelButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
+            this.tbPanelButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tbPanelButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
+            this.tbPanelButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.tbPanelButtons.Controls.Add(this.btnNew, 0, 1);
+            this.tbPanelButtons.Controls.Add(this.btnDelete, 4, 0);
+            this.tbPanelButtons.Controls.Add(this.btnReport, 2, 0);
+            this.tbPanelButtons.Controls.Add(this.btnPrint, 1, 0);
+            this.tbPanelButtons.Controls.Add(this.btnTransactions, 0, 0);
+            this.tbPanelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbPanelButtons.Location = new System.Drawing.Point(3, 3);
+            this.tbPanelButtons.Name = "tbPanelButtons";
+            this.tbPanelButtons.RowCount = 2;
+            this.tbPanelButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbPanelButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tbPanelButtons.Size = new System.Drawing.Size(884, 194);
+            this.tbPanelButtons.TabIndex = 4;
+            this.tbPanelButtons.Visible = false;
             // 
-            // button5
+            // btnNew
             // 
-            this.button5.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(603, 3);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(144, 188);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = false;
+            this.btnNew.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnNew.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnNew.Location = new System.Drawing.Point(3, 100);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(174, 91);
+            this.btnNew.TabIndex = 5;
+            this.btnNew.Text = "New";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // button4
+            // btnDelete
             // 
-            this.button4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(453, 3);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(144, 188);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = false;
+            this.btnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDelete.Location = new System.Drawing.Point(559, 3);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(174, 91);
+            this.btnDelete.TabIndex = 4;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnReport
             // 
-            this.button3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(303, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(144, 188);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReport.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnReport.Location = new System.Drawing.Point(363, 3);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(174, 91);
+            this.btnReport.TabIndex = 2;
+            this.btnReport.Text = "Generate Report";
+            this.btnReport.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnPrint
             // 
-            this.button2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(153, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(144, 188);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnPrint.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnPrint.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnPrint.Location = new System.Drawing.Point(183, 3);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(174, 91);
+            this.btnPrint.TabIndex = 1;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnTransactions
             // 
-            this.button1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 188);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnTransactions.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnTransactions.Location = new System.Drawing.Point(3, 3);
+            this.btnTransactions.Name = "btnTransactions";
+            this.btnTransactions.Size = new System.Drawing.Size(174, 91);
+            this.btnTransactions.TabIndex = 0;
+            this.btnTransactions.Text = "Transactions";
+            this.btnTransactions.UseVisualStyleBackColor = true;
+            this.btnTransactions.Click += new System.EventHandler(this.btnTransactions_Click);
             // 
             // PanelMain
             // 
@@ -272,17 +270,33 @@
             this.PanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelMain.Location = new System.Drawing.Point(8, 203);
             this.PanelMain.Name = "PanelMain";
-            this.PanelMain.Size = new System.Drawing.Size(1579, 747);
+            this.PanelMain.Size = new System.Drawing.Size(1152, 280);
             this.PanelMain.TabIndex = 1;
+            // 
+            // managementToolStripMenuItem
+            // 
+            this.managementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolMenuUser});
+            this.managementToolStripMenuItem.Name = "managementToolStripMenuItem";
+            this.managementToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.managementToolStripMenuItem.Text = "Management";
+            // 
+            // toolMenuUser
+            // 
+            this.toolMenuUser.Name = "toolMenuUser";
+            this.toolMenuUser.Size = new System.Drawing.Size(270, 34);
+            this.toolMenuUser.Text = "User";
+            this.toolMenuUser.Click += new System.EventHandler(this.toolMenuUser_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1595, 1011);
+            this.ClientSize = new System.Drawing.Size(1168, 544);
             this.Controls.Add(this.tPanelMain);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(1190, 600);
             this.Name = "MainForm";
             this.Text = "Weigh Bridge Application";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -292,7 +306,7 @@
             this.tPanelTop.ResumeLayout(false);
             this.IndicatorPanel.ResumeLayout(false);
             this.IndicatorPanel.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tbPanelButtons.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -311,13 +325,15 @@
         private ToolStripMenuItem viewToolStripMenuItem;
         private TableLayoutPanel tPanelTop;
         private Panel IndicatorPanel;
-        private TableLayoutPanel tableLayoutPanel1;
-        private Button button5;
-        private Button button4;
-        private Button button3;
-        private Button button2;
-        private Button button1;
+        private TableLayoutPanel tbPanelButtons;
         private TextBox textBox1;
         private Label label1;
+        private Button btnDelete;
+        private Button btnReport;
+        private Button btnPrint;
+        private Button btnTransactions;
+        private Button btnNew;
+        private ToolStripMenuItem managementToolStripMenuItem;
+        private ToolStripMenuItem toolMenuUser;
     }
 }

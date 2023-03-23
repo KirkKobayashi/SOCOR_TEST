@@ -36,6 +36,11 @@ namespace TruckScale.Library.Repositories
             return dbContext?.Weighers.Find(id);
         }
 
+        public Weigher? GetByName(string name)
+        {
+            return dbContext?.Weighers.FirstOrDefault(w => w.UserName == name);
+        }
+
         public void Insert(Weigher weigher)
         {
             var rec = dbContext.Weighers.Find(weigher.Id);

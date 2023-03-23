@@ -9,5 +9,6 @@ namespace TruckScale.Library.Interfaces
         Weigher? GetById(int id);
         List<Weigher> GetAll();
         void Insert(Weigher weigher);
+        Weigher? GetByName(string name);
     }
 }

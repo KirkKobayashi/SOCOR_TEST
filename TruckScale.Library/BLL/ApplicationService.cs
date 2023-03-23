@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TruckScale.Library.Data.DBContext;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
+using TruckScale.Library.Repositories;
 
 namespace TruckScale.Library.BLL
 {
@@ -101,9 +102,16 @@ namespace TruckScale.Library.BLL
         #endregion
 
         #region Weigher
-        public Weigher GetWeigher(string name)
+        public Weigher GetWeigherByName(string name)
         {
-            return dbContext.Weighers.FirstOrDefault(x => x.UserName == name);
+            var db = new WeigherRepository(dbContext);
+
+            if (name != null)
+            {
+                return db.GetByName(name);
+            }
+            return null;
+            
         }
 
         public void InsertWeigher(Weigher weigher)
@@ -123,6 +131,7 @@ namespace TruckScale.Library.BLL
                 dbContext.SaveChanges();
             }
         }
+
         #endregion
     }
 }

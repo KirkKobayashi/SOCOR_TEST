@@ -17,14 +17,15 @@ namespace TruckScale.UI.UserControls
 {
     public partial class WeighingUC : UserControl
     {
-        private IApplicationService _service;
+        private readonly IApplicationService _service;
         public WeighingUC(IApplicationService service)
         {
             InitializeComponent();
+            
+            _service = service;
             GetCustomers();
             GetSuppliers();
             GetProducts();
-            _service = service;
         }
 
         private void InsertTransaction()

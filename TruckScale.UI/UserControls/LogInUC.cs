@@ -47,12 +47,13 @@ namespace TruckScale.UI.UserControls
                     return false;
                 }
 
-                var weigher = _service.GetWeigher(txtUserName.Text.Trim());
+                var weigher = _service.GetWeigherByName(txtUserName.Text.Trim());
 
                 if (weigher != null)
                 {
                     if (weigher.Password == AES.EncryptString(Globals.myKey, txtPassword.Text.Trim()))
                     {
+                        _mainForm.weigherId = weigher.Id;
                         return true;
                     }
                 }
@@ -72,7 +73,7 @@ namespace TruckScale.UI.UserControls
 
             if (success)
             {
-                _mainForm.ClearPanel();
+                _mainForm.LogIn();
             }
         }
     }
