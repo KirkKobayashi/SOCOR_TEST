@@ -318,7 +318,6 @@
             this.cboProduct.Name = "cboProduct";
             this.cboProduct.Size = new System.Drawing.Size(994, 33);
             this.cboProduct.TabIndex = 12;
-            this.cboProduct.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // txtRemarks
             // 

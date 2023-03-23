@@ -10,16 +10,17 @@ namespace TruckScale.Library.Data.DBContext
 {
     public class ScaleDbContext : DbContext
     {
-        //public ScaleDbContext(DbContextOptions<ScaleDbContext> options) : base(options)
-        //{
+        private string _constring;
 
-        //}
-
-        private const string ConnectionString = @"Server=wearelegion; Database=dbWb; Trusted_Connection=true; Encrypt=No; TrustServerCertificate=yes";
+        public ScaleDbContext(string constring) 
+        {
+            _constring = constring;
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(ConnectionString);
+            _constring = @"Server=wearelegion; Database=dbWb; Trusted_Connection=true; Encrypt=No; TrustServerCertificate=yes";
+            optionsBuilder.UseSqlServer(_constring);
         }
 
         public DbSet<Customer>  Customers { get; set; }

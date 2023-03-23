@@ -8,19 +8,76 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TruckScale.Library.Data.DBContext;
+using TruckScale.Library.Data.Models;
+using TruckScale.Library.Interfaces;
 using TruckScale.Library.Repositories;
+using TruckScale.UI.HelperClass;
 
 namespace TruckScale.UI.UserControls
 {
     public partial class WeighingUC : UserControl
     {
-        public WeighingUC()
+        private IApplicationService _service;
+        public WeighingUC(IApplicationService service)
         {
             InitializeComponent();
-            
-            CustomerRepository db = new CustomerRepository(new ScaleDbContext());
+            GetCustomers();
+            GetSuppliers();
+            GetProducts();
+            _service = service;
+        }
 
-            db.Insert(new Library.Data.Models.Customer { Name = "Test Customer" });
+        private void InsertTransaction()
+        {
+            Supplier supplier = new Supplier { Name = cboSupplier.Text, Active = true };
+            Customer customer = new Customer { Name = cboCustomer.Text, Active = true };    
+            Product product = new Product { Name=cboProduct.Text, Active=true };
+            Truck truck = new Truck { PlateNumber = txtPlateNumber.Text.Trim(), TareWeight = Convert.ToInt32(txtFirstWeight.Text) };
+            Weigher weigher = new Weigher { Id = 1, FirstName = "Test" };
+
+            WeighingTransaction transaction = new WeighingTransaction
+            {
+                Supplier = supplier,
+                Customer = customer,
+                Product = product,
+                Truck = truck,
+                Weigher = weigher,
+                FirstWeightDate = DateTime.Now,
+                FirstWeight = Convert.ToInt32(txtFirstWeight.Text),
+                Driver = txtDriver.Text.Trim(),
+                Remarks = txtRemarks.Text,
+                Quantity = txtQuantity.Text
+            };
+        }
+
+        private void GetCustomers()
+        {
+            var customers = _service.GetCustomers();
+
+            cboCustomer.Items.Clear();
+            cboCustomer.DataSource = customers;
+            cboCustomer.DisplayMember = "Name";
+            cboCustomer.ValueMember = "Id";
+        }
+
+        private void GetSuppliers()
+        {
+            var suppliers = _service.GetSuppliers();
+
+            cboSupplier.Items.Clear();
+            cboSupplier.DataSource = suppliers;
+            cboSupplier.DisplayMember = "Name";
+            cboSupplier.ValueMember = "Id";
+        }
+
+        private void GetProducts()
+        { 
+            var products = _service.GetProducts();
+
+            cboProduct.Items.Clear();
+            cboProduct.DataSource = products;
+            cboProduct.DisplayMember = "Name";
+            cboProduct.ValueMember = "Id";
         }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)

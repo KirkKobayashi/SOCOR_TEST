@@ -9,11 +9,11 @@ namespace TruckScale.Library.Data.Data_Layer
 {
     public class DataLayer
     {
-        private ScaleDbContext dbContext;
-        public DataLayer()
-        {
-            dbContext = new ScaleDbContext();
-        }
+        //private ScaleDbContext dbContext;
+        //public DataLayer()
+        //{
+        //    dbContext = new ScaleDbContext();
+        //}
 
 
     }
