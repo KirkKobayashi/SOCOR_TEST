@@ -26,9 +26,9 @@ namespace TruckScale.UI.Forms
         public MainForm()
         {
             InitializeComponent();
-            ShowUserLogIn();
 
             _service = Factory.GetApplicationService();
+            ShowUserLogIn();
         }
 
         public void ClearPanelFromWeighing()
