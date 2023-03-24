@@ -153,7 +153,7 @@ namespace TruckScale.Library.BLL
             using (var service = new TransactionRepository(dbContext))
             {
                 //var trans = dbContext?.WeighingTransactions.Where(t => t.FirstWeightDate >= startDate && t.FirstWeightDate <= endDate);
-                var trans = service.GetAll();
+                var trans = service.GetRangedRecords(startDate, endDate);
             }
 
             

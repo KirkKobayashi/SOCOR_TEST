@@ -25,7 +25,7 @@ namespace TruckScale.Library.Repositories
 
         public IQueryable<WeighingTransaction> GetRangedRecords(DateTime startdate, DateTime enddate)
         {
-            return dbContext.WeighingTransactions.Where(w => w.FirstWeightDate <= startdate && w.FirstWeightDate >= enddate);
+            return dbContext.WeighingTransactions.Where(w => w.FirstWeightDate >= startdate && w.FirstWeightDate <= enddate);
         }
 
         public List<WeighingTransaction> GetAll()
