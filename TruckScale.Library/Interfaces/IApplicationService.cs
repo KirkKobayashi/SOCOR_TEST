@@ -9,6 +9,7 @@ namespace TruckScale.Library.Interfaces
         int AddProduct(string name);
         int AddSupplier(string name);
         int AddTruck(string platenumber);
+        List<FlatWeighingTransaction> FlattenTransactionRecords(IQueryable<WeighingTransaction> weighingTransactions);
         Customer GetCustomerByName(string name);
         List<Customer> GetCustomers();
         Product GetProductByName(string name);
@@ -16,7 +17,7 @@ namespace TruckScale.Library.Interfaces
         Supplier GetSupplierByName(string name);
         List<Supplier> GetSuppliers();
         int GetTicketNumber();
-        IEnumerable<FlatWeighingTransaction> GetTransactionsByDate(DateTime startDate, DateTime endDate);
+        List<WeighingTransaction> GetTransactionsByDate(DateTime startDate, DateTime endDate);
         Truck GetTruckByPlate(string platenumber);
         List<Truck> GetTrucks();
         Weigher GetWeigherByName(string name);

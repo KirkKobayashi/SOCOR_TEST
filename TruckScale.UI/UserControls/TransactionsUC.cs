@@ -28,6 +28,7 @@ namespace TruckScale.UI.UserControls
             var enddate = dtEnd.Value.Date.AddDays(1).AddTicks(-10);
             var records = _service.GetTransactionsByDate(startdate, enddate);
 
+            dgvTransactions.DataSource = records;
         }
 
         private void btStart_ValueChanged(object sender, EventArgs e)

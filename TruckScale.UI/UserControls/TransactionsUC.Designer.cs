@@ -30,13 +30,6 @@
         {
             tableLayoutPanel1 = new TableLayoutPanel();
             dgvTransactions = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Supplier = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
             panel1 = new Panel();
             label9 = new Label();
             tableLayoutPanel2 = new TableLayoutPanel();
@@ -79,7 +72,6 @@
             // dgvTransactions
             // 
             dgvTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTransactions.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Supplier, Column4, Column5, Column6 });
             tableLayoutPanel1.SetColumnSpan(dgvTransactions, 2);
             dgvTransactions.Dock = DockStyle.Fill;
             dgvTransactions.Location = new Point(10, 260);
@@ -89,57 +81,6 @@
             dgvTransactions.RowTemplate.Height = 33;
             dgvTransactions.Size = new Size(1250, 586);
             dgvTransactions.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "Id";
-            Column1.MinimumWidth = 8;
-            Column1.Name = "Column1";
-            Column1.Width = 150;
-            // 
-            // Column2
-            // 
-            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column2.HeaderText = "Plate Number";
-            Column2.MinimumWidth = 8;
-            Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column3.HeaderText = "Customer";
-            Column3.MinimumWidth = 8;
-            Column3.Name = "Column3";
-            // 
-            // Supplier
-            // 
-            Supplier.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Supplier.HeaderText = "Supplier";
-            Supplier.MinimumWidth = 8;
-            Supplier.Name = "Supplier";
-            // 
-            // Column4
-            // 
-            Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column4.HeaderText = "Product";
-            Column4.MinimumWidth = 8;
-            Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            Column5.HeaderText = "First Weight";
-            Column5.MinimumWidth = 8;
-            Column5.Name = "Column5";
-            Column5.Width = 142;
-            // 
-            // Column6
-            // 
-            Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            Column6.HeaderText = "Second Weight";
-            Column6.MinimumWidth = 8;
-            Column6.Name = "Column6";
-            Column6.Width = 154;
             // 
             // panel1
             // 
@@ -313,12 +254,5 @@
         private Label label4;
         private TextBox txtSearchBox;
         private ComboBox cboSearchFilter;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Supplier;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column6;
     }
 }
