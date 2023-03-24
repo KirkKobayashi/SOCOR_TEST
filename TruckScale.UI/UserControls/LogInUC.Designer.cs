@@ -28,146 +28,148 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtUserName = new System.Windows.Forms.TextBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.btnLogIn = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.SuspendLayout();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            label2 = new Label();
+            label1 = new Label();
+            txtUserName = new TextBox();
+            txtPassword = new TextBox();
+            btnLogIn = new Button();
+            panel1 = new Panel();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            label3 = new Label();
+            tableLayoutPanel1.SuspendLayout();
+            panel1.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
+            SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.11842F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.76316F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.11842F));
-            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtUserName, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtPassword, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btnLogIn, 2, 4);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 50);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(863, 269);
-            this.tableLayoutPanel1.TabIndex = 1;
+            tableLayoutPanel1.ColumnCount = 4;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 41.11842F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 17.76316F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 41.11842F));
+            tableLayoutPanel1.Controls.Add(label2, 1, 3);
+            tableLayoutPanel1.Controls.Add(label1, 1, 1);
+            tableLayoutPanel1.Controls.Add(txtUserName, 2, 1);
+            tableLayoutPanel1.Controls.Add(txtPassword, 2, 3);
+            tableLayoutPanel1.Controls.Add(btnLogIn, 2, 4);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(0, 50);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 6;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
+            tableLayoutPanel1.Size = new Size(863, 269);
+            tableLayoutPanel1.TabIndex = 1;
             // 
             // label2
             // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(296, 110);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(144, 45);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Password";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            label2.Dock = DockStyle.Fill;
+            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(275, 86);
+            label2.Name = "label2";
+            label2.Size = new Size(194, 45);
+            label2.TabIndex = 4;
+            label2.Text = "Password";
+            label2.TextAlign = ContentAlignment.TopRight;
             // 
             // label1
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(296, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(144, 45);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "User Name";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            label1.Dock = DockStyle.Fill;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(275, 21);
+            label1.Name = "label1";
+            label1.Size = new Size(194, 45);
+            label1.TabIndex = 0;
+            label1.Text = "User Name";
+            label1.TextAlign = ContentAlignment.TopRight;
             // 
             // txtUserName
             // 
-            this.txtUserName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtUserName.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.txtUserName.Location = new System.Drawing.Point(446, 48);
-            this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(120, 31);
-            this.txtUserName.TabIndex = 2;
+            txtUserName.Dock = DockStyle.Fill;
+            txtUserName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtUserName.Location = new Point(475, 24);
+            txtUserName.Name = "txtUserName";
+            txtUserName.Size = new Size(111, 39);
+            txtUserName.TabIndex = 2;
             // 
             // txtPassword
             // 
-            this.txtPassword.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.txtPassword.Location = new System.Drawing.Point(446, 113);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(120, 31);
-            this.txtPassword.TabIndex = 3;
-            this.txtPassword.UseSystemPasswordChar = true;
+            txtPassword.Dock = DockStyle.Fill;
+            txtPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtPassword.Location = new Point(475, 89);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(111, 39);
+            txtPassword.TabIndex = 3;
+            txtPassword.UseSystemPasswordChar = true;
             // 
             // btnLogIn
             // 
-            this.btnLogIn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnLogIn.Location = new System.Drawing.Point(446, 158);
-            this.btnLogIn.Name = "btnLogIn";
-            this.btnLogIn.Size = new System.Drawing.Size(120, 44);
-            this.btnLogIn.TabIndex = 5;
-            this.btnLogIn.Text = "Log In";
-            this.btnLogIn.UseVisualStyleBackColor = true;
-            this.btnLogIn.Click += new System.EventHandler(this.btnLogIn_Click);
+            btnLogIn.Dock = DockStyle.Right;
+            btnLogIn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnLogIn.Location = new Point(475, 134);
+            btnLogIn.Name = "btnLogIn";
+            btnLogIn.Size = new Size(111, 44);
+            btnLogIn.TabIndex = 5;
+            btnLogIn.Text = "Log In";
+            btnLogIn.UseVisualStyleBackColor = true;
+            btnLogIn.Click += btnLogIn_Click;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
-            this.panel1.Controls.Add(this.tableLayoutPanel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(863, 50);
-            this.panel1.TabIndex = 0;
+            panel1.BackColor = Color.FromArgb(33, 37, 41);
+            panel1.Controls.Add(tableLayoutPanel2);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(863, 50);
+            panel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.Controls.Add(this.label3, 1, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(863, 50);
-            this.tableLayoutPanel2.TabIndex = 0;
+            tableLayoutPanel2.ColumnCount = 3;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tableLayoutPanel2.Controls.Add(label3, 1, 0);
+            tableLayoutPanel2.Dock = DockStyle.Fill;
+            tableLayoutPanel2.Location = new Point(0, 0);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.Size = new Size(863, 50);
+            tableLayoutPanel2.TabIndex = 0;
             // 
             // label3
             // 
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(290, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(281, 50);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "User Log In";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label3.Dock = DockStyle.Fill;
+            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(290, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(281, 50);
+            label3.TabIndex = 0;
+            label3.Text = "User Log In";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // LogInUC
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.panel1);
-            this.Name = "LogInUC";
-            this.Size = new System.Drawing.Size(863, 319);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(tableLayoutPanel1);
+            Controls.Add(panel1);
+            Name = "LogInUC";
+            Size = new Size(863, 319);
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            panel1.ResumeLayout(false);
+            tableLayoutPanel2.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion

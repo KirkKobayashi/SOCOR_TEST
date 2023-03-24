@@ -154,13 +154,6 @@ namespace TruckScale.Library.BLL
             {
                 var trans = dbContext?.WeighingTransactions.Where(t => t.FirstWeightDate >= startDate && t.FirstWeightDate <= endDate);
 
-                if (trans.Count() <= 0)
-                {
-                    return null;
-                }
-
-                //return trans.ToList();
-
                 var qTrans = (from t in trans.AsEnumerable()
                               join c in customers on t.CustomerId equals c.Id
                               join s in suppliers on t.SupplierId equals s.Id
@@ -169,8 +162,6 @@ namespace TruckScale.Library.BLL
                               select t);
 
                 return qTrans.ToList();
-
-                //return FlattenTransactionRecords(qTrans);
             }
 
 
