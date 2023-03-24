@@ -1,4 +1,5 @@
-﻿using TruckScale.Library.Data.Models;
+﻿using TruckScale.Library.Data.DTOs;
+using TruckScale.Library.Data.Models;
 
 namespace TruckScale.Library.Interfaces
 {
@@ -14,8 +15,10 @@ namespace TruckScale.Library.Interfaces
         List<Product> GetProducts();
         Supplier GetSupplierByName(string name);
         List<Supplier> GetSuppliers();
-        IEnumerable<WeighingTransaction> GetTransactionsByDate(DateTime startDate, DateTime endDate);
+        int GetTicketNumber();
+        IEnumerable<FlatWeighingTransaction> GetTransactionsByDate(DateTime startDate, DateTime endDate);
         Truck GetTruckByPlate(string platenumber);
+        List<Truck> GetTrucks();
         Weigher GetWeigherByName(string name);
         void InsertTransaction(WeighingTransaction transaction);
         void InsertWeigher(Weigher weigher);

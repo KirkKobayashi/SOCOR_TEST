@@ -44,6 +44,12 @@ namespace TruckScale.Library.Repositories
             }
         }
 
+        public int GetTicketNumber()
+        {
+            var maxTicket = dbContext.WeighingTransactions.Max(x => x.TicketNumber);
+            return maxTicket+1;
+        }
+
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)

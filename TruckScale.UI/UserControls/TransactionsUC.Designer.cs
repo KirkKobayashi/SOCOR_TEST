@@ -220,6 +220,7 @@
             this.btStart.Name = "btStart";
             this.btStart.Size = new System.Drawing.Size(340, 31);
             this.btStart.TabIndex = 3;
+            this.btStart.ValueChanged += new System.EventHandler(this.btStart_ValueChanged);
             // 
             // dtEnd
             // 
@@ -227,6 +228,7 @@
             this.dtEnd.Name = "dtEnd";
             this.dtEnd.Size = new System.Drawing.Size(340, 31);
             this.dtEnd.TabIndex = 4;
+            this.dtEnd.ValueChanged += new System.EventHandler(this.dtEnd_ValueChanged);
             // 
             // label1
             // 
@@ -278,6 +280,11 @@
             // cboSearchFilter
             // 
             this.cboSearchFilter.FormattingEnabled = true;
+            this.cboSearchFilter.Items.AddRange(new object[] {
+            "Plate Number",
+            "Customer",
+            "Supplier",
+            "Product"});
             this.cboSearchFilter.Location = new System.Drawing.Point(23, 64);
             this.cboSearchFilter.Name = "cboSearchFilter";
             this.cboSearchFilter.Size = new System.Drawing.Size(364, 33);

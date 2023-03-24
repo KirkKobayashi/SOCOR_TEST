@@ -20,8 +20,8 @@ namespace TruckScale.UI.UserControls
     public partial class WeighingUC : UserControl
     {
         public bool NewTransaction { get; set; } = false;
-        private ErrorProvider errorProvider;
 
+        private ErrorProvider errorProvider;
         private readonly IApplicationService _service;
         private readonly MainForm _mainForm;
 
@@ -133,6 +133,11 @@ namespace TruckScale.UI.UserControls
                     throw;
                 }
             }
+        }
+
+        private void UpdateTransaction()
+        {
+
         }
 
         private void GetCustomers()

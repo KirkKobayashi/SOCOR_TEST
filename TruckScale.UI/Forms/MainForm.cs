@@ -28,7 +28,7 @@ namespace TruckScale.UI.Forms
             InitializeComponent();
             ShowUserLogIn();
 
-            _service = new ApplicationService(new ScaleDbContext(ConStringHelper.Get()));
+            _service = Factory.GetApplicationService();
         }
 
         public void ClearPanelFromWeighing()
@@ -42,6 +42,7 @@ namespace TruckScale.UI.Forms
 
             ShowTransactions();
         }
+
         public void LogIn()
         {
             PanelMain.Controls.Clear();
@@ -51,7 +52,7 @@ namespace TruckScale.UI.Forms
         private void ShowUserLogIn()
         {
             PanelMain.Controls.Clear();
-            LogInUC logInUC = new LogInUC(new ApplicationService(new ScaleDbContext(ConStringHelper.Get())), this);
+            LogInUC logInUC = new LogInUC(_service, this);
             PanelMain.Controls.Add(logInUC);
             logInUC.Dock = DockStyle.Fill; 
             logInUC.Show();
@@ -60,7 +61,7 @@ namespace TruckScale.UI.Forms
         private void ShowUserManagement()
         {
             PanelMain.Controls.Clear();
-            WeigherUC weigherUC = new WeigherUC(new ApplicationService(new ScaleDbContext(ConStringHelper.Get())));
+            WeigherUC weigherUC = new WeigherUC(_service);
             PanelMain.Controls.Add(weigherUC);
             weigherUC.Dock = DockStyle.Fill;
             weigherUC.Show();

@@ -14,5 +14,6 @@ namespace TruckScale.Library.Interfaces
         WeighingTransaction? GetById(int id);
         List<WeighingTransaction> GetAll();
         void Insert(WeighingTransaction transaction);
+        int GetTicketNumber();
     }
 }

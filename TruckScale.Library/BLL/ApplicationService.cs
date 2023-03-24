@@ -1,12 +1,15 @@
-﻿using Microsoft.Identity.Client;
+﻿using Microsoft.EntityFrameworkCore.Update;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using TruckScale.Library.Data.DBContext;
+using TruckScale.Library.Data.DTOs;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
 using TruckScale.Library.Repositories;
@@ -25,29 +28,50 @@ namespace TruckScale.Library.BLL
 
         public List<Customer> GetCustomers()
         {
-            return dbContext.Customers.ToList();
+            using (var service = new CustomerRepository(dbContext))
+            {
+                return service.GetAll();
+            }
         }
 
         public List<Supplier> GetSuppliers()
         {
-            return dbContext.Suppliers.ToList();
+            using (var service = new SupplierRepository(dbContext))
+            {
+                return service.GetAll();
+            }
         }
 
         public List<Product> GetProducts()
         {
-            return dbContext.Products.ToList();
+            using (var service = new ProductRepository(dbContext))
+            {
+                return service.GetAll();
+            }
+        }
+
+        public List<Truck> GetTrucks()
+        {
+            using (var service = new TruckRepository(dbContext))
+            {
+                return service.GetAll();
+            }
         }
 
         public Supplier GetSupplierByName(string name)
         {
-            var service = new SupplierRepository(dbContext);
-            return service.GetSupplierByName(name);
+            using (var service = new SupplierRepository(dbContext))
+            {
+                return service.GetSupplierByName(name);
+            }
         }
 
         public Customer GetCustomerByName(string name)
         {
-            var service = new CustomerRepository(dbContext);
-            return service.GetCustomerByName(name);
+            using (var service = new CustomerRepository(dbContext))
+            {
+                return service.GetCustomerByName(name);
+            }
         }
 
         public Truck GetTruckByPlate(string platenumber)
@@ -58,26 +82,35 @@ namespace TruckScale.Library.BLL
 
         public Product GetProductByName(string name)
         {
-            var service = new ProductRepository(dbContext);
-            return service.GetProductByName(name);
+            using (var service = new ProductRepository(dbContext))
+            {
+                return service.GetProductByName(name);
+            }
         }
 
         public int AddSupplier(string name)
         {
-            var service = new SupplierRepository(dbContext);
-            return service.Insert(new Supplier { Name = name, Active = true });
+            using (var service = new SupplierRepository(dbContext))
+            {
+                return service.Insert(new Supplier { Name = name, Active = true });
+            }
+                
         }
 
         public int AddCustomer(string name)
         {
-            var service = new CustomerRepository(dbContext);
-            return service.Insert(new Customer { Name = name, Active = true });
+            using (var service = new CustomerRepository(dbContext))
+            {
+                return service.Insert(new Customer { Name = name, Active = true });
+            }
         }
 
         public int AddProduct(string name)
         {
-            var service = new ProductRepository(dbContext);
-            return service.Insert(new Product { Name = name, Active = true });
+            using (var service = new ProductRepository(dbContext))
+            {
+                return service.Insert(new Product { Name = name, Active = true });
+            }
         }
 
         public int AddTruck(string platenumber)
@@ -86,10 +119,20 @@ namespace TruckScale.Library.BLL
             return service.Insert(new Truck { PlateNumber = platenumber });
         }
 
+        public int GetTicketNumber()
+        {
+            using (var service = new TransactionRepository(dbContext))
+            {
+                return service.GetTicketNumber();
+            }
+        }
+
         public void InsertTransaction(WeighingTransaction transaction)
         {
-            dbContext.WeighingTransactions.Add(transaction);
-            dbContext.SaveChanges();
+            using (var service = new TransactionRepository(dbContext))
+            {
+                service.Insert(transaction );
+            }
         }
 
         public void UpdateTransaction(WeighingTransaction transaction)
@@ -100,9 +143,51 @@ namespace TruckScale.Library.BLL
             dbContext.SaveChanges();
         }
 
-        public IEnumerable<WeighingTransaction> GetTransactionsByDate(DateTime startDate, DateTime endDate)
+        public IEnumerable<FlatWeighingTransaction> GetTransactionsByDate(DateTime startDate, DateTime endDate)
         {
-            return dbContext.WeighingTransactions.Where(t => t.FirstWeightDate >= startDate && t.FirstWeightDate <= endDate);
+            var suppliers = GetSuppliers();
+            var products = GetProducts();
+            var customers = GetCustomers();
+            var trucks = GetTrucks();
+
+            var trans =  dbContext?.WeighingTransactions.Where(t => t.FirstWeightDate >= startDate && t.FirstWeightDate <= endDate);
+
+            var qTrans = (from t in trans
+                          join c in customers on t.CustomerId equals c.Id
+                          join s in suppliers on t.SupplierId equals s.Id
+                          join p in products on t.ProductId equals p.Id
+                          join tk in trucks on t.TruckId equals tk.Id
+                          where t.FirstWeightDate >= startDate && t.FirstWeightDate <= endDate
+                          select t);
+
+            return FlattenTransactionRecords(qTrans);
+        }
+
+        private List<FlatWeighingTransaction> FlattenTransactionRecords(IEnumerable<WeighingTransaction> weighingTransactions)
+        {
+            List<FlatWeighingTransaction> flatTransactions = new List<FlatWeighingTransaction>();
+
+            foreach (var i in weighingTransactions)
+            {
+                flatTransactions.Add(new FlatWeighingTransaction
+                {
+                    TruckPlateNumber = i.Truck?.PlateNumber ?? string.Empty,
+                    CustomerName = i.Customer?.Name ?? string.Empty,
+                    SupplierName = i.Supplier?.Name ?? string.Empty,
+                    ProductName = i.Product?.Name ?? string.Empty,
+                    Driver = i.Driver ?? string.Empty,
+                    TicketNumber = i.TicketNumber,
+                    Quantity = i.Quantity ?? string.Empty,
+                    Remarks = i.Remarks ?? string.Empty,
+                    FirstWeight = i.FirstWeight,
+                    SecondWeight = i.SecondWeight,
+                    FirstWeightDate = i.FirstWeightDate,
+                    SecondWeightDate = i.SecondWeightDate,
+                    Id = i.Id
+                });
+            }
+
+            return flatTransactions;
         }
         #endregion
 
