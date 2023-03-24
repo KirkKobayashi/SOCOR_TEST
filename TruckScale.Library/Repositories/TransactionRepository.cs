@@ -1,4 +1,5 @@
-﻿using TruckScale.Library.Data.DBContext;
+﻿using Microsoft.EntityFrameworkCore;
+using TruckScale.Library.Data.DBContext;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
 
@@ -25,7 +26,17 @@ namespace TruckScale.Library.Repositories
 
         public IQueryable<WeighingTransaction> GetRangedRecords(DateTime startdate, DateTime enddate)
         {
-            return dbContext.WeighingTransactions.Where(w => w.FirstWeightDate >= startdate && w.FirstWeightDate <= enddate);
+            //return dbContext.WeighingTransactions.Where(w => w.FirstWeightDate >= startdate && w.FirstWeightDate <= enddate);
+                var trans = dbContext.WeighingTransactions
+                    .Include(w => w.Customer)
+                    .Include(w => w.Supplier)
+                    .Include(w => w.Product)
+                    .Include(w => w.Truck)
+                    .Include(w => w.Weigher)
+                    .Where (w => w.FirstWeightDate >= startdate && w.FirstWeightDate <= enddate);
+
+                return trans;
+
         }
 
         public List<WeighingTransaction> GetAll()

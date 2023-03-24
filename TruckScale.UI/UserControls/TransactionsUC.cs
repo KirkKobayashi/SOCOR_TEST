@@ -8,18 +8,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TruckScale.Library.BLL;
+using TruckScale.UI.Forms;
 
 namespace TruckScale.UI.UserControls
 {
     public partial class TransactionsUC : UserControl
     {
+        public int transactionId { get; set; }
+
+        private readonly MainForm _mainForm;
         private readonly ApplicationService _service;
-        public TransactionsUC(ApplicationService service)
+        public TransactionsUC(ApplicationService service, MainForm mainForm)
         {
             InitializeComponent();
             _service = service;
+            _mainForm = mainForm;
 
             GetRecords();
+            dgvTransactions.AllowUserToDeleteRows = false;
+            dgvTransactions.AllowUserToAddRows = false;
         }
 
         private void GetRecords()
@@ -37,11 +44,13 @@ namespace TruckScale.UI.UserControls
             dt.Columns.Add("Product", typeof(string));
             dt.Columns.Add("First Weight", typeof(int));
             dt.Columns.Add("Second Weight", typeof(int));
+            dt.Columns.Add("Net Weight", typeof(int));
             dt.Columns.Add("Weighing Date/Time", typeof(string));
 
             foreach (var i in records)
             {
-                dt.Rows.Add(i.Id, i.Truck.PlateNumber, i.Customer.Name, i.Supplier.Name, i.Product.Name, i.FirstWeight, i.SecondWeight, i.FirstWeightDate.ToString("HH:mm MM-dd-yyyy"));
+                var netweight = i.FirstWeight - i.SecondWeight;
+                dt.Rows.Add(i.Id, i.Truck.PlateNumber, i.Customer.Name, i.Supplier.Name, i.Product.Name, i.FirstWeight, i.SecondWeight, Math.Abs(netweight), i.FirstWeightDate.ToString("HH:mm MM-dd-yyyy"));
             }
 
             dgvTransactions.DataSource = null;
@@ -58,8 +67,6 @@ namespace TruckScale.UI.UserControls
             dgvTransactions.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
 
-
-
         private void btStart_ValueChanged(object sender, EventArgs e)
         {
             GetRecords();
@@ -70,5 +77,21 @@ namespace TruckScale.UI.UserControls
             GetRecords();
         }
 
+        private void dgvTransactions_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvTransactions.Rows[e.RowIndex];
+                transactionId = Convert.ToInt32(row.Cells[0].Value);
+            }
+        }
+
+        private void dgvTransactions_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                _mainForm.ShowWeighing(false);
+            }
+        }
     }
 }

@@ -71,16 +71,26 @@
             // 
             // dgvTransactions
             // 
-            dgvTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvTransactions.AllowUserToAddRows = false;
+            dgvTransactions.AllowUserToDeleteRows = false;
+            dgvTransactions.BorderStyle = BorderStyle.None;
+            dgvTransactions.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dgvTransactions.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
+            dgvTransactions.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvTransactions.ColumnHeadersHeight = 50;
+            dgvTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             tableLayoutPanel1.SetColumnSpan(dgvTransactions, 2);
             dgvTransactions.Dock = DockStyle.Fill;
             dgvTransactions.Location = new Point(10, 260);
             dgvTransactions.Margin = new Padding(10);
             dgvTransactions.Name = "dgvTransactions";
+            dgvTransactions.ReadOnly = true;
             dgvTransactions.RowHeadersWidth = 62;
             dgvTransactions.RowTemplate.Height = 33;
             dgvTransactions.Size = new Size(1250, 586);
             dgvTransactions.TabIndex = 0;
+            dgvTransactions.CellMouseClick += dgvTransactions_CellMouseClick;
+            dgvTransactions.CellMouseDoubleClick += dgvTransactions_CellMouseDoubleClick;
             // 
             // panel1
             // 
