@@ -18,21 +18,27 @@ namespace TruckScale.UI.UserControls
         {
             InitializeComponent();
             _service = service;
+
+            GetRecords();
+        }
+
+        private void GetRecords()
+        {
+            var startdate = dtStart.Value.Date;
+            var enddate = dtEnd.Value.Date.AddDays(1).AddTicks(-10);
+            var records = _service.GetTransactionsByDate(startdate, enddate);
+
         }
 
         private void btStart_ValueChanged(object sender, EventArgs e)
         {
-
+            GetRecords();
         }
 
         private void dtEnd_ValueChanged(object sender, EventArgs e)
         {
-
+            GetRecords();
         }
 
-        public void Refresh()
-        {
-
-        }
     }
 }

@@ -21,7 +21,11 @@ namespace TruckScale.Library.Repositories
                 dbContext.WeighingTransactions.Remove(rec);
                 dbContext.SaveChanges();
             }
+        }
 
+        public IQueryable<WeighingTransaction> GetRangedRecords(DateTime startdate, DateTime enddate)
+        {
+            return dbContext.WeighingTransactions.Where(w => w.FirstWeightDate <= startdate && w.FirstWeightDate >= enddate);
         }
 
         public List<WeighingTransaction> GetAll()
