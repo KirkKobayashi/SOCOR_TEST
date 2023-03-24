@@ -7,15 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TruckScale.Library.BLL;
 
 namespace TruckScale.UI.UserControls
 {
     public partial class TransactionsUC : UserControl
     {
-        
-        public TransactionsUC()
+        private readonly ApplicationService _service;
+        public TransactionsUC(ApplicationService service)
         {
             InitializeComponent();
+            _service = service;
         }
 
         private void btStart_ValueChanged(object sender, EventArgs e)

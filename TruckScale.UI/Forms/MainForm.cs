@@ -70,7 +70,7 @@ namespace TruckScale.UI.Forms
         private void ShowTransactions()
         {
             PanelMain.Controls.Clear();
-            TransactionsUC uc = new TransactionsUC();
+            TransactionsUC uc = new TransactionsUC(_service);
             PanelMain.Controls.Add(uc);
             uc.Dock = DockStyle.Fill;
             uc.Show();
