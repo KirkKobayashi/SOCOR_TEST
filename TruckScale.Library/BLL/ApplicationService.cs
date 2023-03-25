@@ -24,6 +24,7 @@ namespace TruckScale.Library.BLL
         {
             this.dbContext = dbContext;
         }
+
         #region Weighing
 
         public List<Customer> GetCustomers()
@@ -94,7 +95,7 @@ namespace TruckScale.Library.BLL
             {
                 return service.Insert(new Supplier { Name = name, Active = true });
             }
-                
+
         }
 
         public int AddCustomer(string name)
@@ -131,16 +132,16 @@ namespace TruckScale.Library.BLL
         {
             using (var service = new TransactionRepository(dbContext))
             {
-                service.Insert(transaction );
+                service.Insert(transaction);
             }
         }
 
         public void UpdateTransaction(WeighingTransaction transaction)
         {
-            dbContext.WeighingTransactions.Add(transaction);
-            dbContext.WeighingTransactions.Attach(transaction);
-            dbContext.Entry(transaction).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            dbContext.SaveChanges();
+            using (var service = new TransactionRepository(dbContext))
+            {
+                service.Update(transaction);
+            }
         }
 
         public WeighingTransaction GetTransaction(int id)
@@ -184,6 +185,7 @@ namespace TruckScale.Library.BLL
         #endregion
 
         #region Weigher
+
         public Weigher GetWeigherByName(string name)
         {
             var db = new WeigherRepository(dbContext);
@@ -193,7 +195,7 @@ namespace TruckScale.Library.BLL
                 return db.GetByName(name);
             }
             return null;
-            
+
         }
 
         public void InsertWeigher(Weigher weigher)

@@ -155,6 +155,7 @@
             txtNetWeight.ReadOnly = true;
             txtNetWeight.Size = new Size(585, 37);
             txtNetWeight.TabIndex = 24;
+            txtNetWeight.TabStop = false;
             txtNetWeight.TextAlign = HorizontalAlignment.Right;
             // 
             // txtSecondWeight
@@ -163,11 +164,15 @@
             txtSecondWeight.Dock = DockStyle.Fill;
             txtSecondWeight.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
             txtSecondWeight.Location = new Point(414, 538);
+            txtSecondWeight.MaxLength = 7;
             txtSecondWeight.Name = "txtSecondWeight";
             txtSecondWeight.ReadOnly = true;
             txtSecondWeight.Size = new Size(585, 37);
             txtSecondWeight.TabIndex = 23;
+            txtSecondWeight.TabStop = false;
             txtSecondWeight.TextAlign = HorizontalAlignment.Right;
+            txtSecondWeight.DoubleClick += txtSecondWeight_DoubleClick;
+            txtSecondWeight.Leave += txtSecondWeight_Leave;
             // 
             // label12
             // 
@@ -284,19 +289,26 @@
             // 
             // txtId
             // 
+            txtId.CharacterCasing = CharacterCasing.Upper;
             txtId.Dock = DockStyle.Fill;
+            txtId.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             txtId.Location = new Point(414, 133);
             txtId.Name = "txtId";
             txtId.ReadOnly = true;
             txtId.Size = new Size(385, 31);
             txtId.TabIndex = 7;
+            txtId.TabStop = false;
             // 
             // txtTicket
             // 
+            txtTicket.CharacterCasing = CharacterCasing.Upper;
+            txtTicket.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             txtTicket.Location = new Point(1005, 133);
             txtTicket.Name = "txtTicket";
+            txtTicket.ReadOnly = true;
             txtTicket.Size = new Size(267, 31);
             txtTicket.TabIndex = 9;
+            txtTicket.TabStop = false;
             // 
             // cboCustomer
             // 
@@ -305,7 +317,7 @@
             cboCustomer.Location = new Point(414, 253);
             cboCustomer.Name = "cboCustomer";
             cboCustomer.Size = new Size(385, 33);
-            cboCustomer.TabIndex = 10;
+            cboCustomer.TabIndex = 2;
             // 
             // cboSupplier
             // 
@@ -314,7 +326,7 @@
             cboSupplier.Location = new Point(414, 293);
             cboSupplier.Name = "cboSupplier";
             cboSupplier.Size = new Size(385, 33);
-            cboSupplier.TabIndex = 11;
+            cboSupplier.TabIndex = 3;
             // 
             // cboProduct
             // 
@@ -324,7 +336,7 @@
             cboProduct.Location = new Point(414, 373);
             cboProduct.Name = "cboProduct";
             cboProduct.Size = new Size(976, 33);
-            cboProduct.TabIndex = 12;
+            cboProduct.TabIndex = 6;
             // 
             // txtRemarks
             // 
@@ -334,14 +346,14 @@
             txtRemarks.Name = "txtRemarks";
             tableLayoutPanel1.SetRowSpan(txtRemarks, 2);
             txtRemarks.Size = new Size(385, 74);
-            txtRemarks.TabIndex = 15;
+            txtRemarks.TabIndex = 4;
             // 
             // txtQuantity
             // 
             txtQuantity.Location = new Point(1005, 413);
             txtQuantity.Name = "txtQuantity";
             txtQuantity.Size = new Size(267, 31);
-            txtQuantity.TabIndex = 17;
+            txtQuantity.TabIndex = 7;
             // 
             // panel1
             // 
@@ -384,11 +396,13 @@
             // 
             // txtPlateNumber
             // 
+            txtPlateNumber.CharacterCasing = CharacterCasing.Upper;
             txtPlateNumber.Dock = DockStyle.Fill;
+            txtPlateNumber.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             txtPlateNumber.Location = new Point(414, 213);
             txtPlateNumber.Name = "txtPlateNumber";
             txtPlateNumber.Size = new Size(385, 31);
-            txtPlateNumber.TabIndex = 8;
+            txtPlateNumber.TabIndex = 1;
             // 
             // txtFirstWeight
             // 
@@ -396,11 +410,16 @@
             txtFirstWeight.Dock = DockStyle.Fill;
             txtFirstWeight.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
             txtFirstWeight.Location = new Point(414, 493);
+            txtFirstWeight.MaxLength = 7;
             txtFirstWeight.Name = "txtFirstWeight";
             txtFirstWeight.ReadOnly = true;
             txtFirstWeight.Size = new Size(585, 37);
             txtFirstWeight.TabIndex = 22;
+            txtFirstWeight.TabStop = false;
             txtFirstWeight.TextAlign = HorizontalAlignment.Right;
+            txtFirstWeight.DoubleClick += txtFirstWeight_DoubleClick;
+            txtFirstWeight.KeyPress += txtFirstWeight_KeyPress;
+            txtFirstWeight.Leave += txtFirstWeight_Leave;
             // 
             // btnUpdate
             // 
@@ -410,7 +429,7 @@
             btnUpdate.Location = new Point(1005, 493);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(144, 39);
-            btnUpdate.TabIndex = 25;
+            btnUpdate.TabIndex = 8;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = false;
             btnUpdate.Click += btnUpdate_Click;
@@ -448,7 +467,7 @@
             btnClear.Location = new Point(3, 14);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(94, 57);
-            btnClear.TabIndex = 0;
+            btnClear.TabIndex = 10;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = false;
             // 
@@ -462,7 +481,7 @@
             btnSave.Location = new Point(103, 14);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(161, 57);
-            btnSave.TabIndex = 1;
+            btnSave.TabIndex = 9;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
@@ -492,7 +511,7 @@
             btnClose.Location = new Point(33, 14);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(158, 57);
-            btnClose.TabIndex = 1;
+            btnClose.TabIndex = 11;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = false;
             btnClose.Click += btnClose_Click;

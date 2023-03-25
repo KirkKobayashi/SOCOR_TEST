@@ -66,6 +66,15 @@ namespace TruckScale.Library.Repositories
             }
         }
 
+        public void Update(WeighingTransaction transaction)
+        {
+            //dbContext.WeighingTransactions.Add(transaction);
+            //dbContext.WeighingTransactions.Attach(transaction);
+            //dbContext.Entry(transaction).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            dbContext.Update(transaction);
+            dbContext.SaveChanges();
+        }
+
         public int GetTicketNumber()
         {
             var maxTicket = dbContext.WeighingTransactions.Max(x => x.TicketNumber);

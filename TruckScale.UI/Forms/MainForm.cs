@@ -39,6 +39,7 @@ namespace TruckScale.UI.Forms
             btnDelete.Enabled = true;
             btnPrint.Enabled = true;
             PanelMain.Controls.Clear();
+            stringWeight = txtIndicator.Text;
 
             ShowTransactions();
         }
@@ -54,7 +55,7 @@ namespace TruckScale.UI.Forms
             PanelMain.Controls.Clear();
             LogInUC logInUC = new LogInUC(_service, this);
             PanelMain.Controls.Add(logInUC);
-            logInUC.Dock = DockStyle.Fill; 
+            logInUC.Dock = DockStyle.Fill;
             logInUC.Show();
         }
 
@@ -70,7 +71,7 @@ namespace TruckScale.UI.Forms
         private void ShowTransactions()
         {
             PanelMain.Controls.Clear();
-            TransactionsUC uc = new TransactionsUC(_service,this);
+            TransactionsUC uc = new TransactionsUC(_service, this);
             PanelMain.Controls.Add(uc);
             uc.Dock = DockStyle.Fill;
             uc.Show();
@@ -81,13 +82,11 @@ namespace TruckScale.UI.Forms
             btnTransactions.Enabled = false;
             btnReport.Enabled = false;
             btnDelete.Enabled = false;
-            btnPrint.Enabled= false;
+            btnPrint.Enabled = false;
             btnNew.Enabled = false;
 
 
             ShowWeighing(true, 0);
-
-            stringWeight = txtIndicator.Text;
         }
 
         public void ShowWeighing(bool newTrans, int transId)
@@ -99,7 +98,7 @@ namespace TruckScale.UI.Forms
             }
             else
             {
-                 uc = new WeighingUC(_service, this, newTrans, transId);
+                uc = new WeighingUC(_service, this, newTrans, transId);
             }
 
             PanelMain.Controls.Clear();
@@ -122,6 +121,14 @@ namespace TruckScale.UI.Forms
         private void stripMenuLogIn_Click(object sender, EventArgs e)
         {
             ShowUserLogIn();
+        }
+
+        private void txtIndicator_TextChanged(object sender, EventArgs e)
+        {
+            if (txtIndicator.TextLength > 2)
+            {
+                stringWeight = txtIndicator.Text.Trim();
+            }
         }
     }
 }

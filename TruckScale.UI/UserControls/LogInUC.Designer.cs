@@ -44,77 +44,80 @@
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.ColumnCount = 4;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 41.11842F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 17.76316F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 41.11842F));
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 36.6354F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 26.7291965F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 36.6354027F));
             tableLayoutPanel1.Controls.Add(label2, 1, 3);
             tableLayoutPanel1.Controls.Add(label1, 1, 1);
-            tableLayoutPanel1.Controls.Add(txtUserName, 2, 1);
-            tableLayoutPanel1.Controls.Add(txtPassword, 2, 3);
-            tableLayoutPanel1.Controls.Add(btnLogIn, 2, 4);
+            tableLayoutPanel1.Controls.Add(txtUserName, 1, 2);
+            tableLayoutPanel1.Controls.Add(txtPassword, 1, 4);
+            tableLayoutPanel1.Controls.Add(btnLogIn, 1, 5);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 50);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 6;
+            tableLayoutPanel1.RowCount = 7;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
-            tableLayoutPanel1.Size = new Size(863, 269);
+            tableLayoutPanel1.Size = new Size(1581, 1029);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // label2
             // 
             label2.Dock = DockStyle.Fill;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(275, 86);
+            label2.Location = new Point(582, 239);
             label2.Name = "label2";
-            label2.Size = new Size(194, 45);
+            label2.Size = new Size(416, 45);
             label2.TabIndex = 4;
             label2.Text = "Password";
-            label2.TextAlign = ContentAlignment.TopRight;
+            label2.TextAlign = ContentAlignment.BottomCenter;
             // 
             // label1
             // 
             label1.Dock = DockStyle.Fill;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(275, 21);
+            label1.Location = new Point(582, 149);
             label1.Name = "label1";
-            label1.Size = new Size(194, 45);
+            label1.Size = new Size(416, 45);
             label1.TabIndex = 0;
             label1.Text = "User Name";
-            label1.TextAlign = ContentAlignment.TopRight;
+            label1.TextAlign = ContentAlignment.BottomCenter;
             // 
             // txtUserName
             // 
             txtUserName.Dock = DockStyle.Fill;
             txtUserName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtUserName.Location = new Point(475, 24);
+            txtUserName.Location = new Point(582, 197);
             txtUserName.Name = "txtUserName";
-            txtUserName.Size = new Size(111, 39);
+            txtUserName.Size = new Size(416, 39);
             txtUserName.TabIndex = 2;
+            txtUserName.TextAlign = HorizontalAlignment.Center;
             // 
             // txtPassword
             // 
             txtPassword.Dock = DockStyle.Fill;
             txtPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtPassword.Location = new Point(475, 89);
+            txtPassword.Location = new Point(582, 287);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(111, 39);
+            txtPassword.Size = new Size(416, 39);
             txtPassword.TabIndex = 3;
+            txtPassword.TextAlign = HorizontalAlignment.Center;
             txtPassword.UseSystemPasswordChar = true;
             // 
             // btnLogIn
             // 
-            btnLogIn.Dock = DockStyle.Right;
+            btnLogIn.Dock = DockStyle.Fill;
             btnLogIn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnLogIn.Location = new Point(475, 134);
+            btnLogIn.Location = new Point(582, 339);
+            btnLogIn.Margin = new Padding(3, 10, 3, 3);
             btnLogIn.Name = "btnLogIn";
-            btnLogIn.Size = new Size(111, 44);
+            btnLogIn.Size = new Size(416, 87);
             btnLogIn.TabIndex = 5;
             btnLogIn.Text = "Log In";
             btnLogIn.UseVisualStyleBackColor = true;
@@ -127,7 +130,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(863, 50);
+            panel1.Size = new Size(1581, 50);
             panel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -142,7 +145,7 @@
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(863, 50);
+            tableLayoutPanel2.Size = new Size(1581, 50);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // label3
@@ -150,9 +153,9 @@
             label3.Dock = DockStyle.Fill;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(290, 0);
+            label3.Location = new Point(530, 0);
             label3.Name = "label3";
-            label3.Size = new Size(281, 50);
+            label3.Size = new Size(521, 50);
             label3.TabIndex = 0;
             label3.Text = "User Log In";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -164,7 +167,7 @@
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panel1);
             Name = "LogInUC";
-            Size = new Size(863, 319);
+            Size = new Size(1581, 1079);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             panel1.ResumeLayout(false);
@@ -174,13 +177,13 @@
 
         #endregion
         private TableLayoutPanel tableLayoutPanel1;
-        private Label label2;
-        private Label label1;
         private TextBox txtUserName;
         private TextBox txtPassword;
         private Button btnLogIn;
         private Panel panel1;
         private TableLayoutPanel tableLayoutPanel2;
         private Label label3;
+        private Label label2;
+        private Label label1;
     }
 }

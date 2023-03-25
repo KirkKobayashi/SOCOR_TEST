@@ -16,5 +16,6 @@ namespace TruckScale.Library.Interfaces
         void Insert(WeighingTransaction transaction);
         int GetTicketNumber();
         IQueryable<WeighingTransaction> GetRangedRecords(DateTime startdate, DateTime enddate);
+        void Update(WeighingTransaction transaction);
     }
 }

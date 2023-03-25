@@ -24,6 +24,7 @@ namespace TruckScale.UI.UserControls
         private ErrorProvider errorProvider;
         private readonly IApplicationService _service;
         private readonly MainForm _mainForm;
+        private WeighingTransaction weighingTransaction;
 
         public WeighingUC(IApplicationService service, MainForm mainForm, bool newTrans, int transId = 0)
         {
@@ -41,7 +42,7 @@ namespace TruckScale.UI.UserControls
             GetProducts();
             if (_newTrans)
             {
-                txtTicket.Text =  _service.GetTicketNumber().ToString();
+                txtTicket.Text = _service.GetTicketNumber().ToString();
             }
             else
             {
@@ -64,12 +65,14 @@ namespace TruckScale.UI.UserControls
             }
         }
 
-        private void InsertTransaction()
+
+        private void SaveTransaction()
         {
             using (TransactionScope scope = new TransactionScope())
             {
                 try
                 {
+                    #region RelatedFieldsPrep
                     int productId;
                     int supplierId;
                     int customerId;
@@ -115,8 +118,9 @@ namespace TruckScale.UI.UserControls
                     {
                         truckId = truck.Id;
                     }
+                    #endregion
 
-                    WeighingTransaction transaction = new WeighingTransaction
+                    weighingTransaction = new WeighingTransaction
                     {
                         FirstWeightDate = DateTime.Now,
                         FirstWeight = Convert.ToInt32(txtFirstWeight.Text),
@@ -127,26 +131,58 @@ namespace TruckScale.UI.UserControls
                         CustomerId = customerId,
                         SupplierId = supplierId,
                         ProductId = productId,
-                        TruckId = truckId, 
+                        TruckId = truckId,
                         TicketNumber = Convert.ToInt32(txtTicket.Text)
                     };
 
-                    _service.InsertTransaction(transaction);
+                    if (_newTrans)
+                    {
+                        InsertTransaction();
+                        //Print Initial Ticket
+                    }
+                    else
+                    {
+                        weighingTransaction.SecondWeightDate = DateTime.Now;
+                        weighingTransaction.SecondWeight = Convert.ToInt32(txtSecondWeight.Text);
+                        UpdateTransaction();
+                        //Print Second Ticket
+                    }
 
                     _mainForm.ClearPanelFromWeighing();
                     scope.Complete();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    MessageBox.Show($"Error saving / updating record \n\n{ex.Message}", "Weigh Bridge Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     scope.Dispose();
-                    throw;
                 }
+            }
+        }
+
+        private void InsertTransaction()
+        {
+            try
+            {
+                _service.InsertTransaction(weighingTransaction);
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
         private void UpdateTransaction()
         {
+            try
+            {
+                _service.UpdateTransaction(weighingTransaction);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
         }
 
         private void GetCustomers()
@@ -188,12 +224,18 @@ namespace TruckScale.UI.UserControls
 
             if (td != null)
             {
+                txtId.Text = td.Id.ToString("0000000000");
                 txtTicket.Text = td.TicketNumber.ToString();
                 txtPlateNumber.Text = td.Truck?.PlateNumber ?? string.Empty;
                 cboCustomer.Text = td.Customer?.Name ?? string.Empty;
                 cboSupplier.Text = td.Supplier?.Name ?? string.Empty;
                 cboProduct.Text = td.Product?.Name ?? string.Empty;
-
+                txtFirstWeight.Text = td.FirstWeight.ToString();
+                txtSecondWeight.Text = td.SecondWeight.ToString();
+                txtNetWeight.Text = Math.Abs(td.FirstWeight - td.SecondWeight).ToString();
+                txtRemarks.Text = td.Remarks;
+                txtQuantity.Text = td.Quantity;
+                txtDriver.Text = td.Driver;
             }
         }
 
@@ -210,31 +252,90 @@ namespace TruckScale.UI.UserControls
             var goodSupplier = FormValidation(cboSupplier);
             var goodProduct = FormValidation(cboProduct);
 
-            if (_newTrans)
+            if (goodTicket && goodPlate && goodCustomer && goodSupplier && goodProduct)
             {
-                if (goodTicket && goodPlate && goodCustomer && goodSupplier && goodProduct)
+                if (string.IsNullOrWhiteSpace(txtFirstWeight.Text))
                 {
-                    if (string.IsNullOrWhiteSpace(txtFirstWeight.Text))
-                    {
-                        errorProvider.SetError(btnUpdate, "Click update weight");
-                        return;
-                    }
-                    else
-                    {
-                        errorProvider.SetError(btnUpdate, "");
-                    }
-
-                    InsertTransaction();
+                    errorProvider.SetError(btnUpdate, "Click update weight");
+                    return;
                 }
+                else
+                {
+                    errorProvider.SetError(btnUpdate, "");
+                }
+
+                SaveTransaction();
+            }
+        }
+
+        private void GetWeight()
+        {
+            try
+            {
+                if (_newTrans)
+                {
+                    txtFirstWeight.Text = _mainForm.stringWeight;
+                }
+                else
+                {
+                    txtSecondWeight.Text = _mainForm.stringWeight;
+                    txtNetWeight.Text = Math.Abs(Convert.ToInt32(txtFirstWeight.Text) - Convert.ToInt32(txtSecondWeight.Text)).ToString();
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Error capturing weight");
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            GetWeight();
+        }
+
+        private void txtFirstWeight_DoubleClick(object sender, EventArgs e)
+        {
+            txtFirstWeight.ReadOnly = false;
+            txtFirstWeight.SelectAll();
+
+        }
+
+        private void txtSecondWeight_DoubleClick(object sender, EventArgs e)
+        {
             if (_newTrans)
             {
-                txtFirstWeight.Text = _mainForm.stringWeight;
+                return;
             }
+            txtSecondWeight.ReadOnly = false;
+            txtSecondWeight.SelectAll();
+        }
+
+        private void txtFirstWeight_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsNumber(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtFirstWeight_Leave(object sender, EventArgs e)
+        {
+            txtFirstWeight.ReadOnly = true;
+            if (_newTrans == false)
+            {
+                txtNetWeight.Text = Math.Abs(Convert.ToInt32(txtFirstWeight.Text) - Convert.ToInt32(txtSecondWeight.Text)).ToString();
+            }
+        }
+
+        private void txtSecondWeight_Leave(object sender, EventArgs e)
+        {
+            txtSecondWeight.ReadOnly = true;
+            txtNetWeight.Text = Math.Abs(Convert.ToInt32(txtFirstWeight.Text) - Convert.ToInt32(txtSecondWeight.Text)).ToString();
         }
     }
 }
