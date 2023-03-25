@@ -28,7 +28,7 @@ namespace TruckScale.UI.Forms
             InitializeComponent();
 
             _service = Factory.GetApplicationService();
-            ShowTransactions();
+            ShowUserLogIn();
         }
 
         public void ClearPanelFromWeighing()
@@ -85,18 +85,27 @@ namespace TruckScale.UI.Forms
             btnNew.Enabled = false;
 
 
-            ShowWeighing(true);
+            ShowWeighing(true, 0);
 
             stringWeight = txtIndicator.Text;
         }
 
-        public void ShowWeighing(bool newTrans)
+        public void ShowWeighing(bool newTrans, int transId)
         {
-            //WeighingUC uc = new WeighingUC(_service, this);
-            //PanelMain.Controls.Clear();
-            //PanelMain.Controls.Add(uc);
-            //uc.Dock = DockStyle.Fill;
-            //uc.Show();
+            WeighingUC uc;
+            if (transId == 0)
+            {
+                uc = new WeighingUC(_service, this, newTrans);
+            }
+            else
+            {
+                 uc = new WeighingUC(_service, this, newTrans, transId);
+            }
+
+            PanelMain.Controls.Clear();
+            PanelMain.Controls.Add(uc);
+            uc.Dock = DockStyle.Fill;
+            uc.Show();
         }
 
         private void btnTransactions_Click(object sender, EventArgs e)

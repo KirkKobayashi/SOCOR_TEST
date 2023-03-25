@@ -143,33 +143,21 @@ namespace TruckScale.Library.BLL
             dbContext.SaveChanges();
         }
 
+        public WeighingTransaction GetTransaction(int id)
+        {
+            using (var service = new TransactionRepository(dbContext))
+            {
+                return service.GetById(id);
+            }
+        }
+
         public List<WeighingTransaction>? GetTransactionsByDate(DateTime startDate, DateTime endDate)
         {
-            //DELETE
-            //var suppliers = GetSuppliers();
-            //var products = GetProducts();
-            //var customers = GetCustomers();
-            //var trucks = GetTrucks();
-
             using (var service = new TransactionRepository(dbContext))
             {
                 var trans = service.GetRangedRecords(startDate, endDate);
                 return trans.ToList();
-                //var trans = dbContext?.WeighingTransactions
-                //    .Where(t => t.FirstWeightDate >= startDate && t.FirstWeightDate <= endDate).ToList();
-                //return (from t in trans.AsEnumerable() select t).ToList();
-                //DELETE
-                //var qTrans = (from t in trans.AsEnumerable()
-                //              //join c in customers on t.CustomerId equals c.Id
-                //              //join s in suppliers on t.SupplierId equals s.Id
-                //              //join p in products on t.ProductId equals p.Id
-                //              //join tk in trucks on t.TruckId equals tk.Id
-                //              select t);
-
-                //return qTrans.ToList();
             }
-
-
         }
 
         public List<FlatWeighingTransaction> FlattenTransactionRecords(IQueryable<WeighingTransaction> weighingTransactions)

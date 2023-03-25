@@ -17,6 +17,7 @@ namespace TruckScale.Library.Interfaces
         Supplier GetSupplierByName(string name);
         List<Supplier> GetSuppliers();
         int GetTicketNumber();
+        WeighingTransaction GetTransaction(int id);
         List<WeighingTransaction> GetTransactionsByDate(DateTime startDate, DateTime endDate);
         Truck GetTruckByPlate(string platenumber);
         List<Truck> GetTrucks();

@@ -24,19 +24,18 @@ namespace TruckScale.Library.Repositories
             }
         }
 
+
         public IQueryable<WeighingTransaction> GetRangedRecords(DateTime startdate, DateTime enddate)
         {
-            //return dbContext.WeighingTransactions.Where(w => w.FirstWeightDate >= startdate && w.FirstWeightDate <= enddate);
-                var trans = dbContext.WeighingTransactions
-                    .Include(w => w.Customer)
-                    .Include(w => w.Supplier)
-                    .Include(w => w.Product)
-                    .Include(w => w.Truck)
-                    .Include(w => w.Weigher)
-                    .Where (w => w.FirstWeightDate >= startdate && w.FirstWeightDate <= enddate);
+            var trans = dbContext.WeighingTransactions
+                .Include(w => w.Customer)
+                .Include(w => w.Supplier)
+                .Include(w => w.Product)
+                .Include(w => w.Truck)
+                .Include(w => w.Weigher)
+                .Where(w => w.FirstWeightDate >= startdate && w.FirstWeightDate <= enddate);
 
-                return trans;
-
+            return trans;
         }
 
         public List<WeighingTransaction> GetAll()
@@ -46,12 +45,20 @@ namespace TruckScale.Library.Repositories
 
         public WeighingTransaction? GetById(int id)
         {
-            return dbContext.WeighingTransactions.Find(id);
+            var transaction = dbContext.WeighingTransactions
+                .Include(w => w.Customer)
+                    .Include(w => w.Supplier)
+                    .Include(w => w.Product)
+                    .Include(w => w.Truck)
+                    .Include(w => w.Weigher)
+                    .Where(w => w.Id == id);
+
+            return transaction.FirstOrDefault();
         }
 
         public void Insert(WeighingTransaction transaction)
         {
-            var rec = dbContext.WeighingTransactions.Find(transaction);
+            var rec = dbContext.WeighingTransactions.Find(transaction.Id);
             if (rec is null)
             {
                 dbContext.WeighingTransactions.Add(transaction);
@@ -62,7 +69,7 @@ namespace TruckScale.Library.Repositories
         public int GetTicketNumber()
         {
             var maxTicket = dbContext.WeighingTransactions.Max(x => x.TicketNumber);
-            return maxTicket+1;
+            return maxTicket + 1;
         }
 
         private bool disposed = false;

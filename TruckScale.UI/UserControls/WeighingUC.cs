@@ -19,31 +19,33 @@ namespace TruckScale.UI.UserControls
 {
     public partial class WeighingUC : UserControl
     {
+        private readonly int _transId;
         private readonly bool _newTrans;
         private ErrorProvider errorProvider;
         private readonly IApplicationService _service;
         private readonly MainForm _mainForm;
 
-        public WeighingUC(IApplicationService service, MainForm mainForm, bool newTrans)
+        public WeighingUC(IApplicationService service, MainForm mainForm, bool newTrans, int transId = 0)
         {
             InitializeComponent();
             _service = service;
             _mainForm = mainForm;
             _newTrans = newTrans;
+            _transId = transId;
         }
 
         private void WeighingUC_Load(object sender, EventArgs e)
         {
+            GetCustomers();
+            GetSuppliers();
+            GetProducts();
             if (_newTrans)
             {
-                GetCustomers();
-                GetSuppliers();
-                GetProducts();
+                txtTicket.Text =  _service.GetTicketNumber().ToString();
             }
             else
             {
-                //txtId.Text =
-                //Get Details
+                LoadDetails();
             }
             errorProvider = new ErrorProvider();
         }
@@ -125,14 +127,14 @@ namespace TruckScale.UI.UserControls
                         CustomerId = customerId,
                         SupplierId = supplierId,
                         ProductId = productId,
-                        TruckId = truckId
+                        TruckId = truckId, 
+                        TicketNumber = Convert.ToInt32(txtTicket.Text)
                     };
 
                     _service.InsertTransaction(transaction);
 
-                    scope.Complete();
-
                     _mainForm.ClearPanelFromWeighing();
+                    scope.Complete();
                 }
                 catch (Exception)
                 {
@@ -155,6 +157,7 @@ namespace TruckScale.UI.UserControls
             cboCustomer.DataSource = customers;
             cboCustomer.DisplayMember = "Name";
             cboCustomer.ValueMember = "Id";
+            cboCustomer.SelectedIndex = -1;
         }
 
         private void GetSuppliers()
@@ -165,6 +168,7 @@ namespace TruckScale.UI.UserControls
             cboSupplier.DataSource = suppliers;
             cboSupplier.DisplayMember = "Name";
             cboSupplier.ValueMember = "Id";
+            cboSupplier.SelectedIndex = -1;
         }
 
         private void GetProducts()
@@ -175,6 +179,22 @@ namespace TruckScale.UI.UserControls
             cboProduct.DataSource = products;
             cboProduct.DisplayMember = "Name";
             cboProduct.ValueMember = "Id";
+            cboProduct.SelectedIndex = -1;
+        }
+
+        private void LoadDetails()
+        {
+            var td = _service.GetTransaction(_transId);
+
+            if (td != null)
+            {
+                txtTicket.Text = td.TicketNumber.ToString();
+                txtPlateNumber.Text = td.Truck?.PlateNumber ?? string.Empty;
+                cboCustomer.Text = td.Customer?.Name ?? string.Empty;
+                cboSupplier.Text = td.Supplier?.Name ?? string.Empty;
+                cboProduct.Text = td.Product?.Name ?? string.Empty;
+
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -190,31 +210,31 @@ namespace TruckScale.UI.UserControls
             var goodSupplier = FormValidation(cboSupplier);
             var goodProduct = FormValidation(cboProduct);
 
-            //if (NewTransaction)
-            //{
-            //    if (goodTicket && goodPlate && goodCustomer && goodSupplier && goodProduct)
-            //    {
-            //        if (string.IsNullOrWhiteSpace(txtFirstWeight.Text))
-            //        {
-            //            errorProvider.SetError(btnUpdate, "Click update weight");
-            //            return;
-            //        }
-            //        else
-            //        {
-            //            errorProvider.SetError(btnUpdate, "");
-            //        }
+            if (_newTrans)
+            {
+                if (goodTicket && goodPlate && goodCustomer && goodSupplier && goodProduct)
+                {
+                    if (string.IsNullOrWhiteSpace(txtFirstWeight.Text))
+                    {
+                        errorProvider.SetError(btnUpdate, "Click update weight");
+                        return;
+                    }
+                    else
+                    {
+                        errorProvider.SetError(btnUpdate, "");
+                    }
 
-            //        InsertTransaction();
-            //    }
-            //}
+                    InsertTransaction();
+                }
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            //if (NewTransaction)
-            //{
-            //    txtFirstWeight.Text = _mainForm.stringWeight;
-            //}
+            if (_newTrans)
+            {
+                txtFirstWeight.Text = _mainForm.stringWeight;
+            }
         }
     }
 }

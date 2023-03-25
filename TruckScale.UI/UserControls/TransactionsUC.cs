@@ -90,7 +90,9 @@ namespace TruckScale.UI.UserControls
         {
             if (e.RowIndex >= 0)
             {
-                _mainForm.ShowWeighing(false);
+                DataGridViewRow row = dgvTransactions.Rows[e.RowIndex];
+                transactionId = Convert.ToInt32(row.Cells[0].Value);
+                _mainForm.ShowWeighing(false, transactionId);
             }
         }
     }
