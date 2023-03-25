@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TruckScale.Library\TruckScale.Library.csproj" />
+    <ProjectReference Include="..\TruckScale.SerialPort\TruckScale.ScaleSerialPort.csproj" />
   </ItemGroup>
 
   <ItemGroup>

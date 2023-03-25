@@ -1,4 +1,6 @@
-﻿using TruckScale.Library.BLL;
+﻿using System.Configuration;
+using TruckScale.Library.BLL;
+using TruckScale.ScaleSerialPort;
 
 namespace TruckScale.UI.HelperClass
 {
@@ -8,5 +10,7 @@ namespace TruckScale.UI.HelperClass
         {
             return new ApplicationService(new Library.Data.DBContext.ScaleDbContext(ConStringHelper.Get()));
         }
+
+
     }
 }
