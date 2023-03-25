@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TruckScale.UI", "TruckScale.UI\TruckScale.UI.csproj", "{1FB3F2A4-CF2F-4E62-8889-F018F2731010}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TruckScale.Library", "TruckScale.Library\TruckScale.Library.csproj", "{B146F5F3-0740-49E6-ABAC-225660ACAB9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TruckScale.Library", "TruckScale.Library\TruckScale.Library.csproj", "{B146F5F3-0740-49E6-ABAC-225660ACAB9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TruckScale.ScaleSerialPort", "TruckScale.SerialPort\TruckScale.ScaleSerialPort.csproj", "{70DF097D-2B6F-444D-8751-63436F586A08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B146F5F3-0740-49E6-ABAC-225660ACAB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B146F5F3-0740-49E6-ABAC-225660ACAB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B146F5F3-0740-49E6-ABAC-225660ACAB9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70DF097D-2B6F-444D-8751-63436F586A08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70DF097D-2B6F-444D-8751-63436F586A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70DF097D-2B6F-444D-8751-63436F586A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70DF097D-2B6F-444D-8751-63436F586A08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
