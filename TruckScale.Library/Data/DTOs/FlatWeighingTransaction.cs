@@ -11,9 +11,13 @@ namespace TruckScale.Library.Data.DTOs
         public string CustomerName { get; set; }
         public string SupplierName { get; set; }
         public string ProductName { get; set; }
+        public string Quantity { get; set; }
         public int FirstWeight { get; set; }
         public int SecondWeight { get; set; }
         public int NetWeight { get; set; }
+        public DateTime FirstWeighingDate { get; set; }
+        public DateTime SecondWeighingDate { get; set; }
+        public string WeigherName { get; set; } 
 
         public void GetNet()
         {
