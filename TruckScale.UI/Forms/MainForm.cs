@@ -79,8 +79,6 @@ namespace TruckScale.UI.Forms
             uc.Show();
         }
 
-
-
         private void btnNew_Click(object sender, EventArgs e)
         {
             btnTransactions.Enabled = false;

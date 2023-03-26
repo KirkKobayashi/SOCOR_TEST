@@ -10,6 +10,7 @@ using System.Transactions;
 using System.Windows.Forms;
 using TruckScale.Library.BLL;
 using TruckScale.Library.Data.DTOs;
+using TruckScale.Library.Printing;
 using TruckScale.Report_Print;
 using TruckScale.UI.Forms;
 
@@ -37,8 +38,11 @@ namespace TruckScale.UI.UserControls
         public void PrintScaleTicket()
         {
             string ticketPath = _appDirectory;
-            string fileName = "Templates\\ScaleTicket.xlsx";
+            string fileName = "Templates\\ScaleTicket.txt";
             var excel = new ExcelHelper(ticketPath, fileName);
+
+            ScaleTicket st = new ScaleTicket(fileName, ticketPath);
+
 
             var transaction = _service.GetTransaction(transactionId);
 
@@ -56,8 +60,8 @@ namespace TruckScale.UI.UserControls
                 TicketNumber = transaction.TicketNumber,
                 WeigherName = $"{transaction.Weigher.FirstName} {transaction.Weigher.LastName}"
             };
-
-            excel.PrintScaleTicket(flatTrans);
+            st.PrintTicket(flatTrans);
+            //excel.PrintScaleTicket(flatTrans);
         }
 
         private void GetRecords()

@@ -2,7 +2,6 @@
 using ClosedXML;
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Wordprocessing;
-using Microsoft.Graph;
 
 namespace TruckScale.Report_Print
 {
@@ -48,7 +47,6 @@ namespace TruckScale.Report_Print
 
                     worksheet.PageSetup.FitToPages(1, 1);
 
-                    var printer = new Printer
                 }
                 //SLDocument doc = new SLDocument();
                 //var trans = flatWeighingTransaction;
