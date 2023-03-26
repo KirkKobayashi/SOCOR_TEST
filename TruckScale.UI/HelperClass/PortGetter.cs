@@ -15,13 +15,15 @@ namespace TruckScale.UI.HelperClass
             var sp = new ScalePort
             {
                 PortName = ConfigurationManager.AppSettings["portname"],
-                StartIndex =Convert.ToInt32( ConfigurationManager.AppSettings["startIndex"]),
+                StartIndex = Convert.ToInt32(ConfigurationManager.AppSettings["startIndex"]),
                 EndIndex = Convert.ToInt32(ConfigurationManager.AppSettings["endIndex"]),
                 BaudRate = Convert.ToInt32(ConfigurationManager.AppSettings["baudrate"]),
-                TerminationCharacter =(char)Convert.ToInt32( ConfigurationManager.AppSettings["endIndex"]),
+                TerminationCharacter = (char)Convert.ToInt32(ConfigurationManager.AppSettings["endIndex"]),
                 ReceivedBytesThreshold = Convert.ToInt32(ConfigurationManager.AppSettings["rthreshold"]),
                 ReadBufferSize = Convert.ToInt32(ConfigurationManager.AppSettings["rbuffersize"]),
-            }
+            };
+
+            return sp;
         }
     }
 }

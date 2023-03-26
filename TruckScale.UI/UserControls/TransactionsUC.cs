@@ -6,8 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 using TruckScale.Library.BLL;
+using TruckScale.Library.Data.DTOs;
+using TruckScale.Report_Print;
 using TruckScale.UI.Forms;
 
 namespace TruckScale.UI.UserControls
@@ -15,6 +18,7 @@ namespace TruckScale.UI.UserControls
     public partial class TransactionsUC : UserControl
     {
         public int transactionId { get; set; }
+        private string _appDirectory;
 
         private readonly MainForm _mainForm;
         private readonly ApplicationService _service;
@@ -23,10 +27,37 @@ namespace TruckScale.UI.UserControls
             InitializeComponent();
             _service = service;
             _mainForm = mainForm;
+            _appDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
             GetRecords();
             dgvTransactions.AllowUserToDeleteRows = false;
             dgvTransactions.AllowUserToAddRows = false;
+        }
+
+        public void PrintScaleTicket()
+        {
+            string ticketPath = _appDirectory;
+            string fileName = "Templates\\ScaleTicket.xlsx";
+            var excel = new ExcelHelper(ticketPath, fileName);
+
+            var transaction = _service.GetTransaction(transactionId);
+
+            var flatTrans = new FlatWeighingTransaction
+            {
+                TruckPlateNumber = transaction.Truck.PlateNumber,
+                CustomerName = transaction.Customer.Name,
+                SupplierName = transaction.Supplier.Name,
+                FirstWeighingDate = transaction.FirstWeightDate,
+                SecondWeighingDate = transaction.SecondWeightDate,
+                FirstWeight = transaction.FirstWeight,
+                SecondWeight = transaction.SecondWeight,
+                ProductName = transaction.Product.Name,
+                Quantity = transaction.Quantity,
+                TicketNumber = transaction.TicketNumber,
+                WeigherName = $"{transaction.Weigher.FirstName} {transaction.Weigher.LastName}"
+            };
+
+            excel.PrintScaleTicket(flatTrans);
         }
 
         private void GetRecords()
@@ -94,6 +125,11 @@ namespace TruckScale.UI.UserControls
                 transactionId = Convert.ToInt32(row.Cells[0].Value);
                 _mainForm.ShowWeighing(false, transactionId);
             }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            PrintScaleTicket();
         }
     }
 }

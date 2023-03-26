@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TruckScale.Library.BLL;
 using TruckScale.Library.Data.DBContext;
+using TruckScale.Report_Print;
 using TruckScale.UI.HelperClass;
 using TruckScale.UI.UserControls;
 
@@ -23,21 +24,22 @@ namespace TruckScale.UI.Forms
 
         private ApplicationService _service;
 
+        
+
         public MainForm()
         {
             InitializeComponent();
 
             _service = Factory.GetApplicationService();
-            ShowUserLogIn();
+            
+
+            ShowTransactions();
         }
 
         public void ClearPanelFromWeighing()
         {
             btnNew.Enabled = true;
             btnTransactions.Enabled = true;
-            btnReport.Enabled = true;
-            btnDelete.Enabled = true;
-            btnPrint.Enabled = true;
             PanelMain.Controls.Clear();
             stringWeight = txtIndicator.Text;
 
@@ -77,12 +79,11 @@ namespace TruckScale.UI.Forms
             uc.Show();
         }
 
+
+
         private void btnNew_Click(object sender, EventArgs e)
         {
             btnTransactions.Enabled = false;
-            btnReport.Enabled = false;
-            btnDelete.Enabled = false;
-            btnPrint.Enabled = false;
             btnNew.Enabled = false;
 
 

@@ -44,9 +44,6 @@
             txtIndicator = new TextBox();
             tbPanelButtons = new TableLayoutPanel();
             btnNew = new Button();
-            btnDelete = new Button();
-            btnReport = new Button();
-            btnPrint = new Button();
             btnTransactions = new Button();
             PanelMain = new Panel();
             menuStrip1.SuspendLayout();
@@ -198,9 +195,6 @@
             tbPanelButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
             tbPanelButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 90F));
             tbPanelButtons.Controls.Add(btnNew, 0, 1);
-            tbPanelButtons.Controls.Add(btnDelete, 4, 0);
-            tbPanelButtons.Controls.Add(btnReport, 2, 0);
-            tbPanelButtons.Controls.Add(btnPrint, 1, 0);
             tbPanelButtons.Controls.Add(btnTransactions, 0, 0);
             tbPanelButtons.Dock = DockStyle.Fill;
             tbPanelButtons.Location = new Point(3, 3);
@@ -223,39 +217,6 @@
             btnNew.Text = "New";
             btnNew.UseVisualStyleBackColor = true;
             btnNew.Click += btnNew_Click;
-            // 
-            // btnDelete
-            // 
-            btnDelete.Dock = DockStyle.Fill;
-            btnDelete.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnDelete.Location = new Point(559, 3);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(174, 91);
-            btnDelete.TabIndex = 4;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnReport
-            // 
-            btnReport.Dock = DockStyle.Fill;
-            btnReport.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnReport.Location = new Point(363, 3);
-            btnReport.Name = "btnReport";
-            btnReport.Size = new Size(174, 91);
-            btnReport.TabIndex = 2;
-            btnReport.Text = "Generate Report";
-            btnReport.UseVisualStyleBackColor = true;
-            // 
-            // btnPrint
-            // 
-            btnPrint.Dock = DockStyle.Fill;
-            btnPrint.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnPrint.Location = new Point(183, 3);
-            btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(174, 91);
-            btnPrint.TabIndex = 1;
-            btnPrint.Text = "Print";
-            btnPrint.UseVisualStyleBackColor = true;
             // 
             // btnTransactions
             // 
@@ -318,9 +279,6 @@
         private TableLayoutPanel tbPanelButtons;
         private TextBox txtIndicator;
         private Label label1;
-        private Button btnDelete;
-        private Button btnReport;
-        private Button btnPrint;
         private Button btnTransactions;
         private Button btnNew;
         private ToolStripMenuItem managementToolStripMenuItem;
