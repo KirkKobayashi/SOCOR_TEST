@@ -194,14 +194,14 @@
             tbPanelButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
             tbPanelButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
             tbPanelButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 90F));
-            tbPanelButtons.Controls.Add(btnNew, 0, 1);
+            tbPanelButtons.Controls.Add(btnNew, 1, 0);
             tbPanelButtons.Controls.Add(btnTransactions, 0, 0);
             tbPanelButtons.Dock = DockStyle.Fill;
             tbPanelButtons.Location = new Point(3, 3);
             tbPanelButtons.Name = "tbPanelButtons";
             tbPanelButtons.RowCount = 2;
-            tbPanelButtons.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tbPanelButtons.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tbPanelButtons.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tbPanelButtons.RowStyles.Add(new RowStyle(SizeType.Percent, 66.6666641F));
             tbPanelButtons.Size = new Size(884, 194);
             tbPanelButtons.TabIndex = 4;
             tbPanelButtons.Visible = false;
@@ -210,9 +210,10 @@
             // 
             btnNew.Dock = DockStyle.Fill;
             btnNew.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnNew.Location = new Point(3, 100);
+            btnNew.Location = new Point(186, 3);
+            btnNew.Margin = new Padding(6, 3, 6, 3);
             btnNew.Name = "btnNew";
-            btnNew.Size = new Size(174, 91);
+            btnNew.Size = new Size(168, 58);
             btnNew.TabIndex = 5;
             btnNew.Text = "New";
             btnNew.UseVisualStyleBackColor = true;
@@ -222,9 +223,10 @@
             // 
             btnTransactions.Dock = DockStyle.Fill;
             btnTransactions.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnTransactions.Location = new Point(3, 3);
+            btnTransactions.Location = new Point(6, 3);
+            btnTransactions.Margin = new Padding(6, 3, 6, 3);
             btnTransactions.Name = "btnTransactions";
-            btnTransactions.Size = new Size(174, 91);
+            btnTransactions.Size = new Size(168, 58);
             btnTransactions.TabIndex = 0;
             btnTransactions.Text = "Transactions";
             btnTransactions.UseVisualStyleBackColor = true;

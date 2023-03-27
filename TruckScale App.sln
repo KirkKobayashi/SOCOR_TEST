@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TruckScale.Library", "Truck
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TruckScale.ScaleSerialPort", "TruckScale.SerialPort\TruckScale.ScaleSerialPort.csproj", "{70DF097D-2B6F-444D-8751-63436F586A08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TruckScale.Report_Print", "TruckScale.Report_Print\TruckScale.Report_Print.csproj", "{AEFD46B9-DCCE-4CDB-BCED-EA77E76C109C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{70DF097D-2B6F-444D-8751-63436F586A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70DF097D-2B6F-444D-8751-63436F586A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70DF097D-2B6F-444D-8751-63436F586A08}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AEFD46B9-DCCE-4CDB-BCED-EA77E76C109C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AEFD46B9-DCCE-4CDB-BCED-EA77E76C109C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AEFD46B9-DCCE-4CDB-BCED-EA77E76C109C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AEFD46B9-DCCE-4CDB-BCED-EA77E76C109C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

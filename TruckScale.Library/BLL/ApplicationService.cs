@@ -26,7 +26,6 @@ namespace TruckScale.Library.BLL
         }
 
         #region Weighing
-
         public List<Customer> GetCustomers()
         {
             using (var service = new CustomerRepository(dbContext))
@@ -141,6 +140,14 @@ namespace TruckScale.Library.BLL
             using (var service = new TransactionRepository(dbContext))
             {
                 service.Update(transaction);
+            }
+        }
+
+        public void DeleteTransaction(int id)
+        {
+            using (var service = new TransactionRepository(dbContext))
+            {
+                service.Delete(id);
             }
         }
 

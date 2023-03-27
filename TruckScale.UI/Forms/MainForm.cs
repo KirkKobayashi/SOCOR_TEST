@@ -1,17 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TruckScale.Library.BLL;
-using TruckScale.Library.Data.DBContext;
-using TruckScale.Report_Print;
+﻿using TruckScale.Library.BLL;
 using TruckScale.UI.HelperClass;
 using TruckScale.UI.UserControls;
 
@@ -24,14 +11,12 @@ namespace TruckScale.UI.Forms
 
         private ApplicationService _service;
 
-        
-
         public MainForm()
         {
             InitializeComponent();
 
             _service = Factory.GetApplicationService();
-            
+
 
             ShowTransactions();
         }

@@ -1,20 +1,8 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
-using Microsoft.VisualBasic.Logging;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System.Data;
 using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
-using System.Windows.Forms;
 using TruckScale.Library.BLL;
 using TruckScale.Library.Data.DTOs;
 using TruckScale.Library.Printing;
-using TruckScale.Report_Print;
 using TruckScale.UI.Forms;
 using Font = System.Drawing.Font;
 
@@ -45,7 +33,6 @@ namespace TruckScale.UI.UserControls
             {
                 string ticketPath = _appDirectory;
                 string fileName = "Templates\\ScaleTicket.txt";
-                var excel = new ExcelHelper(ticketPath, fileName);
 
                 ScaleTicket st = new ScaleTicket(fileName, ticketPath);
 
@@ -198,6 +185,25 @@ namespace TruckScale.UI.UserControls
         private void btnPrint_Click(object sender, EventArgs e)
         {
             PrintScaleTicket();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (transactionId > 0)
+            {
+                var ans = MessageBox.Show("Delete selected record?", "Truck Scale Application", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+
+                if (ans == DialogResult.Yes)
+                {
+                    _service.DeleteTransaction(transactionId);
+                    GetRecords();
+                }
+            }
+        }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             tableLayoutPanel1 = new TableLayoutPanel();
             dgvTransactions = new DataGridView();
             panel1 = new Panel();
@@ -78,6 +79,8 @@
             // 
             dgvTransactions.AllowUserToAddRows = false;
             dgvTransactions.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(224, 224, 224);
+            dgvTransactions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvTransactions.BorderStyle = BorderStyle.None;
             dgvTransactions.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvTransactions.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
@@ -88,10 +91,12 @@
             dgvTransactions.Dock = DockStyle.Fill;
             dgvTransactions.Location = new Point(10, 260);
             dgvTransactions.Margin = new Padding(10);
+            dgvTransactions.MultiSelect = false;
             dgvTransactions.Name = "dgvTransactions";
             dgvTransactions.ReadOnly = true;
             dgvTransactions.RowHeadersWidth = 62;
             dgvTransactions.RowTemplate.Height = 33;
+            dgvTransactions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTransactions.Size = new Size(1966, 586);
             dgvTransactions.TabIndex = 0;
             dgvTransactions.CellMouseClick += dgvTransactions_CellMouseClick;
@@ -271,6 +276,7 @@
             btnDelete.TabIndex = 3;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnReport
             // 
@@ -281,6 +287,7 @@
             btnReport.TabIndex = 1;
             btnReport.Text = "Report";
             btnReport.UseVisualStyleBackColor = true;
+            btnReport.Click += btnReport_Click;
             // 
             // btnPrint
             // 
