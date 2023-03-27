@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using System.Data;
 using System.Drawing.Printing;
 using TruckScale.Library.BLL;
 using TruckScale.Library.Data.DTOs;
@@ -203,7 +204,30 @@ namespace TruckScale.UI.UserControls
 
         private void btnReport_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string savePath = string.Empty;
+                using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+                {
+                    dialog.InitialDirectory = @"C:\temp";
+                    dialog.ShowDialog();
+                    savePath = dialog.SelectedPath;
+                }
 
+                ScaleReport rpt = new ScaleReport(savePath);
+
+                var startdate = dtStart.Value.Date;
+                var enddate = dtEnd.Value.Date.AddDays(1).AddTicks(-10);
+                var records = _service.GetTransactionsByDate(startdate, enddate);
+                rpt.ExportReport(records);
+
+                MessageBox.Show("Report Saved", "Truck Scale Application", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
