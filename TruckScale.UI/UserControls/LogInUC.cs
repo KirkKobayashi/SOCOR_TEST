@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.Intrinsics.Arm;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TruckScale.Library.BLL;
+﻿using TruckScale.Library.BLL;
 using TruckScale.UI.Forms;
 using TruckScale.UI.HelperClass;
 
@@ -17,8 +6,6 @@ namespace TruckScale.UI.UserControls
 {
     public partial class LogInUC : UserControl
     {
-        public event EventHandler<EventArgs> LogIn;
-
         private readonly ApplicationService _service;
         private readonly MainForm _mainForm;
 
@@ -27,6 +14,8 @@ namespace TruckScale.UI.UserControls
             InitializeComponent();
             _service = service;
             _mainForm = mainForm;
+
+            txtUserName.Focus();
         }
 
         private bool UserLogIn()
@@ -74,6 +63,14 @@ namespace TruckScale.UI.UserControls
             if (success)
             {
                 _mainForm.LogIn();
+            }
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                btnLogIn.PerformClick();
             }
         }
     }

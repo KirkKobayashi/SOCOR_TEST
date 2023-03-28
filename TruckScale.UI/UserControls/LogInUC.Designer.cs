@@ -62,7 +62,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 70F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
             tableLayoutPanel1.Size = new Size(1581, 1029);
             tableLayoutPanel1.TabIndex = 1;
@@ -71,54 +71,55 @@
             // 
             label2.Dock = DockStyle.Fill;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(582, 239);
+            label2.Location = new Point(582, 245);
             label2.Name = "label2";
             label2.Size = new Size(416, 45);
             label2.TabIndex = 4;
-            label2.Text = "Password";
+            label2.Text = "PASSWORD";
             label2.TextAlign = ContentAlignment.BottomCenter;
             // 
             // label1
             // 
             label1.Dock = DockStyle.Fill;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(582, 149);
+            label1.Location = new Point(582, 155);
             label1.Name = "label1";
             label1.Size = new Size(416, 45);
             label1.TabIndex = 0;
-            label1.Text = "User Name";
+            label1.Text = "USERNAME";
             label1.TextAlign = ContentAlignment.BottomCenter;
             // 
             // txtUserName
             // 
             txtUserName.Dock = DockStyle.Fill;
             txtUserName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtUserName.Location = new Point(582, 197);
+            txtUserName.Location = new Point(582, 203);
             txtUserName.Name = "txtUserName";
             txtUserName.Size = new Size(416, 39);
-            txtUserName.TabIndex = 2;
+            txtUserName.TabIndex = 0;
             txtUserName.TextAlign = HorizontalAlignment.Center;
             // 
             // txtPassword
             // 
             txtPassword.Dock = DockStyle.Fill;
             txtPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtPassword.Location = new Point(582, 287);
+            txtPassword.Location = new Point(582, 293);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(416, 39);
-            txtPassword.TabIndex = 3;
+            txtPassword.TabIndex = 1;
             txtPassword.TextAlign = HorizontalAlignment.Center;
             txtPassword.UseSystemPasswordChar = true;
+            txtPassword.KeyDown += txtPassword_KeyDown;
             // 
             // btnLogIn
             // 
-            btnLogIn.Dock = DockStyle.Fill;
+            btnLogIn.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             btnLogIn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnLogIn.Location = new Point(582, 339);
+            btnLogIn.Location = new Point(660, 345);
             btnLogIn.Margin = new Padding(3, 10, 3, 3);
             btnLogIn.Name = "btnLogIn";
-            btnLogIn.Size = new Size(416, 87);
-            btnLogIn.TabIndex = 5;
+            btnLogIn.Size = new Size(260, 57);
+            btnLogIn.TabIndex = 2;
             btnLogIn.Text = "Log In";
             btnLogIn.UseVisualStyleBackColor = true;
             btnLogIn.Click += btnLogIn_Click;

@@ -24,6 +24,7 @@ namespace TruckScale.Library.Interfaces
         Weigher GetWeigherByName(string name);
         void InsertTransaction(WeighingTransaction transaction);
         void InsertWeigher(Weigher weigher);
+        void SeedWeigher(Weigher weigher);
         void UpdateTransaction(WeighingTransaction transaction);
     }
 }

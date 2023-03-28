@@ -226,6 +226,7 @@
             label4.TabIndex = 1;
             label4.Text = "Search";
             label4.TextAlign = ContentAlignment.MiddleRight;
+            label4.Visible = false;
             // 
             // txtSearchBox
             // 
@@ -234,6 +235,7 @@
             txtSearchBox.Name = "txtSearchBox";
             txtSearchBox.Size = new Size(364, 31);
             txtSearchBox.TabIndex = 3;
+            txtSearchBox.Visible = false;
             // 
             // cboSearchFilter
             // 
@@ -244,6 +246,7 @@
             cboSearchFilter.Name = "cboSearchFilter";
             cboSearchFilter.Size = new Size(364, 33);
             cboSearchFilter.TabIndex = 2;
+            cboSearchFilter.Visible = false;
             // 
             // tableLayoutPanel4
             // 

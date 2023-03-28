@@ -18,36 +18,76 @@ namespace TruckScale.Library.Repositories
 
         public void Delete(int id)
         {
-            var rec = dbContext.Trucks.Find(id);
-            if (rec != null)
+            try
             {
-                dbContext.Trucks.Remove(rec);
+                var rec = dbContext.Trucks.Find(id);
+                if (rec != null)
+                {
+                    dbContext.Trucks.Remove(rec);
+                }
+                dbContext.SaveChanges();
             }
-            dbContext.SaveChanges();
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<Weigher> GetAll()
         {
-            return dbContext.Weighers.ToList();
+            try
+            {
+                return dbContext.Weighers.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public Weigher? GetById(int id)
         {
-            return dbContext?.Weighers.Find(id);
+            try
+            {
+                return dbContext?.Weighers.Find(id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public Weigher? GetByName(string name)
         {
-            return dbContext?.Weighers.FirstOrDefault(w => w.UserName == name);
+            try
+            {
+                return dbContext?.Weighers.FirstOrDefault(w => w.UserName == name);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void Insert(Weigher weigher)
         {
-            var rec = dbContext.Weighers.Find(weigher.Id);
-            if (rec is null)
+            try
             {
-                dbContext.Weighers.Add(weigher);
-                dbContext.SaveChanges();
+                var rec = dbContext.Weighers.Find(weigher.Id);
+                if (rec is null)
+                {
+                    dbContext.Weighers.Add(weigher);
+                    dbContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 

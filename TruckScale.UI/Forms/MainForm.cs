@@ -1,4 +1,6 @@
-﻿using TruckScale.Library.BLL;
+﻿using Microsoft.EntityFrameworkCore;
+using TruckScale.Library.BLL;
+using TruckScale.Library.Data.Models;
 using TruckScale.UI.HelperClass;
 using TruckScale.UI.UserControls;
 
@@ -17,8 +19,7 @@ namespace TruckScale.UI.Forms
 
             _service = Factory.GetApplicationService();
 
-
-            ShowTransactions();
+            SeedWeigher();
         }
 
         public void ClearPanelFromWeighing()
@@ -113,6 +114,34 @@ namespace TruckScale.UI.Forms
             {
                 stringWeight = txtIndicator.Text.Trim();
             }
+        }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PanelMain.Controls.Clear();
+            weigherId = 0;
+        }
+
+        private void SeedWeigher()
+        {
+            try
+            {
+                Weigher weigher = new Weigher
+                {
+
+                    FirstName = "admin",
+                    LastName = "admin",
+                    UserName = "admin",
+                    Password = AES.EncryptString(Globals.myKey, "admin")
+                };
+
+                _service.SeedWeigher(weigher);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding admin account \n\n{ex.Message}");
+            }
+            
         }
     }
 }

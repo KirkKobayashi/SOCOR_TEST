@@ -1,8 +1,8 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-using System.Data;
+﻿using System.Data;
 using System.Drawing.Printing;
 using TruckScale.Library.BLL;
 using TruckScale.Library.Data.DTOs;
+using TruckScale.Library.Data.Models;
 using TruckScale.Library.Printing;
 using TruckScale.UI.Forms;
 using Font = System.Drawing.Font;
@@ -12,10 +12,14 @@ namespace TruckScale.UI.UserControls
     public partial class TransactionsUC : UserControl
     {
         public int transactionId { get; set; }
-        private string _appDirectory;
-        private StreamReader reader;
+
         private readonly MainForm _mainForm;
         private readonly ApplicationService _service;
+        private string _appDirectory;
+
+        private StreamReader reader;
+        private List<WeighingTransaction> _transactions;
+
         public TransactionsUC(ApplicationService service, MainForm mainForm)
         {
             InitializeComponent();
@@ -66,10 +70,9 @@ namespace TruckScale.UI.UserControls
                 pd.Print();
                 reader.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show($"Ticket printing error\n\n{ex.Message}", "Truck Scale Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -114,7 +117,7 @@ namespace TruckScale.UI.UserControls
             {
                 var startdate = dtStart.Value.Date;
                 var enddate = dtEnd.Value.Date.AddDays(1).AddTicks(-10);
-                var records = _service.GetTransactionsByDate(startdate, enddate);
+                _transactions = _service.GetTransactionsByDate(startdate, enddate);
 
 
                 DataTable dt = new DataTable();
@@ -128,7 +131,7 @@ namespace TruckScale.UI.UserControls
                 dt.Columns.Add("Net Weight", typeof(int));
                 dt.Columns.Add("Weighing Date/Time", typeof(string));
 
-                foreach (var i in records)
+                foreach (var i in _transactions)
                 {
                     var netweight = i.FirstWeight - i.SecondWeight;
                     dt.Rows.Add(i.Id, i.Truck.PlateNumber, i.Customer.Name, i.Supplier.Name, i.Product.Name, i.FirstWeight, i.SecondWeight, Math.Abs(netweight), i.FirstWeightDate.ToString("HH:mm MM-dd-yyyy"));
@@ -147,10 +150,9 @@ namespace TruckScale.UI.UserControls
 
                 dgvTransactions.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show($"Error retrieving records\n\n{ex.Message}", "Truck Scale Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -190,15 +192,22 @@ namespace TruckScale.UI.UserControls
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (transactionId > 0)
+            try
             {
-                var ans = MessageBox.Show("Delete selected record?", "Truck Scale Application", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
-
-                if (ans == DialogResult.Yes)
+                if (transactionId > 0)
                 {
-                    _service.DeleteTransaction(transactionId);
-                    GetRecords();
+                    var ans = MessageBox.Show("Delete selected record?", "Truck Scale Application", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+
+                    if (ans == DialogResult.Yes)
+                    {
+                        _service.DeleteTransaction(transactionId);
+                        GetRecords();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting record", "Truck Scale Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

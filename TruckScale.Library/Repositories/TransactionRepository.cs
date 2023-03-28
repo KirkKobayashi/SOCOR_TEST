@@ -16,69 +16,121 @@ namespace TruckScale.Library.Repositories
 
         public void Delete(int id)
         {
-            var rec = dbContext.WeighingTransactions.Find(id);
-            if (rec != null)
+            try
             {
-                dbContext.WeighingTransactions.Remove(rec);
-                dbContext.SaveChanges();
+                var rec = dbContext.WeighingTransactions.Find(id);
+                if (rec != null)
+                {
+                    dbContext.WeighingTransactions.Remove(rec);
+                    dbContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
 
         public IQueryable<WeighingTransaction> GetRangedRecords(DateTime startdate, DateTime enddate)
         {
-            var trans = dbContext.WeighingTransactions
-                .Include(w => w.Customer)
-                .Include(w => w.Supplier)
-                .Include(w => w.Product)
-                .Include(w => w.Truck)
-                .Include(w => w.Weigher)
-                .Where(w => w.FirstWeightDate >= startdate && w.FirstWeightDate <= enddate);
+            try
+            {
+                var trans = dbContext.WeighingTransactions
+                        .Include(w => w.Customer)
+                        .Include(w => w.Supplier)
+                        .Include(w => w.Product)
+                        .Include(w => w.Truck)
+                        .Include(w => w.Weigher)
+                        .Where(w => w.FirstWeightDate >= startdate && w.FirstWeightDate <= enddate);
 
-            return trans;
+                return trans;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<WeighingTransaction> GetAll()
         {
-            return dbContext.WeighingTransactions.ToList();
+            try
+            {
+                return dbContext.WeighingTransactions.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public WeighingTransaction? GetById(int id)
         {
-            var transaction = dbContext.WeighingTransactions
-                .Include(w => w.Customer)
-                    .Include(w => w.Supplier)
-                    .Include(w => w.Product)
-                    .Include(w => w.Truck)
-                    .Include(w => w.Weigher)
-                    .Where(w => w.Id == id);
+            try
+            {
+                var transaction = dbContext.WeighingTransactions
+                  .Include(w => w.Customer)
+                      .Include(w => w.Supplier)
+                      .Include(w => w.Product)
+                      .Include(w => w.Truck)
+                      .Include(w => w.Weigher)
+                      .Where(w => w.Id == id);
 
-            return transaction.FirstOrDefault();
+                return transaction.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void Insert(WeighingTransaction transaction)
         {
-            var rec = dbContext.WeighingTransactions.Find(transaction.Id);
-            if (rec is null)
+            try
             {
-                dbContext.WeighingTransactions.Add(transaction);
-                dbContext.SaveChanges();
+                var rec = dbContext.WeighingTransactions.Find(transaction.Id);
+                if (rec is null)
+                {
+                    dbContext.WeighingTransactions.Add(transaction);
+                    dbContext.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
         public void Update(WeighingTransaction transaction)
         {
-            //dbContext.WeighingTransactions.Add(transaction);
-            //dbContext.WeighingTransactions.Attach(transaction);
-            //dbContext.Entry(transaction).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            dbContext.Update(transaction);
-            dbContext.SaveChanges();
+            try
+            {
+                dbContext.Update(transaction);
+                dbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public int GetTicketNumber()
         {
-            var maxTicket = dbContext.WeighingTransactions.Max(x => x.TicketNumber);
-            return maxTicket + 1;
+            try
+            {
+                var maxTicket = dbContext.WeighingTransactions.Max(x => x.TicketNumber);
+                return maxTicket + 1;
+            }
+            catch (InvalidOperationException)
+            {
+                return 1;
+            }
         }
 
         private bool disposed = false;

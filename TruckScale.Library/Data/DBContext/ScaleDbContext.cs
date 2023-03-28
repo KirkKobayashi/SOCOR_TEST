@@ -19,8 +19,20 @@ namespace TruckScale.Library.Data.DBContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            _constring = @"Server=wearelegion; Database=dbWb; Trusted_Connection=true; Encrypt=No; TrustServerCertificate=yes";
+            //_constring = @"Server=wearelegion; Database=dbWb; Trusted_Connection=true; Encrypt=No; TrustServerCertificate=yes";
+            //optionsBuilder.UseSqlServer(_constring, builder =>
+            //{
+            //    builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+            //});
+
             optionsBuilder.UseSqlServer(_constring);
+
+
+            //optionsBuilder.UseSqlServer("your_connection_string", builder =>
+            //{
+            //    builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+            //});
+            //base.OnConfiguring(optionsBuilder);
         }
 
         public DbSet<Customer>  Customers { get; set; }
