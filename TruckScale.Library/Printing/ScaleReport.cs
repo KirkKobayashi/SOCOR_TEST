@@ -46,6 +46,7 @@ namespace TruckScale.Library.Printing
                 var fileName = $@"Scale_Report_{DateTime.Now.ToString("MMddyyyy")}.xlsx";
                 var savePath = Path.Combine(_filePath, fileName);
                 doc.SaveAs(savePath);
+
             }
             catch (Exception)
             {

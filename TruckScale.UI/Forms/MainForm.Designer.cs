@@ -42,15 +42,11 @@
             IndicatorPanel = new Panel();
             label1 = new Label();
             txtIndicator = new TextBox();
-            tbPanelButtons = new TableLayoutPanel();
-            btnNew = new Button();
-            btnTransactions = new Button();
             PanelMain = new Panel();
             menuStrip1.SuspendLayout();
             tPanelMain.SuspendLayout();
             tPanelTop.SuspendLayout();
             IndicatorPanel.SuspendLayout();
-            tbPanelButtons.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -59,7 +55,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { systemToolStripMenuItem, viewToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1168, 33);
+            menuStrip1.Size = new Size(1572, 33);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -73,26 +69,26 @@
             // stripMenuLogIn
             // 
             stripMenuLogIn.Name = "stripMenuLogIn";
-            stripMenuLogIn.Size = new Size(270, 34);
+            stripMenuLogIn.Size = new Size(179, 34);
             stripMenuLogIn.Text = "Log In";
             stripMenuLogIn.Click += stripMenuLogIn_Click;
             // 
             // logOutToolStripMenuItem
             // 
             logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            logOutToolStripMenuItem.Size = new Size(270, 34);
+            logOutToolStripMenuItem.Size = new Size(179, 34);
             logOutToolStripMenuItem.Text = "Log Out";
             logOutToolStripMenuItem.Click += logOutToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(267, 6);
+            toolStripSeparator1.Size = new Size(176, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(270, 34);
+            exitToolStripMenuItem.Size = new Size(179, 34);
             exitToolStripMenuItem.Text = "Exit";
             // 
             // viewToolStripMenuItem
@@ -132,7 +128,7 @@
             tPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
-            tPanelMain.Size = new Size(1168, 511);
+            tPanelMain.Size = new Size(1572, 876);
             tPanelMain.TabIndex = 1;
             // 
             // tPanelTop
@@ -142,14 +138,13 @@
             tPanelTop.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 76.92308F));
             tPanelTop.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.07692F));
             tPanelTop.Controls.Add(IndicatorPanel, 1, 0);
-            tPanelTop.Controls.Add(tbPanelButtons, 0, 0);
             tPanelTop.Dock = DockStyle.Fill;
             tPanelTop.Location = new Point(5, 0);
             tPanelTop.Margin = new Padding(0);
             tPanelTop.Name = "tPanelTop";
             tPanelTop.RowCount = 1;
             tPanelTop.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tPanelTop.Size = new Size(1158, 200);
+            tPanelTop.Size = new Size(1562, 200);
             tPanelTop.TabIndex = 0;
             // 
             // IndicatorPanel
@@ -158,9 +153,9 @@
             IndicatorPanel.Controls.Add(label1);
             IndicatorPanel.Controls.Add(txtIndicator);
             IndicatorPanel.Dock = DockStyle.Fill;
-            IndicatorPanel.Location = new Point(893, 3);
+            IndicatorPanel.Location = new Point(1204, 3);
             IndicatorPanel.Name = "IndicatorPanel";
-            IndicatorPanel.Size = new Size(262, 194);
+            IndicatorPanel.Size = new Size(355, 194);
             IndicatorPanel.TabIndex = 3;
             // 
             // label1
@@ -176,62 +171,16 @@
             // 
             txtIndicator.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtIndicator.BorderStyle = BorderStyle.None;
-            txtIndicator.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+            txtIndicator.Font = new Font("Segoe UI", 34F, FontStyle.Regular, GraphicsUnit.Point);
             txtIndicator.Location = new Point(2, 45);
+            txtIndicator.Multiline = true;
             txtIndicator.Name = "txtIndicator";
-            txtIndicator.Size = new Size(260, 96);
+            txtIndicator.Size = new Size(353, 97);
             txtIndicator.TabIndex = 0;
             txtIndicator.TabStop = false;
             txtIndicator.Text = "123456";
             txtIndicator.TextAlign = HorizontalAlignment.Center;
             txtIndicator.TextChanged += txtIndicator_TextChanged;
-            // 
-            // tbPanelButtons
-            // 
-            tbPanelButtons.ColumnCount = 6;
-            tbPanelButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
-            tbPanelButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
-            tbPanelButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
-            tbPanelButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            tbPanelButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
-            tbPanelButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 90F));
-            tbPanelButtons.Controls.Add(btnNew, 1, 0);
-            tbPanelButtons.Controls.Add(btnTransactions, 0, 0);
-            tbPanelButtons.Dock = DockStyle.Fill;
-            tbPanelButtons.Location = new Point(3, 3);
-            tbPanelButtons.Name = "tbPanelButtons";
-            tbPanelButtons.RowCount = 2;
-            tbPanelButtons.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tbPanelButtons.RowStyles.Add(new RowStyle(SizeType.Percent, 66.6666641F));
-            tbPanelButtons.Size = new Size(884, 194);
-            tbPanelButtons.TabIndex = 4;
-            tbPanelButtons.Visible = false;
-            // 
-            // btnNew
-            // 
-            btnNew.Dock = DockStyle.Fill;
-            btnNew.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnNew.Location = new Point(186, 3);
-            btnNew.Margin = new Padding(6, 3, 6, 3);
-            btnNew.Name = "btnNew";
-            btnNew.Size = new Size(168, 58);
-            btnNew.TabIndex = 5;
-            btnNew.Text = "New";
-            btnNew.UseVisualStyleBackColor = true;
-            btnNew.Click += btnNew_Click;
-            // 
-            // btnTransactions
-            // 
-            btnTransactions.Dock = DockStyle.Fill;
-            btnTransactions.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnTransactions.Location = new Point(6, 3);
-            btnTransactions.Margin = new Padding(6, 3, 6, 3);
-            btnTransactions.Name = "btnTransactions";
-            btnTransactions.Size = new Size(168, 58);
-            btnTransactions.TabIndex = 0;
-            btnTransactions.Text = "Transactions";
-            btnTransactions.UseVisualStyleBackColor = true;
-            btnTransactions.Click += btnTransactions_Click;
             // 
             // PanelMain
             // 
@@ -240,14 +189,14 @@
             PanelMain.Dock = DockStyle.Fill;
             PanelMain.Location = new Point(8, 203);
             PanelMain.Name = "PanelMain";
-            PanelMain.Size = new Size(1152, 280);
+            PanelMain.Size = new Size(1556, 645);
             PanelMain.TabIndex = 1;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1168, 544);
+            ClientSize = new Size(1572, 909);
             Controls.Add(tPanelMain);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -255,13 +204,13 @@
             Name = "MainForm";
             Text = "Weigh Bridge Application";
             WindowState = FormWindowState.Maximized;
+            FormClosing += MainForm_FormClosing;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             tPanelMain.ResumeLayout(false);
             tPanelTop.ResumeLayout(false);
             IndicatorPanel.ResumeLayout(false);
             IndicatorPanel.PerformLayout();
-            tbPanelButtons.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -279,11 +228,8 @@
         private ToolStripMenuItem viewToolStripMenuItem;
         private TableLayoutPanel tPanelTop;
         private Panel IndicatorPanel;
-        private TableLayoutPanel tbPanelButtons;
         private TextBox txtIndicator;
         private Label label1;
-        private Button btnTransactions;
-        private Button btnNew;
         private ToolStripMenuItem managementToolStripMenuItem;
         private ToolStripMenuItem toolMenuUser;
     }

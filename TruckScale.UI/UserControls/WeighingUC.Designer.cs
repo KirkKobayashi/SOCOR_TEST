@@ -312,6 +312,8 @@
             // 
             // cboCustomer
             // 
+            cboCustomer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboCustomer.AutoCompleteSource = AutoCompleteSource.ListItems;
             cboCustomer.Dock = DockStyle.Fill;
             cboCustomer.FormattingEnabled = true;
             cboCustomer.Location = new Point(414, 253);
@@ -321,6 +323,8 @@
             // 
             // cboSupplier
             // 
+            cboSupplier.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboSupplier.AutoCompleteSource = AutoCompleteSource.ListItems;
             cboSupplier.Dock = DockStyle.Fill;
             cboSupplier.FormattingEnabled = true;
             cboSupplier.Location = new Point(414, 293);
@@ -330,6 +334,8 @@
             // 
             // cboProduct
             // 
+            cboProduct.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboProduct.AutoCompleteSource = AutoCompleteSource.ListItems;
             tableLayoutPanel1.SetColumnSpan(cboProduct, 3);
             cboProduct.Dock = DockStyle.Fill;
             cboProduct.FormattingEnabled = true;
@@ -439,7 +445,7 @@
             txtDriver.Location = new Point(1005, 293);
             txtDriver.Name = "txtDriver";
             txtDriver.Size = new Size(267, 31);
-            txtDriver.TabIndex = 27;
+            txtDriver.TabIndex = 5;
             // 
             // tableLayoutPanel2
             // 

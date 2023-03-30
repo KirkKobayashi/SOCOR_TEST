@@ -110,8 +110,25 @@ namespace TruckScale.Library.Repositories
         {
             try
             {
-                dbContext.Update(transaction);
+                var ttU = dbContext.WeighingTransactions.Find(transaction.Id);
+                ttU.SecondWeight = transaction.SecondWeight;
+                ttU.SecondWeightDate = transaction.SecondWeightDate;
+                ttU.FirstWeight = transaction.FirstWeight;
+                ttU.FirstWeightDate = transaction.FirstWeightDate;
+                ttU.CustomerId = transaction.CustomerId;
+                ttU.SupplierId = transaction.SupplierId;
+                ttU.ProductId = transaction.ProductId;
+                ttU.TruckId = transaction.TruckId;
+                ttU.TicketNumber = transaction.TicketNumber;
+                ttU.Quantity = transaction.Quantity; 
+                ttU.Driver = transaction.Driver;
+                ttU.Remarks =   transaction.Remarks;
+                
+
+                dbContext.Update(ttU);
+                //dbContext.Entry(transaction).CurrentValues.SetValues(transaction);
                 dbContext.SaveChanges();
+
             }
             catch (Exception)
             {

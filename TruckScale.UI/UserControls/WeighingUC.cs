@@ -24,7 +24,6 @@ namespace TruckScale.UI.UserControls
         private ErrorProvider errorProvider;
         private readonly IApplicationService _service;
         private readonly MainForm _mainForm;
-        private WeighingTransaction weighingTransaction;
 
         public WeighingUC(IApplicationService service, MainForm mainForm, bool newTrans, int transId = 0)
         {
@@ -49,6 +48,8 @@ namespace TruckScale.UI.UserControls
                 LoadDetails();
             }
             errorProvider = new ErrorProvider();
+
+            txtPlateNumber.Focus();
         }
 
         private bool FormValidation(Control control)
@@ -64,7 +65,6 @@ namespace TruckScale.UI.UserControls
                 return true;
             }
         }
-
 
         private void SaveTransaction()
         {
@@ -120,9 +120,9 @@ namespace TruckScale.UI.UserControls
                     }
                     #endregion
 
-                    weighingTransaction = new WeighingTransaction
+                    var weighingTransaction = new WeighingTransaction
                     {
-                        FirstWeightDate = DateTime.Now,
+
                         FirstWeight = Convert.ToInt32(txtFirstWeight.Text),
                         Driver = txtDriver.Text.Trim(),
                         Remarks = txtRemarks.Text,
@@ -137,15 +137,15 @@ namespace TruckScale.UI.UserControls
 
                     if (_newTrans)
                     {
-                        InsertTransaction();
-                        //Print Initial Ticket
+                        weighingTransaction.FirstWeightDate = DateTime.Now;
+                        InsertTransaction(weighingTransaction);
                     }
                     else
                     {
+                        weighingTransaction.Id = _transId;
                         weighingTransaction.SecondWeightDate = DateTime.Now;
                         weighingTransaction.SecondWeight = Convert.ToInt32(txtSecondWeight.Text);
-                        UpdateTransaction();
-                        //Print Second Ticket
+                        UpdateTransaction(weighingTransaction);
                     }
 
                     _mainForm.ClearPanelFromWeighing();
@@ -159,7 +159,7 @@ namespace TruckScale.UI.UserControls
             }
         }
 
-        private void InsertTransaction()
+        private void InsertTransaction(WeighingTransaction weighingTransaction)
         {
             try
             {
@@ -172,7 +172,7 @@ namespace TruckScale.UI.UserControls
             }
         }
 
-        private void UpdateTransaction()
+        private void UpdateTransaction(WeighingTransaction weighingTransaction)
         {
             try
             {

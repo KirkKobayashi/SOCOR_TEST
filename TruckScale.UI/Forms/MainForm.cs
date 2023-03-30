@@ -1,6 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DocumentFormat.OpenXml.Office2019.Drawing.Model3D;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Graph.Models;
 using TruckScale.Library.BLL;
 using TruckScale.Library.Data.Models;
+using TruckScale.ScaleSerialPort;
 using TruckScale.UI.HelperClass;
 using TruckScale.UI.UserControls;
 
@@ -13,6 +16,12 @@ namespace TruckScale.UI.Forms
 
         private ApplicationService _service;
 
+        private ScalePortCon _sp;
+
+        private ScalePort sPort;
+
+        delegate void SetWeight(string weighstring);
+
         public MainForm()
         {
             InitializeComponent();
@@ -20,12 +29,54 @@ namespace TruckScale.UI.Forms
             _service = Factory.GetApplicationService();
 
             SeedWeigher();
+            InitializePort();
+        }
+
+        private void InitializePort()
+        {
+            try
+            {
+                sPort = PortGetter.Get();
+                _sp = new ScalePortCon(sPort);
+                _sp.SerialDataReceieved += _sp_SerialDataReceieved;
+                _sp.OpenPort();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening serial port \n\n{ex.Message}");
+            }
+        }
+
+        private void SetWeightString(string weight)
+        {
+            if (txtIndicator.InvokeRequired)
+            {
+                SetWeight d = new SetWeight(SetWeightString);
+                this.BeginInvoke(d, new object[] { weight });
+            }
+            else
+            {
+                txtIndicator.Text = string.Format(weight, "00");
+            }
+        }
+
+        private void _sp_SerialDataReceieved(object? sender, SerialDataEventArgs e)
+        {
+            if (e.Data != null)
+            {
+                var newWeight = e.Data.TrimStart('0');
+
+                if (newWeight.Length == 0)
+                {
+                    SetWeightString("0");
+                    return;
+                }
+                SetWeightString(newWeight);
+            }
         }
 
         public void ClearPanelFromWeighing()
         {
-            btnNew.Enabled = true;
-            btnTransactions.Enabled = true;
             PanelMain.Controls.Clear();
             stringWeight = txtIndicator.Text;
 
@@ -35,7 +86,7 @@ namespace TruckScale.UI.Forms
         public void LogIn()
         {
             PanelMain.Controls.Clear();
-            tbPanelButtons.Visible = true;
+            ShowTransactions();
         }
 
         private void ShowUserLogIn()
@@ -67,10 +118,6 @@ namespace TruckScale.UI.Forms
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            btnTransactions.Enabled = false;
-            btnNew.Enabled = false;
-
-
             ShowWeighing(true, 0);
         }
 
@@ -80,6 +127,7 @@ namespace TruckScale.UI.Forms
             if (transId == 0)
             {
                 uc = new WeighingUC(_service, this, newTrans);
+
             }
             else
             {
@@ -141,7 +189,16 @@ namespace TruckScale.UI.Forms
             {
                 MessageBox.Show($"Error adding admin account \n\n{ex.Message}");
             }
-            
+
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (sPort != null && sPort.IsOpen)
+            {
+                _sp.Dispose();
+                sPort.Close();
+            }
         }
     }
 }

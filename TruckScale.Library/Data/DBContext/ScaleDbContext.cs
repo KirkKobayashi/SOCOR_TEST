@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace TruckScale.Library.Data.DBContext
             //});
 
             optionsBuilder.UseSqlServer(_constring);
+            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
 
             //optionsBuilder.UseSqlServer("your_connection_string", builder =>

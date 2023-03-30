@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             tableLayoutPanel1 = new TableLayoutPanel();
             dgvTransactions = new DataGridView();
             panel1 = new Panel();
@@ -40,13 +40,11 @@
             dtEnd = new DateTimePicker();
             label1 = new Label();
             tableLayoutPanel3 = new TableLayoutPanel();
-            label4 = new Label();
-            txtSearchBox = new TextBox();
-            cboSearchFilter = new ComboBox();
             tableLayoutPanel4 = new TableLayoutPanel();
             btnDelete = new Button();
             btnReport = new Button();
             btnPrint = new Button();
+            btnNew = new Button();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTransactions).BeginInit();
             panel1.SuspendLayout();
@@ -57,20 +55,21 @@
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 400F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            tableLayoutPanel1.Controls.Add(dgvTransactions, 0, 2);
+            tableLayoutPanel1.Controls.Add(dgvTransactions, 1, 2);
             tableLayoutPanel1.Controls.Add(panel1, 0, 0);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 1, 1);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 0, 1);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 1);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 1, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(1);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 200F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 150F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Size = new Size(1986, 856);
             tableLayoutPanel1.TabIndex = 0;
@@ -79,8 +78,8 @@
             // 
             dgvTransactions.AllowUserToAddRows = false;
             dgvTransactions.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(224, 224, 224);
-            dgvTransactions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(224, 224, 224);
+            dgvTransactions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             dgvTransactions.BorderStyle = BorderStyle.None;
             dgvTransactions.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvTransactions.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
@@ -89,7 +88,7 @@
             dgvTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             tableLayoutPanel1.SetColumnSpan(dgvTransactions, 2);
             dgvTransactions.Dock = DockStyle.Fill;
-            dgvTransactions.Location = new Point(10, 260);
+            dgvTransactions.Location = new Point(410, 210);
             dgvTransactions.Margin = new Padding(10);
             dgvTransactions.MultiSelect = false;
             dgvTransactions.Name = "dgvTransactions";
@@ -97,7 +96,7 @@
             dgvTransactions.RowHeadersWidth = 62;
             dgvTransactions.RowTemplate.Height = 33;
             dgvTransactions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvTransactions.Size = new Size(1966, 586);
+            dgvTransactions.Size = new Size(1566, 636);
             dgvTransactions.TabIndex = 0;
             dgvTransactions.CellMouseClick += dgvTransactions_CellMouseClick;
             dgvTransactions.CellMouseDoubleClick += dgvTransactions_CellMouseDoubleClick;
@@ -105,7 +104,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(33, 37, 41);
-            tableLayoutPanel1.SetColumnSpan(panel1, 2);
+            tableLayoutPanel1.SetColumnSpan(panel1, 3);
             panel1.Controls.Add(label9);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(3, 3);
@@ -127,16 +126,15 @@
             // 
             // tableLayoutPanel2
             // 
-            tableLayoutPanel2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             tableLayoutPanel2.ColumnCount = 2;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 26.47059F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 73.52941F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 60F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
             tableLayoutPanel2.Controls.Add(label2, 0, 2);
             tableLayoutPanel2.Controls.Add(label3, 0, 3);
             tableLayoutPanel2.Controls.Add(dtStart, 1, 2);
             tableLayoutPanel2.Controls.Add(dtEnd, 1, 3);
             tableLayoutPanel2.Controls.Add(label1, 1, 1);
-            tableLayoutPanel2.Location = new Point(1393, 53);
+            tableLayoutPanel2.Location = new Point(3, 53);
             tableLayoutPanel2.Margin = new Padding(3, 3, 10, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 5;
@@ -145,14 +143,14 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 71.42857F));
-            tableLayoutPanel2.Size = new Size(583, 194);
+            tableLayoutPanel2.Size = new Size(387, 144);
             tableLayoutPanel2.TabIndex = 2;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Dock = DockStyle.Right;
-            label2.Location = new Point(103, 61);
+            label2.Location = new Point(9, 46);
             label2.Name = "label2";
             label2.Size = new Size(48, 40);
             label2.TabIndex = 1;
@@ -162,7 +160,7 @@
             // 
             label3.AutoSize = true;
             label3.Dock = DockStyle.Right;
-            label3.Location = new Point(109, 101);
+            label3.Location = new Point(15, 86);
             label3.Name = "label3";
             label3.Size = new Size(42, 40);
             label3.TabIndex = 2;
@@ -170,24 +168,24 @@
             // 
             // dtStart
             // 
-            dtStart.Location = new Point(157, 64);
+            dtStart.Location = new Point(63, 49);
             dtStart.Name = "dtStart";
-            dtStart.Size = new Size(340, 31);
+            dtStart.Size = new Size(321, 31);
             dtStart.TabIndex = 3;
             dtStart.ValueChanged += btStart_ValueChanged;
             // 
             // dtEnd
             // 
-            dtEnd.Location = new Point(157, 104);
+            dtEnd.Location = new Point(63, 89);
             dtEnd.Name = "dtEnd";
-            dtEnd.Size = new Size(340, 31);
+            dtEnd.Size = new Size(321, 31);
             dtEnd.TabIndex = 4;
             dtEnd.ValueChanged += dtEnd_ValueChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(157, 21);
+            label1.Location = new Point(63, 6);
             label1.Name = "label1";
             label1.Size = new Size(223, 25);
             label1.TabIndex = 0;
@@ -195,16 +193,13 @@
             // 
             // tableLayoutPanel3
             // 
-            tableLayoutPanel3.ColumnCount = 3;
+            tableLayoutPanel3.ColumnCount = 2;
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 63.9583321F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 36.0416679F));
-            tableLayoutPanel3.Controls.Add(label4, 2, 1);
-            tableLayoutPanel3.Controls.Add(txtSearchBox, 2, 3);
-            tableLayoutPanel3.Controls.Add(cboSearchFilter, 2, 2);
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tableLayoutPanel3.Controls.Add(tableLayoutPanel4, 1, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(10, 53);
+            tableLayoutPanel3.Location = new Point(410, 53);
             tableLayoutPanel3.Margin = new Padding(10, 3, 3, 3);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 5;
@@ -213,40 +208,8 @@
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 71.42857F));
-            tableLayoutPanel3.Size = new Size(1377, 194);
+            tableLayoutPanel3.Size = new Size(1097, 144);
             tableLayoutPanel3.TabIndex = 3;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Dock = DockStyle.Fill;
-            label4.Location = new Point(890, 21);
-            label4.Name = "label4";
-            label4.Size = new Size(484, 40);
-            label4.TabIndex = 1;
-            label4.Text = "Search";
-            label4.TextAlign = ContentAlignment.MiddleRight;
-            label4.Visible = false;
-            // 
-            // txtSearchBox
-            // 
-            txtSearchBox.Dock = DockStyle.Right;
-            txtSearchBox.Location = new Point(1010, 104);
-            txtSearchBox.Name = "txtSearchBox";
-            txtSearchBox.Size = new Size(364, 31);
-            txtSearchBox.TabIndex = 3;
-            txtSearchBox.Visible = false;
-            // 
-            // cboSearchFilter
-            // 
-            cboSearchFilter.Dock = DockStyle.Right;
-            cboSearchFilter.FormattingEnabled = true;
-            cboSearchFilter.Items.AddRange(new object[] { "Plate Number", "Customer", "Supplier", "Product" });
-            cboSearchFilter.Location = new Point(1010, 64);
-            cboSearchFilter.Name = "cboSearchFilter";
-            cboSearchFilter.Size = new Size(364, 33);
-            cboSearchFilter.TabIndex = 2;
-            cboSearchFilter.Visible = false;
             // 
             // tableLayoutPanel4
             // 
@@ -257,25 +220,31 @@
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Controls.Add(btnDelete, 3, 0);
-            tableLayoutPanel4.Controls.Add(btnReport, 1, 0);
-            tableLayoutPanel4.Controls.Add(btnPrint, 0, 0);
+            tableLayoutPanel4.Controls.Add(btnDelete, 4, 2);
+            tableLayoutPanel4.Controls.Add(btnReport, 2, 2);
+            tableLayoutPanel4.Controls.Add(btnPrint, 1, 2);
+            tableLayoutPanel4.Controls.Add(btnNew, 0, 2);
             tableLayoutPanel4.Dock = DockStyle.Fill;
             tableLayoutPanel4.Location = new Point(23, 3);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
-            tableLayoutPanel4.RowCount = 2;
+            tableLayoutPanel4.RowCount = 3;
             tableLayoutPanel3.SetRowSpan(tableLayoutPanel4, 5);
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Size = new Size(861, 188);
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel4.Size = new Size(1071, 138);
             tableLayoutPanel4.TabIndex = 4;
             // 
             // btnDelete
             // 
             btnDelete.Dock = DockStyle.Fill;
-            btnDelete.Location = new Point(453, 3);
+            btnDelete.FlatAppearance.BorderSize = 0;
+            btnDelete.FlatStyle = FlatStyle.Flat;
+            btnDelete.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
+            btnDelete.ForeColor = Color.Blue;
+            btnDelete.Location = new Point(603, 101);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(144, 54);
+            btnDelete.Size = new Size(144, 34);
             btnDelete.TabIndex = 3;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
@@ -284,9 +253,13 @@
             // btnReport
             // 
             btnReport.Dock = DockStyle.Fill;
-            btnReport.Location = new Point(153, 3);
+            btnReport.FlatAppearance.BorderSize = 0;
+            btnReport.FlatStyle = FlatStyle.Flat;
+            btnReport.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
+            btnReport.ForeColor = Color.Blue;
+            btnReport.Location = new Point(303, 101);
             btnReport.Name = "btnReport";
-            btnReport.Size = new Size(144, 54);
+            btnReport.Size = new Size(144, 34);
             btnReport.TabIndex = 1;
             btnReport.Text = "Report";
             btnReport.UseVisualStyleBackColor = true;
@@ -295,13 +268,27 @@
             // btnPrint
             // 
             btnPrint.Dock = DockStyle.Fill;
-            btnPrint.Location = new Point(3, 3);
+            btnPrint.FlatAppearance.BorderSize = 0;
+            btnPrint.FlatStyle = FlatStyle.Flat;
+            btnPrint.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
+            btnPrint.ForeColor = Color.Blue;
+            btnPrint.Location = new Point(153, 101);
             btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(144, 54);
+            btnPrint.Size = new Size(144, 34);
             btnPrint.TabIndex = 0;
             btnPrint.Text = "Print";
             btnPrint.UseVisualStyleBackColor = true;
             btnPrint.Click += btnPrint_Click;
+            // 
+            // btnNew
+            // 
+            btnNew.Location = new Point(3, 101);
+            btnNew.Name = "btnNew";
+            btnNew.Size = new Size(144, 34);
+            btnNew.TabIndex = 4;
+            btnNew.Text = "Add New";
+            btnNew.UseVisualStyleBackColor = true;
+            btnNew.Click += btnNew_Click;
             // 
             // TransactionsUC
             // 
@@ -317,7 +304,6 @@
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             tableLayoutPanel3.ResumeLayout(false);
-            tableLayoutPanel3.PerformLayout();
             tableLayoutPanel4.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -335,12 +321,10 @@
         private DateTimePicker dtStart;
         private DateTimePicker dtEnd;
         private TableLayoutPanel tableLayoutPanel3;
-        private Label label4;
-        private TextBox txtSearchBox;
-        private ComboBox cboSearchFilter;
         private TableLayoutPanel tableLayoutPanel4;
         private Button btnDelete;
         private Button btnReport;
         private Button btnPrint;
+        private Button btnNew;
     }
 }

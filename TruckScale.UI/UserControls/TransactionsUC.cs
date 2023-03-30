@@ -15,10 +15,9 @@ namespace TruckScale.UI.UserControls
 
         private readonly MainForm _mainForm;
         private readonly ApplicationService _service;
-        private string _appDirectory;
-
         private StreamReader reader;
         private List<WeighingTransaction> _transactions;
+        private string _appDirectory;
 
         public TransactionsUC(ApplicationService service, MainForm mainForm)
         {
@@ -36,6 +35,11 @@ namespace TruckScale.UI.UserControls
         {
             try
             {
+                if (transactionId == 0)
+                {
+                    return;
+                }
+
                 string ticketPath = _appDirectory;
                 string fileName = "Templates\\ScaleTicket.txt";
 
@@ -216,27 +220,42 @@ namespace TruckScale.UI.UserControls
             try
             {
                 string savePath = string.Empty;
-                using (FolderBrowserDialog dialog = new FolderBrowserDialog())
-                {
-                    dialog.InitialDirectory = @"C:\temp";
-                    dialog.ShowDialog();
-                    savePath = dialog.SelectedPath;
-                }
-
                 ScaleReport rpt = new ScaleReport(savePath);
 
                 var startdate = dtStart.Value.Date;
                 var enddate = dtEnd.Value.Date.AddDays(1).AddTicks(-10);
                 var records = _service.GetTransactionsByDate(startdate, enddate);
-                rpt.ExportReport(records);
 
-                MessageBox.Show("Report Saved", "Truck Scale Application", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (records.Count == 0)
+                {
+                    MessageBox.Show("No records found for the given date range.", "Truck Scale Application", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    return;
+                }
+
+                using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+                {
+                    dialog.InitialDirectory = @"C:\temp";
+                    var result = dialog.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        savePath = dialog.SelectedPath;
+                        rpt.ExportReport(records);
+                        MessageBox.Show("Report Saved", "Truck Scale Application", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
             }
             catch (Exception)
             {
 
                 throw;
             }
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            _mainForm.ShowWeighing(true, 0);
         }
     }
 }

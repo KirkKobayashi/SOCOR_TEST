@@ -8,9 +8,9 @@ using TruckScale.ScaleSerialPort;
 
 namespace TruckScale.UI.HelperClass
 {
-    public class PortGetter
+    public static class PortGetter
     {
-        public ScalePort Get()
+        public static ScalePort Get()
         {
             var sp = new ScalePort
             {
@@ -18,11 +18,14 @@ namespace TruckScale.UI.HelperClass
                 StartIndex = Convert.ToInt32(ConfigurationManager.AppSettings["startIndex"]),
                 EndIndex = Convert.ToInt32(ConfigurationManager.AppSettings["endIndex"]),
                 BaudRate = Convert.ToInt32(ConfigurationManager.AppSettings["baudrate"]),
-                TerminationCharacter = (char)Convert.ToInt32(ConfigurationManager.AppSettings["endIndex"]),
+                TerminationCharacter = (char)Convert.ToInt32(ConfigurationManager.AppSettings["terminationChar"]),
                 ReceivedBytesThreshold = Convert.ToInt32(ConfigurationManager.AppSettings["rthreshold"]),
                 ReadBufferSize = Convert.ToInt32(ConfigurationManager.AppSettings["rbuffersize"]),
+                DtrEnable = true
+                
             };
 
+            
             return sp;
         }
     }

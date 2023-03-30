@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace TruckScale.ScaleSerialPort
 {
@@ -22,10 +18,18 @@ namespace TruckScale.ScaleSerialPort
 
         public void OpenPort()
         {
-            if (_sp.IsOpen == false)
+            try
             {
-                _sp.DataReceived += _sp_DataReceived;
-                _sp.Open();
+                if (_sp.IsOpen == false)
+                {
+                    _sp.DataReceived += _sp_DataReceived;
+                    _sp.Open();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
@@ -38,13 +42,15 @@ namespace TruckScale.ScaleSerialPort
 
                 foreach (char c in rawData)
                 {
-                    if (c ==  _sp.TerminationCharacter)
+                    if (c == _sp.TerminationCharacter)
                     {
                         appendedData = sb.ToString();
-                        sb.Clear();
-                        _sp.DiscardInBuffer();
 
                         SerialDataReceieved(this, new SerialDataEventArgs(appendedData, _sp.StartIndex, _sp.EndIndex));
+                        rawData = string.Empty;
+                        _sp.DiscardInBuffer();
+                        sb.Clear();
+
                     }
                     else
                     {
