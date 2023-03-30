@@ -26,6 +26,8 @@ namespace TruckScale.Library.BLL
         }
 
         #region Weighing
+
+
         public List<Customer> GetCustomers()
         {
             using (var service = new CustomerRepository(dbContext))
