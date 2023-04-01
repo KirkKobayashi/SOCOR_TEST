@@ -5,17 +5,15 @@ using TruckScale.UI.HelperClass;
 
 namespace TruckScale.UI.UserControls
 {
-    public partial class ProductCrudUC : UserControl
+    public partial class CustomerCrudUC : UserControl
     {
         private ScaleDbContext _dbContext;
         private bool _newRecord;
         private int _recId;
-
-        public ProductCrudUC(bool newRecord)
+        public CustomerCrudUC()
         {
             InitializeComponent();
 
-            _newRecord = newRecord;
             _dbContext = Factory.GetDBContext();
 
             GetRecords();
@@ -76,7 +74,7 @@ namespace TruckScale.UI.UserControls
         }
         private async void GetRecords()
         {
-            var records = await _dbContext.Products.ToListAsync();
+            var records = await _dbContext.Customers.ToListAsync();
 
             if (records != null)
             {
@@ -105,13 +103,13 @@ namespace TruckScale.UI.UserControls
             {
                 if (_newRecord)
                 {
-                    _dbContext.Products.Add(new Product { Active = true, Name = txtName.Text.ToUpper(), });
+                    _dbContext.Customers.Add(new Customer { Active = true, Name = txtName.Text.ToUpper(), });
                     _dbContext.SaveChanges();
 
                 }
                 else
                 {
-                    var record = _dbContext.Products.Find(_recId);
+                    var record = _dbContext.Customers.Find(_recId);
                     if (record != null)
                     {
                         record.Name = txtName.Text.ToUpper();
