@@ -43,6 +43,9 @@
             label1 = new Label();
             txtIndicator = new TextBox();
             PanelMain = new Panel();
+            productMgtMenu = new ToolStripMenuItem();
+            customerMgtMenu = new ToolStripMenuItem();
+            supplierMgtMenu = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             tPanelMain.SuspendLayout();
             tPanelTop.SuspendLayout();
@@ -100,15 +103,15 @@
             // 
             // managementToolStripMenuItem
             // 
-            managementToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolMenuUser });
+            managementToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolMenuUser, productMgtMenu, customerMgtMenu, supplierMgtMenu });
             managementToolStripMenuItem.Name = "managementToolStripMenuItem";
-            managementToolStripMenuItem.Size = new Size(219, 34);
+            managementToolStripMenuItem.Size = new Size(270, 34);
             managementToolStripMenuItem.Text = "Management";
             // 
             // toolMenuUser
             // 
             toolMenuUser.Name = "toolMenuUser";
-            toolMenuUser.Size = new Size(149, 34);
+            toolMenuUser.Size = new Size(191, 34);
             toolMenuUser.Text = "User";
             toolMenuUser.Click += toolMenuUser_Click;
             // 
@@ -192,6 +195,25 @@
             PanelMain.Size = new Size(1556, 645);
             PanelMain.TabIndex = 1;
             // 
+            // productMgtMenu
+            // 
+            productMgtMenu.Name = "productMgtMenu";
+            productMgtMenu.Size = new Size(270, 34);
+            productMgtMenu.Text = "Products";
+            productMgtMenu.Click += productMgtMenu_Click;
+            // 
+            // customerMgtMenu
+            // 
+            customerMgtMenu.Name = "customerMgtMenu";
+            customerMgtMenu.Size = new Size(191, 34);
+            customerMgtMenu.Text = "Customer";
+            // 
+            // supplierMgtMenu
+            // 
+            supplierMgtMenu.Name = "supplierMgtMenu";
+            supplierMgtMenu.Size = new Size(191, 34);
+            supplierMgtMenu.Text = "Suppliers";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -232,5 +254,8 @@
         private Label label1;
         private ToolStripMenuItem managementToolStripMenuItem;
         private ToolStripMenuItem toolMenuUser;
+        private ToolStripMenuItem productMgtMenu;
+        private ToolStripMenuItem customerMgtMenu;
+        private ToolStripMenuItem supplierMgtMenu;
     }
 }

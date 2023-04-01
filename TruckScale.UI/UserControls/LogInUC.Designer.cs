@@ -70,42 +70,46 @@
             // label2
             // 
             label2.Dock = DockStyle.Fill;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.ForeColor = Color.FromArgb(108, 117, 125);
             label2.Location = new Point(582, 245);
             label2.Name = "label2";
             label2.Size = new Size(416, 45);
             label2.TabIndex = 4;
             label2.Text = "PASSWORD";
-            label2.TextAlign = ContentAlignment.BottomCenter;
+            label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
             label1.Dock = DockStyle.Fill;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = Color.FromArgb(108, 117, 125);
             label1.Location = new Point(582, 155);
             label1.Name = "label1";
             label1.Size = new Size(416, 45);
             label1.TabIndex = 0;
             label1.Text = "USERNAME";
-            label1.TextAlign = ContentAlignment.BottomCenter;
+            label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // txtUserName
             // 
+            txtUserName.BorderStyle = BorderStyle.None;
             txtUserName.Dock = DockStyle.Fill;
             txtUserName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtUserName.Location = new Point(582, 203);
             txtUserName.Name = "txtUserName";
-            txtUserName.Size = new Size(416, 39);
+            txtUserName.Size = new Size(416, 32);
             txtUserName.TabIndex = 0;
             txtUserName.TextAlign = HorizontalAlignment.Center;
             // 
             // txtPassword
             // 
+            txtPassword.BorderStyle = BorderStyle.None;
             txtPassword.Dock = DockStyle.Fill;
             txtPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtPassword.Location = new Point(582, 293);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(416, 39);
+            txtPassword.Size = new Size(416, 32);
             txtPassword.TabIndex = 1;
             txtPassword.TextAlign = HorizontalAlignment.Center;
             txtPassword.UseSystemPasswordChar = true;

@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Office2019.Drawing.Model3D;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Graph.Models;
 using TruckScale.Library.BLL;
@@ -29,7 +30,12 @@ namespace TruckScale.UI.Forms
             _service = Factory.GetApplicationService();
 
             SeedWeigher();
-            InitializePort();
+            //InitializePort();
+
+            ProductCrudUC uc = new ProductCrudUC(true);
+            PanelMain.Controls.Add(uc);
+            uc.Dock = DockStyle.Fill;
+            uc.Show();
         }
 
         private void InitializePort()
@@ -199,6 +205,15 @@ namespace TruckScale.UI.Forms
                 _sp.Dispose();
                 sPort.Close();
             }
+        }
+
+        private void productMgtMenu_Click(object sender, EventArgs e)
+        {
+            //ProductManagementUC uc = new ProductManagementUC(Factory.GetDBContext());
+            //PanelMain.Controls.Clear();
+            //PanelMain.Controls.Add(uc);
+            //uc.Dock = DockStyle.Fill;
+            //uc.Show();  
         }
     }
 }
