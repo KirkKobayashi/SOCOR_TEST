@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TruckScale.Library.Data.DBContext;
 using TruckScale.Library.Data.Models;
+using TruckScale.UI.Forms;
 using TruckScale.UI.HelperClass;
 
 namespace TruckScale.UI.UserControls
@@ -10,7 +11,8 @@ namespace TruckScale.UI.UserControls
         private ScaleDbContext _dbContext;
         private bool _newRecord;
         private int _recId;
-        public CustomerCrudUC()
+        private MainForm _mainForm;
+        public CustomerCrudUC(MainForm mainForm)
         {
             InitializeComponent();
 
@@ -21,8 +23,15 @@ namespace TruckScale.UI.UserControls
             btnSave.Click += BtnSave_Click;
             dgvRecords.CellMouseClick += DgvRecords_CellMouseClick;
             btnAdd.Click += BtnAdd_Click;
+            btnCancel.Click += BtnCancel_Click;
 
             TitleLabel.Text = "Customer Management";
+            _mainForm = mainForm;
+        }
+
+        private void BtnCancel_Click(object? sender, EventArgs e)
+        {
+            _mainForm.ShowTransactions();
         }
 
         private void BtnAdd_Click(object? sender, EventArgs e)

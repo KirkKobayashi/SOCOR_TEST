@@ -88,6 +88,7 @@ namespace TruckScale.UI.Forms
         {
             PanelMain.Controls.Clear();
             ViewMenu.Enabled = true;
+            stripMenuLogIn.Enabled = false;
             ShowTransactions();
         }
 
@@ -103,13 +104,13 @@ namespace TruckScale.UI.Forms
         private void ShowUserManagement()
         {
             PanelMain.Controls.Clear();
-            WeigherUC weigherUC = new WeigherUC(_service);
+            WeigherUC weigherUC = new WeigherUC(_service, this);
             PanelMain.Controls.Add(weigherUC);
             weigherUC.Dock = DockStyle.Fill;
             weigherUC.Show();
         }
 
-        private void ShowTransactions()
+        public void ShowTransactions()
         {
             PanelMain.Controls.Clear();
             TransactionsUC uc = new TransactionsUC(_service, this);
@@ -171,6 +172,7 @@ namespace TruckScale.UI.Forms
             ViewMenu.Enabled = false;
             PanelMain.Controls.Clear();
             weigherId = 0;
+            stripMenuLogIn.Enabled = true;
         }
 
         private void SeedWeigher()
@@ -215,7 +217,7 @@ namespace TruckScale.UI.Forms
 
         private void customerMgtMenu_Click(object sender, EventArgs e)
         {
-            CustomerCrudUC uc = new CustomerCrudUC();
+            CustomerCrudUC uc = new CustomerCrudUC(this);
             PanelMain.Controls.Clear();
             PanelMain.Controls.Add(uc);
             uc.Dock = DockStyle.Fill;
@@ -229,6 +231,16 @@ namespace TruckScale.UI.Forms
             PanelMain.Controls.Add(uc);
             uc.Dock = DockStyle.Fill;
             uc.Show();
+        }
+
+        private void txtIndicator_DoubleClick(object sender, EventArgs e)
+        {
+            txtIndicator.ReadOnly = false;
+        }
+
+        private void txtIndicator_Leave(object sender, EventArgs e)
+        {
+            txtIndicator.ReadOnly = true;
         }
     }
 }

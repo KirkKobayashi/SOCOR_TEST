@@ -106,7 +106,7 @@
             // 
             managementToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolMenuUser, productMgtMenu, customerMgtMenu, supplierMgtMenu });
             managementToolStripMenuItem.Name = "managementToolStripMenuItem";
-            managementToolStripMenuItem.Size = new Size(270, 34);
+            managementToolStripMenuItem.Size = new Size(219, 34);
             managementToolStripMenuItem.Text = "Management";
             // 
             // toolMenuUser
@@ -195,17 +195,20 @@
             // txtIndicator
             // 
             txtIndicator.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtIndicator.BackColor = Color.White;
             txtIndicator.BorderStyle = BorderStyle.None;
             txtIndicator.Font = new Font("Segoe UI", 34F, FontStyle.Regular, GraphicsUnit.Point);
             txtIndicator.Location = new Point(2, 45);
             txtIndicator.Multiline = true;
             txtIndicator.Name = "txtIndicator";
+            txtIndicator.ReadOnly = true;
             txtIndicator.Size = new Size(353, 97);
             txtIndicator.TabIndex = 0;
             txtIndicator.TabStop = false;
-            txtIndicator.Text = "123456";
             txtIndicator.TextAlign = HorizontalAlignment.Center;
             txtIndicator.TextChanged += txtIndicator_TextChanged;
+            txtIndicator.DoubleClick += txtIndicator_DoubleClick;
+            txtIndicator.Leave += txtIndicator_Leave;
             // 
             // PanelMain
             // 

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using TruckScale.Library.BLL;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
+using TruckScale.UI.Forms;
 using TruckScale.UI.HelperClass;
 
 namespace TruckScale.UI.UserControls
@@ -19,13 +20,15 @@ namespace TruckScale.UI.UserControls
         string emptyError = "Can not be empty.";
         ErrorProvider errorProvider = new ErrorProvider { };
 
+        private MainForm _mainForm;
         private IApplicationService _service;
         private bool readyToSave = false;
 
-        public WeigherUC(IApplicationService service)
+        public WeigherUC(IApplicationService service, MainForm mainForm)
         {
             InitializeComponent();
             _service = service;
+            _mainForm = mainForm;
         }
 
         private void ValidateForm()
@@ -117,7 +120,7 @@ namespace TruckScale.UI.UserControls
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            ClearForm();
+            _mainForm.ShowTransactions();
         }
     }
 }
