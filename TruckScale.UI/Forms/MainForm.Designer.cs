@@ -46,6 +46,7 @@
             label1 = new Label();
             txtIndicator = new TextBox();
             PanelMain = new Panel();
+            transactionsToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             tPanelMain.SuspendLayout();
             tPanelTop.SuspendLayout();
@@ -96,7 +97,7 @@
             // 
             // ViewMenu
             // 
-            ViewMenu.DropDownItems.AddRange(new ToolStripItem[] { managementToolStripMenuItem });
+            ViewMenu.DropDownItems.AddRange(new ToolStripItem[] { managementToolStripMenuItem, transactionsToolStripMenuItem });
             ViewMenu.Enabled = false;
             ViewMenu.Name = "ViewMenu";
             ViewMenu.Size = new Size(65, 29);
@@ -106,34 +107,34 @@
             // 
             managementToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolMenuUser, productMgtMenu, customerMgtMenu, supplierMgtMenu });
             managementToolStripMenuItem.Name = "managementToolStripMenuItem";
-            managementToolStripMenuItem.Size = new Size(219, 34);
+            managementToolStripMenuItem.Size = new Size(270, 34);
             managementToolStripMenuItem.Text = "Management";
             // 
             // toolMenuUser
             // 
             toolMenuUser.Name = "toolMenuUser";
-            toolMenuUser.Size = new Size(191, 34);
+            toolMenuUser.Size = new Size(270, 34);
             toolMenuUser.Text = "User";
             toolMenuUser.Click += toolMenuUser_Click;
             // 
             // productMgtMenu
             // 
             productMgtMenu.Name = "productMgtMenu";
-            productMgtMenu.Size = new Size(191, 34);
+            productMgtMenu.Size = new Size(270, 34);
             productMgtMenu.Text = "Products";
             productMgtMenu.Click += productMgtMenu_Click;
             // 
             // customerMgtMenu
             // 
             customerMgtMenu.Name = "customerMgtMenu";
-            customerMgtMenu.Size = new Size(191, 34);
+            customerMgtMenu.Size = new Size(270, 34);
             customerMgtMenu.Text = "Customer";
             customerMgtMenu.Click += customerMgtMenu_Click;
             // 
             // supplierMgtMenu
             // 
             supplierMgtMenu.Name = "supplierMgtMenu";
-            supplierMgtMenu.Size = new Size(191, 34);
+            supplierMgtMenu.Size = new Size(270, 34);
             supplierMgtMenu.Text = "Suppliers";
             supplierMgtMenu.Click += supplierMgtMenu_Click;
             // 
@@ -220,6 +221,13 @@
             PanelMain.Size = new Size(1556, 645);
             PanelMain.TabIndex = 1;
             // 
+            // transactionsToolStripMenuItem
+            // 
+            transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
+            transactionsToolStripMenuItem.Size = new Size(270, 34);
+            transactionsToolStripMenuItem.Text = "Transactions";
+            transactionsToolStripMenuItem.Click += transactionsToolStripMenuItem_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -263,5 +271,6 @@
         private ToolStripMenuItem productMgtMenu;
         private ToolStripMenuItem customerMgtMenu;
         private ToolStripMenuItem supplierMgtMenu;
+        private ToolStripMenuItem transactionsToolStripMenuItem;
     }
 }

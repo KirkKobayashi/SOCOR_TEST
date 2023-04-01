@@ -242,5 +242,10 @@ namespace TruckScale.UI.Forms
         {
             txtIndicator.ReadOnly = true;
         }
+
+        private void transactionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowTransactions();
+        }
     }
 }

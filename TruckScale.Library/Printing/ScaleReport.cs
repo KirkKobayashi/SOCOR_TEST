@@ -3,21 +3,13 @@ using TruckScale.Library.Data.Models;
 using System.Data;
 using System.Linq;
 using DocumentFormat.OpenXml.Drawing.ChartDrawing;
+using Microsoft.Graph.Models;
 
 namespace TruckScale.Library.Printing
 {
     public class ScaleReport
     {
-        private readonly string _fileName;
-        private readonly string _filePath;
-        private string _fullPath;
-
-        public ScaleReport(string filePath)
-        {
-            _filePath = filePath;
-        }
-
-        public void ExportReport(List<WeighingTransaction> weighingTransactions)
+        public void ExportReport(List<WeighingTransaction> weighingTransactions, string filepath)
         {
             try
             {
@@ -44,7 +36,7 @@ namespace TruckScale.Library.Printing
                 doc.SetCellStyle(rowCount + 4, columnCount, style);
                 
                 var fileName = $@"Scale_Report_{DateTime.Now.ToString("MMddyyyy")}.xlsx";
-                var savePath = Path.Combine(_filePath, fileName);
+                var savePath = Path.Combine(filepath, fileName);
                 doc.SaveAs(savePath);
 
             }

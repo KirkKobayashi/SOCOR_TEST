@@ -70,6 +70,8 @@ namespace TruckScale.UI.UserControls
                 var fullPath = st.PrintTicket(flatTrans);
 
                 PrintDocument pd = new PrintDocument();
+                Margins margins= new Margins(5,5,20,20);
+                pd.DefaultPageSettings.Margins = margins;
                 pd.DocumentName = fullPath;
                 pd.PrintPage += Pd_PrintPage;
                 reader = new StreamReader(fullPath);
@@ -224,8 +226,7 @@ namespace TruckScale.UI.UserControls
         {
             try
             {
-                string savePath = string.Empty;
-                ScaleReport rpt = new ScaleReport(savePath);
+                ScaleReport rpt = new ScaleReport();
 
                 var startdate = dtStart.Value.Date;
                 var enddate = dtEnd.Value.Date.AddDays(1).AddTicks(-10);
@@ -245,8 +246,9 @@ namespace TruckScale.UI.UserControls
 
                     if (result == DialogResult.OK)
                     {
-                        savePath = dialog.SelectedPath;
-                        rpt.ExportReport(records);
+                        var savePath = dialog.SelectedPath;
+                        rpt.ExportReport(records, savePath);
+
                         MessageBox.Show("Report Saved", "Truck Scale Application", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
