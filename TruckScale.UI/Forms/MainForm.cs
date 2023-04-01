@@ -31,11 +31,6 @@ namespace TruckScale.UI.Forms
 
             SeedWeigher();
             //InitializePort();
-
-            ProductCrudUC uc = new ProductCrudUC(true);
-            PanelMain.Controls.Add(uc);
-            uc.Dock = DockStyle.Fill;
-            uc.Show();
         }
 
         private void InitializePort()
@@ -92,6 +87,7 @@ namespace TruckScale.UI.Forms
         public void LogIn()
         {
             PanelMain.Controls.Clear();
+            ViewMenu.Enabled = true;
             ShowTransactions();
         }
 
@@ -172,6 +168,7 @@ namespace TruckScale.UI.Forms
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ViewMenu.Enabled = false;
             PanelMain.Controls.Clear();
             weigherId = 0;
         }
@@ -209,11 +206,29 @@ namespace TruckScale.UI.Forms
 
         private void productMgtMenu_Click(object sender, EventArgs e)
         {
-            //ProductManagementUC uc = new ProductManagementUC(Factory.GetDBContext());
-            //PanelMain.Controls.Clear();
-            //PanelMain.Controls.Add(uc);
-            //uc.Dock = DockStyle.Fill;
-            //uc.Show();  
+            ProductCrudUC uc = new ProductCrudUC();
+            PanelMain.Controls.Clear();
+            PanelMain.Controls.Add(uc);
+            uc.Dock = DockStyle.Fill;
+            uc.Show();
+        }
+
+        private void customerMgtMenu_Click(object sender, EventArgs e)
+        {
+            CustomerCrudUC uc = new CustomerCrudUC();
+            PanelMain.Controls.Clear();
+            PanelMain.Controls.Add(uc);
+            uc.Dock = DockStyle.Fill;
+            uc.Show();
+        }
+
+        private void supplierMgtMenu_Click(object sender, EventArgs e)
+        {
+            SupplierCrudUC uc = new SupplierCrudUC();
+            PanelMain.Controls.Clear();
+            PanelMain.Controls.Add(uc);
+            uc.Dock = DockStyle.Fill;
+            uc.Show();
         }
     }
 }

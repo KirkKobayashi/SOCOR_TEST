@@ -21,6 +21,8 @@ namespace TruckScale.UI.UserControls
             btnSave.Click += BtnSave_Click;
             dgvRecords.CellMouseClick += DgvRecords_CellMouseClick;
             btnAdd.Click += BtnAdd_Click;
+
+            TitleLabel.Text = "Supplier Management";
         }
 
         private void BtnAdd_Click(object? sender, EventArgs e)
@@ -63,26 +65,40 @@ namespace TruckScale.UI.UserControls
 
         private void DeleteRecord(int recordId)
         {
-            var supp = _dbContext.Suppliers.Find(recordId);
-
-            if (supp != null)
+            try
             {
-                _dbContext.Suppliers.Remove(supp);
-                _dbContext.SaveChanges();
-                GetRecords();
+                var supp = _dbContext.Suppliers.Find(recordId);
+
+                if (supp != null)
+                {
+                    _dbContext.Suppliers.Remove(supp);
+                    _dbContext.SaveChanges();
+                    GetRecords();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Delete error \n\n{ex.Message}");
             }
         }
         private async void GetRecords()
         {
-            var records = await _dbContext.Suppliers.ToListAsync();
-
-            if (records != null)
+            try
             {
-                dgvRecords.Rows.Clear();
-                foreach (var i in records)
+                var records = await _dbContext.Suppliers.ToListAsync();
+
+                if (records != null)
                 {
-                    dgvRecords.Rows.Add(i.Id, i.Name);
+                    dgvRecords.Rows.Clear();
+                    foreach (var i in records)
+                    {
+                        dgvRecords.Rows.Add(i.Id, i.Name);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Retrieve error \n\n{ex.Message}");
             }
         }
 
@@ -122,10 +138,9 @@ namespace TruckScale.UI.UserControls
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show($"Save / Update error \n\n{ex.Message}");
             }
 
             _newRecord = false;

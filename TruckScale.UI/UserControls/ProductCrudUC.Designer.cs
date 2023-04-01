@@ -39,14 +39,18 @@
             delete = new DataGridViewButtonColumn();
             btnAdd = new Button();
             panel1 = new Panel();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            TitleLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvRecords).BeginInit();
+            panel1.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.ForeColor = Color.DimGray;
-            label1.Location = new Point(22, 196);
+            label1.Location = new Point(22, 128);
             label1.Name = "label1";
             label1.Size = new Size(71, 30);
             label1.TabIndex = 0;
@@ -55,7 +59,7 @@
             // txtName
             // 
             txtName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtName.Location = new Point(99, 193);
+            txtName.Location = new Point(99, 125);
             txtName.Name = "txtName";
             txtName.ReadOnly = true;
             txtName.Size = new Size(488, 37);
@@ -98,11 +102,11 @@
             dgvRecords.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvRecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRecords.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, edit, delete });
-            dgvRecords.Location = new Point(22, 251);
+            dgvRecords.Location = new Point(22, 168);
             dgvRecords.Name = "dgvRecords";
             dgvRecords.RowHeadersWidth = 62;
             dgvRecords.RowTemplate.Height = 33;
-            dgvRecords.Size = new Size(1235, 350);
+            dgvRecords.Size = new Size(1235, 433);
             dgvRecords.TabIndex = 5;
             // 
             // Column1
@@ -144,7 +148,7 @@
             btnAdd.FlatStyle = FlatStyle.Flat;
             btnAdd.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnAdd.ForeColor = Color.WhiteSmoke;
-            btnAdd.Location = new Point(22, 124);
+            btnAdd.Location = new Point(22, 56);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(112, 44);
             btnAdd.TabIndex = 6;
@@ -155,11 +159,39 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(33, 37, 41);
+            panel1.Controls.Add(tableLayoutPanel1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1277, 50);
             panel1.TabIndex = 7;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.Controls.Add(TitleLabel, 1, 0);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Margin = new Padding(1);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new Size(1277, 50);
+            tableLayoutPanel1.TabIndex = 1;
+            // 
+            // TitleLabel
+            // 
+            TitleLabel.Dock = DockStyle.Fill;
+            TitleLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            TitleLabel.ForeColor = Color.WhiteSmoke;
+            TitleLabel.Location = new Point(428, 0);
+            TitleLabel.Name = "TitleLabel";
+            TitleLabel.Size = new Size(419, 50);
+            TitleLabel.TabIndex = 0;
+            TitleLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // ProductCrudUC
             // 
@@ -177,6 +209,8 @@
             Name = "ProductCrudUC";
             Size = new Size(1277, 723);
             ((System.ComponentModel.ISupportInitialize)dgvRecords).EndInit();
+            panel1.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -194,5 +228,7 @@
         private DataGridViewButtonColumn delete;
         private Button btnAdd;
         private Panel panel1;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Label TitleLabel;
     }
 }

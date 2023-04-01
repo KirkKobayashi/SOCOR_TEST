@@ -24,6 +24,7 @@ namespace TruckScale.UI.UserControls
         private ErrorProvider errorProvider;
         private readonly IApplicationService _service;
         private readonly MainForm _mainForm;
+        private WeighingTransaction _transaction;
 
         public WeighingUC(IApplicationService service, MainForm mainForm, bool newTrans, int transId = 0)
         {
@@ -142,6 +143,7 @@ namespace TruckScale.UI.UserControls
                     }
                     else
                     {
+                        weighingTransaction.FirstWeightDate = _transaction.FirstWeightDate;
                         weighingTransaction.Id = _transId;
                         weighingTransaction.SecondWeightDate = DateTime.Now;
                         weighingTransaction.SecondWeight = Convert.ToInt32(txtSecondWeight.Text);
@@ -220,22 +222,22 @@ namespace TruckScale.UI.UserControls
 
         private void LoadDetails()
         {
-            var td = _service.GetTransaction(_transId);
+            _transaction = _service.GetTransaction(_transId);
 
-            if (td != null)
+            if (_transaction != null)
             {
-                txtId.Text = td.Id.ToString("0000000000");
-                txtTicket.Text = td.TicketNumber.ToString();
-                txtPlateNumber.Text = td.Truck?.PlateNumber ?? string.Empty;
-                cboCustomer.Text = td.Customer?.Name ?? string.Empty;
-                cboSupplier.Text = td.Supplier?.Name ?? string.Empty;
-                cboProduct.Text = td.Product?.Name ?? string.Empty;
-                txtFirstWeight.Text = td.FirstWeight.ToString();
-                txtSecondWeight.Text = td.SecondWeight.ToString();
-                txtNetWeight.Text = Math.Abs(td.FirstWeight - td.SecondWeight).ToString();
-                txtRemarks.Text = td.Remarks;
-                txtQuantity.Text = td.Quantity;
-                txtDriver.Text = td.Driver;
+                txtId.Text = _transaction.Id.ToString("0000000000");
+                txtTicket.Text = _transaction.TicketNumber.ToString();
+                txtPlateNumber.Text = _transaction.Truck?.PlateNumber ?? string.Empty;
+                cboCustomer.Text = _transaction.Customer?.Name ?? string.Empty;
+                cboSupplier.Text = _transaction.Supplier?.Name ?? string.Empty;
+                cboProduct.Text = _transaction.Product?.Name ?? string.Empty;
+                txtFirstWeight.Text = _transaction.FirstWeight.ToString();
+                txtSecondWeight.Text = _transaction.SecondWeight.ToString();
+                txtNetWeight.Text = Math.Abs(_transaction.FirstWeight - _transaction.SecondWeight).ToString();
+                txtRemarks.Text = _transaction.Remarks;
+                txtQuantity.Text = _transaction.Quantity;
+                txtDriver.Text = _transaction.Driver;
             }
         }
 

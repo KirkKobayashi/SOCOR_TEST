@@ -48,6 +48,11 @@ namespace TruckScale.UI.UserControls
 
                 var transaction = _service.GetTransaction(transactionId);
 
+                if (transaction == null)
+                {
+                    return;
+                }
+
                 var flatTrans = new FlatWeighingTransaction
                 {
                     TruckPlateNumber = transaction.Truck.PlateNumber,
