@@ -146,7 +146,7 @@ namespace TruckScale.UI.UserControls
                     }
                     else
                     {
-                        if (weighingTransaction.SecondWeight > 0)
+                        if (Convert.ToInt32(txtSecondWeight.Text) > 0)
                         {
                             var ans = MessageBox.Show("Update this transaction?", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             if (ans == DialogResult.No)
