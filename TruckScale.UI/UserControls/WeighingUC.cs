@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +16,7 @@ using TruckScale.Library.Interfaces;
 using TruckScale.Library.Repositories;
 using TruckScale.UI.Forms;
 using TruckScale.UI.HelperClass;
+using Control = System.Windows.Forms.Control;
 
 namespace TruckScale.UI.UserControls
 {
@@ -143,6 +146,15 @@ namespace TruckScale.UI.UserControls
                     }
                     else
                     {
+                        if (weighingTransaction.SecondWeight > 0)
+                        {
+                            var ans = MessageBox.Show("Update this transaction?", "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (ans == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+
                         weighingTransaction.FirstWeightDate = _transaction.FirstWeightDate;
                         weighingTransaction.Id = _transId;
                         weighingTransaction.SecondWeightDate = DateTime.Now;
@@ -238,6 +250,8 @@ namespace TruckScale.UI.UserControls
                 txtRemarks.Text = _transaction.Remarks;
                 txtQuantity.Text = _transaction.Quantity;
                 txtDriver.Text = _transaction.Driver;
+                txtWeighInDate.Text = _transaction.FirstWeightDate.ToString("MM/dd/yyyy HH:mm");
+                txtWeighOutDate.Text = _transaction.SecondWeight > 0 ? _transaction.SecondWeightDate.ToString("MM/dd/yyyy HH:mm") : string.Empty;
             }
         }
 

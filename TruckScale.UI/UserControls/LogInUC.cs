@@ -1,4 +1,5 @@
 ﻿using TruckScale.Library.BLL;
+using TruckScale.Library.Data.Models;
 using TruckScale.UI.Forms;
 using TruckScale.UI.HelperClass;
 
@@ -15,7 +16,32 @@ namespace TruckScale.UI.UserControls
             _service = service;
             _mainForm = mainForm;
 
+            SeedWeigher();
             txtUserName.Focus();
+        }
+
+        private void SeedWeigher()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+
+                Weigher weigher = new Weigher
+                {
+
+                    FirstName = "admin",
+                    LastName = "admin",
+                    UserName = "admin",
+                    Password = AES.EncryptString(Globals.myKey, "admin")
+                };
+
+                _service.SeedWeigher(weigher);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding admin account \n\n{ex.Message}");
+            }
+            finally { Cursor.Current = Cursors.Default; }
         }
 
         private bool UserLogIn()

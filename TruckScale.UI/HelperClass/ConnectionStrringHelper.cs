@@ -9,9 +9,9 @@ namespace TruckScale.UI.HelperClass
 {
     public static class ConStringHelper
     {
-        public static string Get()
+        public static string Get(string dbname)
         {
-            return ConfigurationManager.ConnectionStrings["default"].ToString();
+            return ConfigurationManager.ConnectionStrings[dbname].ToString();
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office2019.Drawing.Model3D;
-using DocumentFormat.OpenXml.Wordprocessing;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Graph.Models;
-using TruckScale.Library.BLL;
-using TruckScale.Library.Data.Models;
+﻿using TruckScale.Library.BLL;
 using TruckScale.ScaleSerialPort;
 using TruckScale.UI.HelperClass;
 using TruckScale.UI.UserControls;
@@ -28,9 +23,7 @@ namespace TruckScale.UI.Forms
             InitializeComponent();
 
             _service = Factory.GetApplicationService();
-
-            SeedWeigher();
-            //InitializePort();
+            InitializePort();
         }
 
         private void InitializePort()
@@ -175,28 +168,6 @@ namespace TruckScale.UI.Forms
             stripMenuLogIn.Enabled = true;
         }
 
-        private void SeedWeigher()
-        {
-            try
-            {
-                Weigher weigher = new Weigher
-                {
-
-                    FirstName = "admin",
-                    LastName = "admin",
-                    UserName = "admin",
-                    Password = AES.EncryptString(Globals.myKey, "admin")
-                };
-
-                _service.SeedWeigher(weigher);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error adding admin account \n\n{ex.Message}");
-            }
-
-        }
-
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (sPort != null && sPort.IsOpen)
@@ -246,6 +217,11 @@ namespace TruckScale.UI.Forms
         private void transactionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowTransactions();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

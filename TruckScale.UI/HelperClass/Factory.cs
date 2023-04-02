@@ -14,7 +14,8 @@ namespace TruckScale.UI.HelperClass
 
         public static ScaleDbContext GetDBContext()
         {
-            return new Library.Data.DBContext.ScaleDbContext(ConStringHelper.Get());
+            var dbname = ConfigurationManager.AppSettings["dbname"].ToString();
+            return new Library.Data.DBContext.ScaleDbContext(ConStringHelper.Get(dbname));
         }
 
     }

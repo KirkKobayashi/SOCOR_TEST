@@ -1,10 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TruckScale.Library.Data.Models;
 
 namespace TruckScale.Library.Data.DBContext
@@ -20,21 +14,8 @@ namespace TruckScale.Library.Data.DBContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //_constring = @"Server=wearelegion; Database=dbWb; Trusted_Connection=true; Encrypt=No; TrustServerCertificate=yes";
-            //optionsBuilder.UseSqlServer(_constring, builder =>
-            //{
-            //    builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
-            //});
-
             optionsBuilder.UseSqlServer(_constring);
             optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-
-
-            //optionsBuilder.UseSqlServer("your_connection_string", builder =>
-            //{
-            //    builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
-            //});
-            //base.OnConfiguring(optionsBuilder);
         }
 
         public DbSet<Customer>  Customers { get; set; }
