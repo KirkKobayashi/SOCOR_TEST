@@ -29,6 +29,23 @@ namespace TruckScale.UI.UserControls
             GetRecords();
             dgvTransactions.AllowUserToDeleteRows = false;
             dgvTransactions.AllowUserToAddRows = false;
+
+            CheckDirectory();
+        }
+
+        private void CheckDirectory()
+        {
+            try
+            {
+                if (!Directory.Exists(_appDirectory + "\\Templates"))
+                {
+                    Directory.CreateDirectory(_appDirectory + "\\Templates");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Print creation error \n\n{ex.Message}");
+            }
         }
 
         public void PrintScaleTicket()
