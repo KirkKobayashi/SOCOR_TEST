@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Configuration;
+using System.Data;
 using System.Drawing.Printing;
 using TruckScale.Library.BLL;
 using TruckScale.Library.Data.DTOs;
@@ -59,8 +60,9 @@ namespace TruckScale.UI.UserControls
 
                 string ticketPath = _appDirectory;
                 string fileName = "Templates\\ScaleTicket.txt";
-
-                ScaleTicket st = new ScaleTicket(fileName, ticketPath);
+                var address1 = ConfigurationManager.AppSettings["add1"].ToString();
+                var address2 = ConfigurationManager.AppSettings["add2"].ToString();
+                ScaleTicket st = new ScaleTicket(fileName, ticketPath, address1, address2);
 
 
                 var transaction = _service.GetTransaction(transactionId);

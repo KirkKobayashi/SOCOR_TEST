@@ -73,26 +73,26 @@
             // stripMenuLogIn
             // 
             stripMenuLogIn.Name = "stripMenuLogIn";
-            stripMenuLogIn.Size = new Size(270, 34);
+            stripMenuLogIn.Size = new Size(179, 34);
             stripMenuLogIn.Text = "Log In";
             stripMenuLogIn.Click += stripMenuLogIn_Click;
             // 
             // logOutToolStripMenuItem
             // 
             logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            logOutToolStripMenuItem.Size = new Size(270, 34);
+            logOutToolStripMenuItem.Size = new Size(179, 34);
             logOutToolStripMenuItem.Text = "Log Out";
             logOutToolStripMenuItem.Click += logOutToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(267, 6);
+            toolStripSeparator1.Size = new Size(176, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(270, 34);
+            exitToolStripMenuItem.Size = new Size(179, 34);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -222,7 +222,7 @@
             // PanelMain
             // 
             PanelMain.BackColor = Color.WhiteSmoke;
-            PanelMain.BorderStyle = BorderStyle.FixedSingle;
+            PanelMain.BorderStyle = BorderStyle.Fixed3D;
             PanelMain.Dock = DockStyle.Fill;
             PanelMain.Location = new Point(8, 203);
             PanelMain.Name = "PanelMain";

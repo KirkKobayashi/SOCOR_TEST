@@ -6,13 +6,14 @@
 
         public SerialDataEventArgs(string dataInArray, int trimStart, int trimEnd)
         {
-            var len = dataInArray.Length;
+            Data = dataInArray;
+            //var len = dataInArray.Length;
 
-            //if (len >= trimStart + trimEnd)
-            if (len >= trimEnd + trimStart)
-            {
-                Data = dataInArray.Substring(trimStart, trimEnd);
-            }
+            ////if (len >= trimStart + trimEnd)
+            //if (len >= trimEnd + trimStart)
+            //{
+            //    Data = dataInArray.Substring(trimStart, trimEnd);
+            //}
         }
     }
 }

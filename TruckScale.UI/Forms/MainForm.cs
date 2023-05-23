@@ -3,6 +3,7 @@ using TruckScale.ScaleSerialPort;
 using TruckScale.UI.HelperClass;
 using TruckScale.UI.UserControls;
 
+
 namespace TruckScale.UI.Forms
 {
     public partial class MainForm : Form
@@ -58,14 +59,15 @@ namespace TruckScale.UI.Forms
         {
             if (e.Data != null)
             {
-                var newWeight = e.Data.TrimStart('0');
+                var newWeight = e.Data.Substring(sPort.StartIndex, sPort.EndIndex);
 
-                if (newWeight.Length == 0)
-                {
-                    SetWeightString("0");
-                    return;
-                }
-                SetWeightString(newWeight);
+                SetWeightString(newWeight.ParseWeight());
+                //if (newWeight.Length == 0)
+                //{
+                //    SetWeightString("0");
+                //    return;
+                //}
+                //SetWeightString(newWeight);
             }
         }
 

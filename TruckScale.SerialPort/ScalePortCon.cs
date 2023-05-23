@@ -39,24 +39,24 @@ namespace TruckScale.ScaleSerialPort
             {
                 rawData = _sp.ReadExisting();
                 sb = new StringBuilder();
+                SerialDataReceieved(this, new SerialDataEventArgs(rawData, _sp.StartIndex, _sp.EndIndex));
+                //foreach (char c in rawData)
+                //{
+                //    if (c == _sp.TerminationCharacter)
+                //    {
+                //        appendedData = sb.ToString();
 
-                foreach (char c in rawData)
-                {
-                    if (c == _sp.TerminationCharacter)
-                    {
-                        appendedData = sb.ToString();
+                //        SerialDataReceieved(this, new SerialDataEventArgs(appendedData, _sp.StartIndex, _sp.EndIndex));
+                //        rawData = string.Empty;
+                //        _sp.DiscardInBuffer();
+                //        sb.Clear();
 
-                        SerialDataReceieved(this, new SerialDataEventArgs(appendedData, _sp.StartIndex, _sp.EndIndex));
-                        rawData = string.Empty;
-                        _sp.DiscardInBuffer();
-                        sb.Clear();
-
-                    }
-                    else
-                    {
-                        sb.Append(c);
-                    }
-                }
+                //    }
+                //    else
+                //    {
+                //        sb.Append(c);
+                //    }
+                //}
             }
         }
 

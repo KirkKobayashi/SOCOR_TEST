@@ -44,6 +44,7 @@
             // 
             // tableLayoutPanel1
             // 
+            tableLayoutPanel1.BackColor = Color.White;
             tableLayoutPanel1.ColumnCount = 3;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 36.6354F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 26.7291965F));
@@ -93,23 +94,21 @@
             // 
             // txtUserName
             // 
-            txtUserName.BorderStyle = BorderStyle.None;
             txtUserName.Dock = DockStyle.Fill;
             txtUserName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtUserName.Location = new Point(582, 203);
             txtUserName.Name = "txtUserName";
-            txtUserName.Size = new Size(416, 32);
+            txtUserName.Size = new Size(416, 39);
             txtUserName.TabIndex = 0;
             txtUserName.TextAlign = HorizontalAlignment.Center;
             // 
             // txtPassword
             // 
-            txtPassword.BorderStyle = BorderStyle.None;
             txtPassword.Dock = DockStyle.Fill;
             txtPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtPassword.Location = new Point(582, 293);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(416, 32);
+            txtPassword.Size = new Size(416, 39);
             txtPassword.TabIndex = 1;
             txtPassword.TextAlign = HorizontalAlignment.Center;
             txtPassword.UseSystemPasswordChar = true;

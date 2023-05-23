@@ -1,14 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Update;
-using Microsoft.Identity.Client;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using TruckScale.Library.Data.DBContext;
+﻿using TruckScale.Library.Data.DBContext;
 using TruckScale.Library.Data.DTOs;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;

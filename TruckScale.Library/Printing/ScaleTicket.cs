@@ -5,12 +5,16 @@ namespace TruckScale.Library.Printing
     public class ScaleTicket
     {
         private readonly string filePath;
+        private readonly string address1;
+        private readonly string address2;
         private readonly string fileName;
 
-        public ScaleTicket(string fileName, string filePath)
+        public ScaleTicket(string fileName, string filePath, string address1, string address2)
         {
             this.fileName = fileName;
             this.filePath = filePath;
+            this.address1 = address1;
+            this.address2 = address2;
         }
 
         public string PrintTicket(FlatWeighingTransaction weighingTransaction)
@@ -26,8 +30,9 @@ namespace TruckScale.Library.Printing
 
                 using (StreamWriter sw = File.CreateText(fullPath))
                 {
-                    sw.WriteLine(string.Format("{0, 0}", "Vision 2000 Fedmills Corp."));
-                    sw.WriteLine(string.Format("{0, 0}", "Bagong Pook, Rosario, Batangas."));
+
+                    sw.WriteLine(string.Format("{0, 0}", address1));
+                    sw.WriteLine(string.Format("{0, 0}", address2));
                     sw.WriteLine("");
                     sw.WriteLine(string.Format("{0, 0}", "TRUCK PLATE NUMBER:"));
                     sw.WriteLine(string.Format("{0, 30}", weighingTransaction.TruckPlateNumber));
