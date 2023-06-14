@@ -88,22 +88,18 @@ namespace TruckScale.Library.Repositories
             }
         }
 
-        public void Insert(WeighingTransaction transaction)
+        public int Insert(WeighingTransaction transaction)
         {
-            try
+            var rec = dbContext.WeighingTransactions.Find(transaction.Id);
+            if (rec is null)
             {
-                var rec = dbContext.WeighingTransactions.Find(transaction.Id);
-                if (rec is null)
-                {
-                    dbContext.WeighingTransactions.Add(transaction);
-                    dbContext.SaveChanges();
-                }
-            }
-            catch (Exception)
-            {
+                dbContext.WeighingTransactions.Add(transaction);
+                dbContext.SaveChanges();
 
-                throw;
+                return transaction.Id;
             }
+
+            return 0;
         }
 
         public void Update(WeighingTransaction transaction)
@@ -120,10 +116,10 @@ namespace TruckScale.Library.Repositories
                 ttU.ProductId = transaction.ProductId;
                 ttU.TruckId = transaction.TruckId;
                 ttU.TicketNumber = transaction.TicketNumber;
-                ttU.Quantity = transaction.Quantity; 
+                ttU.Quantity = transaction.Quantity;
                 ttU.Driver = transaction.Driver;
-                ttU.Remarks =   transaction.Remarks;
-                
+                ttU.Remarks = transaction.Remarks;
+
 
                 dbContext.Update(ttU);
                 //dbContext.Entry(transaction).CurrentValues.SetValues(transaction);

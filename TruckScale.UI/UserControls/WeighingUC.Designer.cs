@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             tableLayoutPanel1 = new TableLayoutPanel();
             label13 = new Label();
             txtNetWeight = new TextBox();
@@ -62,6 +63,9 @@
             panel2 = new Panel();
             btnClose = new Button();
             btnSave = new Button();
+            btnFirst = new Button();
+            btnSecond = new Button();
+            toolTip1 = new ToolTip(components);
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
@@ -107,6 +111,8 @@
             tableLayoutPanel1.Controls.Add(txtWeighInDate, 4, 11);
             tableLayoutPanel1.Controls.Add(txtWeighOutDate, 4, 12);
             tableLayoutPanel1.Controls.Add(panel2, 3, 14);
+            tableLayoutPanel1.Controls.Add(btnFirst, 3, 2);
+            tableLayoutPanel1.Controls.Add(btnSecond, 4, 2);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
             tableLayoutPanel1.Location = new Point(0, 0);
@@ -114,7 +120,7 @@
             tableLayoutPanel1.RowCount = 17;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 80F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
@@ -135,7 +141,7 @@
             // label13
             // 
             label13.Dock = DockStyle.Fill;
-            label13.Location = new Point(806, 290);
+            label13.Location = new Point(806, 310);
             label13.Name = "label13";
             label13.Size = new Size(194, 40);
             label13.TabIndex = 26;
@@ -147,7 +153,7 @@
             // 
             txtNetWeight.Dock = DockStyle.Fill;
             txtNetWeight.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtNetWeight.Location = new Point(506, 583);
+            txtNetWeight.Location = new Point(506, 603);
             txtNetWeight.Name = "txtNetWeight";
             txtNetWeight.ReadOnly = true;
             txtNetWeight.Size = new Size(294, 29);
@@ -159,7 +165,7 @@
             // 
             txtSecondWeight.Dock = DockStyle.Fill;
             txtSecondWeight.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtSecondWeight.Location = new Point(506, 538);
+            txtSecondWeight.Location = new Point(506, 558);
             txtSecondWeight.MaxLength = 7;
             txtSecondWeight.Name = "txtSecondWeight";
             txtSecondWeight.ReadOnly = true;
@@ -174,7 +180,7 @@
             // 
             label12.Dock = DockStyle.Fill;
             label12.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label12.Location = new Point(306, 580);
+            label12.Location = new Point(306, 600);
             label12.Name = "label12";
             label12.Size = new Size(194, 45);
             label12.TabIndex = 21;
@@ -185,7 +191,7 @@
             // 
             label11.Dock = DockStyle.Fill;
             label11.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.Location = new Point(306, 535);
+            label11.Location = new Point(306, 555);
             label11.Name = "label11";
             label11.Size = new Size(194, 45);
             label11.TabIndex = 20;
@@ -196,7 +202,7 @@
             // 
             label10.Dock = DockStyle.Fill;
             label10.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.Location = new Point(306, 490);
+            label10.Location = new Point(306, 510);
             label10.Name = "label10";
             label10.Size = new Size(194, 45);
             label10.TabIndex = 19;
@@ -206,7 +212,7 @@
             // label8
             // 
             label8.Dock = DockStyle.Fill;
-            label8.Location = new Point(806, 410);
+            label8.Location = new Point(806, 430);
             label8.Name = "label8";
             label8.Size = new Size(194, 40);
             label8.TabIndex = 16;
@@ -217,7 +223,7 @@
             // label7
             // 
             label7.Dock = DockStyle.Fill;
-            label7.Location = new Point(806, 210);
+            label7.Location = new Point(806, 230);
             label7.Name = "label7";
             label7.Size = new Size(194, 40);
             label7.TabIndex = 14;
@@ -227,7 +233,7 @@
             // label5
             // 
             label5.Dock = DockStyle.Fill;
-            label5.Location = new Point(306, 370);
+            label5.Location = new Point(306, 390);
             label5.Name = "label5";
             label5.Size = new Size(194, 40);
             label5.TabIndex = 13;
@@ -239,15 +245,15 @@
             label6.Dock = DockStyle.Fill;
             label6.Location = new Point(306, 130);
             label6.Name = "label6";
-            label6.Size = new Size(194, 40);
+            label6.Size = new Size(194, 60);
             label6.TabIndex = 6;
             label6.Text = "Ticket Number";
-            label6.TextAlign = ContentAlignment.MiddleRight;
+            label6.TextAlign = ContentAlignment.TopRight;
             // 
             // label4
             // 
             label4.Dock = DockStyle.Fill;
-            label4.Location = new Point(306, 290);
+            label4.Location = new Point(306, 310);
             label4.Name = "label4";
             label4.Size = new Size(194, 40);
             label4.TabIndex = 4;
@@ -257,7 +263,7 @@
             // label2
             // 
             label2.Dock = DockStyle.Fill;
-            label2.Location = new Point(306, 250);
+            label2.Location = new Point(306, 270);
             label2.Name = "label2";
             label2.Size = new Size(194, 40);
             label2.TabIndex = 3;
@@ -267,7 +273,7 @@
             // label3
             // 
             label3.Dock = DockStyle.Fill;
-            label3.Location = new Point(306, 210);
+            label3.Location = new Point(306, 230);
             label3.Name = "label3";
             label3.Size = new Size(194, 40);
             label3.TabIndex = 2;
@@ -316,7 +322,7 @@
             cboCustomer.Dock = DockStyle.Fill;
             cboCustomer.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
             cboCustomer.FormattingEnabled = true;
-            cboCustomer.Location = new Point(506, 253);
+            cboCustomer.Location = new Point(506, 273);
             cboCustomer.Name = "cboCustomer";
             cboCustomer.Size = new Size(294, 29);
             cboCustomer.TabIndex = 2;
@@ -328,7 +334,7 @@
             cboSupplier.Dock = DockStyle.Fill;
             cboSupplier.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
             cboSupplier.FormattingEnabled = true;
-            cboSupplier.Location = new Point(506, 293);
+            cboSupplier.Location = new Point(506, 313);
             cboSupplier.Name = "cboSupplier";
             cboSupplier.Size = new Size(294, 29);
             cboSupplier.TabIndex = 3;
@@ -341,7 +347,7 @@
             cboProduct.Dock = DockStyle.Fill;
             cboProduct.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
             cboProduct.FormattingEnabled = true;
-            cboProduct.Location = new Point(506, 373);
+            cboProduct.Location = new Point(506, 393);
             cboProduct.Name = "cboProduct";
             cboProduct.Size = new Size(794, 29);
             cboProduct.TabIndex = 6;
@@ -350,7 +356,7 @@
             // 
             txtRemarks.Dock = DockStyle.Fill;
             txtRemarks.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtRemarks.Location = new Point(1006, 213);
+            txtRemarks.Location = new Point(1006, 233);
             txtRemarks.MaxLength = 200;
             txtRemarks.Multiline = true;
             txtRemarks.Name = "txtRemarks";
@@ -361,7 +367,7 @@
             // txtQuantity
             // 
             txtQuantity.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtQuantity.Location = new Point(1006, 413);
+            txtQuantity.Location = new Point(1006, 433);
             txtQuantity.Name = "txtQuantity";
             txtQuantity.Size = new Size(267, 29);
             txtQuantity.TabIndex = 7;
@@ -411,7 +417,7 @@
             txtPlateNumber.CharacterCasing = CharacterCasing.Upper;
             txtPlateNumber.Dock = DockStyle.Fill;
             txtPlateNumber.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtPlateNumber.Location = new Point(506, 213);
+            txtPlateNumber.Location = new Point(506, 233);
             txtPlateNumber.MaxLength = 60;
             txtPlateNumber.Name = "txtPlateNumber";
             txtPlateNumber.Size = new Size(294, 29);
@@ -421,7 +427,7 @@
             // 
             txtFirstWeight.Dock = DockStyle.Fill;
             txtFirstWeight.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtFirstWeight.Location = new Point(506, 493);
+            txtFirstWeight.Location = new Point(506, 513);
             txtFirstWeight.MaxLength = 7;
             txtFirstWeight.Name = "txtFirstWeight";
             txtFirstWeight.ReadOnly = true;
@@ -438,18 +444,19 @@
             btnUpdate.BackColor = Color.FromArgb(74, 214, 109);
             btnUpdate.FlatAppearance.BorderColor = Color.FromArgb(233, 236, 239);
             btnUpdate.FlatStyle = FlatStyle.Flat;
-            btnUpdate.Location = new Point(806, 493);
+            btnUpdate.Location = new Point(806, 513);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(144, 38);
             btnUpdate.TabIndex = 8;
-            btnUpdate.Text = "Update";
+            btnUpdate.Text = "Get Weight";
+            toolTip1.SetToolTip(btnUpdate, "Gets the current displayed weight");
             btnUpdate.UseVisualStyleBackColor = false;
             btnUpdate.Click += btnUpdate_Click;
             // 
             // txtDriver
             // 
             txtDriver.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtDriver.Location = new Point(1006, 293);
+            txtDriver.Location = new Point(1006, 313);
             txtDriver.Name = "txtDriver";
             txtDriver.Size = new Size(267, 29);
             txtDriver.TabIndex = 5;
@@ -459,7 +466,7 @@
             // 
             txtWeighInDate.Dock = DockStyle.Fill;
             txtWeighInDate.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtWeighInDate.Location = new Point(1006, 493);
+            txtWeighInDate.Location = new Point(1006, 513);
             txtWeighInDate.Name = "txtWeighInDate";
             txtWeighInDate.ReadOnly = true;
             txtWeighInDate.Size = new Size(294, 29);
@@ -469,7 +476,7 @@
             // 
             txtWeighOutDate.Dock = DockStyle.Fill;
             txtWeighOutDate.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtWeighOutDate.Location = new Point(1006, 538);
+            txtWeighOutDate.Location = new Point(1006, 558);
             txtWeighOutDate.Name = "txtWeighOutDate";
             txtWeighOutDate.ReadOnly = true;
             txtWeighOutDate.Size = new Size(294, 29);
@@ -481,30 +488,54 @@
             tableLayoutPanel1.SetColumnSpan(panel2, 2);
             panel2.Controls.Add(btnClose);
             panel2.Controls.Add(btnSave);
-            panel2.Location = new Point(806, 628);
+            panel2.Location = new Point(806, 648);
             panel2.Name = "panel2";
             panel2.Size = new Size(494, 73);
             panel2.TabIndex = 32;
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(200, 15);
+            btnClose.Location = new Point(200, 3);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(111, 40);
+            btnClose.Size = new Size(111, 52);
             btnClose.TabIndex = 1;
             btnClose.Text = "EXIT";
+            toolTip1.SetToolTip(btnClose, "Exits this window");
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(319, 15);
+            btnSave.Location = new Point(319, 3);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(176, 40);
+            btnSave.Size = new Size(176, 52);
             btnSave.TabIndex = 0;
             btnSave.Text = "SAVE";
+            toolTip1.SetToolTip(btnSave, "Save Transaction");
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
+            // 
+            // btnFirst
+            // 
+            btnFirst.Location = new Point(806, 133);
+            btnFirst.Name = "btnFirst";
+            btnFirst.Size = new Size(144, 54);
+            btnFirst.TabIndex = 33;
+            btnFirst.Text = "First Print";
+            toolTip1.SetToolTip(btnFirst, "Prints the first weighing details");
+            btnFirst.UseVisualStyleBackColor = true;
+            btnFirst.Click += btnFirst_Click;
+            // 
+            // btnSecond
+            // 
+            btnSecond.Location = new Point(1006, 133);
+            btnSecond.Name = "btnSecond";
+            btnSecond.Size = new Size(144, 54);
+            btnSecond.TabIndex = 34;
+            btnSecond.Text = "Second Print";
+            toolTip1.SetToolTip(btnSecond, "Prints the second weighing details");
+            btnSecond.UseVisualStyleBackColor = true;
+            btnSecond.Click += btnSecond_Click;
             // 
             // WeighingUC
             // 
@@ -559,5 +590,8 @@
         private Panel panel2;
         private Button btnClose;
         private Button btnSave;
+        private Button btnFirst;
+        private Button btnSecond;
+        private ToolTip toolTip1;
     }
 }

@@ -22,7 +22,7 @@ namespace TruckScale.Library.Interfaces
         Truck GetTruckByPlate(string platenumber);
         List<Truck> GetTrucks();
         Weigher GetWeigherByName(string name);
-        void InsertTransaction(WeighingTransaction transaction);
+        int InsertTransaction(WeighingTransaction transaction);
         void InsertWeigher(Weigher weigher);
         void SeedWeigher(Weigher weigher);
         void UpdateTransaction(WeighingTransaction transaction);

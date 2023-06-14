@@ -7,6 +7,10 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>Screen Icon.ico</ApplicationIcon>
+    <Title>Truck Scale Application</Title>
+    <Authors>BERNARD R. LOGADOR II</Authors>
+    <Company>FIL-WEIGHING SCALE CO.</Company>
+    <Copyright>2023</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

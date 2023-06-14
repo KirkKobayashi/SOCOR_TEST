@@ -102,6 +102,7 @@ namespace TruckScale.Library.Printing
                     //Print second weighing
                     else if (ticketType == 2)
                     {
+                        SetSpacing(sw, 22);
                         SecondWeighingData(sw, weighingTransaction);
                     }
                     //Print Complete ticket
@@ -126,12 +127,5 @@ namespace TruckScale.Library.Printing
             }
         }
     }
-
-
 }
 
-
-//Ticket printing flow
-//Get path of excel file
-//Query records to print
-//Pass records and type of printing to method

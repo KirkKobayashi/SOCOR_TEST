@@ -13,7 +13,7 @@ namespace TruckScale.Library.Interfaces
         void Dispose();
         WeighingTransaction? GetById(int id);
         List<WeighingTransaction> GetAll();
-        void Insert(WeighingTransaction transaction);
+        int Insert(WeighingTransaction transaction);
         int GetTicketNumber();
         IQueryable<WeighingTransaction> GetRangedRecords(DateTime startdate, DateTime enddate);
         void Update(WeighingTransaction transaction);

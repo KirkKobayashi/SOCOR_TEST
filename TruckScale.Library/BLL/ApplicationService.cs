@@ -127,11 +127,11 @@ namespace TruckScale.Library.BLL
             }
         }
 
-        public void InsertTransaction(WeighingTransaction transaction)
+        public int InsertTransaction(WeighingTransaction transaction)
         {
             using (var service = new TransactionRepository(dbContext))
             {
-                service.Insert(transaction);
+                return service.Insert(transaction);
             }
         }
 

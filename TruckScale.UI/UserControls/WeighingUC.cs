@@ -1,7 +1,11 @@
-﻿using System.Transactions;
+﻿using System.Drawing.Printing;
+using System.Transactions;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
+using TruckScale.Library.Printing;
 using TruckScale.UI.Forms;
+using TruckScale.UI.HelperClass;
+using TruckScale_App;
 using Control = System.Windows.Forms.Control;
 
 namespace TruckScale.UI.UserControls
@@ -53,6 +57,84 @@ namespace TruckScale.UI.UserControls
             {
                 errorProvider.SetError(control, "");
                 return true;
+            }
+        }
+
+        private void PrintTicket(int ticketType, WeighingTransaction transaction)
+        {
+            try
+            {
+                if (transaction != null)
+                {
+                    var ans = MessageBox.Show("Load scale ticket to the printer.", "Printing", MessageBoxButtons.OKCancel, MessageBoxIcon.None);
+
+                    if (ans == DialogResult.Cancel)
+                        return;
+
+                    var transactionToPrint = _service.GetTransaction(transaction.Id);
+                    var flatTrans = ExtensionMethods.FlattenData(transactionToPrint);
+
+                    string ticketPath = Global.AppDirectory;
+                    string fileName = Global.TextFileName;
+
+                    var fullPath = Path.Combine(ticketPath, fileName);
+
+                    using (var pd = TicketPrinting.Print(flatTrans, fullPath, ticketType))
+                    {
+                        Margins margins = new Margins(5, 5, 20, 20);
+                        pd.DefaultPageSettings.Margins = margins;
+                        pd.DocumentName = fullPath;
+                        var reader = new StreamReader(fullPath);
+                        pd.PrintPage += (sender, e) => Pd_PrintPage(sender, e, reader);
+
+
+                        using (PrintPreviewDialog ppd = new PrintPreviewDialog())
+                        {
+                            ppd.Document = pd;
+                            pd.Print();
+                            reader.Close();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ticket printing error\n\n{ex.Message}", "Truck Scale Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Pd_PrintPage(object sender, PrintPageEventArgs e, StreamReader reader)
+        {
+            System.Drawing.Font verdana10Font = new Font("Verdana", 8);
+            //Get the Graphics object  
+            Graphics g = e.Graphics;
+            float linesPerPage = 0;
+            float yPos = 0;
+            int count = 0;
+            //Read margins from PrintPageEventArgs  
+            float leftMargin = e.MarginBounds.Left;
+            float topMargin = e.MarginBounds.Top;
+            string line = null;
+            //Calculate the lines per page on the basis of the height of the page and the height of the font  
+            linesPerPage = e.MarginBounds.Height / verdana10Font.GetHeight(g);
+            //Now read lines one by one, using StreamReader  
+            while (count < linesPerPage && ((line = reader.ReadLine()) != null))
+            {
+                //Calculate the starting position  
+                yPos = topMargin + (count * verdana10Font.GetHeight(g));
+                //Draw text  
+                g.DrawString(line, verdana10Font, Brushes.Black, leftMargin, yPos, new StringFormat());
+                //Move to next line  
+                count++;
+            }
+            //If PrintPageEventArgs has more pages to print  
+            if (line != null)
+            {
+                e.HasMorePages = true;
+            }
+            else
+            {
+                e.HasMorePages = false;
             }
         }
 
@@ -129,6 +211,8 @@ namespace TruckScale.UI.UserControls
                     {
                         weighingTransaction.FirstWeightDate = DateTime.Now;
                         InsertTransaction(weighingTransaction);
+
+                        PrintTicket(1, weighingTransaction);
                     }
                     else
                     {
@@ -146,6 +230,7 @@ namespace TruckScale.UI.UserControls
                         weighingTransaction.SecondWeightDate = DateTime.Now;
                         weighingTransaction.SecondWeight = Convert.ToInt32(txtSecondWeight.Text);
                         UpdateTransaction(weighingTransaction);
+                        PrintTicket(2, weighingTransaction);
                     }
 
                     _mainForm.ClearPanelFromWeighing();
@@ -354,6 +439,28 @@ namespace TruckScale.UI.UserControls
         {
             txtSecondWeight.ReadOnly = true;
             txtNetWeight.Text = Math.Abs(Convert.ToInt32(txtFirstWeight.Text) - Convert.ToInt32(txtSecondWeight.Text)).ToString();
+        }
+
+        private void btnFirst_Click(object sender, EventArgs e)
+        {
+            if (_transaction != null)
+            {
+                PrintTicket(1, _transaction);
+                return;
+            }
+
+            MessageBox.Show("No transaction to print.", "Print", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        }
+
+        private void btnSecond_Click(object sender, EventArgs e)
+        {
+            if (_transaction != null)
+            {
+                PrintTicket(2, _transaction);
+                return;
+            }
+
+            MessageBox.Show("No transaction to print.", "Print", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         }
     }
 }

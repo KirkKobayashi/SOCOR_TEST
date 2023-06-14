@@ -1,9 +1,6 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using System.Data;
 using System.Drawing.Printing;
-using System.Xml.Linq;
 using TruckScale.Library.BLL;
-using TruckScale.Library.Data.DTOs;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Printing;
 using TruckScale.UI.Forms;
@@ -52,7 +49,7 @@ namespace TruckScale.UI.UserControls
             }
         }
 
-        public void PrintScaleTicket()
+        private void PrintScaleTicket()
         {
             try
             {
@@ -65,6 +62,11 @@ namespace TruckScale.UI.UserControls
 
                 if (transaction != null)
                 {
+                    var ans = MessageBox.Show("Load scale ticket to the printer.", "Printing", MessageBoxButtons.OKCancel, MessageBoxIcon.None);
+
+                    if (ans == DialogResult.Cancel)
+                        return;
+
                     var flatTrans = ExtensionMethods.FlattenData(transaction);
 
                     string ticketPath = _appDirectory;
