@@ -16,6 +16,7 @@ namespace TruckScale.Library.Printing
 
         private static void FirstWeighingData(StreamWriter sw, FlatWeighingTransaction weighingTransaction)
         {
+            SetSpacing(sw, 12);
             sw.WriteLine(string.Format("{0, 40}", weighingTransaction.TruckPlateNumber));
 
             sw.WriteLine("");
@@ -26,7 +27,7 @@ namespace TruckScale.Library.Printing
 
             sw.WriteLine(string.Format("{0, 40}", weighingTransaction.FirstWeight.ToString("N0") + " KG"));
 
-            SetSpacing(sw, 1);
+            SetSpacing(sw, 2);
 
             sw.WriteLine(string.Format("{0, 40}", weighingTransaction.ProductName));
 
@@ -50,23 +51,23 @@ namespace TruckScale.Library.Printing
             }
 
 
-            SetSpacing(sw, 12);
+            SetSpacing(sw, 3);
 
             sw.WriteLine(string.Format("{0, 40}", weighingTransaction.SecondWeighingDate.ToString("HH:mm MM-dd-yyyy")));
 
-            SetSpacing(sw, 2);
+            SetSpacing(sw, 3);
 
             sw.WriteLine(string.Format("{0, 40}", gross.ToString("N0") + " KG"));
 
-            SetSpacing(sw, 1);
+            SetSpacing(sw, 2);
 
             sw.WriteLine(string.Format("{0, 40}", tare.ToString("N0") + " KG"));
 
-            SetSpacing(sw, 1);
+            SetSpacing(sw, 2);
 
             sw.WriteLine(string.Format("{0, 40}", Convert.ToInt32(Math.Abs(weighingTransaction.FirstWeight - weighingTransaction.SecondWeight)).ToString("N0") + " KG"));
 
-            SetSpacing(sw, 4);
+            SetSpacing(sw, 5);
 
             sw.WriteLine(string.Format("{0, 40}", weighingTransaction.CustomerName));
 
@@ -75,7 +76,7 @@ namespace TruckScale.Library.Printing
             sw.WriteLine(string.Format("{0, 20}", weighingTransaction.WeigherName));
         }
 
-        public static PrintDocument Print(FlatWeighingTransaction weighingTransaction, string ticketPath, int ticketType)
+        public static PrintDocument Print(FlatWeighingTransaction weighingTransaction, string ticketPath, int ticketType = 0)
         {
             if (weighingTransaction == null)
             {
@@ -92,7 +93,7 @@ namespace TruckScale.Library.Printing
                 using (StreamWriter sw = File.CreateText(ticketPath))
                 {
 
-                    SetSpacing(sw, 12);
+                    
                     //Print first weighing
                     if(ticketType == 1)
                     {

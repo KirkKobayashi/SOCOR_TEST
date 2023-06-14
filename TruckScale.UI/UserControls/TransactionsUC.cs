@@ -1,11 +1,14 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Drawing.Printing;
+using System.Xml.Linq;
 using TruckScale.Library.BLL;
 using TruckScale.Library.Data.DTOs;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Printing;
 using TruckScale.UI.Forms;
+using TruckScale.UI.HelperClass;
+using TruckScale_App;
 using Font = System.Drawing.Font;
 
 namespace TruckScale.UI.UserControls
@@ -18,7 +21,7 @@ namespace TruckScale.UI.UserControls
         private readonly ApplicationService _service;
         private StreamReader reader;
         private List<WeighingTransaction> _transactions;
-        private string _appDirectory;
+        private string _appDirectory = Global.AppDirectory;
 
         public TransactionsUC(ApplicationService service, MainForm mainForm)
         {
@@ -58,48 +61,33 @@ namespace TruckScale.UI.UserControls
                     return;
                 }
 
-                string ticketPath = _appDirectory;
-                string fileName = "Templates\\ScaleTicket.txt";
-
-                var address1 = ConfigurationManager.AppSettings["add1"].ToString();
-                var address2 = ConfigurationManager.AppSettings["add2"].ToString();
-                ScaleTicket st = new ScaleTicket(fileName, ticketPath, address1, address2);
-
-
                 var transaction = _service.GetTransaction(transactionId);
 
-                if (transaction == null)
+                if (transaction != null)
                 {
-                    return;
+                    var flatTrans = ExtensionMethods.FlattenData(transaction);
+
+                    string ticketPath = _appDirectory;
+                    string fileName = Global.TextFileName;
+
+                    var fullPath = Path.Combine(ticketPath, fileName);
+
+                    using (var pd = TicketPrinting.Print(flatTrans, fullPath))
+                    {
+                        Margins margins = new Margins(5, 5, 20, 20);
+                        pd.DefaultPageSettings.Margins = margins;
+                        pd.DocumentName = fullPath;
+                        pd.PrintPage += Pd_PrintPage;
+                        reader = new StreamReader(fullPath);
+
+                        using (PrintPreviewDialog ppd = new PrintPreviewDialog())
+                        {
+                            ppd.Document = pd;
+                            pd.Print();
+                            reader.Close();
+                        }
+                    }
                 }
-
-                var flatTrans = new FlatWeighingTransaction
-                {
-                    TruckPlateNumber = transaction.Truck.PlateNumber,
-                    CustomerName = transaction.Customer.Name,
-                    SupplierName = transaction.Supplier.Name,
-                    FirstWeighingDate = transaction.FirstWeightDate,
-                    SecondWeighingDate = transaction.SecondWeightDate,
-                    FirstWeight = transaction.FirstWeight,
-                    SecondWeight = transaction.SecondWeight,
-                    ProductName = transaction.Product.Name,
-                    Quantity = transaction.Quantity,
-                    TicketNumber = transaction.TicketNumber,
-                    WeigherName = $"{transaction.Weigher.FirstName} {transaction.Weigher.LastName}"
-                };
-                var fullPath = st.PrintTicket(flatTrans);
-
-                PrintDocument pd = new PrintDocument();
-                Margins margins = new Margins(5, 5, 20, 20);
-                pd.DefaultPageSettings.Margins = margins;
-                pd.DocumentName = fullPath;
-                pd.PrintPage += Pd_PrintPage;
-                reader = new StreamReader(fullPath);
-
-                PrintPreviewDialog ppd = new PrintPreviewDialog();
-                ppd.Document = pd;
-                pd.Print();
-                reader.Close();
             }
             catch (Exception ex)
             {
