@@ -26,5 +26,6 @@ namespace TruckScale.Library.Interfaces
         void InsertWeigher(Weigher weigher);
         void SeedWeigher(Weigher weigher);
         void UpdateTransaction(WeighingTransaction transaction);
+        bool ValidateTicketNumber(int ticketnumber);
     }
 }

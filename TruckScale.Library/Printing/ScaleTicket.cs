@@ -1,4 +1,6 @@
-﻿using TruckScale.Library.Data.DTOs;
+﻿using Microsoft.VisualBasic;
+using TruckScale.Library.Data.DTOs;
+
 
 namespace TruckScale.Library.Printing
 {
@@ -17,7 +19,7 @@ namespace TruckScale.Library.Printing
             this.address2 = address2;
         }
 
-        public string PrintTicket(FlatWeighingTransaction weighingTransaction)
+        public string PrintTicketVision(FlatWeighingTransaction weighingTransaction)
         {
             try
             {
@@ -58,6 +60,81 @@ namespace TruckScale.Library.Printing
                     sw.WriteLine(string.Format("{0, 30}", weighingTransaction.WeigherName));
                     sw.WriteLine(string.Format("{0, 0}", "CUSTOMER REP:"));
                     sw.WriteLine(string.Format("{0, 0}", "TICKET NUMBER:" + String.Format("{0,10}", weighingTransaction.TicketNumber.ToString("0000000000"))));
+                }
+
+                return fullPath;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public string PrintTicket(FlatWeighingTransaction weighingTransaction)
+        {
+            try
+            {
+                var fullPath = Path.Combine(filePath, fileName);
+
+                if (File.Exists(fullPath))
+                {
+                    File.Delete(fullPath);
+                }
+
+                using (StreamWriter sw = File.CreateText(fullPath))
+                {
+                    int gross;
+                    int tare;
+
+                    if (weighingTransaction.FirstWeight > weighingTransaction.SecondWeight)
+                    {
+                        gross = weighingTransaction.FirstWeight;
+                        tare = weighingTransaction.SecondWeight;
+                    }
+                    else
+                    {
+                        tare = weighingTransaction.FirstWeight;
+                        gross = weighingTransaction.SecondWeight;
+                    }
+
+                    for (int i = 1; i < 12; i++)
+                    {
+                        sw.WriteLine("");
+                    }
+
+                    sw.WriteLine(string.Format("{0, 40}", weighingTransaction.TruckPlateNumber));
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 40}", weighingTransaction.FirstWeighingDate.ToString("HH:mm MM-dd-yyyy")));
+                    sw.WriteLine("");
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 40}", weighingTransaction.FirstWeight.ToString("N0") + " KG"));
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 40}", weighingTransaction.ProductName));
+                    sw.WriteLine("");
+                    sw.WriteLine("");
+                    sw.WriteLine("");
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 40}", weighingTransaction.SecondWeighingDate.ToString("HH:mm MM-dd-yyyy")));
+                    sw.WriteLine("");
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 40}", gross.ToString("N0") + " KG"));
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 40}", tare.ToString("N0") + " KG"));
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 40}", Convert.ToInt32(Math.Abs(weighingTransaction.FirstWeight - weighingTransaction.SecondWeight)).ToString("N0") + " KG"));
+                    sw.WriteLine("");
+                    sw.WriteLine("");
+                    sw.WriteLine("");
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 40}", weighingTransaction.CustomerName));
+
+                    for (int i = 1; i < 12; i++)
+                    {
+                        sw.WriteLine("");
+                    }
+
+                    sw.WriteLine(string.Format("{0, 20}", weighingTransaction.WeigherName));
+
                 }
 
                 return fullPath;

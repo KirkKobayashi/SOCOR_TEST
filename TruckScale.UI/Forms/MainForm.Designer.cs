@@ -44,7 +44,6 @@
             tPanelMain = new TableLayoutPanel();
             tPanelTop = new TableLayoutPanel();
             IndicatorPanel = new Panel();
-            label1 = new Label();
             txtIndicator = new TextBox();
             PanelMain = new Panel();
             menuStrip1.SuspendLayout();
@@ -158,7 +157,7 @@
             tPanelMain.Location = new Point(0, 33);
             tPanelMain.Name = "tPanelMain";
             tPanelMain.RowCount = 4;
-            tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 200F));
+            tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 80F));
             tPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
@@ -168,53 +167,46 @@
             // tPanelTop
             // 
             tPanelTop.BackColor = Color.White;
-            tPanelTop.ColumnCount = 2;
-            tPanelTop.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 76.92308F));
-            tPanelTop.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.07692F));
-            tPanelTop.Controls.Add(IndicatorPanel, 1, 0);
+            tPanelTop.CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset;
+            tPanelTop.ColumnCount = 1;
+            tPanelTop.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tPanelTop.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tPanelTop.Controls.Add(IndicatorPanel, 0, 0);
             tPanelTop.Dock = DockStyle.Fill;
             tPanelTop.Location = new Point(5, 0);
             tPanelTop.Margin = new Padding(0);
             tPanelTop.Name = "tPanelTop";
             tPanelTop.RowCount = 1;
             tPanelTop.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tPanelTop.Size = new Size(1562, 200);
+            tPanelTop.Size = new Size(1562, 80);
             tPanelTop.TabIndex = 0;
             // 
             // IndicatorPanel
             // 
-            IndicatorPanel.BackColor = Color.WhiteSmoke;
-            IndicatorPanel.Controls.Add(label1);
+            IndicatorPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            IndicatorPanel.BackColor = Color.FromArgb(56, 56, 56);
             IndicatorPanel.Controls.Add(txtIndicator);
-            IndicatorPanel.Dock = DockStyle.Fill;
-            IndicatorPanel.Location = new Point(1204, 3);
+            IndicatorPanel.Location = new Point(5, 5);
             IndicatorPanel.Name = "IndicatorPanel";
-            IndicatorPanel.Size = new Size(355, 194);
+            IndicatorPanel.Size = new Size(1552, 70);
             IndicatorPanel.TabIndex = 3;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(-1, 17);
-            label1.Name = "label1";
-            label1.Size = new Size(173, 25);
-            label1.TabIndex = 1;
-            label1.Text = "WEIGHT INDICATOR";
             // 
             // txtIndicator
             // 
-            txtIndicator.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtIndicator.BackColor = Color.White;
+            txtIndicator.BackColor = Color.FromArgb(56, 56, 56);
             txtIndicator.BorderStyle = BorderStyle.None;
-            txtIndicator.Font = new Font("Segoe UI", 34F, FontStyle.Regular, GraphicsUnit.Point);
-            txtIndicator.Location = new Point(2, 45);
+            txtIndicator.Dock = DockStyle.Fill;
+            txtIndicator.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
+            txtIndicator.ForeColor = Color.White;
+            txtIndicator.Location = new Point(0, 0);
             txtIndicator.Multiline = true;
             txtIndicator.Name = "txtIndicator";
             txtIndicator.ReadOnly = true;
-            txtIndicator.Size = new Size(353, 97);
+            txtIndicator.Size = new Size(1552, 70);
             txtIndicator.TabIndex = 0;
             txtIndicator.TabStop = false;
-            txtIndicator.TextAlign = HorizontalAlignment.Center;
+            txtIndicator.Text = "NO CONNECTION";
+            txtIndicator.TextAlign = HorizontalAlignment.Right;
             txtIndicator.TextChanged += txtIndicator_TextChanged;
             txtIndicator.DoubleClick += txtIndicator_DoubleClick;
             txtIndicator.Leave += txtIndicator_Leave;
@@ -224,9 +216,9 @@
             PanelMain.BackColor = Color.WhiteSmoke;
             PanelMain.BorderStyle = BorderStyle.Fixed3D;
             PanelMain.Dock = DockStyle.Fill;
-            PanelMain.Location = new Point(8, 203);
+            PanelMain.Location = new Point(8, 83);
             PanelMain.Name = "PanelMain";
-            PanelMain.Size = new Size(1556, 645);
+            PanelMain.Size = new Size(1556, 765);
             PanelMain.TabIndex = 1;
             // 
             // MainForm
@@ -242,6 +234,7 @@
             Text = "Weigh Bridge Application";
             WindowState = FormWindowState.Maximized;
             FormClosing += MainForm_FormClosing;
+            Shown += MainForm_Shown;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             tPanelMain.ResumeLayout(false);
@@ -266,7 +259,6 @@
         private TableLayoutPanel tPanelTop;
         private Panel IndicatorPanel;
         private TextBox txtIndicator;
-        private Label label1;
         private ToolStripMenuItem managementToolStripMenuItem;
         private ToolStripMenuItem toolMenuUser;
         private ToolStripMenuItem productMgtMenu;

@@ -1,21 +1,7 @@
-﻿using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Wordprocessing;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
-using System.Windows.Forms;
-using TruckScale.Library.Data.DBContext;
+﻿using System.Transactions;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
-using TruckScale.Library.Repositories;
 using TruckScale.UI.Forms;
-using TruckScale.UI.HelperClass;
 using Control = System.Windows.Forms.Control;
 
 namespace TruckScale.UI.UserControls
@@ -70,7 +56,7 @@ namespace TruckScale.UI.UserControls
             }
         }
 
-        private void SaveTransaction()
+        private void SaveTransaction(int ticketNumber)
         {
             using (TransactionScope scope = new TransactionScope())
             {
@@ -136,7 +122,7 @@ namespace TruckScale.UI.UserControls
                         SupplierId = supplierId,
                         ProductId = productId,
                         TruckId = truckId,
-                        TicketNumber = Convert.ToInt32(txtTicket.Text)
+                        TicketNumber = ticketNumber
                     };
 
                     if (_newTrans)
@@ -262,6 +248,22 @@ namespace TruckScale.UI.UserControls
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            int ticketNumber;
+            if (!int.TryParse(txtTicket.Text, out ticketNumber))
+            {
+                MessageBox.Show("Invalid ticket number.", "Ticket Number Validation", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                txtTicket.Focus();
+                return;
+            }
+
+            var validTicketNumber = _service.ValidateTicketNumber(ticketNumber);
+
+            if (!validTicketNumber && _newTrans)
+            {
+                MessageBox.Show($"Ticket number - {ticketNumber} has already been used.");
+                return;
+            }
+
             var goodTicket = FormValidation(txtTicket);
             var goodPlate = FormValidation(txtPlateNumber);
             var goodCustomer = FormValidation(cboCustomer);
@@ -280,7 +282,7 @@ namespace TruckScale.UI.UserControls
                     errorProvider.SetError(btnUpdate, "");
                 }
 
-                SaveTransaction();
+                SaveTransaction(ticketNumber);
             }
         }
 

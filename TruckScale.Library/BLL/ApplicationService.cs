@@ -119,6 +119,14 @@ namespace TruckScale.Library.BLL
             }
         }
 
+        public bool ValidateTicketNumber(int ticketnumber)
+        {
+            using (var service = new TransactionRepository(dbContext))
+            {
+                return service.ValidateTicket(ticketnumber);
+            }
+        }
+
         public void InsertTransaction(WeighingTransaction transaction)
         {
             using (var service = new TransactionRepository(dbContext))

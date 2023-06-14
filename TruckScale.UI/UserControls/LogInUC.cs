@@ -1,4 +1,5 @@
-﻿using TruckScale.Library.BLL;
+﻿using Microsoft.Data.SqlClient;
+using TruckScale.Library.BLL;
 using TruckScale.Library.Data.Models;
 using TruckScale.UI.Forms;
 using TruckScale.UI.HelperClass;
@@ -12,15 +13,21 @@ namespace TruckScale.UI.UserControls
 
         public LogInUC(ApplicationService service, MainForm mainForm)
         {
-            InitializeComponent();
+            
             _service = service;
             _mainForm = mainForm;
 
-            SeedWeigher();
+            if (!SeedWeigher())
+            {
+                return; 
+            }
+                
+            
+            InitializeComponent();
             txtUserName.Focus();
         }
 
-        private void SeedWeigher()
+        private bool SeedWeigher()
         {
             Cursor.Current = Cursors.WaitCursor;
             try
@@ -36,10 +43,17 @@ namespace TruckScale.UI.UserControls
                 };
 
                 _service.SeedWeigher(weigher);
+                return true;
+            }
+            catch (SqlException sqlex)
+            {
+                MessageBox.Show($"Could not connect to database. \n\n{sqlex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding admin account \n\n{ex.Message}");
+                MessageBox.Show($"Error adding admin account \n\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
             finally { Cursor.Current = Cursors.Default; }
         }
@@ -98,6 +112,11 @@ namespace TruckScale.UI.UserControls
             {
                 btnLogIn.PerformClick();
             }
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

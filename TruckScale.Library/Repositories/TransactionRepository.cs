@@ -168,5 +168,17 @@ namespace TruckScale.Library.Repositories
             disposed = true;
             GC.SuppressFinalize(this);
         }
+
+        public bool ValidateTicket(int ticketnumber)
+        {
+            var ticket = dbContext.WeighingTransactions.FirstOrDefault(x => x.TicketNumber == ticketnumber);
+
+            if (ticket != null)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

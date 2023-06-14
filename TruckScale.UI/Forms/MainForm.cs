@@ -24,13 +24,13 @@ namespace TruckScale.UI.Forms
             InitializeComponent();
 
             _service = Factory.GetApplicationService();
-            InitializePort();
         }
 
         private void InitializePort()
         {
             try
             {
+                Thread.Sleep(2000);
                 sPort = PortGetter.Get();
                 _sp = new ScalePortCon(sPort);
                 _sp.SerialDataReceieved += _sp_SerialDataReceieved;
@@ -224,6 +224,16 @@ namespace TruckScale.UI.Forms
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void tPanelTop_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            InitializePort();
         }
     }
 }

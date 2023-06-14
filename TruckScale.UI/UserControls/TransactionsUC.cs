@@ -60,6 +60,7 @@ namespace TruckScale.UI.UserControls
 
                 string ticketPath = _appDirectory;
                 string fileName = "Templates\\ScaleTicket.txt";
+
                 var address1 = ConfigurationManager.AppSettings["add1"].ToString();
                 var address2 = ConfigurationManager.AppSettings["add2"].ToString();
                 ScaleTicket st = new ScaleTicket(fileName, ticketPath, address1, address2);
@@ -89,7 +90,7 @@ namespace TruckScale.UI.UserControls
                 var fullPath = st.PrintTicket(flatTrans);
 
                 PrintDocument pd = new PrintDocument();
-                Margins margins= new Margins(5,5,20,20);
+                Margins margins = new Margins(5, 5, 20, 20);
                 pd.DefaultPageSettings.Margins = margins;
                 pd.DocumentName = fullPath;
                 pd.PrintPage += Pd_PrintPage;
