@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             menuStrip1 = new MenuStrip();
             systemToolStripMenuItem = new ToolStripMenuItem();
             stripMenuLogIn = new ToolStripMenuItem();
@@ -228,6 +229,7 @@
             ClientSize = new Size(1572, 909);
             Controls.Add(tPanelMain);
             Controls.Add(menuStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             MinimumSize = new Size(1190, 600);
             Name = "MainForm";
