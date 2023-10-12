@@ -13,7 +13,7 @@ namespace TruckScale.Library.Printing
             this.filePath = filePath;
         }
 
-        public string PrintTicket(FlatWeighingTransaction weighingTransaction)
+        public string PrintTicket(FlatWeighingTransaction weighingTransaction, List<string> ticketHeaders)
         {
             try
             {
@@ -24,34 +24,41 @@ namespace TruckScale.Library.Printing
                     File.Delete(fullPath);
                 }
 
+                var netWeight = Convert.ToInt32(Math.Abs(weighingTransaction.FirstWeight - weighingTransaction.SecondWeight));
+
                 using (StreamWriter sw = File.CreateText(fullPath))
                 {
-                    sw.WriteLine(string.Format("{0, 0}", "Vision 2000 Fedmills Corp."));
-                    sw.WriteLine(string.Format("{0, 0}", "Bagong Pook, Rosario, Batangas."));
+                    sw.WriteLine(string.Format("{0, 0}", ticketHeaders[0]));
+                    sw.WriteLine(string.Format("{0, 0}", ticketHeaders[1]));
                     sw.WriteLine("");
-                    sw.WriteLine(string.Format("{0, 0}", "TRUCK PLATE NUMBER:"));
-                    sw.WriteLine(string.Format("{0, 30}", weighingTransaction.TruckPlateNumber));
-                    sw.WriteLine(string.Format("{0, 0}", "SUPPLIER:"));
-                    sw.WriteLine(string.Format("{0, 30}", weighingTransaction.SupplierName));
-                    sw.WriteLine(string.Format("{0, 0}", "CUSTOMER:"));
-                    sw.WriteLine(string.Format("{0, 30}", weighingTransaction.CustomerName));
-                    sw.WriteLine(string.Format("{0, 0}", "QUANTITY:"));
-                    sw.WriteLine(string.Format("{0, 30}", weighingTransaction.Quantity));
-                    sw.WriteLine(string.Format("{0, 0}", "PRODUCT:"));
-                    sw.WriteLine(string.Format("{0, 30}", weighingTransaction.ProductName));
-                    sw.WriteLine(string.Format("{0, 0}", "WEIGH-IN:"));
-                    sw.WriteLine(string.Format("{0, 30}", weighingTransaction.FirstWeighingDate.ToString("HH:mm MM-dd-yyyy")));
-                    sw.WriteLine(string.Format("{0, 0}", "WEIGH-OUT:"));
-                    sw.WriteLine(string.Format("{0, 30}", weighingTransaction.SecondWeighingDate.ToString("HH:mm MM-dd-yyyy")));
-                    sw.WriteLine(string.Format("{0, 0}", "FIRST WEIGHT:"));
-                    sw.WriteLine(string.Format("{0, 30}", weighingTransaction.FirstWeight + " KG"));
-                    sw.WriteLine(string.Format("{0, 0}", "SECOND WEIGHT:"));
-                    sw.WriteLine(string.Format("{0, 30}", weighingTransaction.SecondWeight + " KG"));
-                    sw.WriteLine(string.Format("{0, 0}", "NET WEIGHT:"));
-                    sw.WriteLine(string.Format("{0, 30}", Convert.ToInt32(Math.Abs(weighingTransaction.FirstWeight - weighingTransaction.SecondWeight)) + " KG"));
-                    sw.WriteLine(string.Format("{0, 0}", "SCALER:"));
-                    sw.WriteLine(string.Format("{0, 30}", weighingTransaction.WeigherName));
+                    sw.WriteLine("");
+                    sw.WriteLine("");
+
+                    sw.WriteLine(string.Format("{0, 0}", $"TRUCK PLATE NUMBER: {weighingTransaction.TruckPlateNumber}"));
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 0}", $"SUPPLIER: { weighingTransaction.SupplierName}"));
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 0}", $"CUSTOMER: {weighingTransaction.CustomerName}"));
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 0}", $"QUANTITY: {weighingTransaction.Quantity}"));
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 0}", $"PRODUCT: {weighingTransaction.ProductName}"));
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 0}", $"WEIGH-IN: {weighingTransaction.FirstWeighingDate.ToString("HH:mm MM-dd-yyyy")}"));
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 0}", $"WEIGH-OUT: {weighingTransaction.SecondWeighingDate.ToString("HH:mm MM-dd-yyyy")}"));
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 0}", $"FIRST WEIGHT:{weighingTransaction.FirstWeight} KG"));
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 0}", $"SECOND WEIGHT: {weighingTransaction.SecondWeight} KG"));
+                    sw.WriteLine("");
+                    sw.WriteLine(string.Format("{0, 0}", $"NET WEIGHT: {netWeight} KG"));
+                    sw.WriteLine("");
                     sw.WriteLine(string.Format("{0, 0}", "CUSTOMER REP:"));
+                    sw.WriteLine(string.Format("{0, 0}",$"SCALER: {weighingTransaction.WeigherName}"));
+                   
+                    sw.WriteLine("");
+                    sw.WriteLine("");
                     sw.WriteLine(string.Format("{0, 0}", "TICKET NUMBER:" + String.Format("{0,10}", weighingTransaction.TicketNumber.ToString("0000000000"))));
                 }
 

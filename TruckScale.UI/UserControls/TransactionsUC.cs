@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Configuration;
+using System.Data;
 using System.Drawing.Printing;
 using TruckScale.Library.BLL;
 using TruckScale.Library.Data.DTOs;
@@ -84,7 +85,7 @@ namespace TruckScale.UI.UserControls
                     TicketNumber = transaction.TicketNumber,
                     WeigherName = $"{transaction.Weigher.FirstName} {transaction.Weigher.LastName}"
                 };
-                var fullPath = st.PrintTicket(flatTrans);
+                var fullPath = st.PrintTicket(flatTrans, ConfigHelper.GetHeaders());
 
                 PrintDocument pd = new PrintDocument();
                 Margins margins= new Margins(5,5,20,20);
@@ -280,6 +281,21 @@ namespace TruckScale.UI.UserControls
         private void btnNew_Click(object sender, EventArgs e)
         {
             _mainForm.ShowWeighing(true, 0);
+        }
+    }
+
+    public static class ConfigHelper
+    {
+        public static List<string> GetHeaders()
+        {
+            var header1 = ConfigurationManager.AppSettings["header1"];
+            var header2 = ConfigurationManager.AppSettings["header2"];
+
+            return new List<string>
+            {
+                header1?? string.Empty,
+                header2?? string.Empty
+            };
         }
     }
 }
