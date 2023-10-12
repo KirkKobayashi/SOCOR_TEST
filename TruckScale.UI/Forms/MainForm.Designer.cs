@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             menuStrip1 = new MenuStrip();
             systemToolStripMenuItem = new ToolStripMenuItem();
             stripMenuLogIn = new ToolStripMenuItem();
@@ -73,26 +74,26 @@
             // stripMenuLogIn
             // 
             stripMenuLogIn.Name = "stripMenuLogIn";
-            stripMenuLogIn.Size = new Size(270, 34);
+            stripMenuLogIn.Size = new Size(179, 34);
             stripMenuLogIn.Text = "Log In";
             stripMenuLogIn.Click += stripMenuLogIn_Click;
             // 
             // logOutToolStripMenuItem
             // 
             logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            logOutToolStripMenuItem.Size = new Size(270, 34);
+            logOutToolStripMenuItem.Size = new Size(179, 34);
             logOutToolStripMenuItem.Text = "Log Out";
             logOutToolStripMenuItem.Click += logOutToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(267, 6);
+            toolStripSeparator1.Size = new Size(176, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(270, 34);
+            exitToolStripMenuItem.Size = new Size(179, 34);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -236,6 +237,7 @@
             ClientSize = new Size(1572, 909);
             Controls.Add(tPanelMain);
             Controls.Add(menuStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             MinimumSize = new Size(1190, 600);
             Name = "MainForm";
