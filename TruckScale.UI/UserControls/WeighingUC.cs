@@ -46,10 +46,12 @@ namespace TruckScale.UI.UserControls
             if (_newTrans)
             {
                 txtTicket.Text = _service.GetTicketNumber().ToString();
+                GetWeight();
             }
             else
             {
                 LoadDetails();
+                GetWeight();
             }
             errorProvider = new ErrorProvider();
 
@@ -291,10 +293,12 @@ namespace TruckScale.UI.UserControls
                 if (_newTrans)
                 {
                     txtFirstWeight.Text = _mainForm.stringWeight;
+                    txtWeighInDate.Text = DateTime.Now.ToString("HH:mm MM/dd/yyyy");
                 }
                 else
                 {
                     txtSecondWeight.Text = _mainForm.stringWeight;
+                    txtWeighOutDate.Text = DateTime.Now.ToString("HH:mm MM/dd/yyyy");
                     txtNetWeight.Text = Math.Abs(Convert.ToInt32(txtFirstWeight.Text) - Convert.ToInt32(txtSecondWeight.Text)).ToString();
                 }
             }

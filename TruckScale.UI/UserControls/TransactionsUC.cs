@@ -88,7 +88,7 @@ namespace TruckScale.UI.UserControls
                 var fullPath = st.PrintTicket(flatTrans, ConfigHelper.GetHeaders());
 
                 PrintDocument pd = new PrintDocument();
-                Margins margins= new Margins(5,5,20,20);
+                Margins margins = new Margins(5, 5, 20, 20);
                 pd.DefaultPageSettings.Margins = margins;
                 pd.DocumentName = fullPath;
                 pd.PrintPage += Pd_PrintPage;

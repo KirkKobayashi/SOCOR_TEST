@@ -71,12 +71,4 @@ namespace TruckScale.Library.Printing
             }
         }
     }
-
-    public class TextFileProps
-    {
-        public string FileName { get; set; }
-        public int FontSize { get; set; }
-        public string FontName { get; set; }
-
-    }
 }

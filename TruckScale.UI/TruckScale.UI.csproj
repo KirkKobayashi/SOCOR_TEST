@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <PackageId />
+    <PackageId>TruckScale_App</PackageId>
     <Title>Truck Scale Application</Title>
     <Authors>Bernard R. Logador II</Authors>
     <Company>Fil-Weighing Scale Co</Company>
@@ -53,6 +53,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="dbwb_script.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Templates\ScaleTicket.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
