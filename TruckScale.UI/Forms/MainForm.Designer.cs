@@ -204,7 +204,6 @@
             txtIndicator.Size = new Size(355, 69);
             txtIndicator.TabIndex = 0;
             txtIndicator.TabStop = false;
-            txtIndicator.Text = "123";
             txtIndicator.TextAlign = HorizontalAlignment.Center;
             txtIndicator.TextChanged += txtIndicator_TextChanged;
             txtIndicator.DoubleClick += txtIndicator_DoubleClick;

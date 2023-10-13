@@ -55,7 +55,6 @@
             label9 = new Label();
             txtPlateNumber = new TextBox();
             txtFirstWeight = new TextBox();
-            btnUpdate = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
             btnClear = new Button();
             btnSave = new Button();
@@ -64,6 +63,7 @@
             txtWeighInDate = new TextBox();
             txtWeighOutDate = new TextBox();
             txtDriver = new TextBox();
+            btnUpdate = new Button();
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
@@ -74,12 +74,12 @@
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 6;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 17.53247F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20.61069F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 32.4675331F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 29.38931F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 32.4675331F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 17.5324669F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 29.38931F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20.6106853F));
             tableLayoutPanel1.Controls.Add(label13, 3, 6);
             tableLayoutPanel1.Controls.Add(txtNetWeight, 2, 13);
             tableLayoutPanel1.Controls.Add(txtSecondWeight, 2, 12);
@@ -104,30 +104,30 @@
             tableLayoutPanel1.Controls.Add(panel1, 0, 0);
             tableLayoutPanel1.Controls.Add(txtPlateNumber, 2, 4);
             tableLayoutPanel1.Controls.Add(txtFirstWeight, 2, 11);
-            tableLayoutPanel1.Controls.Add(btnUpdate, 3, 11);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 4, 14);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 1, 14);
             tableLayoutPanel1.Controls.Add(txtWeighInDate, 4, 11);
             tableLayoutPanel1.Controls.Add(txtWeighOutDate, 4, 12);
             tableLayoutPanel1.Controls.Add(txtDriver, 4, 6);
+            tableLayoutPanel1.Controls.Add(btnUpdate, 3, 11);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 18;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
@@ -138,9 +138,9 @@
             // label13
             // 
             label13.Dock = DockStyle.Fill;
-            label13.Location = new Point(725, 262);
+            label13.Location = new Point(724, 222);
             label13.Name = "label13";
-            label13.Size = new Size(174, 50);
+            label13.Size = new Size(174, 40);
             label13.TabIndex = 26;
             label13.Text = "Driver";
             label13.TextAlign = ContentAlignment.MiddleRight;
@@ -148,11 +148,11 @@
             // txtNetWeight
             // 
             txtNetWeight.Dock = DockStyle.Fill;
-            txtNetWeight.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            txtNetWeight.Location = new Point(373, 555);
+            txtNetWeight.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            txtNetWeight.Location = new Point(406, 465);
             txtNetWeight.Name = "txtNetWeight";
             txtNetWeight.ReadOnly = true;
-            txtNetWeight.Size = new Size(346, 37);
+            txtNetWeight.Size = new Size(312, 31);
             txtNetWeight.TabIndex = 24;
             txtNetWeight.TabStop = false;
             txtNetWeight.TextAlign = HorizontalAlignment.Right;
@@ -160,12 +160,12 @@
             // txtSecondWeight
             // 
             txtSecondWeight.Dock = DockStyle.Fill;
-            txtSecondWeight.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            txtSecondWeight.Location = new Point(373, 505);
+            txtSecondWeight.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            txtSecondWeight.Location = new Point(406, 425);
             txtSecondWeight.MaxLength = 7;
             txtSecondWeight.Name = "txtSecondWeight";
             txtSecondWeight.ReadOnly = true;
-            txtSecondWeight.Size = new Size(346, 37);
+            txtSecondWeight.Size = new Size(312, 31);
             txtSecondWeight.TabIndex = 23;
             txtSecondWeight.TabStop = false;
             txtSecondWeight.TextAlign = HorizontalAlignment.Right;
@@ -176,9 +176,9 @@
             // 
             label12.Dock = DockStyle.Fill;
             label12.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label12.Location = new Point(193, 552);
+            label12.Location = new Point(226, 462);
             label12.Name = "label12";
-            label12.Size = new Size(174, 50);
+            label12.Size = new Size(174, 40);
             label12.TabIndex = 21;
             label12.Text = "NET WEIGHT";
             label12.TextAlign = ContentAlignment.MiddleRight;
@@ -187,9 +187,9 @@
             // 
             label11.Dock = DockStyle.Fill;
             label11.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.Location = new Point(193, 502);
+            label11.Location = new Point(226, 422);
             label11.Name = "label11";
-            label11.Size = new Size(174, 50);
+            label11.Size = new Size(174, 40);
             label11.TabIndex = 20;
             label11.Text = "SECOND WEIGHT";
             label11.TextAlign = ContentAlignment.MiddleRight;
@@ -198,9 +198,9 @@
             // 
             label10.Dock = DockStyle.Fill;
             label10.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.Location = new Point(193, 452);
+            label10.Location = new Point(226, 382);
             label10.Name = "label10";
-            label10.Size = new Size(174, 50);
+            label10.Size = new Size(174, 40);
             label10.TabIndex = 19;
             label10.Text = "FIRST WEIGHT";
             label10.TextAlign = ContentAlignment.MiddleRight;
@@ -208,9 +208,9 @@
             // label8
             // 
             label8.Dock = DockStyle.Fill;
-            label8.Location = new Point(725, 382);
+            label8.Location = new Point(724, 322);
             label8.Name = "label8";
-            label8.Size = new Size(174, 50);
+            label8.Size = new Size(174, 40);
             label8.TabIndex = 16;
             label8.Text = "Quantity";
             label8.TextAlign = ContentAlignment.MiddleRight;
@@ -218,9 +218,9 @@
             // label7
             // 
             label7.Dock = DockStyle.Fill;
-            label7.Location = new Point(725, 162);
+            label7.Location = new Point(724, 142);
             label7.Name = "label7";
-            label7.Size = new Size(174, 50);
+            label7.Size = new Size(174, 40);
             label7.TabIndex = 14;
             label7.Text = "Remarks";
             label7.TextAlign = ContentAlignment.MiddleRight;
@@ -228,9 +228,9 @@
             // label5
             // 
             label5.Dock = DockStyle.Fill;
-            label5.Location = new Point(193, 332);
+            label5.Location = new Point(226, 282);
             label5.Name = "label5";
-            label5.Size = new Size(174, 50);
+            label5.Size = new Size(174, 40);
             label5.TabIndex = 13;
             label5.Text = "Product";
             label5.TextAlign = ContentAlignment.MiddleRight;
@@ -238,9 +238,9 @@
             // label6
             // 
             label6.Dock = DockStyle.Fill;
-            label6.Location = new Point(725, 92);
+            label6.Location = new Point(724, 82);
             label6.Name = "label6";
-            label6.Size = new Size(174, 50);
+            label6.Size = new Size(174, 40);
             label6.TabIndex = 6;
             label6.Text = "Ticket Number";
             label6.TextAlign = ContentAlignment.MiddleRight;
@@ -248,9 +248,9 @@
             // label4
             // 
             label4.Dock = DockStyle.Fill;
-            label4.Location = new Point(193, 262);
+            label4.Location = new Point(226, 222);
             label4.Name = "label4";
-            label4.Size = new Size(174, 50);
+            label4.Size = new Size(174, 40);
             label4.TabIndex = 4;
             label4.Text = "Supplier";
             label4.TextAlign = ContentAlignment.MiddleRight;
@@ -258,9 +258,9 @@
             // label2
             // 
             label2.Dock = DockStyle.Fill;
-            label2.Location = new Point(193, 212);
+            label2.Location = new Point(226, 182);
             label2.Name = "label2";
-            label2.Size = new Size(174, 50);
+            label2.Size = new Size(174, 40);
             label2.TabIndex = 3;
             label2.Text = "Customer";
             label2.TextAlign = ContentAlignment.MiddleRight;
@@ -268,9 +268,9 @@
             // label3
             // 
             label3.Dock = DockStyle.Fill;
-            label3.Location = new Point(193, 162);
+            label3.Location = new Point(226, 142);
             label3.Name = "label3";
-            label3.Size = new Size(174, 50);
+            label3.Size = new Size(174, 40);
             label3.TabIndex = 2;
             label3.Text = "Plate Number";
             label3.TextAlign = ContentAlignment.MiddleRight;
@@ -278,9 +278,9 @@
             // label1
             // 
             label1.Dock = DockStyle.Fill;
-            label1.Location = new Point(193, 92);
+            label1.Location = new Point(226, 82);
             label1.Name = "label1";
-            label1.Size = new Size(174, 50);
+            label1.Size = new Size(174, 40);
             label1.TabIndex = 0;
             label1.Text = "Transaction ID";
             label1.TextAlign = ContentAlignment.MiddleRight;
@@ -290,10 +290,10 @@
             txtId.CharacterCasing = CharacterCasing.Upper;
             txtId.Dock = DockStyle.Fill;
             txtId.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            txtId.Location = new Point(373, 95);
+            txtId.Location = new Point(406, 85);
             txtId.Name = "txtId";
             txtId.ReadOnly = true;
-            txtId.Size = new Size(346, 31);
+            txtId.Size = new Size(312, 31);
             txtId.TabIndex = 7;
             txtId.TabStop = false;
             // 
@@ -301,7 +301,7 @@
             // 
             txtTicket.CharacterCasing = CharacterCasing.Upper;
             txtTicket.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            txtTicket.Location = new Point(905, 95);
+            txtTicket.Location = new Point(904, 85);
             txtTicket.Name = "txtTicket";
             txtTicket.ReadOnly = true;
             txtTicket.Size = new Size(241, 31);
@@ -314,9 +314,9 @@
             cboCustomer.AutoCompleteSource = AutoCompleteSource.ListItems;
             cboCustomer.Dock = DockStyle.Fill;
             cboCustomer.FormattingEnabled = true;
-            cboCustomer.Location = new Point(373, 215);
+            cboCustomer.Location = new Point(406, 185);
             cboCustomer.Name = "cboCustomer";
-            cboCustomer.Size = new Size(346, 29);
+            cboCustomer.Size = new Size(312, 29);
             cboCustomer.TabIndex = 2;
             // 
             // cboSupplier
@@ -325,9 +325,9 @@
             cboSupplier.AutoCompleteSource = AutoCompleteSource.ListItems;
             cboSupplier.Dock = DockStyle.Fill;
             cboSupplier.FormattingEnabled = true;
-            cboSupplier.Location = new Point(373, 265);
+            cboSupplier.Location = new Point(406, 225);
             cboSupplier.Name = "cboSupplier";
-            cboSupplier.Size = new Size(346, 29);
+            cboSupplier.Size = new Size(312, 29);
             cboSupplier.TabIndex = 3;
             // 
             // cboProduct
@@ -337,24 +337,24 @@
             tableLayoutPanel1.SetColumnSpan(cboProduct, 3);
             cboProduct.Dock = DockStyle.Fill;
             cboProduct.FormattingEnabled = true;
-            cboProduct.Location = new Point(373, 335);
+            cboProduct.Location = new Point(406, 285);
             cboProduct.Name = "cboProduct";
-            cboProduct.Size = new Size(878, 29);
+            cboProduct.Size = new Size(810, 29);
             cboProduct.TabIndex = 6;
             // 
             // txtRemarks
             // 
             txtRemarks.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtRemarks.Location = new Point(905, 165);
+            txtRemarks.Location = new Point(904, 145);
             txtRemarks.Multiline = true;
             txtRemarks.Name = "txtRemarks";
             tableLayoutPanel1.SetRowSpan(txtRemarks, 2);
-            txtRemarks.Size = new Size(346, 79);
+            txtRemarks.Size = new Size(312, 74);
             txtRemarks.TabIndex = 4;
             // 
             // txtQuantity
             // 
-            txtQuantity.Location = new Point(905, 385);
+            txtQuantity.Location = new Point(904, 325);
             txtQuantity.Name = "txtQuantity";
             txtQuantity.Size = new Size(241, 29);
             txtQuantity.TabIndex = 7;
@@ -403,39 +403,26 @@
             txtPlateNumber.CharacterCasing = CharacterCasing.Upper;
             txtPlateNumber.Dock = DockStyle.Fill;
             txtPlateNumber.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            txtPlateNumber.Location = new Point(373, 165);
+            txtPlateNumber.Location = new Point(406, 145);
             txtPlateNumber.Name = "txtPlateNumber";
-            txtPlateNumber.Size = new Size(346, 31);
+            txtPlateNumber.Size = new Size(312, 31);
             txtPlateNumber.TabIndex = 1;
             // 
             // txtFirstWeight
             // 
             txtFirstWeight.Dock = DockStyle.Fill;
-            txtFirstWeight.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            txtFirstWeight.Location = new Point(373, 455);
+            txtFirstWeight.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            txtFirstWeight.Location = new Point(406, 385);
             txtFirstWeight.MaxLength = 7;
             txtFirstWeight.Name = "txtFirstWeight";
             txtFirstWeight.ReadOnly = true;
-            txtFirstWeight.Size = new Size(346, 37);
+            txtFirstWeight.Size = new Size(312, 31);
             txtFirstWeight.TabIndex = 22;
             txtFirstWeight.TabStop = false;
             txtFirstWeight.TextAlign = HorizontalAlignment.Right;
             txtFirstWeight.DoubleClick += txtFirstWeight_DoubleClick;
             txtFirstWeight.KeyPress += txtFirstWeight_KeyPress;
             txtFirstWeight.Leave += txtFirstWeight_Leave;
-            // 
-            // btnUpdate
-            // 
-            btnUpdate.BackColor = Color.FromArgb(74, 214, 109);
-            btnUpdate.FlatAppearance.BorderColor = Color.FromArgb(233, 236, 239);
-            btnUpdate.FlatStyle = FlatStyle.Flat;
-            btnUpdate.Location = new Point(725, 455);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(130, 32);
-            btnUpdate.TabIndex = 8;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = false;
-            btnUpdate.Click += btnUpdate_Click;
             // 
             // tableLayoutPanel2
             // 
@@ -445,7 +432,7 @@
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 62.5F));
             tableLayoutPanel2.Controls.Add(btnClear, 0, 1);
             tableLayoutPanel2.Controls.Add(btnSave, 1, 1);
-            tableLayoutPanel2.Location = new Point(1011, 605);
+            tableLayoutPanel2.Location = new Point(976, 505);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 2;
             tableLayoutPanel1.SetRowSpan(tableLayoutPanel2, 2);
@@ -489,7 +476,7 @@
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15.97938F));
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 84.02062F));
             tableLayoutPanel3.Controls.Add(btnClose, 1, 1);
-            tableLayoutPanel3.Location = new Point(193, 605);
+            tableLayoutPanel3.Location = new Point(226, 505);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel1.SetRowSpan(tableLayoutPanel3, 2);
@@ -516,27 +503,40 @@
             // txtWeighInDate
             // 
             txtWeighInDate.Dock = DockStyle.Fill;
-            txtWeighInDate.Location = new Point(905, 455);
+            txtWeighInDate.Location = new Point(904, 385);
             txtWeighInDate.Name = "txtWeighInDate";
             txtWeighInDate.ReadOnly = true;
-            txtWeighInDate.Size = new Size(346, 29);
+            txtWeighInDate.Size = new Size(312, 29);
             txtWeighInDate.TabIndex = 30;
             // 
             // txtWeighOutDate
             // 
             txtWeighOutDate.Dock = DockStyle.Fill;
-            txtWeighOutDate.Location = new Point(905, 505);
+            txtWeighOutDate.Location = new Point(904, 425);
             txtWeighOutDate.Name = "txtWeighOutDate";
             txtWeighOutDate.ReadOnly = true;
-            txtWeighOutDate.Size = new Size(346, 29);
+            txtWeighOutDate.Size = new Size(312, 29);
             txtWeighOutDate.TabIndex = 31;
             // 
             // txtDriver
             // 
-            txtDriver.Location = new Point(905, 265);
+            txtDriver.Location = new Point(904, 225);
             txtDriver.Name = "txtDriver";
             txtDriver.Size = new Size(241, 29);
             txtDriver.TabIndex = 5;
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.BackColor = Color.FromArgb(74, 214, 109);
+            btnUpdate.FlatAppearance.BorderColor = Color.FromArgb(233, 236, 239);
+            btnUpdate.FlatStyle = FlatStyle.Flat;
+            btnUpdate.Location = new Point(724, 385);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(130, 34);
+            btnUpdate.TabIndex = 8;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // WeighingUC
             // 
