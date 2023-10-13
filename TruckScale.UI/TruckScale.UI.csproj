@@ -17,6 +17,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\truck.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\truck.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Screen Icon.ico" />
   </ItemGroup>
 
@@ -43,6 +50,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -55,6 +67,10 @@
   <ItemGroup>
     <None Update="dbwb_script.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Update="Templates\ScaleTicket.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

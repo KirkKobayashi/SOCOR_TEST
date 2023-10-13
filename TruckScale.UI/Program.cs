@@ -25,6 +25,8 @@ namespace TruckScale.UI
                 options.UseSqlServer(conString)
             );
 
+
+
             Application.Run(new MainForm());
         }
     }

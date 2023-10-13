@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            TitleLabel = new Label();
             btnAdd = new Button();
             dgvRecords = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
@@ -39,11 +41,9 @@
             btnSave = new Button();
             txtName = new TextBox();
             label1 = new Label();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            TitleLabel = new Label();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvRecords).BeginInit();
             tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvRecords).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -52,9 +52,38 @@
             panel1.Controls.Add(tableLayoutPanel1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1277, 50);
+            panel1.Size = new Size(1045, 38);
             panel1.TabIndex = 14;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.Controls.Add(TitleLabel, 1, 0);
+            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Margin = new Padding(1);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new Size(1045, 38);
+            tableLayoutPanel1.TabIndex = 0;
+            // 
+            // TitleLabel
+            // 
+            TitleLabel.Dock = DockStyle.Fill;
+            TitleLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            TitleLabel.ForeColor = Color.WhiteSmoke;
+            TitleLabel.Location = new Point(350, 0);
+            TitleLabel.Margin = new Padding(2, 0, 2, 0);
+            TitleLabel.Name = "TitleLabel";
+            TitleLabel.Size = new Size(344, 38);
+            TitleLabel.TabIndex = 0;
+            TitleLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnAdd
             // 
@@ -63,9 +92,10 @@
             btnAdd.FlatStyle = FlatStyle.Flat;
             btnAdd.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnAdd.ForeColor = Color.WhiteSmoke;
-            btnAdd.Location = new Point(22, 56);
+            btnAdd.Location = new Point(18, 42);
+            btnAdd.Margin = new Padding(2);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(112, 44);
+            btnAdd.Size = new Size(92, 33);
             btnAdd.TabIndex = 13;
             btnAdd.Text = "New";
             btnAdd.TextAlign = ContentAlignment.MiddleLeft;
@@ -78,11 +108,12 @@
             dgvRecords.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvRecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRecords.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, edit, delete });
-            dgvRecords.Location = new Point(22, 165);
+            dgvRecords.Location = new Point(18, 124);
+            dgvRecords.Margin = new Padding(2);
             dgvRecords.Name = "dgvRecords";
             dgvRecords.RowHeadersWidth = 62;
             dgvRecords.RowTemplate.Height = 33;
-            dgvRecords.Size = new Size(1235, 472);
+            dgvRecords.Size = new Size(1010, 354);
             dgvRecords.TabIndex = 12;
             // 
             // Column1
@@ -125,9 +156,10 @@
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnCancel.ForeColor = Color.WhiteSmoke;
-            btnCancel.Location = new Point(22, 643);
+            btnCancel.Location = new Point(18, 482);
+            btnCancel.Margin = new Padding(2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(112, 44);
+            btnCancel.Size = new Size(92, 33);
             btnCancel.TabIndex = 11;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = false;
@@ -140,9 +172,10 @@
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnSave.ForeColor = Color.WhiteSmoke;
-            btnSave.Location = new Point(1145, 643);
+            btnSave.Location = new Point(937, 482);
+            btnSave.Margin = new Padding(2);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(112, 44);
+            btnSave.Size = new Size(92, 33);
             btnSave.TabIndex = 10;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = false;
@@ -150,52 +183,27 @@
             // txtName
             // 
             txtName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtName.Location = new Point(99, 125);
+            txtName.Location = new Point(81, 94);
+            txtName.Margin = new Padding(2);
             txtName.Name = "txtName";
             txtName.ReadOnly = true;
-            txtName.Size = new Size(488, 34);
+            txtName.Size = new Size(400, 29);
             txtName.TabIndex = 9;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.ForeColor = Color.DimGray;
-            label1.Location = new Point(22, 128);
+            label1.Location = new Point(18, 96);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(64, 28);
+            label1.Size = new Size(52, 21);
             label1.TabIndex = 8;
             label1.Text = "Name";
             // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.Controls.Add(TitleLabel, 1, 0);
-            tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Margin = new Padding(1);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(1277, 50);
-            tableLayoutPanel1.TabIndex = 0;
-            // 
-            // TitleLabel
-            // 
-            TitleLabel.Dock = DockStyle.Fill;
-            TitleLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            TitleLabel.ForeColor = Color.WhiteSmoke;
-            TitleLabel.Location = new Point(428, 0);
-            TitleLabel.Name = "TitleLabel";
-            TitleLabel.Size = new Size(419, 50);
-            TitleLabel.TabIndex = 0;
-            TitleLabel.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // CustomerCrudUC
             // 
-            AutoScaleDimensions = new SizeF(11F, 28F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel1);
             Controls.Add(btnAdd);
@@ -204,12 +212,13 @@
             Controls.Add(btnSave);
             Controls.Add(txtName);
             Controls.Add(label1);
-            Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            Margin = new Padding(2);
             Name = "CustomerCrudUC";
-            Size = new Size(1277, 723);
+            Size = new Size(1045, 542);
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvRecords).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvRecords).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

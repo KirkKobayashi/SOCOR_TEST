@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionsUC));
             tableLayoutPanel1 = new TableLayoutPanel();
             dgvTransactions = new DataGridView();
@@ -61,8 +61,8 @@
             // 
             tableLayoutPanel1.ColumnCount = 3;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 360F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 87.5F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12.5F));
             tableLayoutPanel1.Controls.Add(dgvTransactions, 0, 2);
             tableLayoutPanel1.Controls.Add(panel1, 0, 0);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 1);
@@ -82,8 +82,8 @@
             // 
             dgvTransactions.AllowUserToAddRows = false;
             dgvTransactions.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(224, 224, 224);
-            dgvTransactions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(224, 224, 224);
+            dgvTransactions.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             dgvTransactions.BorderStyle = BorderStyle.None;
             dgvTransactions.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvTransactions.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
@@ -122,7 +122,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label9.ForeColor = Color.FromArgb(248, 249, 250);
-            label9.Location = new Point(785, 5);
+            label9.Location = new Point(785, 2);
             label9.Name = "label9";
             label9.Size = new Size(235, 32);
             label9.TabIndex = 1;
@@ -212,7 +212,7 @@
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 71.42857F));
-            tableLayoutPanel3.Size = new Size(986, 120);
+            tableLayoutPanel3.Size = new Size(1236, 120);
             tableLayoutPanel3.TabIndex = 3;
             // 
             // tableLayoutPanel4
@@ -221,7 +221,7 @@
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 135F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 135F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 135F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 135F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 135F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel4.Controls.Add(btnDelete, 4, 2);
@@ -236,7 +236,7 @@
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tableLayoutPanel4.Size = new Size(962, 114);
+            tableLayoutPanel4.Size = new Size(1212, 114);
             tableLayoutPanel4.TabIndex = 4;
             // 
             // btnDelete
@@ -248,7 +248,7 @@
             btnDelete.ImageAlign = ContentAlignment.MiddleLeft;
             btnDelete.ImageIndex = 3;
             btnDelete.ImageList = imageList1;
-            btnDelete.Location = new Point(543, 67);
+            btnDelete.Location = new Point(458, 67);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(129, 44);
             btnDelete.TabIndex = 3;

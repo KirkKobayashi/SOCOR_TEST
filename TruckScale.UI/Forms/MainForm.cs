@@ -24,6 +24,19 @@ namespace TruckScale.UI.Forms
 
             _service = Factory.GetApplicationService();
             InitializePort();
+            InitializeUpdateDirectory();
+        }
+
+        private void InitializeUpdateDirectory()
+        {
+            try
+            {
+                UpdateDirectoryHelper.CreateDirectory();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occured while creating update directory. \n\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void InitializePort()
@@ -37,7 +50,7 @@ namespace TruckScale.UI.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error opening serial port \n\n{ex.Message}");
+                MessageBox.Show($"Error opening serial port \n\n{ex.Message}", "Port Initialize", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
