@@ -6,6 +6,7 @@ using TruckScale.Library.Data.DTOs;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Printing;
 using TruckScale.UI.Forms;
+using TruckScale.UI.HelperClass;
 using Font = System.Drawing.Font;
 
 namespace TruckScale.UI.UserControls
@@ -19,6 +20,7 @@ namespace TruckScale.UI.UserControls
         private StreamReader reader;
         private List<WeighingTransaction> _transactions;
         private string _appDirectory;
+        private PrintDocument pdoc = null;
 
         public TransactionsUC(ApplicationService service, MainForm mainForm)
         {
@@ -217,7 +219,8 @@ namespace TruckScale.UI.UserControls
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            PrintScaleTicket();
+            //PrintScaleTicket();
+            Print();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -283,5 +286,30 @@ namespace TruckScale.UI.UserControls
         {
             _mainForm.ShowWeighing(true, 0);
         }
+
+        public void Print()
+        {
+            var toprint = new FlatWeighingTransaction
+            {
+                FirstWeight = 50000,
+                SecondWeighingDate = DateTime.Now,
+                FirstWeighingDate = DateTime.Now,
+                SecondWeight = 30000,
+                NetWeight = 20000,
+                CustomerName = "Customer",
+                SupplierName = "sjnasjkldnbaslkjndlkajsndand",
+                ProductName = "aaskljndlakjsndlkajsndlkjnasdlkjnalksdjnaslkdjna",
+                Remarks = "oioiasmfnmoieuhwqerfqnf813907581unc r1u83u4rcn14-89ru1dd-48uyr x81n9-83ur1",
+                Quantity = "10000 bags",
+                TicketNumber = 1234567,
+                TruckPlateNumber = "AAA 111",
+                WeigherName = "kAMOTE"
+            };
+
+            var printer = new TicketPrinter(toprint, new PrintSettings { HeaderText1 = "Bataan 2020 Inc.", HeaderText2 = "Address"});
+            printer.Print();
+        }
+
     }
 }
+ 
