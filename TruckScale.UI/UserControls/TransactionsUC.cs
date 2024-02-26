@@ -7,7 +7,6 @@ using TruckScale.Library.Data.Models;
 using TruckScale.Library.Printing;
 using TruckScale.UI.Forms;
 using TruckScale.UI.HelperClass;
-using Font = System.Drawing.Font;
 
 namespace TruckScale.UI.UserControls
 {
@@ -20,7 +19,6 @@ namespace TruckScale.UI.UserControls
         private StreamReader reader;
         private List<WeighingTransaction> _transactions;
         private string _appDirectory;
-        private PrintDocument pdoc = null;
 
         public TransactionsUC(ApplicationService service, MainForm mainForm)
         {
@@ -219,8 +217,19 @@ namespace TruckScale.UI.UserControls
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            //PrintScaleTicket();
-            Print();
+            try
+            {
+                var transaction = _service.GetTransaction(transactionId);
+                var toprint = TransactionMiscClass.ConvertToDTO(transaction);
+                var settings = SettingsGetter.GetPrintSettings();
+
+                var printer = new TicketPrinter(toprint, settings);
+                printer.Print();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occured while printing the scale ticket \n\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -286,25 +295,6 @@ namespace TruckScale.UI.UserControls
         {
             _mainForm.ShowWeighing(true, 0);
         }
-
-        public void Print()
-        {
-            try
-            {
-                var transaction = _service.GetTransaction(transactionId);
-                var toprint = TransactionMiscClass.ConvertToDTO(transaction);
-                var settings = SettingsGetter.GetPrintSettings();
-
-                var printer = new TicketPrinter(toprint, settings);
-                printer.Print();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
     }
 
     public static class TransactionMiscClass 
