@@ -58,9 +58,9 @@
             btnClose = new Button();
             btnSave = new Button();
             panel3 = new Panel();
+            label15 = new Label();
             label9 = new Label();
             label14 = new Label();
-            label15 = new Label();
             panel3.SuspendLayout();
             SuspendLayout();
             // 
@@ -269,7 +269,7 @@
             cboCustomer.Margin = new Padding(2);
             cboCustomer.Name = "cboCustomer";
             cboCustomer.Size = new Size(587, 23);
-            cboCustomer.TabIndex = 2;
+            cboCustomer.TabIndex = 3;
             // 
             // cboSupplier
             // 
@@ -281,7 +281,7 @@
             cboSupplier.Margin = new Padding(2);
             cboSupplier.Name = "cboSupplier";
             cboSupplier.Size = new Size(587, 23);
-            cboSupplier.TabIndex = 3;
+            cboSupplier.TabIndex = 4;
             // 
             // cboProduct
             // 
@@ -293,7 +293,7 @@
             cboProduct.Margin = new Padding(2);
             cboProduct.Name = "cboProduct";
             cboProduct.Size = new Size(587, 23);
-            cboProduct.TabIndex = 6;
+            cboProduct.TabIndex = 5;
             // 
             // txtRemarks
             // 
@@ -303,7 +303,7 @@
             txtRemarks.Multiline = true;
             txtRemarks.Name = "txtRemarks";
             txtRemarks.Size = new Size(189, 66);
-            txtRemarks.TabIndex = 4;
+            txtRemarks.TabIndex = 7;
             // 
             // txtQuantity
             // 
@@ -312,7 +312,7 @@
             txtQuantity.Margin = new Padding(2);
             txtQuantity.Name = "txtQuantity";
             txtQuantity.Size = new Size(289, 23);
-            txtQuantity.TabIndex = 7;
+            txtQuantity.TabIndex = 6;
             // 
             // txtPlateNumber
             // 
@@ -365,7 +365,7 @@
             txtDriver.Margin = new Padding(2);
             txtDriver.Name = "txtDriver";
             txtDriver.Size = new Size(189, 23);
-            txtDriver.TabIndex = 5;
+            txtDriver.TabIndex = 2;
             // 
             // txtWeighInDate
             // 
@@ -400,7 +400,7 @@
             btnClose.Margin = new Padding(2);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(67, 38);
-            btnClose.TabIndex = 12;
+            btnClose.TabIndex = 10;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = false;
             btnClose.Click += btnClose_Click;
@@ -416,7 +416,7 @@
             btnSave.Margin = new Padding(2);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(86, 38);
-            btnSave.TabIndex = 10;
+            btnSave.TabIndex = 9;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
@@ -430,6 +430,18 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(748, 30);
             panel3.TabIndex = 1;
+            // 
+            // label15
+            // 
+            label15.Dock = DockStyle.Top;
+            label15.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label15.ForeColor = Color.White;
+            label15.Location = new Point(0, 0);
+            label15.Name = "label15";
+            label15.Size = new Size(748, 30);
+            label15.TabIndex = 0;
+            label15.Text = "Weighing Transaction";
+            label15.TextAlign = ContentAlignment.TopCenter;
             // 
             // label9
             // 
@@ -453,23 +465,11 @@
             label14.TabIndex = 33;
             label14.Text = "Weigh Out";
             // 
-            // label15
-            // 
-            label15.Dock = DockStyle.Top;
-            label15.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label15.ForeColor = Color.White;
-            label15.Location = new Point(0, 0);
-            label15.Name = "label15";
-            label15.Size = new Size(748, 30);
-            label15.TabIndex = 0;
-            label15.Text = "Weighing Transaction";
-            label15.TextAlign = ContentAlignment.TopCenter;
-            // 
             // WeighingUC
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
+            BackColor = Color.Gainsboro;
             Controls.Add(label14);
             Controls.Add(label9);
             Controls.Add(btnClose);
