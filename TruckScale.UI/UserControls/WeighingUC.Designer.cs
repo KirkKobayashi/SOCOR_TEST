@@ -74,6 +74,7 @@
             label13.Size = new Size(38, 15);
             label13.TabIndex = 26;
             label13.Text = "Driver";
+            label13.Visible = false;
             // 
             // txtNetWeight
             // 
@@ -366,6 +367,7 @@
             txtDriver.Name = "txtDriver";
             txtDriver.Size = new Size(189, 23);
             txtDriver.TabIndex = 2;
+            txtDriver.Visible = false;
             // 
             // txtWeighInDate
             // 

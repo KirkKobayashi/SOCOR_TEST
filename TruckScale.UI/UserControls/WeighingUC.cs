@@ -46,6 +46,7 @@ namespace TruckScale.UI.UserControls
             if (_newTrans)
             {
                 txtTicket.Text = _service.GetTicketNumber().ToString();
+                txtWeighInDate.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
             }
             else
             {
@@ -251,7 +252,7 @@ namespace TruckScale.UI.UserControls
                 txtQuantity.Text = _transaction.Quantity;
                 txtDriver.Text = _transaction.Driver;
                 txtWeighInDate.Text = _transaction.FirstWeightDate.ToString("MM/dd/yyyy HH:mm");
-                txtWeighOutDate.Text = _transaction.SecondWeight > 0 ? _transaction.SecondWeightDate.ToString("MM/dd/yyyy HH:mm") : string.Empty;
+                txtWeighOutDate.Text = _transaction.SecondWeight > 0 ? _transaction.SecondWeightDate.ToString("MM/dd/yyyy HH:mm") : DateTime.Now.ToString("MM/dd/yyyy HH:mm");
             }
         }
 

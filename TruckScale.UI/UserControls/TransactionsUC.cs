@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Drawing.Printing;
+using System.Windows.Forms;
 using TruckScale.Library.BLL;
 using TruckScale.Library.Data.DTOs;
 using TruckScale.Library.Data.Models;
@@ -19,6 +20,7 @@ namespace TruckScale.UI.UserControls
         private StreamReader reader;
         private List<WeighingTransaction> _transactions;
         private string _appDirectory;
+        DataTable dt;
 
         public TransactionsUC(ApplicationService service, MainForm mainForm)
         {
@@ -49,98 +51,6 @@ namespace TruckScale.UI.UserControls
             }
         }
 
-        public void PrintScaleTicket()
-        {
-            try
-            {
-                if (transactionId == 0)
-                {
-                    return;
-                }
-
-                string ticketPath = _appDirectory;
-                string fileName = "Templates\\ScaleTicket.txt";
-                var address1 = ConfigurationManager.AppSettings["add1"].ToString();
-                var address2 = ConfigurationManager.AppSettings["add2"].ToString();
-                ScaleTicket st = new ScaleTicket(fileName, ticketPath, address1, address2);
-
-
-                var transaction = _service.GetTransaction(transactionId);
-
-                if (transaction == null)
-                {
-                    return;
-                }
-
-                var flatTrans = new FlatWeighingTransaction
-                {
-                    TruckPlateNumber = transaction.Truck.PlateNumber,
-                    CustomerName = transaction.Customer.Name,
-                    SupplierName = transaction.Supplier.Name,
-                    FirstWeighingDate = transaction.FirstWeightDate,
-                    SecondWeighingDate = transaction.SecondWeightDate,
-                    FirstWeight = transaction.FirstWeight,
-                    SecondWeight = transaction.SecondWeight,
-                    ProductName = transaction.Product.Name,
-                    Quantity = transaction.Quantity,
-                    TicketNumber = transaction.TicketNumber,
-                    WeigherName = $"{transaction.Weigher.FirstName} {transaction.Weigher.LastName}"
-                };
-                var fullPath = st.PrintTicket(flatTrans);
-
-                PrintDocument pd = new PrintDocument();
-                Margins margins = new Margins(5, 5, 20, 20);
-                pd.DefaultPageSettings.Margins = margins;
-                pd.DocumentName = fullPath;
-                pd.PrintPage += Pd_PrintPage;
-                reader = new StreamReader(fullPath);
-
-                PrintPreviewDialog ppd = new PrintPreviewDialog();
-                ppd.Document = pd;
-                pd.Print();
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ticket printing error\n\n{ex.Message}", "Truck Scale Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void Pd_PrintPage(object sender, PrintPageEventArgs ppeArgs)
-        {
-            System.Drawing.Font verdana10Font = new Font("Verdana", 8);
-            //Get the Graphics object  
-            Graphics g = ppeArgs.Graphics;
-            float linesPerPage = 0;
-            float yPos = 0;
-            int count = 0;
-            //Read margins from PrintPageEventArgs  
-            float leftMargin = ppeArgs.MarginBounds.Left;
-            float topMargin = ppeArgs.MarginBounds.Top;
-            string line = null;
-            //Calculate the lines per page on the basis of the height of the page and the height of the font  
-            linesPerPage = ppeArgs.MarginBounds.Height / verdana10Font.GetHeight(g);
-            //Now read lines one by one, using StreamReader  
-            while (count < linesPerPage && ((line = reader.ReadLine()) != null))
-            {
-                //Calculate the starting position  
-                yPos = topMargin + (count * verdana10Font.GetHeight(g));
-                //Draw text  
-                g.DrawString(line, verdana10Font, Brushes.Black, leftMargin, yPos, new StringFormat());
-                //Move to next line  
-                count++;
-            }
-            //If PrintPageEventArgs has more pages to print  
-            if (line != null)
-            {
-                ppeArgs.HasMorePages = true;
-            }
-            else
-            {
-                ppeArgs.HasMorePages = false;
-            }
-        }
-
         private void GetRecords()
         {
             try
@@ -150,7 +60,7 @@ namespace TruckScale.UI.UserControls
                 _transactions = _service.GetTransactionsByDate(startdate, enddate);
 
 
-                DataTable dt = new DataTable();
+                dt = new DataTable();
                 dt.Columns.Add("Id", typeof(int));
                 dt.Columns.Add("Plate Number", typeof(string));
                 dt.Columns.Add("Customer", typeof(string));
@@ -295,33 +205,65 @@ namespace TruckScale.UI.UserControls
         {
             _mainForm.ShowWeighing(true, 0);
         }
-    }
 
-    public static class TransactionMiscClass 
-    {
-        public static FlatWeighingTransaction ConvertToDTO(WeighingTransaction transaction)
+        private void panel3_Paint(object sender, PaintEventArgs e)
         {
-            if (transaction != null)
-            {
-                return new FlatWeighingTransaction
-                {
-                    FirstWeight = transaction.FirstWeight,
-                    SecondWeighingDate = transaction.SecondWeightDate,
-                    FirstWeighingDate = transaction.FirstWeightDate,
-                    SecondWeight = transaction.SecondWeight,
-                    CustomerName = transaction.Customer?.Name ?? string.Empty,
-                    SupplierName = transaction.Supplier?.Name ?? string.Empty,
-                    ProductName = transaction.Product.Name ?? string.Empty,
-                    Remarks = transaction.Remarks ?? string.Empty,
-                    Quantity = transaction.Quantity ?? string.Empty,
-                    TicketNumber = transaction.TicketNumber,
-                    TruckPlateNumber = transaction.Truck.PlateNumber,
-                    WeigherName = transaction.Weigher.UserName
-                };
-            }
 
-            return new FlatWeighingTransaction();
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string searchString = txtSearch.Text.Trim();
+
+                // Filter the DataTable rows based on the search term in the "Name" column
+                var filteredRows = dt.AsEnumerable()
+                    .Where(row => row.Field<string>("Plate Number").ToLower().Contains(searchString.ToLower()));
+
+                // Create a new DataTable with the filtered rows
+                DataTable filteredDataTable = filteredRows.Any() ? filteredRows.CopyToDataTable() : dt.Clone();
+
+                // Bind the filtered DataTable to the DataGridView
+                dgvTransactions.DataSource = filteredDataTable;
+            }
+        }
+
+        private void txtSearch_Click(object sender, EventArgs e)
+        {
+            txtSearch.SelectAll();
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            txtSearch.Text = "Plate Number";
+        }
+
+        public static class TransactionMiscClass
+        {
+            public static FlatWeighingTransaction ConvertToDTO(WeighingTransaction transaction)
+            {
+                if (transaction != null)
+                {
+                    return new FlatWeighingTransaction
+                    {
+                        FirstWeight = transaction.FirstWeight,
+                        SecondWeighingDate = transaction.SecondWeightDate,
+                        FirstWeighingDate = transaction.FirstWeightDate,
+                        SecondWeight = transaction.SecondWeight,
+                        CustomerName = transaction.Customer?.Name ?? string.Empty,
+                        SupplierName = transaction.Supplier?.Name ?? string.Empty,
+                        ProductName = transaction.Product.Name ?? string.Empty,
+                        Remarks = transaction.Remarks ?? string.Empty,
+                        Quantity = transaction.Quantity ?? string.Empty,
+                        TicketNumber = transaction.TicketNumber,
+                        TruckPlateNumber = transaction.Truck.PlateNumber,
+                        WeigherName = transaction.Weigher.UserName
+                    };
+                }
+
+                return new FlatWeighingTransaction();
+            }
         }
     }
-
 }
