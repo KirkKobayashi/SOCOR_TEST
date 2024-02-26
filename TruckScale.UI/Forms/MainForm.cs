@@ -31,7 +31,7 @@ namespace TruckScale.UI.Forms
         {
             try
             {
-                sPort = PortGetter.Get();
+                sPort = SettingsGetter.Get();
                 _sp = new ScalePortCon(sPort);
                 _sp.SerialDataReceieved += _sp_SerialDataReceieved;
                 _sp.OpenPort();

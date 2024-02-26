@@ -47,9 +47,9 @@ namespace TruckScale.UI.HelperClass
             e.PageSettings.PaperSize = new PaperSize("Custom", 400, 550);
             Graphics graphics = e.Graphics;
             
-            int startX = 10;
-            int startY = 10;
-            int Offset = 30;
+            int startX = _settings.startX;
+            int startY = _settings.startY;
+            int Offset = _settings.yOffset;
 
             SizeF title1Size = (graphics.MeasureString(_settings.HeaderText1, new Font(_settings.HeaderFont, _settings.HeaderFontHeight)));
 
@@ -218,9 +218,5 @@ namespace TruckScale.UI.HelperClass
                   new Font(bodyFont, bodySize, FontStyle.Bold),
                   new SolidBrush(Color.Black), startX + 120, startY + Offset);
         }
-
-
     }
-    
-    
 }

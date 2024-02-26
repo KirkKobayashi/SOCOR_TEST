@@ -289,27 +289,49 @@ namespace TruckScale.UI.UserControls
 
         public void Print()
         {
-            var toprint = new FlatWeighingTransaction
+            try
             {
-                FirstWeight = 50000,
-                SecondWeighingDate = DateTime.Now,
-                FirstWeighingDate = DateTime.Now,
-                SecondWeight = 30000,
-                NetWeight = 20000,
-                CustomerName = "Customer",
-                SupplierName = "sjnasjkldnbaslkjndlkajsndand",
-                ProductName = "aaskljndlakjsndlkajsndlkjnasdlkjnalksdjnaslkdjna",
-                Remarks = "oioiasmfnmoieuhwqerfqnf813907581unc r1u83u4rcn14-89ru1dd-48uyr x81n9-83ur1",
-                Quantity = "10000 bags",
-                TicketNumber = 1234567,
-                TruckPlateNumber = "AAA 111",
-                WeigherName = "kAMOTE"
-            };
+                var transaction = _service.GetTransaction(transactionId);
+                var toprint = TransactionMiscClass.ConvertToDTO(transaction);
+                var settings = SettingsGetter.GetPrintSettings();
 
-            var printer = new TicketPrinter(toprint, new PrintSettings { HeaderText1 = "Bataan 2020 Inc.", HeaderText2 = "Address"});
-            printer.Print();
+                var printer = new TicketPrinter(toprint, settings);
+                printer.Print();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
     }
+
+    public static class TransactionMiscClass 
+    {
+        public static FlatWeighingTransaction ConvertToDTO(WeighingTransaction transaction)
+        {
+            if (transaction != null)
+            {
+                return new FlatWeighingTransaction
+                {
+                    FirstWeight = transaction.FirstWeight,
+                    SecondWeighingDate = transaction.SecondWeightDate,
+                    FirstWeighingDate = transaction.FirstWeightDate,
+                    SecondWeight = transaction.SecondWeight,
+                    CustomerName = transaction.Customer?.Name ?? string.Empty,
+                    SupplierName = transaction.Supplier?.Name ?? string.Empty,
+                    ProductName = transaction.Product.Name ?? string.Empty,
+                    Remarks = transaction.Remarks ?? string.Empty,
+                    Quantity = transaction.Quantity ?? string.Empty,
+                    TicketNumber = transaction.TicketNumber,
+                    TruckPlateNumber = transaction.Truck.PlateNumber,
+                    WeigherName = transaction.Weigher.UserName
+                };
+            }
+
+            return new FlatWeighingTransaction();
+        }
+    }
+
 }
- 
