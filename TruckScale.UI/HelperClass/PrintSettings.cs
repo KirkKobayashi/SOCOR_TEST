@@ -8,7 +8,7 @@
         public int yOffset { get; set; } = 20;
         public int xOffset { get; set; } = 0;
         public string HeaderFont { get; set; } = "Courier New";
-        public int HeaderFontHeight { get; set; } = 16;
+        public int HeaderFontHeight { get; set; } = 12;
         public string BodyFont { get; set; } = "Courier New";
         public int BodyFontHeigt { get; set; } = 9;
         public int PaperSize_X { get; set; } = 300;

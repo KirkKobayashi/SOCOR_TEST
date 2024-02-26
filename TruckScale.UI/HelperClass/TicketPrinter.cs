@@ -42,26 +42,34 @@ namespace TruckScale.UI.HelperClass
             var headerSize = _settings.HeaderFontHeight;
             var bodyFont = _settings.BodyFont;
             var bodySize = _settings.BodyFontHeigt;
-            string separator = "---------------------------------------";
+            string separator = "-----------------------------------------";
 
+            e.PageSettings.PaperSize = new PaperSize("Custom", 400, 550);
             Graphics graphics = e.Graphics;
-            Font font = new Font("Courier New", 10);
             
             int startX = 10;
             int startY = 10;
-            int Offset = 40;
+            int Offset = 30;
+
+            SizeF title1Size = (graphics.MeasureString(_settings.HeaderText1, new Font(_settings.HeaderFont, _settings.HeaderFontHeight)));
+
+            SizeF title2Size = (graphics.MeasureString(_settings.HeaderText2, new Font(_settings.HeaderFont, _settings.HeaderFontHeight)));
+
+            float firstHeaderX = (400 - title1Size.Width) / 2;
+            float secondHeaderX = (400 - title2Size.Width) / 2;
+
 
             //HEADER 1 - COMPANY NAME
             graphics.DrawString(_settings.HeaderText1, new Font(headerFont, headerSize),
-                                new SolidBrush(Color.Black), startX + 50, startY + Offset);
+                                new SolidBrush(Color.Black), firstHeaderX, startY + Offset);
             //HEADER 2 - ADDRESS
             Offset = Offset + 20;
             graphics.DrawString(_settings.HeaderText2, new Font(headerFont, headerSize),
-                              new SolidBrush(Color.Black), startX + 50, startY + Offset);
+                              new SolidBrush(Color.Black), secondHeaderX, startY + Offset);
 
             //TICKET NUMBER
             Offset = Offset + 50;
-            graphics.DrawString("Ticket No :",
+            graphics.DrawString("Ticket No",
                   new Font(bodyFont,bodySize),
                   new SolidBrush(Color.Black), startX, startY + Offset);
             graphics.DrawString(_recordToPrint.TicketNumber.ToString(),
@@ -76,7 +84,7 @@ namespace TruckScale.UI.HelperClass
 
             //PLATENUMBER
             Offset = Offset + 30;
-            graphics.DrawString("Plate Number :",
+            graphics.DrawString("Plate Number",
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX , startY + Offset);
             graphics.DrawString(_recordToPrint.TruckPlateNumber,
@@ -85,7 +93,7 @@ namespace TruckScale.UI.HelperClass
 
             //CUSTOMER
             Offset = Offset + 30;
-            graphics.DrawString($"Customer :",
+            graphics.DrawString($"Customer",
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX , startY + Offset);
             graphics.DrawString(_recordToPrint.CustomerName,
@@ -94,7 +102,7 @@ namespace TruckScale.UI.HelperClass
 
             //SUPPLIER
             Offset = Offset + 30;
-            graphics.DrawString($"Supplier :",
+            graphics.DrawString($"Supplier",
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX , startY + Offset);
             graphics.DrawString(_recordToPrint.SupplierName,
@@ -103,7 +111,7 @@ namespace TruckScale.UI.HelperClass
 
             //PRODUCT
             Offset = Offset + 30;
-            graphics.DrawString($"Product :",
+            graphics.DrawString($"Product",
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX , startY + Offset);
             graphics.DrawString(_recordToPrint.SupplierName,
@@ -112,37 +120,101 @@ namespace TruckScale.UI.HelperClass
 
             //QUANTITY
             Offset = Offset + 30;
-            graphics.DrawString($"Quantity : \n\n{_recordToPrint.Quantity}",
+            graphics.DrawString($"Quantity",
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX , startY + Offset);
+            graphics.DrawString(_recordToPrint.Quantity,
+                  new Font(bodyFont, bodySize),
+                  new SolidBrush(Color.Black), startX + 120, startY + Offset);
 
             //REMARKS
-            Offset = Offset + 50;
-            graphics.DrawString($"Remarks : \n\n{_recordToPrint.Remarks}",
+            Offset = Offset + 30;
+            graphics.DrawString($"Remarks \n\n{_recordToPrint.Remarks}",
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX , startY + Offset);
 
             //SEPARATOR
-            Offset = Offset + 50;
+            Offset = Offset + 40;
             graphics.DrawString(separator,
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX , startY + Offset);
 
-            //GROSS WEIGHT
-            Offset = Offset + 30;
-            graphics.DrawString($"GROSS WEIGHT",
-                  new Font(bodyFont, bodySize),
-                  new SolidBrush(Color.Black), startX , startY + Offset);
-            graphics.DrawString(_recordToPrint.FirstWeight.ToString(),
-                  new Font(bodyFont, bodySize, FontStyle.Bold),
-                  new SolidBrush(Color.Black), startX + 120, startY + Offset);
+            int grossweight;
+            int tareweight;
+            int netweight;
+
+            netweight = Math.Abs(_recordToPrint.FirstWeight - _recordToPrint.SecondWeight);
+
+            if (_recordToPrint.FirstWeight > _recordToPrint.SecondWeight)
+            {
+                grossweight = _recordToPrint.FirstWeight;
+                tareweight = _recordToPrint.SecondWeight;
+            }
+            else
+            {
+                tareweight = _recordToPrint.FirstWeight;
+                grossweight = _recordToPrint.SecondWeight;
+            }
 
             //GROSS WEIGHT
             Offset = Offset + 30;
-            graphics.DrawString($"TARE WEIGHT",
+            graphics.DrawString($"GROSS WEIGHT (KG)",
+                  new Font(bodyFont, bodySize),
+                  new SolidBrush(Color.Black), startX , startY + Offset);
+            graphics.DrawString(grossweight.ToString(),
+                  new Font(bodyFont, bodySize, FontStyle.Bold),
+                  new SolidBrush(Color.Black), startX + 140, startY + Offset);
+
+            //GROSS WEIGHT
+            Offset = Offset + 30;
+            graphics.DrawString($"TARE WEIGHT  (KG)",
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX, startY + Offset);
-            graphics.DrawString(_recordToPrint.SecondWeight.ToString(),
+            graphics.DrawString(tareweight.ToString(),
+                  new Font(bodyFont, bodySize, FontStyle.Bold),
+                  new SolidBrush(Color.Black), startX + 140, startY + Offset);
+
+            //NET WEIGHT
+            Offset = Offset + 30;
+            graphics.DrawString($"NET WEIGHT   (KG)",
+                  new Font(bodyFont, bodySize),
+                  new SolidBrush(Color.Black), startX, startY + Offset);
+            graphics.DrawString(netweight.ToString(),
+                  new Font(bodyFont, bodySize, FontStyle.Bold),
+                  new SolidBrush(Color.Black), startX + 140, startY + Offset);
+
+            //IN DATE
+            Offset = Offset + 30;
+            graphics.DrawString($"Weigh In Date",
+                  new Font(bodyFont, 8),
+                  new SolidBrush(Color.Black), startX, startY + Offset);
+            graphics.DrawString(_recordToPrint.FirstWeighingDate.ToString(),
+                  new Font(bodyFont, 8),
+                  new SolidBrush(Color.Black), startX + 120, startY + Offset);
+
+            //OTU DATE
+            Offset = Offset + 30;
+            graphics.DrawString($"Weigh Out Date",
+                  new Font(bodyFont, 8),
+                  new SolidBrush(Color.Black), startX, startY + Offset);
+            graphics.DrawString(_recordToPrint.SecondWeighingDate.ToString(),
+                  new Font(bodyFont, 8),
+                  new SolidBrush(Color.Black), startX + 120, startY + Offset);
+
+
+           
+            //SEPARATOR
+            Offset = Offset + 50;
+            graphics.DrawString(separator,
+                  new Font(bodyFont, bodySize),
+                  new SolidBrush(Color.Black), startX, startY + Offset);
+
+            //NET WEIGHT
+            Offset = Offset + 8;
+            graphics.DrawString($"WEIGHER",
+                  new Font(bodyFont, 8),
+                  new SolidBrush(Color.Black), startX, startY + Offset);
+            graphics.DrawString(_recordToPrint.WeigherName,
                   new Font(bodyFont, bodySize, FontStyle.Bold),
                   new SolidBrush(Color.Black), startX + 120, startY + Offset);
         }
