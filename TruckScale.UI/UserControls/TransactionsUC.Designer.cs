@@ -71,7 +71,7 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 150F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 80F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Size = new Size(1573, 1243);
             tableLayoutPanel1.TabIndex = 0;
@@ -90,7 +90,7 @@
             dgvTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             tableLayoutPanel1.SetColumnSpan(dgvTransactions, 2);
             dgvTransactions.Dock = DockStyle.Fill;
-            dgvTransactions.Location = new Point(410, 210);
+            dgvTransactions.Location = new Point(410, 140);
             dgvTransactions.Margin = new Padding(10);
             dgvTransactions.MultiSelect = false;
             dgvTransactions.Name = "dgvTransactions";
@@ -98,7 +98,7 @@
             dgvTransactions.RowHeadersWidth = 62;
             dgvTransactions.RowTemplate.Height = 33;
             dgvTransactions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvTransactions.Size = new Size(1153, 1023);
+            dgvTransactions.Size = new Size(1153, 1093);
             dgvTransactions.TabIndex = 0;
             dgvTransactions.CellMouseClick += dgvTransactions_CellMouseClick;
             dgvTransactions.CellMouseDoubleClick += dgvTransactions_CellMouseDoubleClick;
@@ -138,19 +138,20 @@
             panel2.Location = new Point(4, 55);
             panel2.Margin = new Padding(4, 5, 4, 5);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1565, 140);
+            panel2.Size = new Size(1565, 70);
             panel2.TabIndex = 4;
             // 
             // btnDelete
             // 
+            btnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             btnDelete.BackColor = Color.WhiteSmoke;
             btnDelete.FlatAppearance.BorderColor = Color.LightGray;
             btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnDelete.ForeColor = Color.Black;
-            btnDelete.Location = new Point(307, 12);
+            btnDelete.Location = new Point(307, 17);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(93, 105);
+            btnDelete.Size = new Size(93, 35);
             btnDelete.TabIndex = 3;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = false;
@@ -158,14 +159,15 @@
             // 
             // btnPrint
             // 
+            btnPrint.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             btnPrint.BackColor = Color.WhiteSmoke;
             btnPrint.FlatAppearance.BorderColor = Color.LightGray;
             btnPrint.FlatStyle = FlatStyle.Flat;
             btnPrint.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnPrint.ForeColor = Color.Black;
-            btnPrint.Location = new Point(110, 12);
+            btnPrint.Location = new Point(110, 17);
             btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(93, 105);
+            btnPrint.Size = new Size(93, 35);
             btnPrint.TabIndex = 5;
             btnPrint.Text = "Print";
             btnPrint.UseVisualStyleBackColor = false;
@@ -173,14 +175,15 @@
             // 
             // btnReport
             // 
+            btnReport.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             btnReport.BackColor = Color.WhiteSmoke;
             btnReport.FlatAppearance.BorderColor = Color.LightGray;
             btnReport.FlatStyle = FlatStyle.Flat;
             btnReport.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnReport.ForeColor = Color.Black;
-            btnReport.Location = new Point(209, 12);
+            btnReport.Location = new Point(209, 17);
             btnReport.Name = "btnReport";
-            btnReport.Size = new Size(93, 105);
+            btnReport.Size = new Size(93, 35);
             btnReport.TabIndex = 1;
             btnReport.Text = "Report";
             btnReport.UseVisualStyleBackColor = false;
@@ -188,10 +191,11 @@
             // 
             // btnNew
             // 
+            btnNew.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             btnNew.BackColor = Color.WhiteSmoke;
-            btnNew.Location = new Point(11, 12);
+            btnNew.Location = new Point(11, 17);
             btnNew.Name = "btnNew";
-            btnNew.Size = new Size(93, 105);
+            btnNew.Size = new Size(93, 35);
             btnNew.TabIndex = 4;
             btnNew.Text = "Add New";
             btnNew.UseVisualStyleBackColor = false;
@@ -203,10 +207,10 @@
             panel3.Controls.Add(groupBox2);
             panel3.Controls.Add(groupBox1);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(5, 205);
+            panel3.Location = new Point(5, 135);
             panel3.Margin = new Padding(5);
             panel3.Name = "panel3";
-            panel3.Size = new Size(390, 1033);
+            panel3.Size = new Size(390, 1103);
             panel3.TabIndex = 5;
             panel3.Paint += panel3_Paint;
             // 

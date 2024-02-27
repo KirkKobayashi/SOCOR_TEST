@@ -68,7 +68,7 @@ namespace TruckScale.UI.HelperClass
                               new SolidBrush(Color.Black), secondHeaderX, startY + Offset);
 
             //TICKET NUMBER
-            Offset = Offset + 50;
+            Offset = Offset + 30;
             graphics.DrawString("Ticket No",
                   new Font(bodyFont,bodySize),
                   new SolidBrush(Color.Black), startX, startY + Offset);
@@ -114,7 +114,7 @@ namespace TruckScale.UI.HelperClass
             graphics.DrawString($"Product",
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX , startY + Offset);
-            graphics.DrawString(_recordToPrint.SupplierName,
+            graphics.DrawString(_recordToPrint.ProductName,
                   new Font(bodyFont, bodySize, FontStyle.Bold),
                   new SolidBrush(Color.Black), startX + 120, startY + Offset);
 
@@ -163,7 +163,7 @@ namespace TruckScale.UI.HelperClass
                   new SolidBrush(Color.Black), startX , startY + Offset);
             graphics.DrawString(grossweight.ToString(),
                   new Font(bodyFont, bodySize, FontStyle.Bold),
-                  new SolidBrush(Color.Black), startX + 140, startY + Offset);
+                  new SolidBrush(Color.Black), startX + 160, startY + Offset);
 
             //GROSS WEIGHT
             Offset = Offset + 30;
@@ -172,7 +172,7 @@ namespace TruckScale.UI.HelperClass
                   new SolidBrush(Color.Black), startX, startY + Offset);
             graphics.DrawString(tareweight.ToString(),
                   new Font(bodyFont, bodySize, FontStyle.Bold),
-                  new SolidBrush(Color.Black), startX + 140, startY + Offset);
+                  new SolidBrush(Color.Black), startX + 160, startY + Offset);
 
             //NET WEIGHT
             Offset = Offset + 30;
@@ -181,30 +181,30 @@ namespace TruckScale.UI.HelperClass
                   new SolidBrush(Color.Black), startX, startY + Offset);
             graphics.DrawString(netweight.ToString(),
                   new Font(bodyFont, bodySize, FontStyle.Bold),
-                  new SolidBrush(Color.Black), startX + 140, startY + Offset);
+                  new SolidBrush(Color.Black), startX + 160, startY + Offset);
 
             //IN DATE
             Offset = Offset + 30;
             graphics.DrawString($"Weigh In Date",
-                  new Font(bodyFont, 8),
+                  new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX, startY + Offset);
             graphics.DrawString(_recordToPrint.FirstWeighingDate.ToString(),
-                  new Font(bodyFont, 8),
-                  new SolidBrush(Color.Black), startX + 120, startY + Offset);
+                  new Font(bodyFont, bodySize),
+                  new SolidBrush(Color.Black), startX + 150, startY + Offset);
 
             //OTU DATE
             Offset = Offset + 30;
             graphics.DrawString($"Weigh Out Date",
-                  new Font(bodyFont, 8),
+                  new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX, startY + Offset);
             graphics.DrawString(_recordToPrint.SecondWeighingDate.ToString(),
-                  new Font(bodyFont, 8),
-                  new SolidBrush(Color.Black), startX + 120, startY + Offset);
+                  new Font(bodyFont, bodySize),
+                  new SolidBrush(Color.Black), startX + 150, startY + Offset);
 
 
            
             //SEPARATOR
-            Offset = Offset + 50;
+            Offset = Offset + 30;
             graphics.DrawString(separator,
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX, startY + Offset);

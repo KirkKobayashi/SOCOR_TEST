@@ -265,5 +265,10 @@ namespace TruckScale.UI.UserControls
                 return new FlatWeighingTransaction();
             }
         }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

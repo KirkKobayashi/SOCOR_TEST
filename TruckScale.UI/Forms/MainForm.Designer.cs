@@ -45,7 +45,6 @@
             tPanelMain = new TableLayoutPanel();
             tPanelTop = new TableLayoutPanel();
             IndicatorPanel = new Panel();
-            label1 = new Label();
             txtIndicator = new TextBox();
             PanelMain = new Panel();
             menuStrip1.SuspendLayout();
@@ -159,7 +158,7 @@
             tPanelMain.Location = new Point(0, 33);
             tPanelMain.Name = "tPanelMain";
             tPanelMain.RowCount = 4;
-            tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
+            tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 70F));
             tPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
@@ -179,30 +178,18 @@
             tPanelTop.Name = "tPanelTop";
             tPanelTop.RowCount = 1;
             tPanelTop.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tPanelTop.Size = new Size(1559, 100);
+            tPanelTop.Size = new Size(1559, 70);
             tPanelTop.TabIndex = 0;
             // 
             // IndicatorPanel
             // 
             IndicatorPanel.BackColor = Color.Gray;
-            IndicatorPanel.Controls.Add(label1);
             IndicatorPanel.Controls.Add(txtIndicator);
             IndicatorPanel.Dock = DockStyle.Fill;
             IndicatorPanel.Location = new Point(1202, 3);
             IndicatorPanel.Name = "IndicatorPanel";
-            IndicatorPanel.Size = new Size(354, 94);
+            IndicatorPanel.Size = new Size(354, 64);
             IndicatorPanel.TabIndex = 3;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.DimGray;
-            label1.Location = new Point(0, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(187, 25);
-            label1.TabIndex = 1;
-            label1.Text = "WEIGHT INDICATOR";
             // 
             // txtIndicator
             // 
@@ -210,7 +197,7 @@
             txtIndicator.BackColor = Color.DarkGray;
             txtIndicator.BorderStyle = BorderStyle.None;
             txtIndicator.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            txtIndicator.Location = new Point(1, 27);
+            txtIndicator.Location = new Point(1, 12);
             txtIndicator.Multiline = true;
             txtIndicator.Name = "txtIndicator";
             txtIndicator.ReadOnly = true;
@@ -227,9 +214,9 @@
             PanelMain.BackColor = Color.WhiteSmoke;
             PanelMain.BorderStyle = BorderStyle.Fixed3D;
             PanelMain.Dock = DockStyle.Fill;
-            PanelMain.Location = new Point(9, 103);
+            PanelMain.Location = new Point(9, 73);
             PanelMain.Name = "PanelMain";
-            PanelMain.Size = new Size(1553, 744);
+            PanelMain.Size = new Size(1553, 774);
             PanelMain.TabIndex = 1;
             // 
             // MainForm
@@ -270,7 +257,6 @@
         private TableLayoutPanel tPanelTop;
         private Panel IndicatorPanel;
         private TextBox txtIndicator;
-        private Label label1;
         private ToolStripMenuItem managementToolStripMenuItem;
         private ToolStripMenuItem toolMenuUser;
         private ToolStripMenuItem productMgtMenu;
