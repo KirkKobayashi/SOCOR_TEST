@@ -132,11 +132,6 @@ namespace TruckScale.UI.UserControls
                         Driver = txtDriver.Text.Trim(),
                         Remarks = txtRemarks.Text,
                         Quantity = txtQuantity.Text,
-                        WeigherId = _mainForm.weigherId,
-                        CustomerId = customerId,
-                        SupplierId = supplierId,
-                        ProductId = productId,
-                        TruckId = truckId,
                         TicketNumber = Convert.ToInt32(txtTicket.Text)
                     };
 
