@@ -5,7 +5,10 @@ namespace TruckScale.Library.Data.DBContext
 {
     public class ScaleDbContext : DbContext
     {
-
+        public ScaleDbContext()
+        {
+            
+        }
 
         public ScaleDbContext(DbContextOptions<ScaleDbContext> options) : base(options) 
         {

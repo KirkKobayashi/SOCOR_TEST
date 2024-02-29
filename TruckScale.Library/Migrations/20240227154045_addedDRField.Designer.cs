@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TruckScale.Library.Data.DBContext;
 
@@ -11,9 +12,11 @@ using TruckScale.Library.Data.DBContext;
 namespace TruckScale.Library.Migrations
 {
     [DbContext(typeof(ScaleDbContext))]
-    partial class ScaleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240227154045_addedDRField")]
+    partial class addedDRField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
