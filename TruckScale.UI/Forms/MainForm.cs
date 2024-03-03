@@ -11,7 +11,7 @@ namespace TruckScale.UI.Forms
         public int weigherId { get; set; }
         public string? stringWeight { get; set; }
 
-        private ApplicationService _service;
+        //private ApplicationService _service;
 
         private ScalePortCon _sp;
 

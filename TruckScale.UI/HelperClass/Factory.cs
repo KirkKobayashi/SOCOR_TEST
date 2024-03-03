@@ -1,12 +1,15 @@
-﻿using System.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 using TruckScale.Library.BLL;
 using TruckScale.Library.Data.DBContext;
-using TruckScale.ScaleSerialPort;
+using TruckScale.Library.Interfaces;
+using TruckScale.Library.Repositories;
 
 namespace TruckScale.UI.HelperClass
 {
     public static class Factory
     {
+        private static ScaleDbContext dbContex;
         public static ApplicationService GetApplicationService()
         {
             return new ApplicationService(GetDBContext());
@@ -14,7 +17,15 @@ namespace TruckScale.UI.HelperClass
 
         public static IApplicationServiceExtensions GetApplicationServiceExtensions()
         {
-            return new ApplicationServiceExtensions(GetDBContext());
+            dbContex = GetDBContext();
+            ICustomerRepository customer = new CustomerRepository(dbContex);
+            ISupplierRepository supplier = new SupplierRepository(dbContex);
+            ITruckRepository truck = new TruckRepository(dbContex);
+            ITransactionRepository transaction = new TransactionRepository(dbContex);
+            IWeigherRepository weigher = new WeigherRepository(dbContex);
+            IProductRepository product = new ProductRepository(dbContex);
+
+            return new ApplicationServiceExtensions(customer,supplier, product, truck, weigher, transaction);
         }
 
         public static ScaleDbContext GetDBContext()
