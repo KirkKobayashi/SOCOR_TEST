@@ -1,4 +1,6 @@
-﻿using TruckScale.Library.Interfaces;
+﻿using System.Transactions;
+using TruckScale.Library.Data.Models;
+using TruckScale.Library.Interfaces;
 using TruckScale.UI.HelperClass;
 
 
@@ -27,8 +29,11 @@ namespace TruckScale.UI.Forms
 
             txtPlateNumber.Focus();
             GetCustomers();
+            GetSuppliers();
+            GetProducts();
         }
 
+        #region Data Fetch
         private void GetCustomers()
         {
             try
@@ -63,7 +68,7 @@ namespace TruckScale.UI.Forms
         {
             try
             {
-                var list = _service.GetSuppliers();
+                var list = _service.GetProducts();
                 var autosource = new AutoCompleteStringCollection();
 
                 Extensions.SetTextBoxSource(list, txtItem);
@@ -72,6 +77,7 @@ namespace TruckScale.UI.Forms
             {
                 MessageBox.Show($"Error in getting items list. \n\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        } 
+        #endregion
     }
 }

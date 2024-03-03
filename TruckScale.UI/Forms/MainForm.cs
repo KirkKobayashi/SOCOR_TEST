@@ -121,21 +121,24 @@ namespace TruckScale.UI.Forms
 
         public void ShowWeighing(bool newTrans, int transId)
         {
-            WeighingUC uc;
-            if (transId == 0)
-            {
-                uc = new WeighingUC(_service, this, newTrans);
+            //WeighingUC uc;
+            //if (transId == 0)
+            //{
+            //    uc = new WeighingUC(_service, this, newTrans);
 
-            }
-            else
-            {
-                uc = new WeighingUC(_service, this, newTrans, transId);
-            }
+            //}
+            //else
+            //{
+            //    uc = new WeighingUC(_service, this, newTrans, transId);
+            //}
 
-            PanelMain.Controls.Clear();
-            PanelMain.Controls.Add(uc);
-            uc.Dock = DockStyle.Fill;
-            uc.Show();
+            //PanelMain.Controls.Clear();
+            //PanelMain.Controls.Add(uc);
+            //uc.Dock = DockStyle.Fill;
+            //uc.Show();
+            var frm = new TransactionForm(_service);
+            GlobalProps.newTrans = true;
+            frm.ShowDialog();
         }
 
         private void btnTransactions_Click(object sender, EventArgs e)

@@ -7,6 +7,7 @@ namespace TruckScale.Library.Data.DTOs
         public int Id { get; set; }
         
         public int TicketNumber { get; set; }
+        public string DriverName { get; set; }
         public string TruckPlateNumber { get; set; }
         public string CustomerName { get; set; }
         public string SupplierName { get; set; }
