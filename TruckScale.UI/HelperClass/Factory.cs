@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 using TruckScale.Library.BLL;
 using TruckScale.Library.Data.DBContext;
 using TruckScale.ScaleSerialPort;
@@ -14,8 +15,8 @@ namespace TruckScale.UI.HelperClass
 
         public static ScaleDbContext GetDBContext()
         {
-            var dbname = ConfigurationManager.AppSettings["dbname"].ToString();
-            return new Library.Data.DBContext.ScaleDbContext(ConStringHelper.Get(dbname));
+            var consString = ConfigurationManager.AppSettings["dbname"].ToString();
+            return new Library.Data.DBContext.ScaleDbContext();
         }
 
     }

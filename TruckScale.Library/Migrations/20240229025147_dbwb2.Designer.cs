@@ -12,8 +12,8 @@ using TruckScale.Library.Data.DBContext;
 namespace TruckScale.Library.Migrations
 {
     [DbContext(typeof(ScaleDbContext))]
-    [Migration("20230321112232_IniitalCreate")]
-    partial class IniitalCreate
+    [Migration("20240229025147_dbwb2")]
+    partial class dbwb2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,6 +118,9 @@ namespace TruckScale.Library.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Weighers");
@@ -131,8 +134,11 @@ namespace TruckScale.Library.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
+
+                    b.Property<string>("DrNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Driver")
                         .HasColumnType("nvarchar(max)");
@@ -143,7 +149,7 @@ namespace TruckScale.Library.Migrations
                     b.Property<DateTime>("FirstWeightDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<string>("Quantity")
@@ -158,16 +164,16 @@ namespace TruckScale.Library.Migrations
                     b.Property<DateTime>("SecondWeightDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SupplierId")
+                    b.Property<int?>("SupplierId")
                         .HasColumnType("int");
 
                     b.Property<int>("TicketNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("TruckId")
+                    b.Property<int?>("TruckId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WeigherId")
+                    b.Property<int?>("WeigherId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -189,33 +195,23 @@ namespace TruckScale.Library.Migrations
                 {
                     b.HasOne("TruckScale.Library.Data.Models.Customer", "Customer")
                         .WithMany("Transactions")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("TruckScale.Library.Data.Models.Product", "Product")
                         .WithMany("Transactions")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
 
                     b.HasOne("TruckScale.Library.Data.Models.Supplier", "Supplier")
                         .WithMany("Transactions")
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SupplierId");
 
                     b.HasOne("TruckScale.Library.Data.Models.Truck", "Truck")
                         .WithMany("Transactions")
-                        .HasForeignKey("TruckId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TruckId");
 
                     b.HasOne("TruckScale.Library.Data.Models.Weigher", "Weigher")
                         .WithMany("Transactions")
-                        .HasForeignKey("WeigherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WeigherId");
 
                     b.Navigation("Customer");
 
