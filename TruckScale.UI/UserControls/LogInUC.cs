@@ -68,6 +68,7 @@ namespace TruckScale.UI.UserControls
                 {
                     if (weigher.Password == AES.EncryptString(Globals.myKey, txtPassword.Text.Trim()))
                     {
+                        GlobalProps.UserName = weigher.UserName;
                         _mainForm.weigherId = weigher.Id;
                         return true;
                     }

@@ -59,8 +59,9 @@
             // 
             // tableLayoutPanel1
             // 
+            tableLayoutPanel1.BackColor = SystemColors.Control;
             tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
             tableLayoutPanel1.Controls.Add(dgvTransactions, 1, 2);
@@ -108,7 +109,7 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             dgvTransactions.DefaultCellStyle = dataGridViewCellStyle3;
             dgvTransactions.Dock = DockStyle.Fill;
-            dgvTransactions.Location = new Point(187, 84);
+            dgvTransactions.Location = new Point(207, 84);
             dgvTransactions.Margin = new Padding(7, 6, 7, 6);
             dgvTransactions.MultiSelect = false;
             dgvTransactions.Name = "dgvTransactions";
@@ -116,7 +117,7 @@
             dgvTransactions.RowHeadersWidth = 62;
             dgvTransactions.RowTemplate.Height = 33;
             dgvTransactions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvTransactions.Size = new Size(907, 656);
+            dgvTransactions.Size = new Size(887, 656);
             dgvTransactions.TabIndex = 0;
             dgvTransactions.CellMouseClick += dgvTransactions_CellMouseClick;
             dgvTransactions.CellMouseDoubleClick += dgvTransactions_CellMouseDoubleClick;
@@ -229,9 +230,8 @@
             panel3.Location = new Point(4, 81);
             panel3.Margin = new Padding(4, 3, 4, 3);
             panel3.Name = "panel3";
-            panel3.Size = new Size(172, 662);
+            panel3.Size = new Size(192, 662);
             panel3.TabIndex = 5;
-            panel3.Paint += panel3_Paint;
             // 
             // groupBox2
             // 

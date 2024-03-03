@@ -16,16 +16,32 @@ namespace TruckScale.UI.UserControls
         public int transactionId { get; set; }
 
         private readonly MainForm _mainForm;
-        private readonly ApplicationService _service;
+        //private readonly ApplicationService _service;
+        private readonly IApplicationServiceExtensions _serviceExtensions;
         private StreamReader reader;
-        private List<WeighingTransaction> _transactions;
+        //private List<WeighingTransaction> _transactions;
         private string _appDirectory;
         DataTable dt;
 
-        public TransactionsUC(ApplicationService service, MainForm mainForm)
+
+        public TransactionsUC(IApplicationServiceExtensions serviceExtensions)
         {
             InitializeComponent();
-            _service = service;
+            _serviceExtensions = serviceExtensions;
+            //_service = service;
+            _appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            GetRecords();
+            dgvTransactions.AllowUserToDeleteRows = false;
+            dgvTransactions.AllowUserToAddRows = false;
+
+            CheckDirectory();
+
+        }
+        public TransactionsUC(ApplicationService service, MainForm mainForm, IApplicationServiceExtensions serviceExtensions)
+        {
+            InitializeComponent();
+            //_service = service;
             _mainForm = mainForm;
             _appDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -34,6 +50,7 @@ namespace TruckScale.UI.UserControls
             dgvTransactions.AllowUserToAddRows = false;
 
             CheckDirectory();
+            _serviceExtensions = serviceExtensions;
         }
 
         private void CheckDirectory()
@@ -57,8 +74,8 @@ namespace TruckScale.UI.UserControls
             {
                 var startdate = dtStart.Value.Date;
                 var enddate = dtEnd.Value.Date.AddDays(1).AddTicks(-10);
-                _transactions = _service.GetTransactionsByDate(startdate, enddate);
-
+                //var _transactions = _service.GetTransactionsByDate(startdate, enddate);
+                var _transactions = _serviceExtensions.GetRangedTransactions(startdate, enddate);
 
                 dt = new DataTable();
                 dt.Columns.Add("Id", typeof(int));
@@ -73,8 +90,11 @@ namespace TruckScale.UI.UserControls
 
                 foreach (var i in _transactions)
                 {
+
                     var netweight = i.FirstWeight - i.SecondWeight;
-                    dt.Rows.Add(i.Id, i.Truck.PlateNumber, i.Customer.Name, i.Supplier.Name, i.Product.Name, i.FirstWeight, i.SecondWeight, Math.Abs(netweight), i.FirstWeightDate.ToString("HH:mm MM-dd-yyyy"));
+                    dt.Rows.Add(i.Id, i.TruckPlateNumber, i.CustomerName, i.SupplierName, i.ProductName, i.FirstWeight, i.SecondWeight, Math.Abs(netweight), i.FirstWeighingDate.ToString("HH:mm MM-dd-yyyy"));
+                    //    var netweight = i.FirstWeight - i.SecondWeight;
+                    //    dt.Rows.Add(i.Id, i.Truck.PlateNumber, i.Customer.Name, i.Supplier.Name, i.Product.Name, i.FirstWeight, i.SecondWeight, Math.Abs(netweight), i.FirstWeightDate.ToString("HH:mm MM-dd-yyyy"));
                 }
 
                 dgvTransactions.DataSource = null;
@@ -121,7 +141,15 @@ namespace TruckScale.UI.UserControls
             {
                 DataGridViewRow row = dgvTransactions.Rows[e.RowIndex];
                 transactionId = Convert.ToInt32(row.Cells[0].Value);
-                _mainForm.ShowWeighing(false, transactionId);
+                GlobalProps.TransactionId = transactionId;
+                GlobalProps.newTrans = false;
+                //_mainForm.ShowWeighing(false, transactionId);
+
+                var frm = new TransactionForm(Factory.GetApplicationServiceExtensions());
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.ShowDialog();
+
+                GetRecords();
             }
         }
 
@@ -129,7 +157,7 @@ namespace TruckScale.UI.UserControls
         {
             try
             {
-                var transaction = _service.GetTransaction(transactionId);
+                var transaction = _serviceExtensions.GetById(transactionId);
                 var toprint = TransactionMiscClass.ConvertToDTO(transaction);
                 var settings = SettingsGetter.GetPrintSettings();
 
@@ -152,7 +180,7 @@ namespace TruckScale.UI.UserControls
 
                     if (ans == DialogResult.Yes)
                     {
-                        _service.DeleteTransaction(transactionId);
+                        _serviceExtensions.DeleteTransaction(transactionId);
                         GetRecords();
                     }
                 }
@@ -171,7 +199,7 @@ namespace TruckScale.UI.UserControls
 
                 var startdate = dtStart.Value.Date;
                 var enddate = dtEnd.Value.Date.AddDays(1).AddTicks(-10);
-                var records = _service.GetTransactionsByDate(startdate, enddate);
+                var records = _serviceExtensions.GetTransactionsByDate(startdate, enddate);
 
                 if (records.Count == 0)
                 {
@@ -204,16 +232,12 @@ namespace TruckScale.UI.UserControls
         private void btnNew_Click(object sender, EventArgs e)
         {
             //_mainForm.ShowWeighing(true, 0);
-            var frm = new TransactionForm(_service, Factory.GetApplicationServiceExtensions());
-
             GlobalProps.newTrans = true;
+            var frm = new TransactionForm(Factory.GetApplicationServiceExtensions());
             frm.StartPosition = FormStartPosition.CenterParent;
-            frm.ShowDialog();   
-        }
+            frm.ShowDialog();
 
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
+            GetRecords();
         }
 
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
@@ -271,9 +295,5 @@ namespace TruckScale.UI.UserControls
             }
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

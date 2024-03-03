@@ -10,28 +10,31 @@ namespace TruckScale.UI.Forms
 {
     public partial class TransactionForm : Form
     {
-        private IApplicationService _service;
+        //private IApplicationService _service;
         private IApplicationServiceExtensions _serviceExtensions;
 
-        public TransactionForm(IApplicationService service, IApplicationServiceExtensions serviceExtensions)
+        public TransactionForm(IApplicationServiceExtensions serviceExtensions)
         {
             InitializeComponent();
-            _service = service;
             _serviceExtensions = serviceExtensions;
         }
 
         private void TransactionForm_Load(object sender, EventArgs e)
         {
-            if (GlobalProps.newTrans)
-            {
-                txtTicket.Text = _service.GetTicketNumber().ToString();
-                lblWeighIn.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
-            }
-
-            txtPlateNumber.Focus();
             GetCustomers();
             GetSuppliers();
             GetProducts();
+
+            if (GlobalProps.newTrans)
+            {
+                txtTicket.Text = _serviceExtensions.GetTicketNumber().ToString();
+                lblWeighIn.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
+                txtPlateNumber.Focus();
+            }
+            else
+            {
+                RetrieveDetails();
+            }
         }
 
         #region Data Fetch
@@ -39,7 +42,7 @@ namespace TruckScale.UI.Forms
         {
             try
             {
-                var customers = _service.GetCustomers();
+                var customers = _serviceExtensions.GetCustomers();
                 var autosource = new AutoCompleteStringCollection();
 
                 Extensions.SetTextBoxSource(customers, txtCustomer);
@@ -54,7 +57,7 @@ namespace TruckScale.UI.Forms
         {
             try
             {
-                var list = _service.GetSuppliers();
+                var list = _serviceExtensions.GetSuppliers();
                 var autosource = new AutoCompleteStringCollection();
 
                 Extensions.SetTextBoxSource(list, txtSupplier);
@@ -69,7 +72,7 @@ namespace TruckScale.UI.Forms
         {
             try
             {
-                var list = _service.GetProducts();
+                var list = _serviceExtensions.GetProducts();
                 var autosource = new AutoCompleteStringCollection();
 
                 Extensions.SetTextBoxSource(list, txtItem);
@@ -82,7 +85,20 @@ namespace TruckScale.UI.Forms
 
         private void RetrieveDetails()
         {
-            
+            var rec = _serviceExtensions.GetDisplayTransaction(GlobalProps.TransactionId);
+
+            txtTicket.Text = rec.TicketNumber.ToString();
+            txtCustomer.Text = rec.CustomerName;
+            txtPlateNumber.Text = rec.TruckPlateNumber;
+            txtSupplier.Text = rec.SupplierName;
+            txtItem.Text = rec.ProductName;
+            txtQuantity.Text = rec.Quantity;
+            txtDriver.Text = rec.DriverName;
+            txtFirstWeight.Text = rec.FirstWeight.ToString();
+            txtSecondWeight.Text = rec.SecondWeight.ToString();
+            lblWeighIn.Text = rec.FirstWeighingDate.ToString("HH:mm MM/dd/yyyy");
+            lblWeighOut.Text = (rec.SecondWeighingDate.Year < new DateTime(2020, 1, 1).Year) ? DateTime.Now.ToString("HH:mm MM/dd/yyyy") : rec.SecondWeighingDate.ToString("HH:mm MM/dd/yyyy");
+            txtNetWeight.Text = rec.NetWeight.ToString();
         }
         #endregion
 
@@ -146,10 +162,22 @@ namespace TruckScale.UI.Forms
 
         private void btnGetWeight_Click(object sender, EventArgs e)
         {
-            if (GlobalProps.newTrans)
+            try
             {
-                txtFirstWeight.Text = GlobalProps.CurrentWeight.ToString();
-                lblWeighIn.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm ");
+                if (GlobalProps.newTrans)
+                {
+                    txtFirstWeight.Text = GlobalProps.CurrentWeight.ToString();
+                    lblWeighIn.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm ");
+                }
+                else
+                {
+                    txtSecondWeight.Text = GlobalProps.CurrentWeight.ToString();
+                    txtNetWeight.Text = Math.Abs(Convert.ToInt32(txtFirstWeight.Text) - Convert.ToInt32(txtSecondWeight.Text)).ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occured while retrieving weight. \n\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -171,7 +199,7 @@ namespace TruckScale.UI.Forms
 
             if (GlobalProps.newTrans)
             {
-                if (int.TryParse(txtFirstWeight.Text, out int firstWeight))
+                if (!int.TryParse(txtFirstWeight.Text, out int firstWeight))
                 {
                     MessageBox.Show("Invalid first weight.");
                     return;
@@ -181,7 +209,7 @@ namespace TruckScale.UI.Forms
             }
             else
             {
-                if (int.TryParse(txtSecondWeight.Text, out int secondWeight))
+                if (!int.TryParse(txtSecondWeight.Text, out int secondWeight))
                 {
                     MessageBox.Show("Invalid first weight.");
                     return;

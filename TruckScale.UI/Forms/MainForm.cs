@@ -102,7 +102,9 @@ namespace TruckScale.UI.Forms
         public void ShowTransactions()
         {
             PanelMain.Controls.Clear();
-            TransactionsUC uc = new TransactionsUC(_service, this);
+            //TransactionsUC uc = new TransactionsUC(_service, this);
+            IApplicationServiceExtensions svc = Factory.GetApplicationServiceExtensions();
+            TransactionsUC uc = new TransactionsUC(svc);
             PanelMain.Controls.Add(uc);
             uc.Dock = DockStyle.Fill;
             uc.Show();
