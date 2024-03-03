@@ -10,6 +10,7 @@ namespace TruckScale.Library.Interfaces
     public interface ITransactionRepository
     {
         void Delete(int id);
+        void Dispose();
         WeighingTransaction? GetById(int id);
         List<WeighingTransaction> GetAll();
         void Insert(WeighingTransaction transaction);

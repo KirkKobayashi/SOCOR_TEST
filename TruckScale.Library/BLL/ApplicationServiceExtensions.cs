@@ -1,6 +1,13 @@
-﻿using TruckScale.Library.Data.DTOs;
+﻿using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Graph.Models;
+using Microsoft.Graph.Models.Security;
+using TruckScale.Library.Data.DBContext;
+using TruckScale.Library.Data.DTOs;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
+using TruckScale.Library.Repositories;
 
 namespace TruckScale.Library.BLL
 {
@@ -9,6 +16,7 @@ namespace TruckScale.Library.BLL
         List<Customer> GetCustomers();
         List<Supplier> GetSuppliers();
         List<Product> GetProducts();
+
         List<FlatWeighingTransaction> FlattenTransactionRecords(List<WeighingTransaction> weighingTransactions);
         List<FlatWeighingTransaction> GetRangedTransactions(DateTime startDate, DateTime endDate);
         void InsertNewTransaction(FlatWeighingTransaction transaction);
@@ -178,7 +186,13 @@ namespace TruckScale.Library.BLL
 
         public List<FlatWeighingTransaction> GetRangedTransactions(DateTime startDate, DateTime endDate)
         {
-            var trans = _transactionService.GetRangedRecords(startDate, endDate).ToList();
+            var trans = _dbContext.WeighingTransactions
+                  .Include(w => w.Customer)
+                  .Include(w => w.Supplier)
+                  .Include(w => w.Product)
+                  .Include(w => w.Truck)
+                  .Include(w => w.Weigher)
+                  .Where(w => w.FirstWeightDate >= startDate && w.FirstWeightDate <= endDate).ToList();
 
             return FlattenTransactionRecords(trans);
         }
@@ -207,22 +221,28 @@ namespace TruckScale.Library.BLL
 
         public List<Customer> GetCustomers()
         {
-            return _customerService.GetAll();
+            return _dbContext.Customers.ToList();
         }
 
         public List<Supplier> GetSuppliers()
         {
-            return _supplierService.GetAll();
+            return _dbContext.Suppliers.ToList();
         }
 
         public List<Product> GetProducts()
         {
-            return _productService.GetAll();
+            return _dbContext.Products.ToList();
         }
 
         public FlatWeighingTransaction GetDisplayTransaction(int id)
         {
-            var t =  _transactionService.GetById(id);
+            var t = _dbContext.WeighingTransactions
+                    .Include(w => w.Customer)
+                     .Include(w => w.Supplier)
+                     .Include(w => w.Product)
+                     .Include(w => w.Truck)
+                     .Include(w => w.Weigher)
+                     .Where(w => w.Id == id).FirstOrDefault(); 
 
             if (t != null)
             {
@@ -250,22 +270,52 @@ namespace TruckScale.Library.BLL
 
         public List<WeighingTransaction>? GetTransactionsByDate(DateTime startDate, DateTime endDate)
         {
-            return _transactionService.GetRangedRecords(startDate, endDate).ToList();
+            var trans = _dbContext.WeighingTransactions
+               .Include(w => w.Customer)
+               .Include(w => w.Supplier)
+               .Include(w => w.Product)
+               .Include(w => w.Truck)
+               .Include(w => w.Weigher)
+               .Where(w => w.FirstWeightDate >= startDate && w.FirstWeightDate <= endDate);
+
+            return trans.ToList();
         }
 
         public WeighingTransaction GetById(int id)
         {
-            return _transactionService.GetById(id);
+            var transaction = _dbContext.WeighingTransactions
+                 .Include(w => w.Customer)
+                     .Include(w => w.Supplier)
+                     .Include(w => w.Product)
+                     .Include(w => w.Truck)
+                     .Include(w => w.Weigher)
+                     .Where(w => w.Id == id);
+
+            return transaction.FirstOrDefault();
         }
 
         public void DeleteTransaction(int id)
         {
-            _transactionService.Delete(id);
+            var recordToDelete = _dbContext.WeighingTransactions.Find(id);
+
+            if (recordToDelete != null)
+            {
+                _dbContext.WeighingTransactions.Remove(recordToDelete);
+                _dbContext.SaveChanges();
+            }
         }
 
         public int GetTicketNumber()
         {
-            return _transactionService.GetTicketNumber();
+            try
+            {
+                var maxTicket = _dbContext.WeighingTransactions.Max(x => x.TicketNumber);
+                return maxTicket + 1;
+            }
+            catch (InvalidOperationException)
+            {
+                return 1;
+            }
         }
     }
 }
