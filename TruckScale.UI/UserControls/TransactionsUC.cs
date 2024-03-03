@@ -16,9 +16,12 @@ namespace TruckScale.UI.UserControls
         public int transactionId { get; set; }
 
         private readonly MainForm _mainForm;
+        //private readonly ApplicationService _service;
         private readonly IApplicationServiceExtensions _serviceExtensions;
         private StreamReader reader;
+        //private List<WeighingTransaction> _transactions;
         private string _appDirectory;
+        DataTable dt;
 
 
         public TransactionsUC(IApplicationServiceExtensions serviceExtensions)
@@ -69,18 +72,33 @@ namespace TruckScale.UI.UserControls
         {
             try
             {
-                dgvTransactions.Rows.Clear();
-
                 var startdate = dtStart.Value.Date;
-                var enddate = dtEnd.Value.Date.AddDays(1).AddTicks(-1);
+                var enddate = dtEnd.Value.Date.AddDays(1).AddTicks(-10);
+                //var _transactions = _service.GetTransactionsByDate(startdate, enddate);
                 var _transactions = _serviceExtensions.GetRangedTransactions(startdate, enddate);
+
+                dt = new DataTable();
+                dt.Columns.Add("Id", typeof(int));
+                dt.Columns.Add("Plate Number", typeof(string));
+                dt.Columns.Add("Customer", typeof(string));
+                dt.Columns.Add("Supplier", typeof(string));
+                dt.Columns.Add("Product", typeof(string));
+                dt.Columns.Add("First Weight", typeof(int));
+                dt.Columns.Add("Second Weight", typeof(int));
+                dt.Columns.Add("Net Weight", typeof(int));
+                dt.Columns.Add("Weighing Date/Time", typeof(string));
 
                 foreach (var i in _transactions)
                 {
 
                     var netweight = i.FirstWeight - i.SecondWeight;
-                    dgvTransactions.Rows.Add(i.Id, i.TruckPlateNumber, i.CustomerName, i.SupplierName, i.ProductName, i.FirstWeight, i.SecondWeight, Math.Abs(netweight), i.FirstWeighingDate.ToString("HH:mm MM-dd-yyyy"));
+                    dt.Rows.Add(i.Id, i.TruckPlateNumber, i.CustomerName, i.SupplierName, i.ProductName, i.FirstWeight, i.SecondWeight, Math.Abs(netweight), i.FirstWeighingDate.ToString("HH:mm MM-dd-yyyy"));
+                    //    var netweight = i.FirstWeight - i.SecondWeight;
+                    //    dt.Rows.Add(i.Id, i.Truck.PlateNumber, i.Customer.Name, i.Supplier.Name, i.Product.Name, i.FirstWeight, i.SecondWeight, Math.Abs(netweight), i.FirstWeightDate.ToString("HH:mm MM-dd-yyyy"));
                 }
+
+                dgvTransactions.DataSource = null;
+                dgvTransactions.DataSource = dt;
 
                 foreach (DataGridViewColumn column in dgvTransactions.Columns)
                 {
@@ -125,6 +143,7 @@ namespace TruckScale.UI.UserControls
                 transactionId = Convert.ToInt32(row.Cells[0].Value);
                 GlobalProps.TransactionId = transactionId;
                 GlobalProps.newTrans = false;
+                //_mainForm.ShowWeighing(false, transactionId);
 
                 var frm = new TransactionForm(Factory.GetApplicationServiceExtensions());
                 frm.StartPosition = FormStartPosition.CenterParent;
@@ -225,17 +244,17 @@ namespace TruckScale.UI.UserControls
         {
             if (e.KeyCode == Keys.Enter)
             {
-                //string searchString = txtSearch.Text.Trim();
+                string searchString = txtSearch.Text.Trim();
 
-                //// Filter the DataTable rows based on the search term in the "Name" column
-                //var filteredRows = dt.AsEnumerable()
-                //    .Where(row => row.Field<string>("Plate Number").ToLower().Contains(searchString.ToLower()));
+                // Filter the DataTable rows based on the search term in the "Name" column
+                var filteredRows = dt.AsEnumerable()
+                    .Where(row => row.Field<string>("Plate Number").ToLower().Contains(searchString.ToLower()));
 
-                //// Create a new DataTable with the filtered rows
-                //DataTable filteredDataTable = filteredRows.Any() ? filteredRows.CopyToDataTable() : dt.Clone();
+                // Create a new DataTable with the filtered rows
+                DataTable filteredDataTable = filteredRows.Any() ? filteredRows.CopyToDataTable() : dt.Clone();
 
-                //// Bind the filtered DataTable to the DataGridView
-                //dgvTransactions.DataSource = filteredDataTable;
+                // Bind the filtered DataTable to the DataGridView
+                dgvTransactions.DataSource = filteredDataTable;
             }
         }
 
