@@ -203,7 +203,12 @@ namespace TruckScale.UI.UserControls
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            _mainForm.ShowWeighing(true, 0);
+            //_mainForm.ShowWeighing(true, 0);
+            var frm = new TransactionForm(_service, Factory.GetApplicationServiceExtensions());
+
+            GlobalProps.newTrans = true;
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();   
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)

@@ -7,8 +7,18 @@ using TruckScale.Library.Data.Models;
 
 namespace TruckScale.Library.BLL
 {
+    public interface IApplicationServiceExtensions
+    {
+        void InsertNewTransaction(FlatWeighingTransaction transaction);
+        void UpdateTransaction(FlatWeighingTransaction transaction);
+        Customer ValidateCustomer(string name);
+        Product ValidateProduct(string name);
+        Supplier ValidateSupplier(string name);
+        Truck ValidateTruck(string plateNumber);
+        Weigher ValidateUser(string username);
+    }
 
-    public class ApplicationServiceExtensions : ApplicationService
+    public class ApplicationServiceExtensions : ApplicationService, IApplicationServiceExtensions
     {
         ScaleDbContext _dbContext;
 
@@ -92,13 +102,13 @@ namespace TruckScale.Library.BLL
             }
 
             return user;
-        } 
+        }
         #endregion
 
         public void InsertNewTransaction(FlatWeighingTransaction transaction)
         {
             var customer = ValidateCustomer(transaction.CustomerName);
-            var supplier     = ValidateSupplier(transaction.SupplierName);
+            var supplier = ValidateSupplier(transaction.SupplierName);
             var product = ValidateProduct(transaction.ProductName);
             var truck = ValidateTruck(transaction.TruckPlateNumber);
             var weigher = ValidateUser(transaction.WeigherName);
@@ -118,6 +128,37 @@ namespace TruckScale.Library.BLL
             };
 
             _dbContext.WeighingTransactions.Add(newWeighing);
+            _dbContext.SaveChanges();
+        }
+
+        public void UpdateTransaction(FlatWeighingTransaction transaction)
+        {
+            var recordToUpdate = _dbContext.WeighingTransactions.Find(transaction.Id);
+
+            if (recordToUpdate == null)
+            {
+                throw new ArgumentNullException("Record does not exists.");
+            }
+
+            var customer = ValidateCustomer(transaction.CustomerName);
+            var supplier = ValidateSupplier(transaction.SupplierName);
+            var product = ValidateProduct(transaction.ProductName);
+            var truck = ValidateTruck(transaction.TruckPlateNumber);
+            var weigher = ValidateUser(transaction.WeigherName);
+
+            recordToUpdate.Customer = customer;
+            recordToUpdate.Supplier = supplier;
+            recordToUpdate.Product = product;
+            recordToUpdate.Truck = truck;
+            recordToUpdate.Weigher = weigher;
+            recordToUpdate.FirstWeight = transaction.FirstWeight;
+            recordToUpdate.FirstWeightDate = transaction.FirstWeighingDate;
+            recordToUpdate.SecondWeight = transaction.SecondWeight;
+            recordToUpdate.SecondWeightDate = transaction.SecondWeighingDate;
+            recordToUpdate.Driver = transaction.DriverName;
+            recordToUpdate.Quantity = transaction.Quantity;
+            recordToUpdate.Remarks = transaction.Remarks;
+
             _dbContext.SaveChanges();
         }
     }

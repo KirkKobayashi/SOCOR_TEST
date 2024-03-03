@@ -330,6 +330,7 @@
             btnGetWeight.TabIndex = 20;
             btnGetWeight.Text = "Update Weight";
             btnGetWeight.UseVisualStyleBackColor = true;
+            btnGetWeight.Click += btnGetWeight_Click;
             // 
             // label12
             // 
@@ -356,6 +357,7 @@
             btnSave.TabIndex = 23;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // btnExit
             // 

@@ -1,4 +1,5 @@
-﻿using TruckScale.Library.Data.DBContext;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using TruckScale.Library.Data.DBContext;
 using TruckScale.Library.Data.DTOs;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
@@ -160,6 +161,34 @@ namespace TruckScale.Library.BLL
             {
                 return service.GetById(id);
             }
+        }
+
+        public FlatWeighingTransaction GetDisplayTransaction(int id)
+        {
+            var t = GetTransaction(id);
+
+            if (t != null)
+            {
+                return new FlatWeighingTransaction
+                {
+                    TruckPlateNumber = t.Truck.PlateNumber ?? string.Empty,
+                    CustomerName = t.Customer.Name ?? string.Empty,
+                    SupplierName = t.Supplier.Name ?? string.Empty,
+                    ProductName = t.Product.Name ?? string.Empty,
+                    TicketNumber = t.TicketNumber,
+                    FirstWeighingDate = t.FirstWeightDate,
+                    FirstWeight = t.FirstWeight,
+                    SecondWeighingDate = t.SecondWeightDate,
+                    SecondWeight = t.SecondWeight,
+                    DriverName = t.Driver,
+                    NetWeight = Math.Abs(t.FirstWeight - t.SecondWeight),
+                    Quantity = t.Quantity ?? string.Empty,
+                    Remarks = t.Remarks ?? string.Empty,
+                    WeigherName = t.Weigher.UserName ?? string.Empty,
+                };
+            }
+
+            return new FlatWeighingTransaction();
         }
 
         public List<WeighingTransaction>? GetTransactionsByDate(DateTime startDate, DateTime endDate)

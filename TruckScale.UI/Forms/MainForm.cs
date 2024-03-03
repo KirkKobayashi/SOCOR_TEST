@@ -62,12 +62,6 @@ namespace TruckScale.UI.Forms
                 var newWeight = e.Data.Substring(sPort.StartIndex, sPort.EndIndex);
 
                 SetWeightString(newWeight.ParseWeight());
-                //if (newWeight.Length == 0)
-                //{
-                //    SetWeightString("0");
-                //    return;
-                //}
-                //SetWeightString(newWeight);
             }
         }
 
@@ -121,24 +115,21 @@ namespace TruckScale.UI.Forms
 
         public void ShowWeighing(bool newTrans, int transId)
         {
-            //WeighingUC uc;
-            //if (transId == 0)
-            //{
-            //    uc = new WeighingUC(_service, this, newTrans);
+            WeighingUC uc;
+            if (transId == 0)
+            {
+                uc = new WeighingUC(_service, this, newTrans);
 
-            //}
-            //else
-            //{
-            //    uc = new WeighingUC(_service, this, newTrans, transId);
-            //}
+            }
+            else
+            {
+                uc = new WeighingUC(_service, this, newTrans, transId);
+            }
 
-            //PanelMain.Controls.Clear();
-            //PanelMain.Controls.Add(uc);
-            //uc.Dock = DockStyle.Fill;
-            //uc.Show();
-            var frm = new TransactionForm(_service);
-            GlobalProps.newTrans = true;
-            frm.ShowDialog();
+            PanelMain.Controls.Clear();
+            PanelMain.Controls.Add(uc);
+            uc.Dock = DockStyle.Fill;
+            uc.Show();
         }
 
         private void btnTransactions_Click(object sender, EventArgs e)
@@ -162,6 +153,7 @@ namespace TruckScale.UI.Forms
             if (txtIndicator.TextLength > 2)
             {
                 stringWeight = txtIndicator.Text.Trim();
+                GlobalProps.CurrentWeight = stringWeight;
             }
         }
 

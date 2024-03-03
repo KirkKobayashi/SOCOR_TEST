@@ -12,6 +12,7 @@ namespace TruckScale.Library.Interfaces
         List<FlatWeighingTransaction> FlattenTransactionRecords(IQueryable<WeighingTransaction> weighingTransactions);
         Customer GetCustomerByName(string name);
         List<Customer> GetCustomers();
+        FlatWeighingTransaction GetDisplayTransaction(int id);
         Product GetProductByName(string name);
         List<Product> GetProducts();
         Supplier GetSupplierByName(string name);
