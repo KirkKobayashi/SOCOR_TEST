@@ -229,7 +229,13 @@ namespace TruckScale.Library.BLL
 
         public FlatWeighingTransaction GetDisplayTransaction(int id)
         {
-            var t = _dbContext.WeighingTransactions.Find(id);
+            var t = _dbContext.WeighingTransactions
+                    .Include(w => w.Customer)
+                     .Include(w => w.Supplier)
+                     .Include(w => w.Product)
+                     .Include(w => w.Truck)
+                     .Include(w => w.Weigher)
+                     .Where(w => w.Id == id).FirstOrDefault(); 
 
             if (t != null)
             {
