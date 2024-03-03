@@ -1,21 +1,7 @@
-﻿using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Wordprocessing;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
-using System.Windows.Forms;
-using TruckScale.Library.Data.DBContext;
+﻿using System.Transactions;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
-using TruckScale.Library.Repositories;
 using TruckScale.UI.Forms;
-using TruckScale.UI.HelperClass;
 using Control = System.Windows.Forms.Control;
 
 namespace TruckScale.UI.UserControls
