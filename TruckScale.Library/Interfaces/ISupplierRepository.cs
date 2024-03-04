@@ -10,5 +10,6 @@ namespace TruckScale.Library.Interfaces
         List<Supplier> GetAll();
         int Insert(Supplier supplier);
         Supplier GetSupplierByName(string name);
+        void Update(Supplier supplier);
     }
 }

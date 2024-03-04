@@ -1,49 +1,50 @@
-﻿using System.Windows.Forms;
-using TruckScale.Library.Data.Models;
+﻿using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
 
 namespace TruckScale.UI.Forms
 {
-    public partial class CustomerForm : Form
+    public partial class SupplierForm : Form
     {
-        private readonly ICustomerRepository _customerService;
-        private Customer _customer;
-        public CustomerForm(ICustomerRepository customerService)
+        private readonly ISupplierRepository _service;
+        private Supplier _supplier;
+
+        public SupplierForm(ISupplierRepository service)
         {
             InitializeComponent();
-            _customerService = customerService;
-            GetAll();
+            _service = service;
 
+            GetAll();
         }
+
 
         private void GetAll()
         {
-            listBoxCustomers.Items.Clear();
-            var customers = _customerService.GetAll();
+            listBox.Items.Clear();
+            var records = _service.GetAll();
 
-            if (customers != null)
+            if (records != null)
             {
-                foreach (var item in customers)
+                foreach (var item in records)
                 {
-                    listBoxCustomers.Items.Add(item.Name);
+                    listBox.Items.Add(item.Name);
                 }
             }
             else
             {
-                listBoxCustomers.Items.Clear();
+                listBox.Items.Clear();
             }
         }
 
-        private Customer GetCustomer(string name)
+        private Supplier GetSupplier(string name)
         {
-            return _customerService.GetCustomerByName(name);
+            return _service.GetSupplierByName(name);
         }
 
-        private void AddCustomer()
+        private void AddRecord()
         {
             try
             {
-                _customerService.Insert(new Customer { Name = txtName.Text.ToUpper() });
+                _service.Insert(new Supplier { Name = txtName.Text.ToUpper() });
                 MessageBox.Show("Record saved/updated.");
             }
             catch (Exception ex)
@@ -52,16 +53,16 @@ namespace TruckScale.UI.Forms
             }
             finally
             {
-                _customer = null;
+                _supplier = null;
             }
         }
 
-        private void UpdateCustomer()
+        private void UpdateRecord()
         {
             try
             {
-                _customer.Name = txtName.Text.ToUpper();
-                _customerService.Update(_customer);
+                _supplier.Name = txtName.Text.ToUpper();
+                _service.Update(_supplier);
 
                 MessageBox.Show("Record saved/updated.");
             }
@@ -71,7 +72,7 @@ namespace TruckScale.UI.Forms
             }
             finally
             {
-                _customer = null;
+                _supplier = null;
             }
         }
 
@@ -79,27 +80,27 @@ namespace TruckScale.UI.Forms
         {
             if (string.IsNullOrEmpty(txtName.Text))
             {
-                MessageBox.Show("Customer name is empty.");
+                MessageBox.Show("Record name is empty.");
                 return;
             }
 
-            if (_customer == null)
+            if (_supplier == null)
             {
-                var customerfound = GetCustomer(txtName.Text);
+                var recfound = GetSupplier(txtName.Text);
 
-                if (customerfound == null)
+                if (recfound == null)
                 {
-                    AddCustomer();
+                    AddRecord();
                 }
                 else
                 {
-                    MessageBox.Show("Customer name already exists.");
+                    MessageBox.Show("Record name already exists.");
                     return;
                 }
             }
             else
             {
-                UpdateCustomer();
+                UpdateRecord();
             }
 
             GetAll();
@@ -111,11 +112,11 @@ namespace TruckScale.UI.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                _customer = _customerService.GetCustomerByName(txtName.Text);
+                _supplier = _service.GetSupplierByName(txtName.Text);
 
-                if (_customer != null)
+                if (_supplier != null)
                 {
-                    txtName.Text = _customer.Name.ToUpper();
+                    txtName.Text = _supplier.Name.ToUpper();
                 }
                 else
                 {
@@ -129,9 +130,9 @@ namespace TruckScale.UI.Forms
             Close();
         }
 
-        private void listBoxCustomers_SelectedIndexChanged(object sender, EventArgs e)
+        private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtName.Text = listBoxCustomers.SelectedItem.ToString().Split('@')[0];
+            txtName.Text = listBox.SelectedItem.ToString().Split('@')[0];
         }
     }
 }

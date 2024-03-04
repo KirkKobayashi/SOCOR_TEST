@@ -82,6 +82,7 @@
             listBoxCustomers.Name = "listBoxCustomers";
             listBoxCustomers.Size = new Size(324, 225);
             listBoxCustomers.TabIndex = 7;
+            listBoxCustomers.SelectedIndexChanged += listBoxCustomers_SelectedIndexChanged;
             // 
             // label3
             // 

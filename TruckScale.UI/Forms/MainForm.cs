@@ -24,7 +24,6 @@ namespace TruckScale.UI.Forms
         public MainForm(IUIFactory factory)
         {
             InitializeComponent();
-            InitializePort();
 
             _factory = factory;
         }
@@ -33,6 +32,8 @@ namespace TruckScale.UI.Forms
         {
             try
             {
+                Thread.Sleep(4000);
+
                 sPort = SettingsGetter.Get();
                 _sp = new ScalePortCon(sPort);
                 _sp.SerialDataReceieved += _sp_SerialDataReceieved;
@@ -98,30 +99,6 @@ namespace TruckScale.UI.Forms
             uc.Show();
         }
 
-        private void btnNew_Click(object sender, EventArgs e)
-        {
-            ShowWeighing(true, 0);
-        }
-
-        public void ShowWeighing(bool newTrans, int transId)
-        {
-            WeighingUC uc;
-            if (transId == 0)
-            {
-                uc = new WeighingUC(_service, this, newTrans);
-
-            }
-            else
-            {
-                uc = new WeighingUC(_service, this, newTrans, transId);
-            }
-
-            PanelMain.Controls.Clear();
-            PanelMain.Controls.Add(uc);
-            uc.Dock = DockStyle.Fill;
-            uc.Show();
-        }
-
         private void toolMenuUser_Click(object sender, EventArgs e)
         {
             var frm = _factory.CreateForm<WeigherManagementForm>();
@@ -162,11 +139,9 @@ namespace TruckScale.UI.Forms
 
         private void productMgtMenu_Click(object sender, EventArgs e)
         {
-            ProductCrudUC uc = new ProductCrudUC();
-            PanelMain.Controls.Clear();
-            PanelMain.Controls.Add(uc);
-            uc.Dock = DockStyle.Fill;
-            uc.Show();
+            var frm = _factory.CreateForm<ProductForm>();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
         }
 
         private void customerMgtMenu_Click(object sender, EventArgs e)
@@ -178,11 +153,9 @@ namespace TruckScale.UI.Forms
 
         private void supplierMgtMenu_Click(object sender, EventArgs e)
         {
-            SupplierCrudUC uc = new SupplierCrudUC();
-            PanelMain.Controls.Clear();
-            PanelMain.Controls.Add(uc);
-            uc.Dock = DockStyle.Fill;
-            uc.Show();
+            var frm = _factory.CreateForm<SupplierForm>();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
         }
 
         private void txtIndicator_DoubleClick(object sender, EventArgs e)
@@ -203,6 +176,11 @@ namespace TruckScale.UI.Forms
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            InitializePort();
         }
     }
 }

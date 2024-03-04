@@ -1,6 +1,6 @@
 ﻿namespace TruckScale.UI.Forms
 {
-    partial class ProductForm
+    partial class SupplierForm
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(12, 370);
+            btnExit.Location = new Point(13, 363);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(75, 23);
             btnExit.TabIndex = 18;
@@ -50,7 +50,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(11, 341);
+            btnSave.Location = new Point(12, 334);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(75, 23);
             btnSave.TabIndex = 17;
@@ -62,16 +62,16 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(12, 87);
+            label3.Location = new Point(13, 80);
             label3.Name = "label3";
-            label3.Size = new Size(102, 13);
+            label3.Size = new Size(98, 13);
             label3.TabIndex = 16;
-            label3.Text = "Products Record";
+            label3.Text = "Supplier Record";
             // 
             // listBox
             // 
             listBox.FormattingEnabled = true;
-            listBox.Location = new Point(12, 110);
+            listBox.Location = new Point(13, 103);
             listBox.Name = "listBox";
             listBox.Size = new Size(324, 225);
             listBox.TabIndex = 15;
@@ -80,7 +80,7 @@
             // txtName
             // 
             txtName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtName.Location = new Point(77, 48);
+            txtName.Location = new Point(78, 41);
             txtName.Name = "txtName";
             txtName.Size = new Size(260, 20);
             txtName.TabIndex = 14;
@@ -89,7 +89,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 51);
+            label2.Location = new Point(13, 44);
             label2.Name = "label2";
             label2.Size = new Size(35, 13);
             label2.TabIndex = 13;
@@ -99,7 +99,7 @@
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = Color.FromArgb(63, 136, 197);
-            panel1.Location = new Point(11, 34);
+            panel1.Location = new Point(12, 27);
             panel1.Name = "panel1";
             panel1.Size = new Size(326, 2);
             panel1.TabIndex = 12;
@@ -108,17 +108,16 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(12, 12);
+            label1.Location = new Point(13, 5);
             label1.Name = "label1";
-            label1.Size = new Size(144, 15);
+            label1.Size = new Size(149, 15);
             label1.TabIndex = 11;
-            label1.Text = "Product Management";
+            label1.Text = "Supplier Management";
             // 
-            // ProductForm
+            // SupplierForm
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
             ClientSize = new Size(348, 404);
             Controls.Add(btnExit);
             Controls.Add(btnSave);
@@ -130,8 +129,8 @@
             Controls.Add(label1);
             Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "ProductForm";
-            Text = "ProductForm";
+            Name = "SupplierForm";
+            Text = "SupplierForm";
             ResumeLayout(false);
             PerformLayout();
         }

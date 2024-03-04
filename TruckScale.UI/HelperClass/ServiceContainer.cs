@@ -1,12 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ScaleUI.UI;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TruckScale.Library.BLL;
 using TruckScale.Library.Data.DBContext;
 using TruckScale.Library.Interfaces;
@@ -40,8 +35,8 @@ namespace TruckScale.UI.HelperClass
             services.AddTransient<TransactionForm>();
             services.AddTransient<LogInForm>();
             services.AddTransient<CustomerForm>();
-            services.AddTransient<ProductCrudUC>();
-            services.AddTransient<SupplierCrudUC>();
+            services.AddTransient<ProductForm>();
+            services.AddTransient<SupplierForm>();
             services.AddTransient<TransactionsUC>();
             services.AddTransient<WeigherManagementForm>();
         }

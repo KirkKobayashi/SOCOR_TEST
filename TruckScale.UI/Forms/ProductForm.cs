@@ -1,4 +1,5 @@
-﻿using TruckScale.Library.Data.Models;
+﻿using System.Windows.Forms;
+using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
 
 namespace TruckScale.UI.Forms
@@ -11,6 +12,8 @@ namespace TruckScale.UI.Forms
         {
             InitializeComponent();
             _service = service;
+
+            GetAll();
         }
 
         private void GetAll()
@@ -76,7 +79,7 @@ namespace TruckScale.UI.Forms
         {
             if (string.IsNullOrEmpty(txtName.Text))
             {
-                MessageBox.Show("Customer name is empty.");
+                MessageBox.Show("Record name is empty.");
                 return;
             }
 
@@ -90,7 +93,7 @@ namespace TruckScale.UI.Forms
                 }
                 else
                 {
-                    MessageBox.Show("Customer name already exists.");
+                    MessageBox.Show("Record name already exists.");
                     return;
                 }
             }
@@ -100,6 +103,8 @@ namespace TruckScale.UI.Forms
             }
 
             GetAll();
+
+            txtName.Text = string.Empty;
         }
 
         private void txtName_KeyDown(object sender, KeyEventArgs e)
@@ -122,6 +127,11 @@ namespace TruckScale.UI.Forms
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtName.Text = listBox.SelectedItem.ToString().Split('@')[0];
         }
     }
 }

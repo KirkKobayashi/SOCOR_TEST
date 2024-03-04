@@ -239,6 +239,7 @@
             Text = "Weigh Bridge Application";
             WindowState = FormWindowState.Maximized;
             FormClosing += MainForm_FormClosing;
+            Shown += MainForm_Shown;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             tPanelMain.ResumeLayout(false);

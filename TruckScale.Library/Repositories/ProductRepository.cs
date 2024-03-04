@@ -69,7 +69,7 @@ namespace TruckScale.Library.Repositories
             }
         }
 
-        private bool disposed = false;
+         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)
         {

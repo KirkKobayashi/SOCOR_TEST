@@ -69,7 +69,7 @@ namespace TruckScale.UI.HelperClass
             var headerSize = _settings.HeaderFontHeight;
             var bodyFont = _settings.BodyFont;
             var bodySize = _settings.BodyFontHeigt;
-            string textLine = "____________________";
+            string textLine = "_________________";
 
             e.PageSettings.PaperSize = new PaperSize("Custom", 800, 1100);
             Graphics graphics = e.Graphics;
@@ -233,7 +233,7 @@ namespace TruckScale.UI.HelperClass
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX + 150, startY + Offset);
 
-            Offset = Offset + 30;
+            Offset = Offset + 50;
             graphics.DrawString(textLine,
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX, startY + Offset);
@@ -241,13 +241,19 @@ namespace TruckScale.UI.HelperClass
                new Font(bodyFont, bodySize),
                new SolidBrush(Color.Black), startX + 230, startY + Offset);
 
+
+            Offset = Offset;
+            graphics.DrawString(_recordToPrint.DriverName ?? string.Empty,
+                  new Font(bodyFont, bodySize),
+                  new SolidBrush(Color.Black), startX, startY + Offset);
             Offset = Offset + bodyOffset;
             graphics.DrawString("Truck Personnel",
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX, startY + Offset);
+  
 
 
-            graphics.DrawString("Raw Materials Inspector",
+            graphics.DrawString("Raw Mat Inspector",
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX + 230, startY + Offset);
             #endregion

@@ -59,6 +59,21 @@ namespace TruckScale.Library.Repositories
             return dbContext.Suppliers.FirstOrDefault(s => s.Name == name);
         }
 
+        public void Update(Supplier supplier)
+        {
+            var rectoupdate = GetById(supplier.Id);
+
+            if (rectoupdate != null)
+            {
+                rectoupdate.Name = supplier.Name;
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                throw new ArgumentNullException("Customer record not found.");
+            }
+        }
+
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)
