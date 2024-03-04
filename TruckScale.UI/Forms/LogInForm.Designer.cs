@@ -35,19 +35,21 @@
             txtPassword = new TextBox();
             btnLogIn = new Button();
             btnCancel = new Button();
+            label2 = new Label();
+            label3 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(57, 0, 153);
+            panel1.BackColor = Color.FromArgb(63, 136, 197);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(2, 2, 2, 2);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(336, 60);
+            panel1.Size = new Size(259, 38);
             panel1.TabIndex = 0;
             // 
             // label1
@@ -55,7 +57,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(121, 35);
+            label1.Location = new Point(96, 9);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(89, 21);
@@ -65,48 +67,45 @@
             // pictureBox1
             // 
             pictureBox1.Image = TruckScale.UI.Properties.Resources.user;
-            pictureBox1.Location = new Point(133, 99);
-            pictureBox1.Margin = new Padding(2, 2, 2, 2);
+            pictureBox1.Location = new Point(98, 51);
+            pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(70, 60);
+            pictureBox1.Size = new Size(60, 52);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
             // 
             // txtUserName
             // 
-            txtUserName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtUserName.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
             txtUserName.ForeColor = Color.DarkGray;
-            txtUserName.Location = new Point(50, 200);
-            txtUserName.Margin = new Padding(2, 2, 2, 2);
-            txtUserName.Multiline = true;
+            txtUserName.Location = new Point(28, 134);
+            txtUserName.Margin = new Padding(2);
             txtUserName.Name = "txtUserName";
-            txtUserName.Size = new Size(236, 41);
+            txtUserName.Size = new Size(203, 22);
             txtUserName.TabIndex = 2;
-            txtUserName.Text = "Username";
             // 
             // txtPassword
             // 
-            txtPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtPassword.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
             txtPassword.ForeColor = Color.DarkGray;
-            txtPassword.Location = new Point(50, 259);
-            txtPassword.Margin = new Padding(2, 2, 2, 2);
-            txtPassword.Multiline = true;
+            txtPassword.Location = new Point(28, 178);
+            txtPassword.Margin = new Padding(2);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(236, 41);
+            txtPassword.Size = new Size(203, 22);
             txtPassword.TabIndex = 3;
-            txtPassword.Text = "Password";
+            txtPassword.UseSystemPasswordChar = true;
             // 
             // btnLogIn
             // 
             btnLogIn.BackColor = Color.WhiteSmoke;
             btnLogIn.FlatAppearance.BorderSize = 0;
             btnLogIn.FlatStyle = FlatStyle.Flat;
-            btnLogIn.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            btnLogIn.Location = new Point(50, 323);
-            btnLogIn.Margin = new Padding(2, 2, 2, 2);
+            btnLogIn.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            btnLogIn.Location = new Point(28, 213);
+            btnLogIn.Margin = new Padding(2);
             btnLogIn.Name = "btnLogIn";
-            btnLogIn.Size = new Size(235, 39);
+            btnLogIn.Size = new Size(201, 27);
             btnLogIn.TabIndex = 4;
             btnLogIn.Text = "Log In";
             btnLogIn.UseVisualStyleBackColor = false;
@@ -117,30 +116,54 @@
             btnCancel.BackColor = Color.WhiteSmoke;
             btnCancel.FlatAppearance.BorderSize = 0;
             btnCancel.FlatStyle = FlatStyle.Flat;
-            btnCancel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            btnCancel.Location = new Point(174, 366);
-            btnCancel.Margin = new Padding(2, 2, 2, 2);
+            btnCancel.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            btnCancel.ForeColor = Color.DarkGray;
+            btnCancel.Location = new Point(135, 244);
+            btnCancel.Margin = new Padding(2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(112, 22);
+            btnCancel.Size = new Size(96, 27);
             btnCancel.TabIndex = 5;
-            btnCancel.Text = "Log In";
+            btnCancel.Text = "Close";
             btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.ForeColor = Color.DimGray;
+            label2.Location = new Point(28, 119);
+            label2.Name = "label2";
+            label2.Size = new Size(30, 13);
+            label2.TabIndex = 6;
+            label2.Text = "User";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.ForeColor = Color.DimGray;
+            label3.Location = new Point(28, 163);
+            label3.Name = "label3";
+            label3.Size = new Size(56, 13);
+            label3.TabIndex = 7;
+            label3.Text = "Password";
+            // 
             // LogInForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(336, 424);
+            ClientSize = new Size(259, 328);
+            Controls.Add(label3);
+            Controls.Add(label2);
             Controls.Add(btnCancel);
             Controls.Add(btnLogIn);
             Controls.Add(txtPassword);
             Controls.Add(txtUserName);
             Controls.Add(pictureBox1);
             Controls.Add(panel1);
+            Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "LogInForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LogInForm";
@@ -160,5 +183,7 @@
         private Label label1;
         private Button btnLogIn;
         private Button btnCancel;
+        private Label label2;
+        private Label label3;
     }
 }

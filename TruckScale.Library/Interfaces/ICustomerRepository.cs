@@ -10,5 +10,6 @@ namespace TruckScale.Library.Interfaces
         List<Customer> GetAll();
         int Insert(Customer customer);
         Customer GetCustomerByName(string name);
+        void Update(Customer customer);
     }
 }

@@ -59,7 +59,8 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { systemToolStripMenuItem, ViewMenu });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1571, 33);
+            menuStrip1.Padding = new Padding(4, 1, 0, 1);
+            menuStrip1.Size = new Size(1100, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -67,32 +68,32 @@
             // 
             systemToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { stripMenuLogIn, logOutToolStripMenuItem, toolStripSeparator1, exitToolStripMenuItem });
             systemToolStripMenuItem.Name = "systemToolStripMenuItem";
-            systemToolStripMenuItem.Size = new Size(85, 29);
+            systemToolStripMenuItem.Size = new Size(57, 22);
             systemToolStripMenuItem.Text = "System";
             // 
             // stripMenuLogIn
             // 
             stripMenuLogIn.Name = "stripMenuLogIn";
-            stripMenuLogIn.Size = new Size(179, 34);
+            stripMenuLogIn.Size = new Size(117, 22);
             stripMenuLogIn.Text = "Log In";
             stripMenuLogIn.Click += stripMenuLogIn_Click;
             // 
             // logOutToolStripMenuItem
             // 
             logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            logOutToolStripMenuItem.Size = new Size(179, 34);
+            logOutToolStripMenuItem.Size = new Size(117, 22);
             logOutToolStripMenuItem.Text = "Log Out";
             logOutToolStripMenuItem.Click += logOutToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(176, 6);
+            toolStripSeparator1.Size = new Size(114, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(179, 34);
+            exitToolStripMenuItem.Size = new Size(117, 22);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -101,110 +102,113 @@
             ViewMenu.DropDownItems.AddRange(new ToolStripItem[] { managementToolStripMenuItem, transactionsToolStripMenuItem });
             ViewMenu.Enabled = false;
             ViewMenu.Name = "ViewMenu";
-            ViewMenu.Size = new Size(65, 29);
+            ViewMenu.Size = new Size(44, 22);
             ViewMenu.Text = "View";
             // 
             // managementToolStripMenuItem
             // 
             managementToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolMenuUser, productMgtMenu, customerMgtMenu, supplierMgtMenu });
             managementToolStripMenuItem.Name = "managementToolStripMenuItem";
-            managementToolStripMenuItem.Size = new Size(219, 34);
+            managementToolStripMenuItem.Size = new Size(145, 22);
             managementToolStripMenuItem.Text = "Management";
             // 
             // toolMenuUser
             // 
             toolMenuUser.Name = "toolMenuUser";
-            toolMenuUser.Size = new Size(191, 34);
+            toolMenuUser.Size = new Size(126, 22);
             toolMenuUser.Text = "User";
             toolMenuUser.Click += toolMenuUser_Click;
             // 
             // productMgtMenu
             // 
             productMgtMenu.Name = "productMgtMenu";
-            productMgtMenu.Size = new Size(191, 34);
+            productMgtMenu.Size = new Size(126, 22);
             productMgtMenu.Text = "Products";
             productMgtMenu.Click += productMgtMenu_Click;
             // 
             // customerMgtMenu
             // 
             customerMgtMenu.Name = "customerMgtMenu";
-            customerMgtMenu.Size = new Size(191, 34);
+            customerMgtMenu.Size = new Size(126, 22);
             customerMgtMenu.Text = "Customer";
             customerMgtMenu.Click += customerMgtMenu_Click;
             // 
             // supplierMgtMenu
             // 
             supplierMgtMenu.Name = "supplierMgtMenu";
-            supplierMgtMenu.Size = new Size(191, 34);
+            supplierMgtMenu.Size = new Size(126, 22);
             supplierMgtMenu.Text = "Suppliers";
             supplierMgtMenu.Click += supplierMgtMenu_Click;
             // 
             // transactionsToolStripMenuItem
             // 
             transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
-            transactionsToolStripMenuItem.Size = new Size(219, 34);
+            transactionsToolStripMenuItem.Size = new Size(145, 22);
             transactionsToolStripMenuItem.Text = "Transactions";
             transactionsToolStripMenuItem.Click += transactionsToolStripMenuItem_Click;
             // 
             // tPanelMain
             // 
             tPanelMain.ColumnCount = 3;
-            tPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 6F));
+            tPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 4F));
             tPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 6F));
+            tPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 4F));
             tPanelMain.Controls.Add(tPanelTop, 1, 0);
             tPanelMain.Controls.Add(PanelMain, 1, 1);
             tPanelMain.Dock = DockStyle.Fill;
-            tPanelMain.Location = new Point(0, 33);
+            tPanelMain.Location = new Point(0, 24);
+            tPanelMain.Margin = new Padding(2);
             tPanelMain.Name = "tPanelMain";
             tPanelMain.RowCount = 4;
-            tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 70F));
+            tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
             tPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
-            tPanelMain.Size = new Size(1571, 875);
+            tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 12F));
+            tPanelMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 3F));
+            tPanelMain.Size = new Size(1100, 521);
             tPanelMain.TabIndex = 1;
             // 
             // tPanelTop
             // 
-            tPanelTop.BackColor = Color.Gray;
+            tPanelTop.BackColor = Color.FromArgb(63, 136, 197);
             tPanelTop.ColumnCount = 2;
             tPanelTop.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 76.92308F));
             tPanelTop.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.07692F));
             tPanelTop.Controls.Add(IndicatorPanel, 1, 0);
             tPanelTop.Dock = DockStyle.Fill;
-            tPanelTop.Location = new Point(6, 0);
+            tPanelTop.Location = new Point(4, 0);
             tPanelTop.Margin = new Padding(0);
             tPanelTop.Name = "tPanelTop";
             tPanelTop.RowCount = 1;
             tPanelTop.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tPanelTop.Size = new Size(1559, 70);
+            tPanelTop.Size = new Size(1092, 42);
             tPanelTop.TabIndex = 0;
             // 
             // IndicatorPanel
             // 
-            IndicatorPanel.BackColor = Color.Gray;
+            IndicatorPanel.BackColor = Color.Transparent;
             IndicatorPanel.Controls.Add(txtIndicator);
             IndicatorPanel.Dock = DockStyle.Fill;
-            IndicatorPanel.Location = new Point(1202, 3);
+            IndicatorPanel.Location = new Point(842, 2);
+            IndicatorPanel.Margin = new Padding(2);
             IndicatorPanel.Name = "IndicatorPanel";
-            IndicatorPanel.Size = new Size(354, 64);
+            IndicatorPanel.Size = new Size(248, 38);
             IndicatorPanel.TabIndex = 3;
             // 
             // txtIndicator
             // 
-            txtIndicator.Anchor = AnchorStyles.None;
-            txtIndicator.BackColor = Color.DarkGray;
+            txtIndicator.Anchor = AnchorStyles.Right;
+            txtIndicator.BackColor = Color.White;
             txtIndicator.BorderStyle = BorderStyle.None;
-            txtIndicator.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            txtIndicator.Location = new Point(1, 12);
+            txtIndicator.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            txtIndicator.Location = new Point(1, 4);
+            txtIndicator.Margin = new Padding(2);
             txtIndicator.Multiline = true;
             txtIndicator.Name = "txtIndicator";
             txtIndicator.ReadOnly = true;
-            txtIndicator.Size = new Size(353, 43);
+            txtIndicator.Size = new Size(247, 31);
             txtIndicator.TabIndex = 0;
             txtIndicator.TabStop = false;
-            txtIndicator.TextAlign = HorizontalAlignment.Center;
+            txtIndicator.TextAlign = HorizontalAlignment.Right;
             txtIndicator.TextChanged += txtIndicator_TextChanged;
             txtIndicator.DoubleClick += txtIndicator_DoubleClick;
             txtIndicator.Leave += txtIndicator_Leave;
@@ -214,21 +218,23 @@
             PanelMain.BackColor = Color.WhiteSmoke;
             PanelMain.BorderStyle = BorderStyle.Fixed3D;
             PanelMain.Dock = DockStyle.Fill;
-            PanelMain.Location = new Point(9, 73);
+            PanelMain.Location = new Point(6, 44);
+            PanelMain.Margin = new Padding(2);
             PanelMain.Name = "PanelMain";
-            PanelMain.Size = new Size(1553, 774);
+            PanelMain.Size = new Size(1088, 460);
             PanelMain.TabIndex = 1;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1571, 908);
+            ClientSize = new Size(1100, 545);
             Controls.Add(tPanelMain);
             Controls.Add(menuStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
-            MinimumSize = new Size(1188, 589);
+            Margin = new Padding(2);
+            MinimumSize = new Size(836, 369);
             Name = "MainForm";
             Text = "Weigh Bridge Application";
             WindowState = FormWindowState.Maximized;

@@ -39,7 +39,7 @@ namespace TruckScale.UI.HelperClass
             services.AddTransient<MainForm>();
             services.AddTransient<TransactionForm>();
             services.AddTransient<LogInForm>();
-            services.AddTransient<CustomerCrudUC>();
+            services.AddTransient<CustomerForm>();
             services.AddTransient<ProductCrudUC>();
             services.AddTransient<SupplierCrudUC>();
             services.AddTransient<TransactionsUC>();

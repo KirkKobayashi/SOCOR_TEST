@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TruckScale.Library.Data.DBContext;
 using TruckScale.Library.Data.Models;
+using TruckScale.Library.Interfaces;
 using TruckScale.UI.Forms;
 using TruckScale.UI.HelperClass;
 
@@ -8,16 +9,11 @@ namespace TruckScale.UI.UserControls
 {
     public partial class CustomerCrudUC : UserControl
     {
-        private ScaleDbContext _dbContext;
-        private bool _newRecord;
-        private int _recId;
-        private MainForm _mainForm;
-        public CustomerCrudUC(MainForm mainForm)
+        private ICustomerRepository _customerService;
+        public CustomerCrudUC(MainForm mainForm, ICustomerRepository customerService)
         {
             InitializeComponent();
-
-            _dbContext = Factory.GetDBContext();
-
+            _customerService = customerService;
             GetRecords();
 
             btnSave.Click += BtnSave_Click;
@@ -26,12 +22,11 @@ namespace TruckScale.UI.UserControls
             btnCancel.Click += BtnCancel_Click;
 
             TitleLabel.Text = "Customer Management";
-            _mainForm = mainForm;
         }
 
         private void BtnCancel_Click(object? sender, EventArgs e)
         {
-            _mainForm.ShowTransactions();
+            throw new NotImplementedException();
         }
 
         private void BtnAdd_Click(object? sender, EventArgs e)
@@ -39,7 +34,7 @@ namespace TruckScale.UI.UserControls
             txtName.Text = string.Empty;
             txtName.ReadOnly = false;
             txtName.Focus();
-            _newRecord = true;
+            throw new NotImplementedException();
         }
 
         private void DgvRecords_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
@@ -51,13 +46,13 @@ namespace TruckScale.UI.UserControls
 
             txtName.Text = row.Cells[1].Value.ToString();
 
-            _recId = Convert.ToInt32(row.Cells[0].Value);
+            //_recId = Convert.ToInt32(row.Cells[0].Value);
 
             if (dgv.Columns[e.ColumnIndex].Name == "edit")
             {
                 txtName.ReadOnly = false;
                 txtName.Focus();
-                _newRecord = false;
+                //_newRecord = false;
             }
 
             if (dgv.Columns[e.ColumnIndex].Name == "delete")
@@ -66,7 +61,7 @@ namespace TruckScale.UI.UserControls
 
                 if (ans == DialogResult.Yes)
                 {
-                    DeleteRecord(_recId);
+                    //DeleteRecord(_recId);
                     txtName.Text = string.Empty;
                 }
             }
@@ -76,14 +71,15 @@ namespace TruckScale.UI.UserControls
         {
             try
             {
-                var prod = _dbContext.Products.Find(recordId);
+                throw new NotImplementedException();
+                //var customer = _customerService.GetCustomerByName()
 
-                if (prod != null)
-                {
-                    _dbContext.Products.Remove(prod);
-                    _dbContext.SaveChanges();
-                    GetRecords();
-                }
+                //if (prod != null)
+                //{
+                //    _dbContext.Products.Remove(prod);
+                //    _dbContext.SaveChanges();
+                //    GetRecords();
+                //}
             }
             catch (Exception ex)
             {
@@ -94,7 +90,7 @@ namespace TruckScale.UI.UserControls
         {
             try
             {
-                var records = await _dbContext.Customers.ToListAsync();
+                var records = _customerService.GetAll();
 
                 if (records != null)
                 {
@@ -113,49 +109,50 @@ namespace TruckScale.UI.UserControls
 
         private void BtnSave_Click(object? sender, EventArgs e)
         {
-            var ep = new ErrorProvider();
-            if (string.IsNullOrWhiteSpace(txtName.Text))
-            {
-                ep.SetError(txtName, "Name must not be blank.");
-                return;
-            }
-            else
-            {
-                ep.SetError(txtName, "");
-            }
+            throw new NotImplementedException();
+            //var ep = new ErrorProvider();
+            //if (string.IsNullOrWhiteSpace(txtName.Text))
+            //{
+            //    ep.SetError(txtName, "Name must not be blank.");
+            //    return;
+            //}
+            //else
+            //{
+            //    ep.SetError(txtName, "");
+            //}
 
-            try
-            {
-                if (_newRecord)
-                {
-                    _dbContext.Customers.Add(new Customer { Active = true, Name = txtName.Text.ToUpper(), });
-                    _dbContext.SaveChanges();
+            //try
+            //{
+            //    if (_newRecord)
+            //    {
+            //        _dbContext.Customers.Add(new Customer { Active = true, Name = txtName.Text.ToUpper(), });
+            //        _dbContext.SaveChanges();
 
-                }
-                else
-                {
-                    var record = _dbContext.Customers.Find(_recId);
-                    if (record != null)
-                    {
-                        record.Name = txtName.Text.ToUpper();
-                        _dbContext.Entry(record).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                        _dbContext.SaveChanges();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Record not found");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Save / Update error \n\n{ex.Message}");
-            }
+            //    }
+            //    else
+            //    {
+            //        var record = _dbContext.Customers.Find(_recId);
+            //        if (record != null)
+            //        {
+            //            record.Name = txtName.Text.ToUpper();
+            //            _dbContext.Entry(record).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            //            _dbContext.SaveChanges();
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Record not found");
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"Save / Update error \n\n{ex.Message}");
+            //}
 
-            _newRecord = false;
-            GetRecords();
-            txtName.Text = string.Empty;
-            txtName.ReadOnly = true;
+            //_newRecord = false;
+            //GetRecords();
+            //txtName.Text = string.Empty;
+            //txtName.ReadOnly = true;
         }
     }
 }

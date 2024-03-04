@@ -32,7 +32,7 @@ namespace TruckScale.Library.Repositories
 
         public Customer GetCustomerByName(string name)
         {
-            return dbContext.Customers.FirstOrDefault(c => c.Name == name);
+            return dbContext.Customers.FirstOrDefault(c => c.Name.ToLower() == name.ToLower());
         }
 
         public Customer? GetById(int id)
@@ -45,6 +45,21 @@ namespace TruckScale.Library.Repositories
             Customer customer = dbContext.Customers.Find(id);
             dbContext.Customers.Remove(customer);
             dbContext.SaveChanges();
+        }
+
+        public void Update(Customer customer)
+        {
+            var customerToUpdate = GetById(customer.Id);
+
+            if (customerToUpdate != null)
+            {
+                customerToUpdate.Name = customer.Name;
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                throw new ArgumentNullException("Customer record not found.");
+            }
         }
 
 

@@ -61,6 +61,7 @@ namespace TruckScale.UI.Forms
         {
             if (e.Data != null)
             {
+                var dLength = e.Data.Length;
                 var newWeight = e.Data.Substring(sPort.StartIndex, sPort.EndIndex);
 
                 SetWeightString(newWeight.ParseWeight());
@@ -87,7 +88,6 @@ namespace TruckScale.UI.Forms
                 ShowTransactions();
             }
         }
-
 
         public void ShowTransactions()
         {
@@ -120,11 +120,6 @@ namespace TruckScale.UI.Forms
             PanelMain.Controls.Add(uc);
             uc.Dock = DockStyle.Fill;
             uc.Show();
-        }
-
-        private void btnTransactions_Click(object sender, EventArgs e)
-        {
-            ShowTransactions();
         }
 
         private void toolMenuUser_Click(object sender, EventArgs e)
@@ -176,11 +171,9 @@ namespace TruckScale.UI.Forms
 
         private void customerMgtMenu_Click(object sender, EventArgs e)
         {
-            CustomerCrudUC uc = new CustomerCrudUC(this);
-            PanelMain.Controls.Clear();
-            PanelMain.Controls.Add(uc);
-            uc.Dock = DockStyle.Fill;
-            uc.Show();
+            var frm = _factory.CreateForm<CustomerForm>();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
         }
 
         private void supplierMgtMenu_Click(object sender, EventArgs e)

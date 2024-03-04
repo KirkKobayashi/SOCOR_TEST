@@ -21,6 +21,7 @@ namespace TruckScale.UI
             using (ServiceProvider serviceProvider = services.BuildServiceProvider())
             {
                 var frm = serviceProvider.GetRequiredService<MainForm>();
+
                 Application.Run(frm);
             }
         }
