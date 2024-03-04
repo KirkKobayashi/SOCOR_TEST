@@ -10,5 +10,6 @@ namespace TruckScale.Library.Interfaces
         List<Product> GetAll();
         int Insert(Product product);
         Product GetProductByName(string name);
+        void Update(Product product);
     }
 }

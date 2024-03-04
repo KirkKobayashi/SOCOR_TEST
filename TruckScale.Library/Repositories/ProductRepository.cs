@@ -54,6 +54,20 @@ namespace TruckScale.Library.Repositories
             return dbContext.Products.FirstOrDefault(p => p.Name == name);
         }
 
+        public void Update(Product product)
+        {
+            var rectoupdate = GetById(product.Id);
+
+            if (rectoupdate != null)
+            {
+                rectoupdate.Name = product.Name;
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                throw new ArgumentNullException("Customer record not found.");
+            }
+        }
 
         private bool disposed = false;
 

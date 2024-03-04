@@ -46,6 +46,7 @@
             btnExit.TabIndex = 18;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += btnExit_Click;
             // 
             // btnSave
             // 
@@ -55,6 +56,7 @@
             btnSave.TabIndex = 17;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // label3
             // 
@@ -81,6 +83,7 @@
             txtName.Name = "txtName";
             txtName.Size = new Size(260, 20);
             txtName.TabIndex = 14;
+            txtName.KeyDown += txtName_KeyDown;
             // 
             // label2
             // 

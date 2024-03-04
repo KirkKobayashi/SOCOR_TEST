@@ -123,7 +123,7 @@ namespace TruckScale.UI.Forms
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }
