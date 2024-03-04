@@ -66,7 +66,7 @@ namespace TruckScale.Library.Repositories
         {
             try
             {
-                return dbContext?.Weighers.FirstOrDefault(w => w.UserName == name);
+                return dbContext?.Weighers.FirstOrDefault(w => w.UserName.ToLower() == name.ToLower());
             }
             catch (Exception)
             {
@@ -91,6 +91,24 @@ namespace TruckScale.Library.Repositories
 
                 throw;
             }
+        }
+
+        public void UpdateWeigher(Weigher weigher)
+        {
+            var updatedWeigher = dbContext.Weighers.Find(weigher.Id);
+
+            if (updatedWeigher == null)
+            {
+                throw new ArgumentNullException("Weigher record not found.");
+            }
+
+            updatedWeigher.Id = weigher.Id;
+            updatedWeigher.FirstName = weigher.FirstName;
+            updatedWeigher.LastName = weigher.LastName;
+            updatedWeigher.UserName = weigher.UserName;
+            updatedWeigher.Password = weigher.Password;
+
+            dbContext.SaveChanges();
         }
 
     }

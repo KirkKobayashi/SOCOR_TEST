@@ -88,14 +88,6 @@ namespace TruckScale.UI.Forms
             }
         }
 
-        private void ShowUserManagement()
-        {
-            PanelMain.Controls.Clear();
-            WeigherUC weigherUC = new WeigherUC(_service, this);
-            PanelMain.Controls.Add(weigherUC);
-            weigherUC.Dock = DockStyle.Fill;
-            weigherUC.Show();
-        }
 
         public void ShowTransactions()
         {
@@ -137,8 +129,9 @@ namespace TruckScale.UI.Forms
 
         private void toolMenuUser_Click(object sender, EventArgs e)
         {
-            PanelMain.Controls.Clear();
-            ShowUserManagement();
+            var frm = _factory.CreateForm<WeigherManagementForm>();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
         }
 
         private void stripMenuLogIn_Click(object sender, EventArgs e)

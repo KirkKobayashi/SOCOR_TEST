@@ -23,7 +23,6 @@ namespace TruckScale.UI
                 var frm = serviceProvider.GetRequiredService<MainForm>();
                 Application.Run(frm);
             }
-            
         }
     }
 }

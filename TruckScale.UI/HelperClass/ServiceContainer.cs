@@ -43,7 +43,7 @@ namespace TruckScale.UI.HelperClass
             services.AddTransient<ProductCrudUC>();
             services.AddTransient<SupplierCrudUC>();
             services.AddTransient<TransactionsUC>();
-            services.AddTransient<WeigherUC>();
+            services.AddTransient<WeigherManagementForm>();
         }
     }
 }
