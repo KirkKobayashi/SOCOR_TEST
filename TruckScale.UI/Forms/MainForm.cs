@@ -1,4 +1,5 @@
-﻿using TruckScale.Library.BLL;
+﻿using ScaleUI.UI;
+using TruckScale.Library.BLL;
 using TruckScale.ScaleSerialPort;
 using TruckScale.UI.HelperClass;
 using TruckScale.UI.UserControls;
@@ -8,6 +9,7 @@ namespace TruckScale.UI.Forms
 {
     public partial class MainForm : Form
     {
+        private readonly IUIFactory _factory;
         public int weigherId { get; set; }
         public string? stringWeight { get; set; }
 
@@ -19,12 +21,12 @@ namespace TruckScale.UI.Forms
 
         delegate void SetWeight(string weighstring);
 
-        public MainForm()
+        public MainForm(IUIFactory factory)
         {
             InitializeComponent();
-
-            _service = Factory.GetApplicationService();
             InitializePort();
+
+            _factory = factory;
         }
 
         private void InitializePort()
@@ -73,21 +75,17 @@ namespace TruckScale.UI.Forms
             ShowTransactions();
         }
 
-        public void LogIn()
-        {
-            PanelMain.Controls.Clear();
-            ViewMenu.Enabled = true;
-            stripMenuLogIn.Enabled = false;
-            ShowTransactions();
-        }
-
         private void ShowUserLogIn()
         {
-            PanelMain.Controls.Clear();
-            LogInUC logInUC = new LogInUC(_service, this);
-            PanelMain.Controls.Add(logInUC);
-            logInUC.Dock = DockStyle.Fill;
-            logInUC.Show();
+            var frm = _factory.CreateForm<LogInForm>();
+            frm.ShowDialog();
+
+            if (!string.IsNullOrEmpty(GlobalProps.UserName))
+            {
+                ViewMenu.Enabled = true;
+                stripMenuLogIn.Enabled = false;
+                ShowTransactions();
+            }
         }
 
         private void ShowUserManagement()
@@ -102,9 +100,7 @@ namespace TruckScale.UI.Forms
         public void ShowTransactions()
         {
             PanelMain.Controls.Clear();
-            //TransactionsUC uc = new TransactionsUC(_service, this);
-            IApplicationServiceExtensions svc = Factory.GetApplicationServiceExtensions();
-            TransactionsUC uc = new TransactionsUC(svc);
+            var uc = _factory.CreateUC<TransactionsUC>();
             PanelMain.Controls.Add(uc);
             uc.Dock = DockStyle.Fill;
             uc.Show();

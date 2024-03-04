@@ -1,23 +1,23 @@
-﻿using TruckScale.Library.BLL;
+﻿
+
+using TruckScale.Library.BLL;
 using TruckScale.Library.Data.Models;
-using TruckScale.UI.Forms;
+using TruckScale.Library.Interfaces;
 using TruckScale.UI.HelperClass;
 
-namespace TruckScale.UI.UserControls
+namespace ScaleUI.UI
 {
-    public partial class LogInUC : UserControl
+    public partial class LogInForm : Form
     {
-        private readonly ApplicationService _service;
-        private readonly MainForm _mainForm;
+        private readonly IApplicationServiceExtensions _service;
+        private readonly IWeigherRepository _weigherService;
 
-        public LogInUC(ApplicationService service, MainForm mainForm)
+        public LogInForm(IApplicationServiceExtensions applicationServiceExtensions, IWeigherRepository weigherService)
         {
             InitializeComponent();
-            _service = service;
-            _mainForm = mainForm;
-
+            _service = applicationServiceExtensions;
+            _weigherService = weigherService;
             SeedWeigher();
-            txtUserName.Focus();
         }
 
         private void SeedWeigher()
@@ -39,12 +39,17 @@ namespace TruckScale.UI.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding admin account \n\n{ex.Message}");
+                MessageBox.Show($"Error base account \n\n{ex.Message}");
             }
             finally { Cursor.Current = Cursors.Default; }
         }
 
-        private bool UserLogIn()
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private async void LogInUser()
         {
             try
             {
@@ -52,53 +57,38 @@ namespace TruckScale.UI.UserControls
                 {
                     MessageBox.Show("User name is empty.");
                     txtUserName.Focus();
-                    return false;
                 }
 
                 if (string.IsNullOrWhiteSpace(txtPassword.Text))
                 {
                     MessageBox.Show("Password is empty.");
                     txtPassword.Focus();
-                    return false;
                 }
 
-                var weigher = _service.GetWeigherByName(txtUserName.Text.Trim());
+                var weigher = _weigherService.GetByName(txtUserName.Text.Trim());
 
                 if (weigher != null)
                 {
                     if (weigher.Password == AES.EncryptString(Globals.myKey, txtPassword.Text.Trim()))
                     {
                         GlobalProps.UserName = weigher.UserName;
-                        _mainForm.weigherId = weigher.Id;
-                        return true;
+                        this.Close();
                     }
                 }
-                MessageBox.Show("Username or password not found");
-                return false;
+                else
+                {
+                    MessageBox.Show("Username or password invalid");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"User log in error \n\n{ex.Message}", "Truck scale application", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return false;
             }
         }
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            var success = UserLogIn();
-
-            if (success)
-            {
-                _mainForm.LogIn();
-            }
-        }
-
-        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Enter)
-            {
-                btnLogIn.PerformClick();
-            }
+            LogInUser();
         }
     }
 }

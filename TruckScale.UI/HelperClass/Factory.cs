@@ -12,15 +12,11 @@ namespace TruckScale.UI.HelperClass
             return new ApplicationService(GetDBContext());
         }
 
-        public static IApplicationServiceExtensions GetApplicationServiceExtensions()
-        {
-            return new ApplicationServiceExtensions(GetDBContext());
-        }
-
         public static ScaleDbContext GetDBContext()
         {
-            var dbname = ConfigurationManager.AppSettings["dbname"].ToString();
-            return new Library.Data.DBContext.ScaleDbContext(ConStringHelper.Get(dbname));
+            return new ScaleDbContext();
+            //var dbname = ConfigurationManager.AppSettings["dbname"].ToString();
+            //return new Library.Data.DBContext.ScaleDbContext(ConStringHelper.Get(dbname));
         }
 
     }

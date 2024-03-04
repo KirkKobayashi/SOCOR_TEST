@@ -6,39 +6,33 @@ using Microsoft.Graph.Models.Security;
 using TruckScale.Library.Data.DBContext;
 using TruckScale.Library.Data.DTOs;
 using TruckScale.Library.Data.Models;
+using TruckScale.Library.Interfaces;
 using TruckScale.Library.Repositories;
 
 namespace TruckScale.Library.BLL
 {
-    public interface IApplicationServiceExtensions
-    {
-        List<Customer> GetCustomers();
-        List<Supplier> GetSuppliers();
-        List<Product> GetProducts();
 
-        List<FlatWeighingTransaction> FlattenTransactionRecords(List<WeighingTransaction> weighingTransactions);
-        List<FlatWeighingTransaction> GetRangedTransactions(DateTime startDate, DateTime endDate);
-        void InsertNewTransaction(FlatWeighingTransaction transaction);
-        void UpdateTransaction(FlatWeighingTransaction transaction);
-        Customer ValidateCustomer(string name);
-        Product ValidateProduct(string name);
-        Supplier ValidateSupplier(string name);
-        Truck ValidateTruck(string plateNumber);
-        Weigher ValidateUser(string username);
-        FlatWeighingTransaction GetDisplayTransaction(int id);
-        List<WeighingTransaction>? GetTransactionsByDate(DateTime startDate, DateTime endDate);
-        WeighingTransaction GetById(int id);
-        void DeleteTransaction(int id);
-        int GetTicketNumber();
-    }
 
     public class ApplicationServiceExtensions : IApplicationServiceExtensions
     {
+        private IWeigherRepository _weigherService;
+        private ITransactionRepository _transactionsService;
+        public ApplicationServiceExtensions(IWeigherRepository weigherService, ITransactionRepository transactionsService)
+        {
+            _weigherService = weigherService;
+            _transactionsService = transactionsService;
+        }
+
         ScaleDbContext _dbContext;
 
-        public ApplicationServiceExtensions(ScaleDbContext dbContext) 
+        public void SeedWeigher(Weigher weigher)
         {
-            _dbContext = dbContext;
+            var weighers = _weigherService.GetAll();
+
+            if (weighers.Count == 0 || weighers == null)
+            {
+                _weigherService.Insert(weigher);
+            }
         }
 
         #region Validations
@@ -179,13 +173,7 @@ namespace TruckScale.Library.BLL
 
         public List<FlatWeighingTransaction> GetRangedTransactions(DateTime startDate, DateTime endDate)
         {
-            var trans = _dbContext.WeighingTransactions
-                  .Include(w => w.Customer)
-                  .Include(w => w.Supplier)
-                  .Include(w => w.Product)
-                  .Include(w => w.Truck)
-                  .Include(w => w.Weigher)
-                  .Where(w => w.FirstWeightDate >= startDate && w.FirstWeightDate <= endDate).ToList();
+            var trans = _transactionsService.GetRangedRecords(startDate, endDate).ToList();
 
             return FlattenTransactionRecords(trans);
         }
@@ -235,7 +223,7 @@ namespace TruckScale.Library.BLL
                      .Include(w => w.Product)
                      .Include(w => w.Truck)
                      .Include(w => w.Weigher)
-                     .Where(w => w.Id == id).FirstOrDefault(); 
+                     .Where(w => w.Id == id).FirstOrDefault();
 
             if (t != null)
             {

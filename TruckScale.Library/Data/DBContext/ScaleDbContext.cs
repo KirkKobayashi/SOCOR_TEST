@@ -5,16 +5,19 @@ namespace TruckScale.Library.Data.DBContext
 {
     public class ScaleDbContext : DbContext
     {
-        private string _constring;
-
-        public ScaleDbContext(string constring) 
+        public ScaleDbContext()
         {
-            _constring = constring;
+                
+        }
+
+        public ScaleDbContext(DbContextOptions options) : base(options)
+        {
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_constring);
+            //optionsBuilder.UseSqlServer(_constring);
             //optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         }
 

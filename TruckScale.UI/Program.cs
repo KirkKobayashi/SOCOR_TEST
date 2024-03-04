@@ -1,4 +1,6 @@
+using Microsoft.Extensions.DependencyInjection;
 using TruckScale.UI.Forms;
+using TruckScale.UI.HelperClass;
 
 namespace TruckScale.UI
 {
@@ -10,10 +12,18 @@ namespace TruckScale.UI
         [STAThread]
         static void Main()
         {
+            var services = new ServiceCollection();
+            ServiceContainer.ConfigureServices(services);
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
+
+            using (ServiceProvider serviceProvider = services.BuildServiceProvider())
+            {
+                var frm = serviceProvider.GetRequiredService<MainForm>();
+                Application.Run(frm);
+            }
+            
         }
     }
 }

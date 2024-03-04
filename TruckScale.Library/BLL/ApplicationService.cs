@@ -146,13 +146,13 @@ namespace TruckScale.Library.BLL
 
         public void SeedWeigher(Weigher weigher)
         {
-            if (dbContext.Weighers.Count() == 0)
-            {
-                using (var service = new WeigherRepository(dbContext))
-                {
-                    service.Insert(weigher);
-                }
-            }
+            //if (dbContext.Weighers.Count() == 0)
+            //{
+            //    using (var service = new WeigherRepository(dbContext))
+            //    {
+            //        service.Insert(weigher);
+            //    }
+            //}
         }
 
         public WeighingTransaction GetTransaction(int id)

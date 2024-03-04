@@ -15,11 +15,8 @@ namespace TruckScale.UI.UserControls
     {
         public int transactionId { get; set; }
 
-        private readonly MainForm _mainForm;
-        //private readonly ApplicationService _service;
         private readonly IApplicationServiceExtensions _serviceExtensions;
         private StreamReader reader;
-        //private List<WeighingTransaction> _transactions;
         private string _appDirectory;
         DataTable dt;
 
@@ -28,7 +25,6 @@ namespace TruckScale.UI.UserControls
         {
             InitializeComponent();
             _serviceExtensions = serviceExtensions;
-            //_service = service;
             _appDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
             GetRecords();
@@ -40,17 +36,17 @@ namespace TruckScale.UI.UserControls
         }
         public TransactionsUC(ApplicationService service, MainForm mainForm, IApplicationServiceExtensions serviceExtensions)
         {
-            InitializeComponent();
-            //_service = service;
-            _mainForm = mainForm;
-            _appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            //InitializeComponent();
+            ////_service = service;
+            //_mainForm = mainForm;
+            //_appDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
-            GetRecords();
-            dgvTransactions.AllowUserToDeleteRows = false;
-            dgvTransactions.AllowUserToAddRows = false;
+            //GetRecords();
+            //dgvTransactions.AllowUserToDeleteRows = false;
+            //dgvTransactions.AllowUserToAddRows = false;
 
-            CheckDirectory();
-            _serviceExtensions = serviceExtensions;
+            //CheckDirectory();
+            //_serviceExtensions = serviceExtensions;
         }
 
         private void CheckDirectory()
@@ -145,9 +141,9 @@ namespace TruckScale.UI.UserControls
                 GlobalProps.newTrans = false;
                 //_mainForm.ShowWeighing(false, transactionId);
 
-                var frm = new TransactionForm(Factory.GetApplicationServiceExtensions());
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.ShowDialog();
+                //var frm = new TransactionForm(Factory.GetApplicationServiceExtensions());
+                //frm.StartPosition = FormStartPosition.CenterParent;
+                //frm.ShowDialog();
 
                 GetRecords();
             }
@@ -233,9 +229,9 @@ namespace TruckScale.UI.UserControls
         {
             //_mainForm.ShowWeighing(true, 0);
             GlobalProps.newTrans = true;
-            var frm = new TransactionForm(Factory.GetApplicationServiceExtensions());
-            frm.StartPosition = FormStartPosition.CenterParent;
-            frm.ShowDialog();
+            //var frm = new TransactionForm(Factory.GetApplicationServiceExtensions());
+            //frm.StartPosition = FormStartPosition.CenterParent;
+            //frm.ShowDialog();
 
             GetRecords();
         }

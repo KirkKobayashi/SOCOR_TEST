@@ -7,7 +7,7 @@ using TruckScale.Library.Interfaces;
 
 namespace TruckScale.Library.Repositories
 {
-    public class WeigherRepository : IWeigherRepository, IDisposable
+    public class WeigherRepository : IWeigherRepository
     {
         private ScaleDbContext dbContext;
 
@@ -38,6 +38,8 @@ namespace TruckScale.Library.Repositories
         {
             try
             {
+                if (dbContext == null)
+                    throw new Exception("tae");
                 return dbContext.Weighers.ToList();
             }
             catch (Exception)
@@ -47,7 +49,7 @@ namespace TruckScale.Library.Repositories
             }
         }
 
-        public Weigher? GetById(int id)
+        public Weigher GetById(int id)
         {
             try
             {
@@ -60,7 +62,7 @@ namespace TruckScale.Library.Repositories
             }
         }
 
-        public Weigher? GetByName(string name)
+        public Weigher GetByName(string name)
         {
             try
             {
@@ -91,23 +93,5 @@ namespace TruckScale.Library.Repositories
             }
         }
 
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    dbContext.Dispose();
-                }
-            }
-            disposed = true;
-        }
-        public void Dispose()
-        {
-            disposed = true;
-            GC.SuppressFinalize(this);
-        }
     }
 }

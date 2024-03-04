@@ -3,7 +3,7 @@ using TruckScale.Library.Data.DTOs;
 
 namespace TruckScale.UI.HelperClass
 {
-    public class TicketPrinter
+    public class TicketPrinter : ITicketPrinter
     {
         private PrintDocument _document;
         private PrintDialog _printDialog;
@@ -72,7 +72,7 @@ namespace TruckScale.UI.HelperClass
 
             e.PageSettings.PaperSize = new PaperSize("Custom", 800, 1100);
             Graphics graphics = e.Graphics;
-            
+
             int startX = _settings.startX;
             int startY = _settings.startY;
             int Offset = _settings.yOffset;
@@ -98,7 +98,7 @@ namespace TruckScale.UI.HelperClass
             _recordToPrint.TicketNumber = 1;
             Offset = Offset + 20;
             graphics.DrawString("Weighing Slip No.",
-                  new Font(bodyFont,bodySize),
+                  new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX, startY + Offset);
             graphics.DrawString(_recordToPrint.TicketNumber.ToString(),
                   new Font(bodyFont, bodySize, FontStyle.Bold),
@@ -255,10 +255,10 @@ namespace TruckScale.UI.HelperClass
                   new Font(bodyFont, bodySize),
                   new SolidBrush(Color.Black), startX, startY + Offset);
 
-         
+
             graphics.DrawString("Raw Materials Inspector",
                   new Font(bodyFont, bodySize),
-                  new SolidBrush(Color.Black), startX +230, startY + Offset);
+                  new SolidBrush(Color.Black), startX + 230, startY + Offset);
             #endregion
         }
     }
