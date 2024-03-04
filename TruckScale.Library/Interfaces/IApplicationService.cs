@@ -9,10 +9,10 @@ namespace TruckScale.Library.Interfaces
         int AddProduct(string name);
         int AddSupplier(string name);
         int AddTruck(string platenumber);
-        List<FlatWeighingTransaction> FlattenTransactionRecords(IQueryable<WeighingTransaction> weighingTransactions);
+        List<TransacionDTO> FlattenTransactionRecords(IQueryable<WeighingTransaction> weighingTransactions);
         Customer GetCustomerByName(string name);
         List<Customer> GetCustomers();
-        FlatWeighingTransaction GetDisplayTransaction(int id);
+        TransacionDTO GetDisplayTransaction(int id);
         Product GetProductByName(string name);
         List<Product> GetProducts();
         Supplier GetSupplierByName(string name);

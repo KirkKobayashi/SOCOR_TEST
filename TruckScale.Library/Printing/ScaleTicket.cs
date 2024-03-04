@@ -17,7 +17,7 @@ namespace TruckScale.Library.Printing
             this.address2 = address2;
         }
 
-        public string PrintTicket(FlatWeighingTransaction weighingTransaction)
+        public string PrintTicket(TransacionDTO weighingTransaction)
         {
             try
             {

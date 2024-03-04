@@ -1,13 +1,6 @@
-﻿using DocumentFormat.OpenXml.InkML;
-using DocumentFormat.OpenXml.Wordprocessing;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Graph.Models;
-using Microsoft.Graph.Models.Security;
-using TruckScale.Library.Data.DBContext;
-using TruckScale.Library.Data.DTOs;
+﻿using TruckScale.Library.Data.DTOs;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
-using TruckScale.Library.Repositories;
 
 namespace TruckScale.Library.BLL
 {
@@ -17,13 +10,19 @@ namespace TruckScale.Library.BLL
     {
         private IWeigherRepository _weigherService;
         private ITransactionRepository _transactionsService;
-        public ApplicationServiceExtensions(IWeigherRepository weigherService, ITransactionRepository transactionsService)
+        private ICustomerRepository _customerService;
+        private ISupplierRepository _supplierService;
+        private IProductRepository _productService;
+        private ITruckRepository _truckService;
+        public ApplicationServiceExtensions(IWeigherRepository weigherService, ITransactionRepository transactionsService, ICustomerRepository customerService, ISupplierRepository supplierService, IProductRepository productService, ITruckRepository truckService)
         {
             _weigherService = weigherService;
             _transactionsService = transactionsService;
+            _customerService = customerService;
+            _supplierService = supplierService;
+            _productService = productService;
+            _truckService = truckService;
         }
-
-        ScaleDbContext _dbContext;
 
         public void SeedWeigher(Weigher weigher)
         {
@@ -38,13 +37,12 @@ namespace TruckScale.Library.BLL
         #region Validations
         public Customer ValidateCustomer(string name)
         {
-            var customer = _dbContext.Customers.FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
+            var customer = _customerService.GetCustomerByName(name);
 
             if (customer == null)
             {
                 var newRecord = new Customer { Name = name, Active = true };
-                _dbContext.Add(newRecord);
-                _dbContext.SaveChanges();
+                _customerService.Insert(newRecord);
 
                 return newRecord;
             }
@@ -54,13 +52,12 @@ namespace TruckScale.Library.BLL
 
         public Supplier ValidateSupplier(string name)
         {
-            var supplier = _dbContext.Suppliers.FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
+            var supplier = _supplierService.GetSupplierByName(name);
 
             if (supplier == null)
             {
                 var newRecord = new Supplier { Name = name, Active = true };
-                _dbContext.Add(newRecord);
-                _dbContext.SaveChanges();
+                _supplierService.Insert(newRecord);
 
                 return newRecord;
             }
@@ -70,13 +67,12 @@ namespace TruckScale.Library.BLL
 
         public Product ValidateProduct(string name)
         {
-            var product = _dbContext.Products.FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
+            var product = _productService.GetProductByName(name);
 
             if (product == null)
             {
                 var newRecord = new Product { Name = name, Active = true };
-                _dbContext.Add(newRecord);
-                _dbContext.SaveChanges();
+                _productService.Insert(newRecord);
 
                 return newRecord;
             }
@@ -86,13 +82,12 @@ namespace TruckScale.Library.BLL
 
         public Truck ValidateTruck(string plateNumber)
         {
-            var truck = _dbContext.Trucks.FirstOrDefault(x => x.PlateNumber.ToLower() == plateNumber.ToLower());
+            var truck = _truckService.GetTruckByPlateNumber(plateNumber);
 
             if (truck == null)
             {
                 var newRecord = new Truck { PlateNumber = plateNumber };
-                _dbContext.Add(newRecord);
-                _dbContext.SaveChanges();
+                _truckService.Insert(newRecord);
 
                 return newRecord;
             }
@@ -102,7 +97,7 @@ namespace TruckScale.Library.BLL
 
         public Weigher ValidateUser(string username)
         {
-            var user = _dbContext.Weighers.FirstOrDefault(x => x.UserName == username);
+            var user = _weigherService.GetByName(username);
 
             if (user == null)
             {
@@ -113,7 +108,7 @@ namespace TruckScale.Library.BLL
         }
         #endregion
 
-        public void InsertNewTransaction(FlatWeighingTransaction transaction)
+        public void InsertNewTransaction(TransacionDTO transaction)
         {
             var customer = ValidateCustomer(transaction.CustomerName);
             var supplier = ValidateSupplier(transaction.SupplierName);
@@ -136,13 +131,12 @@ namespace TruckScale.Library.BLL
                 TicketNumber = transaction.TicketNumber
             };
 
-            _dbContext.WeighingTransactions.Add(newWeighing);
-            _dbContext.SaveChanges();
+            _transactionsService.Insert(newWeighing); 
         }
 
-        public void UpdateTransaction(FlatWeighingTransaction transaction)
+        public void UpdateTransaction(TransacionDTO transaction)
         {
-            var recordToUpdate = _dbContext.WeighingTransactions.Find(transaction.Id);
+            var recordToUpdate = _transactionsService.GetById(transaction.Id);
 
             if (recordToUpdate == null)
             {
@@ -168,23 +162,23 @@ namespace TruckScale.Library.BLL
             recordToUpdate.Remarks = transaction.Remarks;
             recordToUpdate.TicketNumber = transaction.TicketNumber;
 
-            _dbContext.SaveChanges();
+            _transactionsService.Update(recordToUpdate);
         }
 
-        public List<FlatWeighingTransaction> GetRangedTransactions(DateTime startDate, DateTime endDate)
+        public List<TransacionDTO> GetRangedTransactions(DateTime startDate, DateTime endDate)
         {
             var trans = _transactionsService.GetRangedRecords(startDate, endDate).ToList();
 
             return FlattenTransactionRecords(trans);
         }
 
-        public List<FlatWeighingTransaction> FlattenTransactionRecords(List<WeighingTransaction> weighingTransactions)
+        public List<TransacionDTO> FlattenTransactionRecords(List<WeighingTransaction> weighingTransactions)
         {
-            List<FlatWeighingTransaction> flatTransactions = new List<FlatWeighingTransaction>();
+            List<TransacionDTO> flatTransactions = new List<TransacionDTO>();
 
             foreach (var i in weighingTransactions)
             {
-                flatTransactions.Add(new FlatWeighingTransaction
+                flatTransactions.Add(new TransacionDTO
                 {
                     TruckPlateNumber = i.Truck?.PlateNumber ?? string.Empty,
                     CustomerName = i.Customer?.Name ?? string.Empty,
@@ -193,6 +187,12 @@ namespace TruckScale.Library.BLL
                     TicketNumber = i.TicketNumber,
                     FirstWeight = i.FirstWeight,
                     SecondWeight = i.SecondWeight,
+                    FirstWeighingDate = i.FirstWeightDate,
+                    SecondWeighingDate = i.SecondWeightDate,
+                    DriverName = i.Driver,
+                    Quantity = i.Quantity,
+                    Remarks = i.Remarks,
+                    WeigherName = i.Weigher.UserName,
                     Id = i.Id
                 });
             }
@@ -202,32 +202,26 @@ namespace TruckScale.Library.BLL
 
         public List<Customer> GetCustomers()
         {
-            return _dbContext.Customers.ToList();
+            return _customerService.GetAll().ToList();
         }
 
         public List<Supplier> GetSuppliers()
         {
-            return _dbContext.Suppliers.ToList();
+            return _supplierService.GetAll().ToList();
         }
 
         public List<Product> GetProducts()
         {
-            return _dbContext.Products.ToList();
+            return _productService.GetAll().ToList();
         }
 
-        public FlatWeighingTransaction GetDisplayTransaction(int id)
+        public TransacionDTO GetDisplayTransaction(int id)
         {
-            var t = _dbContext.WeighingTransactions
-                    .Include(w => w.Customer)
-                     .Include(w => w.Supplier)
-                     .Include(w => w.Product)
-                     .Include(w => w.Truck)
-                     .Include(w => w.Weigher)
-                     .Where(w => w.Id == id).FirstOrDefault();
+            var t =_transactionsService.GetById(id);
 
             if (t != null)
             {
-                return new FlatWeighingTransaction
+                return new TransacionDTO
                 {
                     TruckPlateNumber = t.Truck.PlateNumber ?? string.Empty,
                     CustomerName = t.Customer.Name ?? string.Empty,
@@ -243,60 +237,38 @@ namespace TruckScale.Library.BLL
                     Quantity = t.Quantity ?? string.Empty,
                     Remarks = t.Remarks ?? string.Empty,
                     WeigherName = t.Weigher.UserName ?? string.Empty,
+                    
                 };
             }
 
-            return new FlatWeighingTransaction();
+            return new TransacionDTO();
         }
 
         public List<WeighingTransaction>? GetTransactionsByDate(DateTime startDate, DateTime endDate)
         {
-            var trans = _dbContext.WeighingTransactions
-               .Include(w => w.Customer)
-               .Include(w => w.Supplier)
-               .Include(w => w.Product)
-               .Include(w => w.Truck)
-               .Include(w => w.Weigher)
-               .Where(w => w.FirstWeightDate >= startDate && w.FirstWeightDate <= endDate);
+            var trans = _transactionsService.GetRangedRecords(startDate, endDate);
 
             return trans.ToList();
         }
 
         public WeighingTransaction GetById(int id)
         {
-            var transaction = _dbContext.WeighingTransactions
-                 .Include(w => w.Customer)
-                     .Include(w => w.Supplier)
-                     .Include(w => w.Product)
-                     .Include(w => w.Truck)
-                     .Include(w => w.Weigher)
-                     .Where(w => w.Id == id);
+           var rec = _transactionsService.GetById(id);
+           
+            if (rec == null)
+                return new WeighingTransaction();
 
-            return transaction.FirstOrDefault();
+            return rec;
         }
 
         public void DeleteTransaction(int id)
         {
-            var recordToDelete = _dbContext.WeighingTransactions.Find(id);
-
-            if (recordToDelete != null)
-            {
-                _dbContext.WeighingTransactions.Remove(recordToDelete);
-                _dbContext.SaveChanges();
-            }
+            _transactionsService.Delete(id);
         }
 
         public int GetTicketNumber()
         {
-            try
-            {
-                var maxTicket = _dbContext.WeighingTransactions.Max(x => x.TicketNumber);
-                return maxTicket + 1;
-            }
-            catch (InvalidOperationException)
-            {
-                return 1;
-            }
+            return _transactionsService.GetTicketNumber();
         }
     }
 }

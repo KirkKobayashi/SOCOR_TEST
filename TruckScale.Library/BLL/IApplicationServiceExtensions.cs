@@ -6,18 +6,18 @@ namespace TruckScale.Library.BLL
     public interface IApplicationServiceExtensions
     {
         void DeleteTransaction(int id);
-        List<FlatWeighingTransaction> FlattenTransactionRecords(List<WeighingTransaction> weighingTransactions);
+        List<TransacionDTO> FlattenTransactionRecords(List<WeighingTransaction> weighingTransactions);
         WeighingTransaction GetById(int id);
         List<Customer> GetCustomers();
-        FlatWeighingTransaction GetDisplayTransaction(int id);
+        TransacionDTO GetDisplayTransaction(int id);
         List<Product> GetProducts();
-        List<FlatWeighingTransaction> GetRangedTransactions(DateTime startDate, DateTime endDate);
+        List<TransacionDTO> GetRangedTransactions(DateTime startDate, DateTime endDate);
         List<Supplier> GetSuppliers();
         int GetTicketNumber();
         List<WeighingTransaction>? GetTransactionsByDate(DateTime startDate, DateTime endDate);
-        void InsertNewTransaction(FlatWeighingTransaction transaction);
+        void InsertNewTransaction(TransacionDTO transaction);
         void SeedWeigher(Weigher weigher);
-        void UpdateTransaction(FlatWeighingTransaction transaction);
+        void UpdateTransaction(TransacionDTO transaction);
         Customer ValidateCustomer(string name);
         Product ValidateProduct(string name);
         Supplier ValidateSupplier(string name);

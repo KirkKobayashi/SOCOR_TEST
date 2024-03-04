@@ -2,7 +2,7 @@
 
 namespace TruckScale.Library.Data.DTOs
 {
-    public class FlatWeighingTransaction
+    public class TransacionDTO
     {
         public int Id { get; set; }
         

@@ -163,13 +163,13 @@ namespace TruckScale.Library.BLL
             }
         }
 
-        public FlatWeighingTransaction GetDisplayTransaction(int id)
+        public TransacionDTO GetDisplayTransaction(int id)
         {
             var t = GetTransaction(id);
 
             if (t != null)
             {
-                return new FlatWeighingTransaction
+                return new TransacionDTO
                 {
                     TruckPlateNumber = t.Truck.PlateNumber ?? string.Empty,
                     CustomerName = t.Customer.Name ?? string.Empty,
@@ -188,7 +188,7 @@ namespace TruckScale.Library.BLL
                 };
             }
 
-            return new FlatWeighingTransaction();
+            return new TransacionDTO();
         }
 
         public List<WeighingTransaction>? GetTransactionsByDate(DateTime startDate, DateTime endDate)
@@ -200,13 +200,13 @@ namespace TruckScale.Library.BLL
             }
         }
 
-        public List<FlatWeighingTransaction> FlattenTransactionRecords(IQueryable<WeighingTransaction> weighingTransactions)
+        public List<TransacionDTO> FlattenTransactionRecords(IQueryable<WeighingTransaction> weighingTransactions)
         {
-            List<FlatWeighingTransaction> flatTransactions = new List<FlatWeighingTransaction>();
+            List<TransacionDTO> flatTransactions = new List<TransacionDTO>();
 
             foreach (var i in weighingTransactions)
             {
-                flatTransactions.Add(new FlatWeighingTransaction
+                flatTransactions.Add(new TransacionDTO
                 {
                     TruckPlateNumber = i.Truck?.PlateNumber ?? string.Empty,
                     CustomerName = i.Customer?.Name ?? string.Empty,

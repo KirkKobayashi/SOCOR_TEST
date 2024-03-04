@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data;
+using System.DirectoryServices.ActiveDirectory;
 using System.Drawing.Printing;
 using System.Windows.Forms;
 using TruckScale.Library.BLL;
@@ -16,37 +17,25 @@ namespace TruckScale.UI.UserControls
         public int transactionId { get; set; }
 
         private readonly IApplicationServiceExtensions _serviceExtensions;
-        private StreamReader reader;
+        private readonly IUIFactory _uiFactory;
+        private readonly ITicketPrinter _ticketPrinter;
         private string _appDirectory;
         DataTable dt;
 
 
-        public TransactionsUC(IApplicationServiceExtensions serviceExtensions)
+        public TransactionsUC(IApplicationServiceExtensions serviceExtensions, IUIFactory uiFactory, ITicketPrinter ticketPrinter)
         {
             InitializeComponent();
             _serviceExtensions = serviceExtensions;
             _appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            _uiFactory = uiFactory;
 
             GetRecords();
             dgvTransactions.AllowUserToDeleteRows = false;
             dgvTransactions.AllowUserToAddRows = false;
 
             CheckDirectory();
-
-        }
-        public TransactionsUC(ApplicationService service, MainForm mainForm, IApplicationServiceExtensions serviceExtensions)
-        {
-            //InitializeComponent();
-            ////_service = service;
-            //_mainForm = mainForm;
-            //_appDirectory = AppDomain.CurrentDomain.BaseDirectory;
-
-            //GetRecords();
-            //dgvTransactions.AllowUserToDeleteRows = false;
-            //dgvTransactions.AllowUserToAddRows = false;
-
-            //CheckDirectory();
-            //_serviceExtensions = serviceExtensions;
+            _ticketPrinter = ticketPrinter;
         }
 
         private void CheckDirectory()
@@ -70,7 +59,6 @@ namespace TruckScale.UI.UserControls
             {
                 var startdate = dtStart.Value.Date;
                 var enddate = dtEnd.Value.Date.AddDays(1).AddTicks(-10);
-                //var _transactions = _service.GetTransactionsByDate(startdate, enddate);
                 var _transactions = _serviceExtensions.GetRangedTransactions(startdate, enddate);
 
                 dt = new DataTable();
@@ -89,8 +77,6 @@ namespace TruckScale.UI.UserControls
 
                     var netweight = i.FirstWeight - i.SecondWeight;
                     dt.Rows.Add(i.Id, i.TruckPlateNumber, i.CustomerName, i.SupplierName, i.ProductName, i.FirstWeight, i.SecondWeight, Math.Abs(netweight), i.FirstWeighingDate.ToString("HH:mm MM-dd-yyyy"));
-                    //    var netweight = i.FirstWeight - i.SecondWeight;
-                    //    dt.Rows.Add(i.Id, i.Truck.PlateNumber, i.Customer.Name, i.Supplier.Name, i.Product.Name, i.FirstWeight, i.SecondWeight, Math.Abs(netweight), i.FirstWeightDate.ToString("HH:mm MM-dd-yyyy"));
                 }
 
                 dgvTransactions.DataSource = null;
@@ -127,7 +113,7 @@ namespace TruckScale.UI.UserControls
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvTransactions.Rows[e.RowIndex];
-                transactionId = Convert.ToInt32(row.Cells[0].Value);
+                GlobalProps.TransactionId = Convert.ToInt32(row.Cells[0].Value);
             }
         }
 
@@ -135,16 +121,10 @@ namespace TruckScale.UI.UserControls
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = dgvTransactions.Rows[e.RowIndex];
-                transactionId = Convert.ToInt32(row.Cells[0].Value);
-                GlobalProps.TransactionId = transactionId;
                 GlobalProps.newTrans = false;
-                //_mainForm.ShowWeighing(false, transactionId);
-
-                //var frm = new TransactionForm(Factory.GetApplicationServiceExtensions());
-                //frm.StartPosition = FormStartPosition.CenterParent;
-                //frm.ShowDialog();
-
+                var frm = _uiFactory.CreateForm<TransactionForm>();
+                frm.StartPosition = FormStartPosition.CenterScreen;
+                frm.ShowDialog();
                 GetRecords();
             }
         }
@@ -153,8 +133,7 @@ namespace TruckScale.UI.UserControls
         {
             try
             {
-                var transaction = _serviceExtensions.GetById(transactionId);
-                var toprint = TransactionMiscClass.ConvertToDTO(transaction);
+                var toprint = _serviceExtensions.GetDisplayTransaction(GlobalProps.TransactionId);
                 var settings = SettingsGetter.GetPrintSettings();
 
                 var printer = new TicketPrinter(toprint, settings);
@@ -227,11 +206,10 @@ namespace TruckScale.UI.UserControls
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            //_mainForm.ShowWeighing(true, 0);
             GlobalProps.newTrans = true;
-            //var frm = new TransactionForm(Factory.GetApplicationServiceExtensions());
-            //frm.StartPosition = FormStartPosition.CenterParent;
-            //frm.ShowDialog();
+            var frm = _uiFactory.CreateForm<TransactionForm>();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
 
             GetRecords();
         }
@@ -266,11 +244,11 @@ namespace TruckScale.UI.UserControls
 
         public static class TransactionMiscClass
         {
-            public static FlatWeighingTransaction ConvertToDTO(WeighingTransaction transaction)
+            public static TransacionDTO ConvertToDTO(WeighingTransaction transaction)
             {
                 if (transaction != null)
                 {
-                    return new FlatWeighingTransaction
+                    return new TransacionDTO
                     {
                         FirstWeight = transaction.FirstWeight,
                         SecondWeighingDate = transaction.SecondWeightDate,
@@ -287,7 +265,7 @@ namespace TruckScale.UI.UserControls
                     };
                 }
 
-                return new FlatWeighingTransaction();
+                return new TransacionDTO();
             }
         }
 

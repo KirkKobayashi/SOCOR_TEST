@@ -55,12 +55,12 @@
             btnGetWeight = new Button();
             label12 = new Label();
             txtDriver = new TextBox();
-            btnSave = new Button();
-            btnExit = new Button();
-            btnPrint = new Button();
             txtTicket = new TextBox();
             panel2 = new Panel();
             panel4 = new Panel();
+            btnSave = new Button();
+            btnExit = new Button();
+            btnPrint = new Button();
             panel1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -104,12 +104,12 @@
             tableLayoutPanel1.Controls.Add(btnGetWeight, 2, 12);
             tableLayoutPanel1.Controls.Add(label12, 0, 8);
             tableLayoutPanel1.Controls.Add(txtDriver, 1, 8);
-            tableLayoutPanel1.Controls.Add(btnSave, 2, 14);
-            tableLayoutPanel1.Controls.Add(btnExit, 2, 15);
-            tableLayoutPanel1.Controls.Add(btnPrint, 0, 14);
             tableLayoutPanel1.Controls.Add(txtTicket, 1, 1);
             tableLayoutPanel1.Controls.Add(panel2, 0, 0);
             tableLayoutPanel1.Controls.Add(panel4, 0, 9);
+            tableLayoutPanel1.Controls.Add(btnSave, 0, 14);
+            tableLayoutPanel1.Controls.Add(btnExit, 0, 15);
+            tableLayoutPanel1.Controls.Add(btnPrint, 2, 14);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -348,36 +348,6 @@
             txtDriver.Size = new Size(127, 22);
             txtDriver.TabIndex = 22;
             // 
-            // btnSave
-            // 
-            btnSave.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnSave.Location = new Point(311, 393);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new Size(93, 39);
-            btnSave.TabIndex = 23;
-            btnSave.Text = "Save";
-            btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += btnSave_Click;
-            // 
-            // btnExit
-            // 
-            btnExit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnExit.Location = new Point(311, 438);
-            btnExit.Name = "btnExit";
-            btnExit.Size = new Size(93, 39);
-            btnExit.TabIndex = 24;
-            btnExit.Text = "Exit";
-            btnExit.UseVisualStyleBackColor = true;
-            // 
-            // btnPrint
-            // 
-            btnPrint.Location = new Point(3, 393);
-            btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(96, 39);
-            btnPrint.TabIndex = 25;
-            btnPrint.Text = "Print";
-            btnPrint.UseVisualStyleBackColor = true;
-            // 
             // txtTicket
             // 
             txtTicket.Location = new Point(138, 13);
@@ -402,6 +372,38 @@
             panel4.Name = "panel4";
             panel4.Size = new Size(401, 2);
             panel4.TabIndex = 28;
+            // 
+            // btnSave
+            // 
+            btnSave.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSave.Location = new Point(39, 393);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(93, 39);
+            btnSave.TabIndex = 23;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
+            // 
+            // btnExit
+            // 
+            btnExit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnExit.Location = new Point(39, 438);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(93, 39);
+            btnExit.TabIndex = 24;
+            btnExit.Text = "Exit";
+            btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += btnExit_Click;
+            // 
+            // btnPrint
+            // 
+            btnPrint.Location = new Point(273, 393);
+            btnPrint.Name = "btnPrint";
+            btnPrint.Size = new Size(96, 39);
+            btnPrint.TabIndex = 25;
+            btnPrint.Text = "Print";
+            btnPrint.UseVisualStyleBackColor = true;
+            btnPrint.Click += btnPrint_Click;
             // 
             // TransactionForm
             // 

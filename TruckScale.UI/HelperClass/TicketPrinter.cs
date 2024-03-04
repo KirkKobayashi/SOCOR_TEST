@@ -7,7 +7,7 @@ namespace TruckScale.UI.HelperClass
     {
         private PrintDocument _document;
         private PrintDialog _printDialog;
-        private FlatWeighingTransaction _recordToPrint;
+        private TransacionDTO _recordToPrint;
         private PrintSettings _settings;
 
         public TicketPrinter()
@@ -19,7 +19,7 @@ namespace TruckScale.UI.HelperClass
             _document.PrintPage += new PrintPageEventHandler(PrintDocument_PrintPage);
         }
 
-        public TicketPrinter(FlatWeighingTransaction recordToPrint, PrintSettings settings)
+        public TicketPrinter(TransacionDTO recordToPrint, PrintSettings settings)
         {
             _document = new PrintDocument();
             _printDialog = new PrintDialog();
@@ -37,6 +37,7 @@ namespace TruckScale.UI.HelperClass
             {
                 PrintPreviewDialog pp = new PrintPreviewDialog();
                 pp.Document = _document;
+                pp.PrintPreviewControl.Zoom = 100 / 100f;
                 result = pp.ShowDialog();
                 if (result == DialogResult.OK)
                 {
@@ -85,17 +86,7 @@ namespace TruckScale.UI.HelperClass
             float firstHeaderX = (400 - title1Size.Width) / 2;
             float secondHeaderX = (400 - title2Size.Width) / 2;
 
-
-            ////HEADER 1 - COMPANY NAME
-            //graphics.DrawString(_settings.HeaderText1, new Font(headerFont, headerSize),
-            //                    new SolidBrush(Color.Black), firstHeaderX, startY + Offset);
-            ////HEADER 2 - ADDRESS
-            //Offset = Offset + 20;
-            //graphics.DrawString(_settings.HeaderText2, new Font(headerFont, headerSize),
-            //                  new SolidBrush(Color.Black), secondHeaderX, startY + Offset);
-
             //TICKET NUMBER
-            _recordToPrint.TicketNumber = 1;
             Offset = Offset + 20;
             graphics.DrawString("Weighing Slip No.",
                   new Font(bodyFont, bodySize),
@@ -105,7 +96,7 @@ namespace TruckScale.UI.HelperClass
                   new SolidBrush(Color.Black), startX + 150, startY + Offset);
 
             graphics.DrawString(_settings.HeaderText2,
-                  new Font(bodyFont, bodySize),
+                  new Font(bodyFont, bodySize, FontStyle.Bold),
                   new SolidBrush(Color.Black), 280, startY + Offset);
             Offset = Offset + 20;
             graphics.DrawString(_settings.HeaderText2,

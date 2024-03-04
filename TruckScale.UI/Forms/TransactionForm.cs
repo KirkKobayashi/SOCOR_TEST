@@ -4,27 +4,30 @@ using TruckScale.Library.Data.DTOs;
 using TruckScale.Library.Data.Models;
 using TruckScale.Library.Interfaces;
 using TruckScale.UI.HelperClass;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using static TruckScale.UI.UserControls.TransactionsUC;
 
 
 namespace TruckScale.UI.Forms
 {
     public partial class TransactionForm : Form
     {
-        //private IApplicationService _service;
         private IApplicationServiceExtensions _serviceExtensions;
+        private ITicketPrinter _ticketService;
 
-        public TransactionForm(IApplicationServiceExtensions serviceExtensions)
+        public TransactionForm(IApplicationServiceExtensions serviceExtensions, ITicketPrinter ticketService)
         {
             InitializeComponent();
             _serviceExtensions = serviceExtensions;
+
+            GetCustomers();
+            GetSuppliers();
+            GetProducts();
+            _ticketService = ticketService;
         }
 
         private void TransactionForm_Load(object sender, EventArgs e)
         {
-            GetCustomers();
-            GetSuppliers();
-            GetProducts();
-
             if (GlobalProps.newTrans)
             {
                 txtTicket.Text = _serviceExtensions.GetTicketNumber().ToString();
@@ -104,7 +107,7 @@ namespace TruckScale.UI.Forms
 
         private void InsertTransaction()
         {
-            var recordToInsert = new FlatWeighingTransaction
+            var recordToInsert = new TransacionDTO
             {
                 CustomerName = txtCustomer.Text,
                 SupplierName = txtSupplier.Text,
@@ -133,7 +136,7 @@ namespace TruckScale.UI.Forms
         {
             try
             {
-                var recordToUpdate = new FlatWeighingTransaction
+                var recordToUpdate = new TransacionDTO
                 {
                     CustomerName = txtCustomer.Text,
                     SupplierName = txtSupplier.Text,
@@ -183,7 +186,7 @@ namespace TruckScale.UI.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-           
+
 
             if (string.IsNullOrEmpty(txtPlateNumber.Text))
             {
@@ -216,6 +219,33 @@ namespace TruckScale.UI.Forms
                 }
 
                 UpdateTransaction();
+            }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (GlobalProps.newTrans)
+            {
+                MessageBox.Show("No record to print.");
+                return;
+            }
+
+            try
+            {
+                var toprint = _serviceExtensions.GetDisplayTransaction(GlobalProps.TransactionId);
+                var settings = SettingsGetter.GetPrintSettings();
+
+                var printer = new TicketPrinter(toprint, settings);
+                printer.Print();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occured while printing the scale ticket \n\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
